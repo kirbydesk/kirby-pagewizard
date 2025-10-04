@@ -1,0 +1,21 @@
+{
+    "name": "chrfickinger/kirby-pages",
+    "description": "Kirby pages boilerplate",
+    "type": "kirby-plugin",
+    "keywords": [
+        "kirby",
+        "kirby-plugin"
+    ],
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Christian Fickinger",
+            "email": "mail@christianfickinger.de",
+            "homepage": "https://christianfickinger.de"
+        }
+    ],
+    "extra": {
+        "installer-name": "kirby-pages"
+    }
+}

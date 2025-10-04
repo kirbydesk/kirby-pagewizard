@@ -1,1 +1,1 @@
-# kirby-pages
+# Kirby Pages
