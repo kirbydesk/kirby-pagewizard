@@ -1,0 +1,24 @@
+---
+title: kirbypages.page.category
+icon: folder
+navigation: true
+options:
+  access:	true
+  changeSlug:	true
+  changeStatus:	true
+  changeTemplate:
+    - category
+    - article
+  changeTitle:	true
+  create:	true
+  delete:	true
+  duplicate: true
+  list:	true
+  move:	true
+  preview: true
+  sort:	true
+  update:	true
+tabs:
+  structure: tabs/structure
+  content: tabs/content
+  properties: tabs/properties

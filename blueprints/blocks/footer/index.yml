@@ -1,0 +1,16 @@
+---
+name: pw.block.footer.name
+icon: sitemap
+tabs:
+  content:
+     fields:
+      category:
+        label: pw.field.category.label
+        type: text
+        counter: false
+      blocks:
+        label: pw.field.blockentries.label
+        type: blocks
+        fieldsets:
+          - pwFooterItem
+        empty: pw.field.blockentries.empty

@@ -1,0 +1,66 @@
+---
+label: kirbypages.tab.project
+icon: settings
+columns:
+  - width: 3/4
+    sections:
+      project:
+        type: fields
+        fields:
+          headlineMeta:
+            type: headline
+            label: pw.panel.section.meta
+          publisher:
+            extends: fields/panel/pwPublisher
+          footer:
+            type: blocks
+            max: 4
+            label: pw.panel.section.footer
+            empty: pw.field.blockentries.empty
+            fieldsets:
+              - pwFooter
+          headlineSocialmedia:
+            type: headline
+            label: pw.panel.section.socialmedia
+          facebook:
+            type: url
+            label: Facebook
+            width: 1/3
+          twitter:
+            type: url
+            label: X (Twitter)
+            width: 1/3
+          instagram:
+            type: url
+            label: Instagram
+            width: 1/3
+          xing:
+            type: url
+            label: Xing
+            width: 1/3
+          linkedin:
+            type: url
+            label: LinkedIn
+            width: 1/3
+          bluesky:
+            type: url
+            label: Bluesky
+            width: 1/3
+  - width: 1/4
+    sections:
+      address:
+        type: fields
+        fields:
+          headlineAddress:
+            type: headline
+            label: pw.panel.section.address
+          addressTitle:
+            extends: fields/panel/pwAddressTitle
+          address:
+            extends: fields/panel/pwAddress
+          addressPhone:
+            extends: fields/panel/pwAddressPhone
+          addressEmail:
+            extends: fields/panel/pwAddressEmail
+          copyright:
+            extends: fields/panel/pwCopyright

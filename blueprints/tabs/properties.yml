@@ -1,0 +1,32 @@
+---
+label: kirbypages.tab.properties
+icon: settings
+columns:
+  - width: 3/4
+    sections:
+      meta:
+        type: fields
+        fields:
+          headlineMeta:
+            type: headline
+            label: pw.panel.section.meta
+          pagetitle:
+            extends: fields/panel/pwPagetitle
+          metadescription:
+            extends: fields/panel/pwMetadescription
+          metakeywords:
+            extends: fields/panel/pwMetakeywords
+  - width: 1/4
+    sections:
+      seo:
+        type: fields
+        fields:
+          headlineSeo:
+            type: headline
+            label: pw.panel.section.seo
+          robots:
+            extends: fields/panel/pwRobots
+          canonical:
+            extends: fields/panel/pwCanonical
+
+

@@ -1,0 +1,8 @@
+---
+title: kirbypages.site
+options:
+  changeTitle:	true
+  update:	true
+tabs:
+  site: tabs/site
+  project: tabs/project
