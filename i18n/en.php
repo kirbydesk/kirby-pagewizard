@@ -12,6 +12,7 @@ return array(
 	'kirbypages.tab.home' => 'Home',
 	'kirbypages.tab.project' => 'Project',
 	'kirbypages.tab.properties' => 'Properties',
+	'kirbypages.tab.seo' => 'SEO',
 	'kirbypages.tab.site' => 'Site',
 	'kirbypages.tab.structure' => 'Structure',
 

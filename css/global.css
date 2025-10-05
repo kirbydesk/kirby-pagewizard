@@ -1,0 +1,111 @@
+/* Theme Settings
+------------------------------------------------------------------------------------------------*/
+:root {
+	/* Brekpoints */
+	--breakpoint-xs: 360px;
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
+	--breakpoint-2xl: 1536px;
+	--breakpoint-3xl: 1920px;
+	--breakpoint-4xl: 2560px;
+
+	/* Animations */
+	--ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+	--ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+
+	/* Fonts
+	--font-light: "Roboto Slab Light", sans-serif;
+	--font-regular: "Roboto Slab Regular", sans-serif;
+	--font-semibold: "Roboto Slab Semibold", sans-serif;
+	--font-bold: "Roboto Slab Bold", sans-serif;
+	 */
+
+	/* Colors */
+	--body-textcolor: #101828;
+	--body-backgroundcolor: white;
+
+	--cta-textcolor: white;
+	--cta-backgroundcolor: darkblue;
+}
+
+
+
+/* Fonts
+------------------------------------------------------------------------------------------------*/
+/*
+@font-face {
+	font-family: 'Roboto Slab Light';
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url('/assets/fonts/roboto-slab-300.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Roboto Slab Regular';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/assets/fonts/roboto-slab-400.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Roboto Slab Semibold';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('/assets/fonts/roboto-slab-600.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Roboto Slab Bold';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/assets/fonts/roboto-slab-700.woff2') format('woff2');
+}
+*/
+
+
+
+/* Base Classes (Fundamental styles)
+------------------------------------------------------------------------------------------------*/
+@layer base {
+	html {
+		@apply h-full;
+
+		body {
+			@apply h-full text-base/5 text-[var(--body-textcolor)] bg-[var(--body-backgroundcolor)] overflow-y-scroll;
+		}
+
+		h1 {
+			@apply text-xl/8 sm:text-2xl/9 md:text-3xl/10 lg:text-4xl/12;
+		}
+		h2 {
+			@apply text-lg/7 sm:text-xl/8 md:text-2xl/9 lg:text-3xl/10;
+		}
+		h3 {
+			@apply text-base/6 sm:text-lg/7 md:text-xl/8 lg:text-2xl/9;
+		}
+		h4 {
+			@apply text-base/6 sm:text-lg/7 md:text-xl/8 lg:text-2xl/9;
+		}
+	}
+}
+
+
+/* Component Classes (Reusable components)
+------------------------------------------------------------------------------------------------*/
+@layer components {
+	a.cta {
+		@apply py-2 text-[var(--cta-textcolor)] bg-[var(--cta-backgroundcolor)];
+	}
+}
+
+
+/* Utility Classes (Custom utility classes)
+------------------------------------------------------------------------------------------------*/
+@layer utilities {
+	.shadow-custom {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+}
