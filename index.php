@@ -1,9 +1,10 @@
 <?php Kirby::plugin('chrfickinger/kirby-pages', [
 
+	/* -------------- Hooks --------------*/
+	'hooks' => require_once 'src/extensions/hooks.php',
+
 	/* -------------- Translations --------------*/
-	'translations' => array(
-		'en' => require_once __DIR__ . '/i18n/en.php',
-	),
+  'translations' => require_once 'src/extensions/translations.php',
 
 	/* -------------- Blueprints --------------*/
 	'blueprints' => [
@@ -45,4 +46,5 @@
 		'error' => __DIR__ . '/templates/error.php',
 		'home' => __DIR__ . '/templates/home.php'
 	]
+
 ]);

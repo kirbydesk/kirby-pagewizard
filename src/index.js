@@ -1,4 +1,4 @@
-// Styles
+// Panel styles
 import "./css/panel.css";
 
 // Blocks
@@ -8,7 +8,7 @@ import socialmedia from "@/blocks/footer/index.vue";
 import socialmediaItem from "@/blocks/footer/item.vue";
 
 // Render
-panel.plugin("chrfickinger/ebv", {
+panel.plugin("chrfickinger/kirby-pages", {
   blocks: {
 		footer: footer,
 		footerItem: footerItem,
