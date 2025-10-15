@@ -8,59 +8,40 @@ columns:
         type: fields
         fields:
           headlineMeta:
-            type: headline
-            label: pw.panel.section.meta
+            extends: kirbyfields/headlines/meta
           publisher:
-            extends: fields/panel/pwPublisher
+            extends: kirbyfields/fields/publisher
           footer:
             type: blocks
             max: 4
-            label: pw.panel.section.footer
-            empty: pw.field.blockentries.empty
+            label: kirbypages.field.footer
+            empty: kirbypages.field.footer.empty
             fieldsets:
-              - pwFooter
-          headlineSocialmedia:
-            type: headline
-            label: pw.panel.section.socialmedia
-          facebook:
-            type: url
-            label: Facebook
-            width: 1/3
-          twitter:
-            type: url
-            label: X (Twitter)
-            width: 1/3
-          instagram:
-            type: url
-            label: Instagram
-            width: 1/3
-          xing:
-            type: url
-            label: Xing
-            width: 1/3
-          linkedin:
-            type: url
-            label: LinkedIn
-            width: 1/3
-          bluesky:
-            type: url
-            label: Bluesky
-            width: 1/3
+              - footer
+          socialmedia:
+            type: blocks
+            label: kirbypages.field.socialmedia
+            empty: kirbypages.field.socialmedia.empty
+            fieldsets:
+              - socialmedia
+
+
+
+
   - width: 1/4
     sections:
       address:
         type: fields
         fields:
           headlineAddress:
-            type: headline
-            label: pw.panel.section.address
-          addressTitle:
-            extends: fields/panel/pwAddressTitle
+            extends: kirbyfields/headlines/address
+          addressName:
+            extends: kirbyfields/fields/address-name
           address:
-            extends: fields/panel/pwAddress
+            extends: kirbyfields/fields/address
           addressPhone:
-            extends: fields/panel/pwAddressPhone
+            extends: kirbyfields/fields/address-phone
           addressEmail:
-            extends: fields/panel/pwAddressEmail
+            extends: kirbyfields/fields/address-email
           copyright:
-            extends: fields/panel/pwCopyright
+            extends: kirbyfields/fields/copyright

@@ -1,10 +1,24 @@
-<?php Kirby::plugin('chrfickinger/kirby-pages', [
+<?php Kirby::plugin(
 
-	/* -------------- Hooks --------------*/
-	'hooks' => require_once 'src/extensions/hooks.php',
+name: 'chrfickinger/kirby-pages',
+license: [
+	'name' => 'Proprietary license',
+	'status' => [
+		'value' => 'valid',
+		'theme' => 'positive',
+		'label' => 'Valid',
+		'icon'  => 'check',
+		'link'  => 'https://christianfickinger.de',
+	]
+],
+extends: [
 
-	/* -------------- Translations --------------*/
-  'translations' => require_once 'src/extensions/translations.php',
+	/* -------------- Extensions --------------*/
+	'hooks' 				=> require_once 'src/extensions/hooks.php',
+  'translations' 	=> require_once 'src/extensions/translations.php',
+  'areas' 				=> require_once 'src/extensions/areas.php',
+
+
 
 	/* -------------- Blueprints --------------*/
 	'blueprints' => [
@@ -30,6 +44,9 @@
 		'blocks/footerItem' => __DIR__ . '/blueprints/blocks/footer/item.yml',
 		'blocks/socialmedia' => __DIR__ . '/blueprints/blocks/socialmedia/index.yml',
 		'blocks/socialmediaItem' => __DIR__ . '/blueprints/blocks/socialmedia/item.yml',
+
+		/* -------------- Fields --------------*/
+		'kirbypages/headlines/accessibility' => __DIR__ . '/blueprints/panel/headlines/accessibility.yml',
 	],
 
 	/* -------------- Snippets --------------*/

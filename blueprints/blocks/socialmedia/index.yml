@@ -1,16 +1,27 @@
 ---
-name: pw.block.footer.name
+name: kirbypages.block.socialmedia.item
 icon: sitemap
 tabs:
   content:
      fields:
-      category:
-        label: pw.field.category.label
-        type: text
-        counter: false
-      blocks:
-        label: pw.field.blockentries.label
-        type: blocks
-        fieldsets:
-          - pwFooterItem
-        empty: pw.field.blockentries.empty
+      service:
+        label: kirbypages.field.provider.service
+        help: kirbypages.field.provider.help
+        type: select
+        required: true
+        width: 1/4
+        options:
+          - facebook
+          - twitter
+          - instagram
+          - xing
+          - linkedin
+          - bluesky
+      url:
+        label: kirbypages.field.provider.url
+        help: kirbypages.field.provider.url.help
+        type: url
+        required: true
+        width: 3/4
+        placeholder: https://
+

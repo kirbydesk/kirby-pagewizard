@@ -1,16 +1,17 @@
 ---
-name: pw.block.footer.name
+name: kirbypages.block.footer
 icon: sitemap
 tabs:
   content:
      fields:
       category:
-        label: pw.field.category.label
+        label: kirbypages.field.category
         type: text
         counter: false
+        help: kirbypages.field.category.help
       blocks:
-        label: pw.field.blockentries.label
+        label: kirbypages.field.blockentries
         type: blocks
         fieldsets:
-          - pwFooterItem
-        empty: pw.field.blockentries.empty
+          - footerItem
+        empty: kirbypages.field.blockentries.empty

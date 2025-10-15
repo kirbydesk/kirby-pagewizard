@@ -1,6 +1,6 @@
 ---
 title: kirbypages.page.error
-icon: file
+icon: alert
 navigation: false
 options:
   access:	true
