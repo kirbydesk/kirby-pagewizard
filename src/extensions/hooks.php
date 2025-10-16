@@ -1,5 +1,6 @@
-<?php
-return [
+<?php return [
+
+	/* -------------- Hooks --------------*/
 	'route:after' => function () {
 		$contentDir = kirby()->root('content');
 			// Create required content files if they do not exist
@@ -32,4 +33,4 @@ return [
 				endif;
 			endforeach;
 		}
-	];
+];

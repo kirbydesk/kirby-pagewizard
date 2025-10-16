@@ -1,6 +1,6 @@
 ---
 label: kirbypages.tab.site
-icon: sitemap
+icon: home
 columns:
   - width: 2/3
     sections:

@@ -1,6 +1,5 @@
-<?php
+<?php return array(
 
-return array(
 	'kirbypages.site' => 'Site',
 
 	'kirbypages.page.article' => 'Article',
