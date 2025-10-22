@@ -20,6 +20,6 @@
 		"installer-name": "kirby-pages"
 	},
 	"require": {
-		"chrfickinger/kirby-fields": "^1.0"
+		"chrfickinger/kirby-fields": "dev-main"
 	}
 }
