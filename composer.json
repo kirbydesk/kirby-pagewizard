@@ -2,7 +2,6 @@
 	"name": "chrfickinger/kirby-pages",
 	"description": "Kirby Pages",
 	"type": "kirby-plugin",
-	"version": "1.0.0",
 	"keywords": [
 		"kirby",
 		"kirby-plugin"
@@ -20,6 +19,6 @@
 		"installer-name": "kirby-pages"
 	},
 	"require": {
-		"chrfickinger/kirby-fields": "dev-main"
+		"getkirby/composer-installer": "^1.2"
 	}
 }
