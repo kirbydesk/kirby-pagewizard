@@ -6,7 +6,7 @@
 		"kirby",
 		"kirby-plugin"
 	],
-	"license": "Proprietary",
+	"license": "proprietary",
 	"homepage": "https://github.com/chrfickinger/kirby-pages",
 	"authors": [
 		{

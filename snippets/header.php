@@ -5,19 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 		<meta name="theme-color" content="var(--darkred)">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge"><?php
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-		// CSS
-		foreach (['site.css'] as $file):
-			file_exists($kirby->roots()->assets()."/css/$file") && print '<link rel="stylesheet" href="'.$kirby->urls()->assets()."/css/$file?".filemtime($kirby->roots()->assets()."/css/$file").'" />';
-		endforeach;
+		<?php file_exists($kirby->roots()->assets()."/css/site.css") && print '<link rel="stylesheet" href="'.$kirby->urls()->assets().'/css/site.css?'.filemtime($kirby->roots()->assets().'/css/site.css').'" />'; ?>
 
-		// JS
-		foreach (['jquery.js','site.js'] as $file):
-			file_exists($kirby->roots()->assets()."/js/$file") && print '<script src="'.$kirby->urls()->assets()."/js/$file?".filemtime($kirby->roots()->assets()."/js/$file").'" defer></script>';
-		endforeach;
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<?php file_exists($kirby->roots()->assets()."/js/site.js") && print '<script src="'.$kirby->urls()->assets().'/js/site.js?'.filemtime($kirby->roots()->assets().'/js/site.js').'" defer></script>'; ?>
 
-		?>
 		<link rel="icon" type="image/svg+xml" href="<?=$kirby->urls()->assets()?>/svg/favicon.svg">
 		<link rel="icon" type="image/png" href="<?=$kirby->urls()->index()?>/favicon.png">
 		<title><?=$page->title()->value()?></title>
