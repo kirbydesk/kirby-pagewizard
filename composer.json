@@ -1,24 +1,25 @@
 {
-	"name": "chrfickinger/kirby-pages",
-	"description": "Kirby Pages",
+	"name": "kirbydesk/pages",
+	"description": "Pages for Kirby CMS",
 	"type": "kirby-plugin",
 	"keywords": [
 		"kirby",
 		"kirby-plugin"
 	],
 	"license": "proprietary",
-	"homepage": "https://github.com/chrfickinger/kirby-pages",
+	"homepage": "https://github.com/kirbydesk/pages",
 	"authors": [
 		{
 			"name": "Christian Fickinger",
-			"email": "mail@christianfickinger.de",
+			"email": "kirby@christianfickinger.de",
 			"homepage": "https://christianfickinger.de"
 		}
 	],
 	"extra": {
-		"installer-name": "kirby-pages"
+		"installer-name": "pages"
 	},
 	"require": {
-		"getkirby/composer-installer": "^1.2"
+		"getkirby/composer-installer": "^1.2",
+		"kirbydesk/fields": "dev-main"
 	}
 }

@@ -1,9 +1,9 @@
 ---
-name: kirbypages.block.footer.item
+name: kdpages.block.footer.item
 icon: box
 tabs:
   link:
-    label: kirbypages.tab.link
+    label: kdpages.tab.link
     fields:
       headlineLink:
         extends: kirbyfields/headlines/link
@@ -12,7 +12,7 @@ tabs:
       link:
         extends: kirbyfields/fields/link
   accessibility:
-    label: kirbypages.tab.accessibility
+    label: kdpages.tab.accessibility
     fields:
       headlineAccessibility:
         extends: kirbyfields/headlines/accessibility
@@ -21,7 +21,7 @@ tabs:
       linkExample:
         extends: kirbyfields/fields/link-example
   properties:
-    label: kirbypages.tab.properties
+    label: kdpages.tab.properties
     fields:
       headlineProperties:
         extends: kirbyfields/headlines/properties

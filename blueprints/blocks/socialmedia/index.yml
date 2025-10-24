@@ -1,12 +1,12 @@
 ---
-name: kirbypages.block.socialmedia.item
+name: kdpages.block.socialmedia.item
 icon: sitemap
 tabs:
   content:
      fields:
       service:
-        label: kirbypages.field.provider.service
-        help: kirbypages.field.provider.help
+        label: kdpages.field.provider.service
+        help: kdpages.field.provider.help
         type: select
         required: true
         width: 1/4
@@ -18,8 +18,8 @@ tabs:
           - linkedin
           - bluesky
       url:
-        label: kirbypages.field.provider.url
-        help: kirbypages.field.provider.url.help
+        label: kdpages.field.provider.url
+        help: kdpages.field.provider.url.help
         type: url
         required: true
         width: 3/4

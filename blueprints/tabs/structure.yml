@@ -1,11 +1,11 @@
 ---
-label: kirbypages.tab.structure
+label: kdpages.tab.structure
 icon: list-bullet
 columns:
   - width: 2/3
     sections:
       listed:
-        label: kirbypages.section.listed
+        label: kdpages.section.listed
         type: pages
         status: listed
         templates: ["article","category"]
@@ -15,7 +15,7 @@ columns:
   - width: 1/3
     sections:
       unlisted:
-        label: kirbypages.section.unlisted
+        label: kdpages.section.unlisted
         type: pages
         status: unlisted
         templates: ["article"]
@@ -23,7 +23,7 @@ columns:
         image: icon
         text: '{{ page.title }}'
       draft:
-        label: kirbypages.section.draft
+        label: kdpages.section.draft
         type: pages
         status: draft
         templates: ["article"]

@@ -1,5 +1,5 @@
 ---
-title: kirbypages.page.error
+title: kdpages.page.error
 icon: alert
 navigation: false
 options:
@@ -18,6 +18,6 @@ options:
   update:	true
 status:
   unlisted:
-    label: kirbypages.status.locked
+    label: kdpages.status.locked
 tabs:
   content: tabs/content

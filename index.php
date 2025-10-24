@@ -1,4 +1,4 @@
-<?php Kirby::plugin('chrfickinger/kirby-pages', [
+<?php Kirby::plugin('kirbydesk/pages', [
 
 	/* -------------- Extensions --------------*/
   'areas' 				=> require_once 'src/extensions/areas.php',

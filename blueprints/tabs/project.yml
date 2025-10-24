@@ -1,5 +1,5 @@
 ---
-label: kirbypages.tab.project
+label: kdpages.tab.project
 icon: settings
 columns:
   - width: 3/4
@@ -14,14 +14,14 @@ columns:
           footer:
             type: blocks
             max: 4
-            label: kirbypages.field.footer
-            empty: kirbypages.field.footer.empty
+            label: kdpages.field.footer
+            empty: kdpages.field.footer.empty
             fieldsets:
               - footer
           socialmedia:
             type: blocks
-            label: kirbypages.field.socialmedia
-            empty: kirbypages.field.socialmedia.empty
+            label: kdpages.field.socialmedia
+            empty: kdpages.field.socialmedia.empty
             fieldsets:
               - socialmedia
 

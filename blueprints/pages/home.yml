@@ -1,5 +1,5 @@
 ---
-title: kirbypages.page.home
+title: kdpages.page.home
 icon: home
 navigation: false
 options:
@@ -18,7 +18,7 @@ options:
   update:	true
 status:
   unlisted:
-    label: kirbypages.status.locked
+    label: kdpages.status.locked
 tabs:
   content: tabs/home
   properties: tabs/properties

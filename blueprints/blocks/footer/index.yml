@@ -1,17 +1,17 @@
 ---
-name: kirbypages.block.footer
+name: kdpages.block.footer
 icon: sitemap
 tabs:
   content:
      fields:
       category:
-        label: kirbypages.field.category
+        label: kdpages.field.category
         type: text
         counter: false
-        help: kirbypages.field.category.help
+        help: kdpages.field.category.help
       blocks:
-        label: kirbypages.field.blockentries
+        label: kdpages.field.blockentries
         type: blocks
         fieldsets:
           - footerItem
-        empty: kirbypages.field.blockentries.empty
+        empty: kdpages.field.blockentries.empty
