@@ -1,0 +1,10 @@
+---
+label: pagewizard.field.address
+type: writer
+counter: false
+inline: true
+marks:
+  - bold
+  - italic
+  - underline
+  - strike

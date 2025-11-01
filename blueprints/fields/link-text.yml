@@ -1,0 +1,7 @@
+---
+label: pagewizard.field.link-text
+type: text
+placeholder: pagewizard.field.link-text.placeholder
+counter: false
+required: true
+help: pagewizard.field.link-text.help

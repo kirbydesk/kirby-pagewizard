@@ -1,5 +1,5 @@
 ---
-label: kdpages.tab.project
+label: pagewizard.tab.project
 icon: settings
 columns:
   - width: 3/4
@@ -8,40 +8,69 @@ columns:
         type: fields
         fields:
           headlineMeta:
-            extends: kirbyfields/headlines/meta
+            extends: pagewizard/headlines/meta
           publisher:
-            extends: kirbyfields/fields/publisher
+            extends: pagewizard/fields/publisher
           footer:
             type: blocks
             max: 4
-            label: kdpages.field.footer
-            empty: kdpages.field.footer.empty
+            label: pagewizard.footer
+            empty: pagewizard.footer.empty
             fieldsets:
               - footer
           socialmedia:
-            type: blocks
-            label: kdpages.field.socialmedia
-            empty: kdpages.field.socialmedia.empty
-            fieldsets:
-              - socialmedia
-
-
-
-
+            type: object
+            label: pagewizard.field.socialmedia
+            empty: pagewizard.field.socialmedia.empty
+            fields:
+              bluesky:
+                type: url
+                label: Bluesky
+                placeholder: https://bsky.app/profile/{{ site.title }}
+              codepen:
+                type: url
+                placeholder: https://codepen.io/{{ site.title }}
+              facebook:
+                type: url
+                placeholder: https://facebook.com/{{ site.title }}
+              github:
+                type: url
+                placeholder: https://github.com/{{ site.title }}
+              instagram:
+                type: url
+                placeholder: https://instagram.com/{{ site.title }}
+              linkedin:
+                type: url
+                placeholder: https://linkedin.com/in/{{ site.title }}
+              mastodon:
+                type: url
+                placeholder: https://mastodon.social/@{{ site.title }}
+              threads:
+                type: url
+                placeholder: https://threads.net/@{{ site.title }}
+              x:
+                type: url
+                placeholder: https://x.com/{{ site.title }}
+              xing:
+                type: url
+                placeholder: https://xing.com/profile/{{ site.title }}
+              youtube:
+                type: url
+                placeholder: https://youtube.com/@{{ site.title }}
   - width: 1/4
     sections:
       address:
         type: fields
         fields:
           headlineAddress:
-            extends: kirbyfields/headlines/address
+            extends: pagewizard/headlines/address
           addressName:
-            extends: kirbyfields/fields/address-name
+            extends: pagewizard/fields/address-name
           address:
-            extends: kirbyfields/fields/address
+            extends: pagewizard/fields/address
           addressPhone:
-            extends: kirbyfields/fields/address-phone
+            extends: pagewizard/fields/address-phone
           addressEmail:
-            extends: kirbyfields/fields/address-email
+            extends: pagewizard/fields/address-email
           copyright:
-            extends: kirbyfields/fields/copyright
+            extends: pagewizard/fields/copyright

@@ -1,0 +1,32 @@
+---
+label: pagewizard.field.link-rel
+type: multiselect
+default:
+  noopener
+  noreferrer
+  nofollow
+options:
+  - value: noopener
+    text:
+      *: pagewizard.field.link-rel.options.noopener
+  - value: noreferrer
+    text:
+      *: pagewizard.field.link-rel.options.noreferrer
+  - value: nofollow
+    text:
+      *: pagewizard.field.link-rel.options.nofollow
+  - value: sponsored
+    text:
+      *: pagewizard.field.link-rel.options.sponsored
+  - value: ugc
+    text:
+      *: pagewizard.field.link-rel.options.ugc
+  - value: bookmark
+    text:
+      *: pagewizard.field.link-rel.options.bookmark
+
+
+
+search: false
+width: 2/3
+help: pagewizard.field.link-rel.help

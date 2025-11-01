@@ -1,15 +1,10 @@
 <template>
-	<div @dblclick="open">
-		<div
-			class="pwPreview"
-			data-block="footer"
-			>
-			<div v-if="content.name">
-				{{ content.name }}
-			</div>
-			<div v-else class="placeholder">
-			{{ $t('pw.block.footer.item.name') }}
-			</div>
+	<div class="pwPreview" @dblclick="open">
+		<div v-if="content.linktext">
+			{{ content.linktext }}
+		</div>
+		<div v-else class="placeholder">
+			{{ $t('pagewizard.field.link-text.placeholder') }}
 		</div>
 	</div>
 </template>

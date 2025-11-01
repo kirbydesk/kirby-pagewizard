@@ -1,0 +1,12 @@
+---
+label: pagewizard.field.link-internal
+type: link
+options:
+  - page
+  - anchor
+  - tel
+  - email
+  - file
+required: true
+width: 2/3
+help: pagewizard.field.link-internal.help

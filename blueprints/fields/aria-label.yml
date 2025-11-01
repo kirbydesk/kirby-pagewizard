@@ -1,0 +1,7 @@
+---
+label: pagewizard.field.aria-label
+type: text
+icon: accessibility
+placeholder: pagewizard.field.aria-label.placeholder
+counter: false
+help: pagewizard.field.aria-label.help

@@ -1,0 +1,11 @@
+---
+label: pagewizard.field.copyright
+type: writer
+counter: false
+inline: true
+marks:
+  - bold
+  - italic
+  - underline
+  - strike
+help: pagewizard.field.copyright.help

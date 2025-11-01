@@ -1,17 +1,17 @@
 ---
-name: kdpages.block.footer
-icon: sitemap
+name: pagewizard.footer
+icon: folder-structure
 tabs:
   content:
      fields:
-      category:
-        label: kdpages.field.category
+      name:
+        label: pagewizard.footer.name
         type: text
         counter: false
-        help: kdpages.field.category.help
+        help: pagewizard.footer.name.help
       blocks:
-        label: kdpages.field.blockentries
+        label: pagewizard.footer.items
         type: blocks
         fieldsets:
           - footerItem
-        empty: kdpages.field.blockentries.empty
+        empty: pagewizard.footer.items.empty

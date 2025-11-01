@@ -1,0 +1,9 @@
+---
+label: pagewizard.field.link-type
+type: toggle
+default: false
+text:
+  - pagewizard.field.link-type.option.internal
+  - pagewizard.field.link-type.option.external
+width: 1/3
+help: pagewizard.field.link-type.help

@@ -1,29 +1,40 @@
 ---
-name: kdpages.block.footer.item
-icon: box
+name: pagewizard.footer.item
+icon: url
 tabs:
   link:
-    label: kdpages.tab.link
+    label: pagewizard.tab.link
     fields:
       headlineLink:
-        extends: kirbyfields/headlines/link
+        extends: pagewizard/headlines/link
+      linkType:
+        extends: pagewizard/fields/link-type
+      link-internal:
+        extends: pagewizard/fields/link-internal
+        when:
+          linkType: false
+      link-external:
+        extends: pagewizard/fields/link-external
+        when:
+          linkType: true
+      linkTarget:
+        extends: pagewizard/fields/link-target
+        when:
+          linkType: true
+      linkRel:
+        extends: pagewizard/fields/link-rel
+        when:
+          linkType: true
+          linkTarget: true
       linkText:
-        extends: kirbyfields/fields/link-text
-      link:
-        extends: kirbyfields/fields/link
+        extends: pagewizard/fields/link-text
   accessibility:
-    label: kdpages.tab.accessibility
+    label: pagewizard.tab.accessibility
     fields:
       headlineAccessibility:
-        extends: kirbyfields/headlines/accessibility
-      linkTitle:
-        extends: kirbyfields/fields/link-title
-      linkExample:
-        extends: kirbyfields/fields/link-example
-  properties:
-    label: kdpages.tab.properties
-    fields:
-      headlineProperties:
-        extends: kirbyfields/headlines/properties
-      linkTarget:
-        extends: kirbyfields/fields/link-target
+        extends: pagewizard/headlines/accessibility
+      ariaLabel:
+        extends: pagewizard/fields/aria-label
+      ariaDescribedby:
+        extends: pagewizard/fields/aria-describedby
+

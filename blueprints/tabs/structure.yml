@@ -1,11 +1,11 @@
 ---
-label: kdpages.tab.structure
+label: pagewizard.tab.structure
 icon: list-bullet
 columns:
   - width: 2/3
     sections:
       listed:
-        label: kdpages.section.listed
+        label: pagewizard.section.listed
         type: pages
         status: listed
         templates: ["article","category"]
@@ -15,7 +15,7 @@ columns:
   - width: 1/3
     sections:
       unlisted:
-        label: kdpages.section.unlisted
+        label: pagewizard.section.unlisted
         type: pages
         status: unlisted
         templates: ["article"]
@@ -23,7 +23,7 @@ columns:
         image: icon
         text: '{{ page.title }}'
       draft:
-        label: kdpages.section.draft
+        label: pagewizard.section.draft
         type: pages
         status: draft
         templates: ["article"]

@@ -1,0 +1,8 @@
+---
+label: pagewizard.field.link-external
+type: link
+options:
+  - url
+required: true
+width: 2/3
+help: pagewizard.field.link-external.help

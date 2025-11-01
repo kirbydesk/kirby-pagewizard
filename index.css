@@ -1,0 +1,18 @@
+div.pwPreview {
+	/* padding: var(--spacing-); */
+
+	.heading {
+		font-weight: bold;
+
+		+ .items {
+			margin-top: var(--spacing-2);
+		}
+	}
+	.placeholder {
+		font-weight: normal;
+  	color: var(--input-color-placeholder);
+	}
+	.items {
+		padding: var(--spacing-2) var(--spacing-1);
+	}
+}
