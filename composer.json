@@ -1,13 +1,13 @@
 {
-	"name": "kirbydesk/pages",
-	"description": "Pages for Kirby CMS",
+	"name": "kirbydesk/kirby-pagewizard",
+	"description": "Pagewizard for Kirby CMS",
 	"type": "kirby-plugin",
 	"keywords": [
 		"kirby",
 		"kirby-plugin"
 	],
 	"license": "proprietary",
-	"homepage": "https://github.com/kirbydesk/pages",
+	"homepage": "https://github.com/kirbydesk/kirby-pagewizard",
 	"authors": [
 		{
 			"name": "Christian Fickinger",
@@ -16,10 +16,9 @@
 		}
 	],
 	"extra": {
-		"installer-name": "pages"
+		"installer-name": "kirby-pagewizard"
 	},
 	"require": {
-		"getkirby/composer-installer": "^1.2",
-		"kirbydesk/fields": "dev-main"
+		"getkirby/composer-installer": "^1.2"
 	}
 }
