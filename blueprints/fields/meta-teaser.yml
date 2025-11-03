@@ -1,0 +1,6 @@
+---
+label: pagewizard.field.meta-teaser
+type: textarea
+buttons: false
+size: small
+help: pagewizard.field.meta-teaser.help

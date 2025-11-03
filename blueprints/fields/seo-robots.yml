@@ -1,0 +1,19 @@
+---
+label: pagewizard.field.seo-robots
+type: multiselect
+default:
+  noindex
+  nofollow
+options:
+  - value: noindex
+    text:
+      *: pagewizard.field.seo-robots.option.noindex
+  - value: nofollow
+    text:
+      *: pagewizard.field.seo-robots.option.nofollow
+  - value: noarchive
+    text:
+      *: pagewizard.field.seo-robots.option.noarchive
+search: false
+translate: false
+help: pagewizard.field.seo-robots.help

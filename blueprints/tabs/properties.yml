@@ -8,25 +8,29 @@ columns:
         type: fields
         fields:
           headlineMeta:
-            type: headline
-            label: pw.panel.section.meta
-          pagetitle:
-            extends: fields/panel/pwPagetitle
-          metadescription:
-            extends: fields/panel/pwMetadescription
-          metakeywords:
-            extends: fields/panel/pwMetakeywords
+            extends: pagewizard/headlines/meta
+          metaPagetitle:
+            extends: pagewizard/fields/meta-pagetitle
+          metaTeaser:
+            extends: pagewizard/fields/meta-teaser
+          line:
+            type: line
+          metaDescription:
+            extends: pagewizard/fields/meta-description
+          metaKeywords:
+            extends: pagewizard/fields/meta-keywords
+          metaAuthor:
+            extends: pagewizard/fields/meta-author
   - width: 1/4
     sections:
       seo:
         type: fields
         fields:
           headlineSeo:
-            type: headline
-            label: pw.panel.section.seo
-          robots:
-            extends: fields/panel/pwRobots
-          canonical:
-            extends: fields/panel/pwCanonical
+            extends: pagewizard/headlines/seo
+          seoRobots:
+            extends: pagewizard/fields/seo-robots
+          seoCanonical:
+            extends: pagewizard/fields/seo-canonical
 
 

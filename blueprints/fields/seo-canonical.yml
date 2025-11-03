@@ -1,0 +1,5 @@
+---
+label: pagewizard.field.seo-canonical
+type: url
+placeholder: '{{page.url}}'
+help: pagewizard.field.seo-canonical.help

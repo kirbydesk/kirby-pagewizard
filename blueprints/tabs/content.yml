@@ -2,14 +2,13 @@
 label: pagewizard.tab.content
 icon: page
 columns:
-  - width: 3/4
+  - width: 1/1
     sections:
       content:
         type: fields
         fields:
           headlineContent:
-            type: headline
-            label: pw.panel.section.content
+            extends: pagewizard/headlines/content
           blocks:
             type: blocks
             fieldsets:
@@ -39,20 +38,3 @@ columns:
                 fieldsets:
                   - ebvContact
                   - ebvTripadvisor
-  - width: 1/4
-    sections:
-      aside:
-        type: fields
-        fields:
-          headlineLayout:
-            type: headline
-            label: pw.panel.section.layout
-          toggleQuiz:
-            type: toggle
-            label: Quiz
-            default: true
-            text:
-              - pw.action.no
-              - pw.action.yes
-          toggleContactoption:
-            extends: fields/panel/pwContactoption

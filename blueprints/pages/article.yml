@@ -6,9 +6,7 @@ options:
   access:	true
   changeSlug:	true
   changeStatus: true
-  changeTemplate:
-    - article
-    - category
+  changeTemplate: false
   changeTitle:	true
   create:	true
   delete:	true

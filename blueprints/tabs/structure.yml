@@ -8,7 +8,7 @@ columns:
         label: pagewizard.section.listed
         type: pages
         status: listed
-        templates: ["article","category"]
+        templates: ["article"]
         layout: cardlets
         image: icon
         text: '{{ page.title }}'
@@ -25,7 +25,7 @@ columns:
       draft:
         label: pagewizard.section.draft
         type: pages
+        icon : file
         status: draft
         templates: ["article"]
-        image: icon
         text: '{{ page.title }}'

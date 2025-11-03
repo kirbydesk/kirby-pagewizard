@@ -8,25 +8,22 @@ default:
 options:
   - value: noopener
     text:
-      *: pagewizard.field.link-rel.options.noopener
+      *: pagewizard.field.link-rel.option.noopener
   - value: noreferrer
     text:
-      *: pagewizard.field.link-rel.options.noreferrer
+      *: pagewizard.field.link-rel.option.noreferrer
   - value: nofollow
     text:
-      *: pagewizard.field.link-rel.options.nofollow
+      *: pagewizard.field.link-rel.option.nofollow
   - value: sponsored
     text:
-      *: pagewizard.field.link-rel.options.sponsored
+      *: pagewizard.field.link-rel.option.sponsored
   - value: ugc
     text:
-      *: pagewizard.field.link-rel.options.ugc
+      *: pagewizard.field.link-rel.option.ugc
   - value: bookmark
     text:
-      *: pagewizard.field.link-rel.options.bookmark
-
-
-
+      *: pagewizard.field.link-rel.option.bookmark
 search: false
 width: 2/3
 help: pagewizard.field.link-rel.help

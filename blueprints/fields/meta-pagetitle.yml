@@ -1,0 +1,6 @@
+---
+label: pagewizard.field.meta-pagetitle
+type: text
+counter: true
+placeholder: '{{page.title}} | {{site.title}}'
+help: pagewizard.field.meta-pagetitle.help
