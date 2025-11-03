@@ -4,7 +4,7 @@
 			{{ content.name }}
 		</div>
 		<div v-else class="heading placeholder">
-			{{ $t('pagewizard.block.footer') }} ...
+			{{ $t('pagewizard.footer.name') }} ...
 		</div>
 		<div class="items" v-for="item in content.blocks" :key="item.id">
 			<div :class="{ placeholder: !item.content.linktext }">

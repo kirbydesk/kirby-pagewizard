@@ -1,6 +1,7 @@
 ---
 label: pagewizard.field.copyright
 type: writer
+placeholder: pagewizard.field.copyright.placeholder
 counter: false
 inline: true
 marks:

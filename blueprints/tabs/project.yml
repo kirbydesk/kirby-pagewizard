@@ -2,15 +2,13 @@
 label: pagewizard.tab.project
 icon: settings
 columns:
-  - width: 3/4
+  - width: 2/3
     sections:
       project:
         type: fields
         fields:
-          headlineMeta:
-            extends: pagewizard/headlines/meta
-          publisher:
-            extends: pagewizard/fields/publisher
+          headlineFooter:
+            extends: pagewizard/headlines/footer
           footer:
             type: blocks
             max: 4
@@ -18,11 +16,39 @@ columns:
             empty: pagewizard.footer.empty
             fieldsets:
               - footer
+          copyright:
+            extends: pagewizard/fields/copyright
+  - width: 1/3
+    sections:
+      address:
+        type: fields
+        fields:
+          headlineContact:
+            extends: pagewizard/headlines/contact
+          address:
+            type: object
+            label: pagewizard.field.address
+            empty: pagewizard.field.address.empty
+            fields:
+              headlineAddress:
+                extends: pagewizard/headlines/address
+              addressName:
+                extends: pagewizard/fields/address-name
+              address:
+                extends: pagewizard/fields/address
+              addressPhone:
+                extends: pagewizard/fields/address-phone
+              addressEmail:
+                extends: pagewizard/fields/address-email
+              addressCountry:
+                extends: pagewizard/fields/address-country
           socialmedia:
             type: object
-            label: pagewizard.field.socialmedia
-            empty: pagewizard.field.socialmedia.empty
+            label: pagewizard.object.socialmedia
+            empty: pagewizard.object.socialmedia.empty
             fields:
+              headlineSocialmedia:
+                extends: pagewizard/headlines/socialmedia
               bluesky:
                 type: url
                 label: Bluesky
@@ -57,20 +83,3 @@ columns:
               youtube:
                 type: url
                 placeholder: https://youtube.com/@{{ site.title }}
-  - width: 1/4
-    sections:
-      address:
-        type: fields
-        fields:
-          headlineAddress:
-            extends: pagewizard/headlines/address
-          addressName:
-            extends: pagewizard/fields/address-name
-          address:
-            extends: pagewizard/fields/address
-          addressPhone:
-            extends: pagewizard/fields/address-phone
-          addressEmail:
-            extends: pagewizard/fields/address-email
-          copyright:
-            extends: pagewizard/fields/copyright

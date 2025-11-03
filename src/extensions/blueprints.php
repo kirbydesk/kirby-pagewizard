@@ -22,6 +22,7 @@
 
 	/* -------------- Fields --------------*/
 	'pagewizard/fields/address' => __DIR__ . '/../../blueprints/fields/address.yml',
+	'pagewizard/fields/address-country' => __DIR__ . '/../../blueprints/fields/address-country.yml',
 	'pagewizard/fields/address-email' => __DIR__ . '/../../blueprints/fields/address-email.yml',
 	'pagewizard/fields/address-name' => __DIR__ . '/../../blueprints/fields/address-name.yml',
 	'pagewizard/fields/address-phone' => __DIR__ . '/../../blueprints/fields/address-phone.yml',
@@ -34,14 +35,16 @@
 	'pagewizard/fields/link-target' => __DIR__ . '/../../blueprints/fields/link-target.yml',
 	'pagewizard/fields/link-text' => __DIR__ . '/../../blueprints/fields/link-text.yml',
 	'pagewizard/fields/link-type' => __DIR__ . '/../../blueprints/fields/link-type.yml',
-	'pagewizard/fields/publisher' => __DIR__ . '/../../blueprints/fields/publisher.yml',
 
 	/* -------------- Headlines --------------*/
 	'pagewizard/headlines/accessibility' => __DIR__ . '/../../blueprints/headlines/accessibility.yml',
 	'pagewizard/headlines/address' => __DIR__ . '/../../blueprints/headlines/address.yml',
-	'pagewizard/headlines/meta' => __DIR__ . '/../../blueprints/headlines/meta.yml',
+	'pagewizard/headlines/contact' => __DIR__ . '/../../blueprints/headlines/contact.yml',
+	'pagewizard/headlines/footer' => __DIR__ . '/../../blueprints/headlines/footer.yml',
+	'pagewizard/headlines/contact' => __DIR__ . '/../../blueprints/headlines/contact.yml',
 	'pagewizard/headlines/link' => __DIR__ . '/../../blueprints/headlines/link.yml',
 	'pagewizard/headlines/properties' => __DIR__ . '/../../blueprints/headlines/properties.yml',
+	'pagewizard/headlines/socialmedia' => __DIR__ . '/../../blueprints/headlines/socialmedia.yml',
 
 	/* -------------- Files --------------*/
 	'pagewizard/files/default' => __DIR__ . '/../../blueprints/files/default.yml',
