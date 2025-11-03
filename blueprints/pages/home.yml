@@ -18,7 +18,7 @@ options:
   update:	true
 status:
   unlisted:
-    label: kdpages.status.locked
+    label: pagewizard.status.locked
 tabs:
   content: tabs/home
   properties: tabs/properties
