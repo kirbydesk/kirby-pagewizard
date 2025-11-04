@@ -1,0 +1,15 @@
+---
+label: pw.field.block-offset
+type: toggles
+default: left
+options:
+  - value: left
+    text:
+      *: pw.option.left
+    icon: expand-left
+  - value: right
+    text:
+      *: pw.option.right
+    icon: expand-right
+help: pw.field.block-offset.help
+width: 1/2

@@ -1,0 +1,15 @@
+---
+label: pw.field.block-alignment
+type: toggles
+default: centered
+width: 1/2
+options:
+  - value: center
+    text:
+      *: pw.option.centered
+    icon: expand-left-right
+  - value: offset
+    text:
+      *: pw.option.offset
+    icon: expand-width
+help: pw.field.block-alignment.help

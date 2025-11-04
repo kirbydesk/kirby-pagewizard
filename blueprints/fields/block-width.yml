@@ -1,0 +1,10 @@
+---
+label: pw.field.block-width
+type: range
+min: 6
+max: 12
+default: 12
+step: 1
+after: /12
+help: pw.field.block-width.help
+width: 1/2
