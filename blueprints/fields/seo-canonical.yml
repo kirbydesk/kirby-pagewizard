@@ -1,5 +1,5 @@
 ---
-label: pagewizard.field.seo-canonical
+label: pw.field.seo-canonical
 type: url
 placeholder: '{{page.url}}'
-help: pagewizard.field.seo-canonical.help
+help: pw.field.seo-canonical.help

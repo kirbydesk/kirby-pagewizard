@@ -17,6 +17,8 @@
 	'tabs/structure' => __DIR__ . '/../../blueprints/tabs/structure.yml',
 
 	/* -------------- Blocks --------------*/
+	'blocks/buttons' => __DIR__ . '/../../blueprints/blocks/buttons/index.yml',
+	'blocks/button' => __DIR__ . '/../../blueprints/blocks/buttons/item.yml',
 	'blocks/footer' => __DIR__ . '/../../blueprints/blocks/footer/index.yml',
 	'blocks/footerItem' => __DIR__ . '/../../blueprints/blocks/footer/item.yml',
 
@@ -28,7 +30,12 @@
 	'pagewizard/fields/address-phone' => __DIR__ . '/../../blueprints/fields/address-phone.yml',
 	'pagewizard/fields/aria-describedby' => __DIR__ . '/../../blueprints/fields/aria-describedby.yml',
 	'pagewizard/fields/aria-label' => __DIR__ . '/../../blueprints/fields/aria-label.yml',
+	'pagewizard/fields/author' => __DIR__ . '/../../blueprints/fields/author.yml',
 	'pagewizard/fields/copyright' => __DIR__ . '/../../blueprints/fields/copyright.yml',
+	'pagewizard/fields/field-visibility' => __DIR__ . '/../../blueprints/fields/field-visibility.yml',
+	'pagewizard/fields/fragment' => __DIR__ . '/../../blueprints/fields/fragment.yml',
+	'pagewizard/fields/heading' => __DIR__ . '/../../blueprints/fields/heading.yml',
+	'pagewizard/fields/level' => __DIR__ . '/../../blueprints/fields/level.yml',
 	'pagewizard/fields/link-external' => __DIR__ . '/../../blueprints/fields/link-external.yml',
 	'pagewizard/fields/link-internal' => __DIR__ . '/../../blueprints/fields/link-internal.yml',
 	'pagewizard/fields/link-rel' => __DIR__ . '/../../blueprints/fields/link-rel.yml',
@@ -42,10 +49,18 @@
 	'pagewizard/fields/meta-teaser' => __DIR__ . '/../../blueprints/fields/meta-teaser.yml',
 	'pagewizard/fields/seo-canonical' => __DIR__ . '/../../blueprints/fields/seo-canonical.yml',
 	'pagewizard/fields/seo-robots' => __DIR__ . '/../../blueprints/fields/seo-robots.yml',
+	'pagewizard/fields/tagline' => __DIR__ . '/../../blueprints/fields/tagline.yml',
+	'pagewizard/fields/text-code' => __DIR__ . '/../../blueprints/fields/text-code.yml',
+	'pagewizard/fields/text-markdown' => __DIR__ . '/../../blueprints/fields/text-markdown.yml',
+	'pagewizard/fields/text-mode' => __DIR__ . '/../../blueprints/fields/text-mode.yml',
+	'pagewizard/fields/text-quote' => __DIR__ . '/../../blueprints/fields/text-quote.yml',
+	'pagewizard/fields/text-textarea' => __DIR__ . '/../../blueprints/fields/text-textarea.yml',
+	'pagewizard/fields/text-writer' => __DIR__ . '/../../blueprints/fields/text-writer.yml',
 
 	/* -------------- Headlines --------------*/
 	'pagewizard/headlines/accessibility' => __DIR__ . '/../../blueprints/headlines/accessibility.yml',
 	'pagewizard/headlines/address' => __DIR__ . '/../../blueprints/headlines/address.yml',
+	'pagewizard/headlines/blocksettings' => __DIR__ . '/../../blueprints/headlines/blocksettings.yml',
 	'pagewizard/headlines/contact' => __DIR__ . '/../../blueprints/headlines/contact.yml',
 	'pagewizard/headlines/content' => __DIR__ . '/../../blueprints/headlines/content.yml',
 	'pagewizard/headlines/footer' => __DIR__ . '/../../blueprints/headlines/footer.yml',

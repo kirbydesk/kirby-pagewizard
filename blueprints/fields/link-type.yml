@@ -1,9 +1,9 @@
 ---
-label: pagewizard.field.link-type
+label: pw.field.link-type
 type: toggle
 default: false
 text:
-  - pagewizard.field.link-type.option.internal
-  - pagewizard.field.link-type.option.external
+  - pw.option.internal
+  - pw.option.external
 width: 1/3
-help: pagewizard.field.link-type.help
+help: pw.field.link-type.help

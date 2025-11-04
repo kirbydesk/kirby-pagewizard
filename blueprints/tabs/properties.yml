@@ -1,5 +1,5 @@
 ---
-label: pagewizard.tab.properties
+label: pw.tab.properties
 icon: settings
 columns:
   - width: 3/4

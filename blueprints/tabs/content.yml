@@ -1,5 +1,5 @@
 ---
-label: pagewizard.tab.content
+label: pw.tab.content
 icon: page
 columns:
   - width: 1/1
@@ -13,28 +13,7 @@ columns:
             type: blocks
             fieldsets:
               static:
-                label: Statische Inhalte
+                label: Kirbydesk Blocks
                 type: group
                 fieldsets:
-                  - pwHero
-                  - pwIntro
                   - pwText
-                  - pwQuote
-                  - pwDefinitionlist
-                  - pwCardlet
-                  - pwGallery
-                  - pwCta
-              dynamic:
-                label: Dynamische Inhalte
-                type: group
-                open: false
-                fieldsets:
-                  - kirbyLatestEvents
-                  - kirbyLatestNews
-              other:
-                label: Vordefinierte Inhalte
-                type: group
-                open: false
-                fieldsets:
-                  - ebvContact
-                  - ebvTripadvisor

@@ -1,0 +1,12 @@
+---
+type: toggles
+width: 1/2
+options:
+  - value: enabled
+    text:
+      *: pw.option.enabled
+    icon: check
+  - value: disabled
+    text:
+      *: pw.option.disabled
+    icon: remove

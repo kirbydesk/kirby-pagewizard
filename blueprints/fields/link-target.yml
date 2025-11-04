@@ -1,9 +1,9 @@
 ---
-label: pagewizard.field.link-target
+label: pw.field.link-target
 type: toggle
 default: false
 width: 1/3
 text:
-  - pagewizard.field.link-target.option.self
-  - pagewizard.field.link-target.option.blank
-help: pagewizard.field.link-target.help
+  - pw.option.self
+  - pw.option.blank
+help: pw.field.link-target.help

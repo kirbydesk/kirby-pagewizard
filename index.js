@@ -15,8 +15,8 @@
   const _sfc_main$1 = {};
   var _sfc_render$1 = function render() {
     var _vm = this, _c = _vm._self._c;
-    return _c("div", { staticClass: "pwPreview", on: { "dblclick": _vm.open } }, [_vm.content.name ? _c("div", { staticClass: "heading" }, [_vm._v(" " + _vm._s(_vm.content.name) + " ")]) : _c("div", { staticClass: "heading placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pagewizard.footer.name")) + " ... ")]), _vm._l(_vm.content.blocks, function(item) {
-      return _c("div", { key: item.id, staticClass: "items" }, [_c("div", { class: { placeholder: !item.content.linktext } }, [_vm._v(" " + _vm._s(item.content.linktext || _vm.$t("pagewizard.field.link-text.placeholder")) + " ")])]);
+    return _c("div", { staticClass: "pwPreview", on: { "dblclick": _vm.open } }, [_vm.content.name ? _c("div", { staticClass: "heading" }, [_vm._v(" " + _vm._s(_vm.content.name) + " ")]) : _c("div", { staticClass: "heading placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.footer.name")) + " ... ")]), _vm._l(_vm.content.blocks, function(item) {
+      return _c("div", { key: item.id, staticClass: "items" }, [_c("div", { class: { placeholder: !item.content.linktext } }, [_vm._v(" " + _vm._s(item.content.linktext || _vm.$t("pw.field.link-text.placeholder")) + " ")])]);
     })], 2);
   };
   var _sfc_staticRenderFns$1 = [];
@@ -31,7 +31,7 @@
   const _sfc_main = {};
   var _sfc_render = function render() {
     var _vm = this, _c = _vm._self._c;
-    return _c("div", { staticClass: "pwPreview", on: { "dblclick": _vm.open } }, [_vm.content.linktext ? _c("div", [_vm._v(" " + _vm._s(_vm.content.linktext) + " ")]) : _c("div", { staticClass: "placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pagewizard.field.link-text.placeholder")) + " ")])]);
+    return _c("div", { staticClass: "pwPreview", on: { "dblclick": _vm.open } }, [_vm.content.linktext ? _c("div", [_vm._v(" " + _vm._s(_vm.content.linktext) + " ")]) : _c("div", { staticClass: "placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])]);
   };
   var _sfc_staticRenderFns = [];
   _sfc_render._withStripped = true;

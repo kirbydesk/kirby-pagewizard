@@ -1,0 +1,7 @@
+---
+label: pw.field.text-markdown
+placeholder: pw.field.text-markdown.placeholder
+help: pw.field.text-markdown.help
+type: textarea
+buttons: false
+font: monospace

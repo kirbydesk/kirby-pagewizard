@@ -1,0 +1,25 @@
+---
+label: pw.field.text-mode
+type: toggles
+width: 1/1
+options:
+  - value: textarea
+    text:
+      *: pw.option.textarea
+    icon: text-justify
+  - value: writer
+    text:
+      *: pw.option.writer
+    icon: text
+  - value: quote
+    text:
+      *: pw.option.quote
+    icon: quote
+  - value: markdown
+    text:
+      *: pw.option.markdown
+    icon: markdown
+  - value: code
+    text:
+      *: pw.option.code
+    icon: code

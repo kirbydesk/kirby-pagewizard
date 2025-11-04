@@ -1,5 +1,5 @@
 ---
-label: pagewizard.field.seo-robots
+label: pw.field.seo-robots
 type: multiselect
 default:
   noindex
@@ -7,13 +7,13 @@ default:
 options:
   - value: noindex
     text:
-      *: pagewizard.field.seo-robots.option.noindex
+      *: pw.option.noindex
   - value: nofollow
     text:
-      *: pagewizard.field.seo-robots.option.nofollow
+      *: pw.option.nofollow
   - value: noarchive
     text:
-      *: pagewizard.field.seo-robots.option.noarchive
+      *: pw.option.noarchive
 search: false
 translate: false
-help: pagewizard.field.seo-robots.help
+help: pw.field.seo-robots.help

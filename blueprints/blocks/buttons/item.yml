@@ -1,0 +1,23 @@
+---
+name: pw.field.action.label
+icon: bolt
+tabs:
+  text:
+    label: pw.tab.link
+    fields:
+      linktext:
+        extends: fields/pwLinktext
+      linktitle:
+        extends: fields/pwLinktitle
+        width: 2/3
+      link:
+        extends: fields/pwLink
+  layout:
+    label: pw.tab.layout
+    fields:
+      textcolor:
+        extends: fields/pwTextcolor
+        default: "#000000"
+      bgcolor:
+        extends: fields/pwBgcolor
+        default: "#ffffff"

@@ -1,0 +1,16 @@
+---
+label: pw.field.level
+help: pw.field.level.help
+type: select
+width: 1/5
+required: true
+default: "h2"
+options:
+  - value: h1
+    text: H1
+  - value: h2
+    text: H2
+  - value: h3
+    text: H3
+  - value: h4
+    text: H4

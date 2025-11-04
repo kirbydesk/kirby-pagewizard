@@ -1,5 +1,5 @@
 ---
-label: pagewizard.tab.project
+label: pw.tab.project
 icon: settings
 columns:
   - width: 2/3
@@ -12,8 +12,8 @@ columns:
           footer:
             type: blocks
             max: 4
-            label: pagewizard.footer
-            empty: pagewizard.footer.empty
+            label: pw.footer
+            empty: pw.footer.empty
             fieldsets:
               - footer
           copyright:
@@ -27,8 +27,8 @@ columns:
             extends: pagewizard/headlines/contact
           address:
             type: object
-            label: pagewizard.field.address
-            empty: pagewizard.field.address.empty
+            label: pw.field.address
+            empty: pw.field.address.empty
             fields:
               headlineAddress:
                 extends: pagewizard/headlines/address
@@ -44,8 +44,8 @@ columns:
                 extends: pagewizard/fields/address-country
           socialmedia:
             type: object
-            label: pagewizard.object.socialmedia
-            empty: pagewizard.object.socialmedia.empty
+            label: pw.field.socialmedia
+            empty: pw.field.socialmedia.empty
             fields:
               headlineSocialmedia:
                 extends: pagewizard/headlines/socialmedia
@@ -53,33 +53,44 @@ columns:
                 type: url
                 label: Bluesky
                 placeholder: https://bsky.app/profile/{{ site.title }}
+                help: https://bsky.app/
               codepen:
                 type: url
                 placeholder: https://codepen.io/{{ site.title }}
+                help: https://codepen.io/
               facebook:
                 type: url
                 placeholder: https://facebook.com/{{ site.title }}
+                help: https://facebook.com/
               github:
                 type: url
                 placeholder: https://github.com/{{ site.title }}
+                help: https://github.com/
               instagram:
                 type: url
                 placeholder: https://instagram.com/{{ site.title }}
+                help: https://instagram.com/
               linkedin:
                 type: url
                 placeholder: https://linkedin.com/in/{{ site.title }}
+                help: https://linkedin.com/
               mastodon:
                 type: url
                 placeholder: https://mastodon.social/@{{ site.title }}
+                help: https://mastodon.social/
               threads:
                 type: url
                 placeholder: https://threads.net/@{{ site.title }}
+                help: https://threads.net/
               x:
                 type: url
                 placeholder: https://x.com/{{ site.title }}
+                help: https://x.com/
               xing:
                 type: url
                 placeholder: https://xing.com/profile/{{ site.title }}
+                help: https://xing.com/
               youtube:
                 type: url
-                placeholder: https://youtube.com/@{{ site.title }}
+                placehhttps://youtube.com/@older: https://youtube.com/@{{ site.title }}
+                help: https://youtube.com/

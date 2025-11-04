@@ -1,8 +1,8 @@
 ---
-label: pagewizard.field.meta-author
+label: pw.field.meta-author
 type: users
 multiple: false
 search: false
-help: pagewizard.field.meta-author.help
-empty: pagewizard.field.meta-author.empty
+help: pw.field.meta-author.help
+empty: pw.field.meta-author.empty
 width: 1/3

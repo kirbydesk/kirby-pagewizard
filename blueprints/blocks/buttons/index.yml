@@ -1,0 +1,6 @@
+---
+label: pw.field.action.label
+type: blocks
+fieldsets:
+  - pwButton
+empty: pw.field.action.empty

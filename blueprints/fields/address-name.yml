@@ -1,5 +1,5 @@
 ---
-label: pagewizard.field.address-name
+label: pw.field.address-name
 type: writer
 counter: false
 inline: true

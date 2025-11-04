@@ -1,17 +1,17 @@
 ---
-name: pagewizard.footer
+name: pw.footer
 icon: folder-structure
 tabs:
   content:
      fields:
       name:
-        label: pagewizard.footer.name
+        label: pw.footer.name
         type: text
         counter: false
-        help: pagewizard.footer.name.help
+        help: pw.footer.name.help
       blocks:
-        label: pagewizard.footer.items
+        label: pw.footer.items
         type: blocks
         fieldsets:
           - footerItem
-        empty: pagewizard.footer.items.empty
+        empty: pw.footer.items.empty

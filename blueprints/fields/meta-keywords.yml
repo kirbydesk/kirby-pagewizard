@@ -1,5 +1,5 @@
 ---
-label: pagewizard.field.meta-keywords
+label: pw.field.meta-keywords
 type: tags
-help: pagewizard.field.meta-keywords.help
+help: pw.field.meta-keywords.help
 width: 2/3

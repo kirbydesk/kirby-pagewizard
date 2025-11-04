@@ -1,7 +1,7 @@
 ---
-label: pagewizard.field.copyright
+label: pw.field.copyright
 type: writer
-placeholder: pagewizard.field.copyright.placeholder
+placeholder: pw.field.copyright.placeholder
 counter: false
 inline: true
 marks:
@@ -9,4 +9,4 @@ marks:
   - italic
   - underline
   - strike
-help: pagewizard.field.copyright.help
+help: pw.field.copyright.help

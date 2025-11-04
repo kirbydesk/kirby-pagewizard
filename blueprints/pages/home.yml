@@ -1,5 +1,5 @@
 ---
-title: pagewizard.page.home
+title: pw.page.home
 icon: home
 navigation: false
 options:
@@ -18,7 +18,7 @@ options:
   update:	true
 status:
   unlisted:
-    label: pagewizard.status.locked
+    label: pw.status.locked
 tabs:
   content: tabs/home
   properties: tabs/properties

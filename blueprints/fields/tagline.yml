@@ -1,0 +1,6 @@
+---
+label: pw.field.tagline
+type: text
+counter: false
+placeholder: pw.field.tagline.placeholder
+help: pw.field.tagline.help

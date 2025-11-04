@@ -1,7 +1,7 @@
 ---
-label: pagewizard.field.aria-label
+label: pw.field.aria-label
 type: text
 icon: accessibility
-placeholder: pagewizard.field.aria-label.placeholder
+placeholder: pw.field.aria-label.placeholder
 counter: false
-help: pagewizard.field.aria-label.help
+help: pw.field.aria-label.help

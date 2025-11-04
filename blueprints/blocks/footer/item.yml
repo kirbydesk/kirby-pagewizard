@@ -1,9 +1,9 @@
 ---
-name: pagewizard.footer.item
+name: pw.footer.item
 icon: url
 tabs:
   link:
-    label: pagewizard.tab.link
+    label: pw.tab.link
     fields:
       headlineLink:
         extends: pagewizard/headlines/link
@@ -29,7 +29,7 @@ tabs:
       linkText:
         extends: pagewizard/fields/link-text
   accessibility:
-    label: pagewizard.tab.accessibility
+    label: pw.tab.accessibility
     fields:
       headlineAccessibility:
         extends: pagewizard/headlines/accessibility

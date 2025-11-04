@@ -1,5 +1,5 @@
 ---
-label: pagewizard.field.link-rel
+label: pw.field.link-rel
 type: multiselect
 default:
   noopener
@@ -8,22 +8,22 @@ default:
 options:
   - value: noopener
     text:
-      *: pagewizard.field.link-rel.option.noopener
+      *: pw.option.noopener
   - value: noreferrer
     text:
-      *: pagewizard.field.link-rel.option.noreferrer
+      *: pw.option.noreferrer
   - value: nofollow
     text:
-      *: pagewizard.field.link-rel.option.nofollow
+      *: pw.option.nofollow
   - value: sponsored
     text:
-      *: pagewizard.field.link-rel.option.sponsored
+      *: pw.option.sponsored
   - value: ugc
     text:
-      *: pagewizard.field.link-rel.option.ugc
+      *: pw.option.ugc
   - value: bookmark
     text:
-      *: pagewizard.field.link-rel.option.bookmark
+      *: pw.option.bookmark
 search: false
 width: 2/3
-help: pagewizard.field.link-rel.help
+help: pw.field.link-rel.help

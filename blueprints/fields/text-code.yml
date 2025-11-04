@@ -1,0 +1,7 @@
+---
+label: pw.field.text-code
+placeholder: pw.field.text-code.placeholder
+help: pw.field.text-code.help
+type: textarea
+buttons: false
+font: monospace

@@ -1,0 +1,6 @@
+---
+label: pw.field.fragment
+type: text
+placeholder: pw.field.fragment.placeholder
+before: "#"
+help: pw.field.fragment.help

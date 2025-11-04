@@ -1,5 +1,5 @@
 ---
-title: pagewizard.page.error
+title: pw.page.error
 icon: alert
 navigation: false
 options:
@@ -18,6 +18,6 @@ options:
   update:	true
 status:
   unlisted:
-    label: pagewizard.status.locked
+    label: pw.status.locked
 tabs:
   content: tabs/content

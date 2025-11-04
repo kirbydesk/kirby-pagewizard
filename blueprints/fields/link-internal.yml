@@ -1,5 +1,5 @@
 ---
-label: pagewizard.field.link-internal
+label: pw.field.link-internal
 type: link
 options:
   - page
@@ -9,4 +9,4 @@ options:
   - file
 required: true
 width: 2/3
-help: pagewizard.field.link-internal.help
+help: pw.field.link-internal.help

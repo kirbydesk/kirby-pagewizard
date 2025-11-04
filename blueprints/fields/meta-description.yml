@@ -1,6 +1,6 @@
 ---
-label: pagewizard.field.meta-description
+label: pw.field.meta-description
 type: textarea
 buttons: false
 size: small
-help: pagewizard.field.meta-description.help
+help: pw.field.meta-description.help

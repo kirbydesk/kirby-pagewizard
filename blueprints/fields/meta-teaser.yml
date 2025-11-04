@@ -1,6 +1,6 @@
 ---
-label: pagewizard.field.meta-teaser
+label: pw.field.meta-teaser
 type: textarea
 buttons: false
 size: small
-help: pagewizard.field.meta-teaser.help
+help: pw.field.meta-teaser.help

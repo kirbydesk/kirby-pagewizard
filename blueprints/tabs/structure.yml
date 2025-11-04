@@ -1,11 +1,11 @@
 ---
-label: pagewizard.tab.structure
+label: pw.tab.structure
 icon: list-bullet
 columns:
   - width: 2/3
     sections:
       listed:
-        label: pagewizard.section.listed
+        label: pw.section.listed
         type: pages
         status: listed
         templates: ["article"]
@@ -15,7 +15,7 @@ columns:
   - width: 1/3
     sections:
       unlisted:
-        label: pagewizard.section.unlisted
+        label: pw.section.unlisted
         type: pages
         status: unlisted
         templates: ["article"]
@@ -23,7 +23,7 @@ columns:
         image: icon
         text: '{{ page.title }}'
       draft:
-        label: pagewizard.section.draft
+        label: pw.section.draft
         type: pages
         icon : file
         status: draft
