@@ -24,8 +24,6 @@ div.k-block-container {
 	div.pwPreview {
 		position: relative;
 		border-radius: var(--rounded) !important;
-		color: var(--block-textcolor);
-		padding: var(--spacing-3);
 
 		.placeholder {
 			font-weight: var(--font-normal);
