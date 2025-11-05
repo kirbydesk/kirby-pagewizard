@@ -2,7 +2,7 @@
   <div class="pwHeading" :data-level="level">
     <div v-if="value" v-html="value"></div>
     <div v-else class="placeholder">
-      {{ $t('pw.field.tagline.placeholder') }}
+      {{ $t('pw.field.heading.placeholder') }}
     </div>
   </div>
 </template>

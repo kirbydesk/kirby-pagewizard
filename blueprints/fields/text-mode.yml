@@ -19,7 +19,3 @@ options:
     text:
       *: pw.option.markdown
     icon: markdown
-  - value: code
-    text:
-      *: pw.option.code
-    icon: code

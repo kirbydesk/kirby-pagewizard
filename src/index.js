@@ -2,14 +2,20 @@
 import "./css/panel.css";
 
 // Blocks
-import footer from "@/blocks/footer/index.vue";
-import footerItem from "@/blocks/footer/item.vue";
+import pwFooter from "@/blocks/footer/index.vue";
+import pwFooterItem from "@/blocks/footer/item.vue";
+
+// Components
+import pwButton from "@/components/button.vue";
+import pwButtons from "@/components/buttons.vue";
 
 // Render
 panel.plugin("kirbydesk/kirby-pagewizard", {
   blocks: {
-		footer: footer,
-		footerItem: footerItem
+		pwButton: pwButton,
+		pwButtons: pwButtons,
+		pwFooter: pwFooter,
+		pwFooterItem: pwFooterItem
 	},
 	icons: {
     "expand-left":

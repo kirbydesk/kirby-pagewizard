@@ -1,7 +1,6 @@
 ---
 label: pw.field.block-offset
 type: toggles
-default: left
 options:
   - value: left
     text:

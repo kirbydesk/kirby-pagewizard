@@ -1,6 +1,6 @@
 ---
-label: pw.field.action.label
+label: pw.field.buttons
 type: blocks
 fieldsets:
   - pwButton
-empty: pw.field.action.empty
+empty: pw.field.buttons.empty

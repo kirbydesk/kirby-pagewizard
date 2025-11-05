@@ -17,7 +17,7 @@ div.k-block-container {
 			display: none;
 		}
 	}
-	div.item.ishidden {
+	.ishidden {
 		opacity:.25;
 	}
 

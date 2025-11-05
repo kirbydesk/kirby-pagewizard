@@ -17,10 +17,10 @@
 	'tabs/structure' => __DIR__ . '/../../blueprints/tabs/structure.yml',
 
 	/* -------------- Blocks --------------*/
-	'blocks/buttons' => __DIR__ . '/../../blueprints/blocks/buttons/index.yml',
-	'blocks/button' => __DIR__ . '/../../blueprints/blocks/buttons/item.yml',
-	'blocks/footer' => __DIR__ . '/../../blueprints/blocks/footer/index.yml',
-	'blocks/footerItem' => __DIR__ . '/../../blueprints/blocks/footer/item.yml',
+	'blocks/pwButtons' => __DIR__ . '/../../blueprints/blocks/buttons/index.yml',
+	'blocks/pwButton' => __DIR__ . '/../../blueprints/blocks/buttons/item.yml',
+	'blocks/pwFooter' => __DIR__ . '/../../blueprints/blocks/footer/index.yml',
+	'blocks/pwFooterItem' => __DIR__ . '/../../blueprints/blocks/footer/item.yml',
 
 	/* -------------- Fields --------------*/
 	'pagewizard/fields/address' => __DIR__ . '/../../blueprints/fields/address.yml',
@@ -66,6 +66,8 @@
 	'pagewizard/headlines/blocksettings' => __DIR__ . '/../../blueprints/headlines/blocksettings.yml',
 	'pagewizard/headlines/contact' => __DIR__ . '/../../blueprints/headlines/contact.yml',
 	'pagewizard/headlines/content' => __DIR__ . '/../../blueprints/headlines/content.yml',
+	'pagewizard/headlines/editorsettings' => __DIR__ . '/../../blueprints/headlines/editorsettings.yml',
+	'pagewizard/headlines/fieldsettings' => __DIR__ . '/../../blueprints/headlines/fieldsettings.yml',
 	'pagewizard/headlines/footer' => __DIR__ . '/../../blueprints/headlines/footer.yml',
 	'pagewizard/headlines/link' => __DIR__ . '/../../blueprints/headlines/link.yml',
 	'pagewizard/headlines/meta' => __DIR__ . '/../../blueprints/headlines/meta.yml',

@@ -34,7 +34,7 @@ div.blockinfo div {
   align-items: center;
   z-index: var(--z-toolbar);
 	color: white;
-	background-color: #63a1de;
+	background-color: var(--color-blue-600);
 
   svg {
     display: block;

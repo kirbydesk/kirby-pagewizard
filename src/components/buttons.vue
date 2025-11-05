@@ -1,8 +1,7 @@
 <template>
-	<div v-if="value.length" class="k-button-group">
-
+	<div class="k-button-group" v-if="value && value.length">
 		<div v-for="item in value" :key="item.id" :class="{'ishidden': item.isHidden}">
-			<button v-if="item.content.link.length"
+			<button
 				type="button"
 				class="k-button"
 				data-has-text="true"
@@ -10,15 +9,13 @@
 				data-size="md"
 				data-variant="filled"
 			>
-				<span v-if="item.content.linktext.length" class="k-button-text"> {{item.content.linktext}} </span>
-				<em v-else class="k-button-text placeholder"> {{ $t('pw.field.linktext.placeholder') }} </em>
-
+			<span v-if="item.content.linktext.length" class="k-button-text"> {{item.content.linktext}} </span>
+			<span v-else class="k-button-text placeholder"> {{ $t('pw.field.link-text.placeholder') }} </span>
 			</button>
 		</div>
 	</div>
 </template>
 <script>
-
 export default {
 	props: {
 		value: String,
@@ -27,12 +24,15 @@ export default {
 </script>
 <style scoped>
 .k-button-group {
-	margin-top: var(--spacing-4);
+	margin: var(--spacing-4) 0 var(--spacing-2);
 }
 button {
-	margin-top: var(--spacing-1);
 	padding: var(--spacing-4) var(--spacing-2);
-	color: var(--button-primary-textcolor);
-	background-color: var(--button-primary-backgroundcolor);
+	background-color: var(--color-gray-600);
+	color: white;
+
+	.k-button-text.placeholder {
+		color: white;
+	}
 }
 </style>

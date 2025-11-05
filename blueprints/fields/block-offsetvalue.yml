@@ -3,7 +3,6 @@ label: pw.field.block-offsetvalue
 type: range
 min: 0
 max: 6
-default: 0
 step: 1
 after: /12
 help: pw.field.block-offsetvalue.help

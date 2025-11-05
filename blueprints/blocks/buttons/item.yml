@@ -1,23 +1,39 @@
 ---
-name: pw.field.action.label
-icon: bolt
+name: pw.field.button
+icon: url
 tabs:
-  text:
+  link:
     label: pw.tab.link
     fields:
-      linktext:
-        extends: fields/pwLinktext
-      linktitle:
-        extends: fields/pwLinktitle
-        width: 2/3
-      link:
-        extends: fields/pwLink
-  layout:
-    label: pw.tab.layout
+      headlineLink:
+        extends: pagewizard/headlines/link
+      linkType:
+        extends: pagewizard/fields/link-type
+      link-internal:
+        extends: pagewizard/fields/link-internal
+        when:
+          linkType: false
+      link-external:
+        extends: pagewizard/fields/link-external
+        when:
+          linkType: true
+      linkTarget:
+        extends: pagewizard/fields/link-target
+        when:
+          linkType: true
+      linkRel:
+        extends: pagewizard/fields/link-rel
+        when:
+          linkType: true
+          linkTarget: true
+      linkText:
+        extends: pagewizard/fields/link-text
+  accessibility:
+    label: pw.tab.accessibility
     fields:
-      textcolor:
-        extends: fields/pwTextcolor
-        default: "#000000"
-      bgcolor:
-        extends: fields/pwBgcolor
-        default: "#ffffff"
+      headlineAccessibility:
+        extends: pagewizard/headlines/accessibility
+      ariaLabel:
+        extends: pagewizard/fields/aria-label
+      ariaDescribedby:
+        extends: pagewizard/fields/aria-describedby

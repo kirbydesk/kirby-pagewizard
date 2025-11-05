@@ -1,7 +1,6 @@
 ---
 label: pw.field.block-alignment
 type: toggles
-default: centered
 width: 1/2
 options:
   - value: center

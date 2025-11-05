@@ -1,6 +1,6 @@
 ---
 type: toggles
-width: 1/2
+width: 1/3
 options:
   - value: enabled
     text:
