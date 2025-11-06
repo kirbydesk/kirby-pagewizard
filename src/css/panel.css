@@ -29,6 +29,16 @@ div.k-block-container {
 			font-weight: var(--font-normal);
 			color: var(--input-color-placeholder);
 		}
+		.linktext {
+			display: inline-flex;
+			align-items: center;
+			gap: var(--spacing-1);
+
+			.k-icon {
+				color: var(--color-text-dimmed);
+			}
+		}
+
 		.items {
 			padding: var(--spacing-2) 0;
 		}
@@ -56,12 +66,13 @@ div.k-block-container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
 		padding: 0;
-		background-color: var(--color-gray-250);
+		background-color: light-dark(var(--color-gray-250), var(--menu-color-back));
 		gap: 1rem;
 
 		.pwGridItem {
 			padding: var(--spacing-3);
-			background-color: light-dark(white, var(--color-red-750));
+			border-radius: var(--rounded) !important;
+			background-color: var(--block-color-back);
 			grid-column: var(--grid-start-sm) / span var(--grid-span-sm);
 		}
 	}
