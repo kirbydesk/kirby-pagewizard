@@ -1,0 +1,10 @@
+---
+label: pw.field.grid-offset
+type: range
+min: 1
+max: 12
+step: 1
+after: /12
+help: pw.field.grid-offset.help
+width: 1/3
+translate: false

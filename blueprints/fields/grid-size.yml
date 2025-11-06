@@ -1,0 +1,10 @@
+---
+label: pw.field.grid-size
+type: range
+min: 1
+max: 12
+step: 1
+after: /12
+help: pw.field.grid-size.help
+width: 2/3
+translate: false

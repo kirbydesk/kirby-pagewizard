@@ -14,3 +14,4 @@ options:
     text: H3
   - value: h4
     text: H4
+translate: false

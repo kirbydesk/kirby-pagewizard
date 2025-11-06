@@ -34,3 +34,38 @@ div.k-block-container {
 		}
 	}
 }
+
+
+/* Hide Layout tab if set */
+.k-form-drawer.hide-layout-tab nav.k-drawer-tabs button:nth-child(2) {
+	display: none !important;
+}
+
+/* Grid settings */
+.pwGrid {
+  display: block;
+	padding: var(--spacing-3);
+	border-radius: var(--rounded) !important;
+
+	.pwGridItem {
+		display: block;
+	}
+}
+@media (min-width: 640px) {
+  .pwGrid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+		padding: 0;
+		background-color: var(--color-gray-250);
+		gap: 1rem;
+
+		.pwGridItem {
+			padding: var(--spacing-3);
+			background-color: light-dark(white, var(--color-red-750));
+			grid-column: var(--grid-start-sm) / span var(--grid-span-sm);
+		}
+	}
+}
+@media (min-width: 768px){.pwGrid .pwGridItem { grid-column: var(--grid-start-md) / span var(--grid-span-md);}}
+@media (min-width: 1024px){.pwGrid .pwGridItem { grid-column: var(--grid-start-lg) / span var(--grid-span-lg);}}
+@media (min-width: 1280px){.pwGrid .pwGridItem { grid-column: var(--grid-start-xl) / span var(--grid-span-xl);}}
