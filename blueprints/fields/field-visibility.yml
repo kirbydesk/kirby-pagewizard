@@ -1,14 +1,9 @@
 ---
-type: toggles
+type: toggle
 width: 1/3
 required: true
-options:
-  - value: enabled
-    text:
-      *: pw.option.enabled
-    icon: check
-  - value: disabled
-    text:
-      *: pw.option.disabled
-    icon: remove
+default: false
+text:
+  - *: pw.option.disabled
+  - *: pw.option.enabled
 translate: false

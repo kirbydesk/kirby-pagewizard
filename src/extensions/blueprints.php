@@ -37,6 +37,11 @@
 	'pagewizard/fields/grid-offset' => __DIR__ . '/../../blueprints/fields/grid-offset.yml',
 	'pagewizard/fields/grid-size' => __DIR__ . '/../../blueprints/fields/grid-size.yml',
 	'pagewizard/fields/heading' => __DIR__ . '/../../blueprints/fields/heading.yml',
+	'pagewizard/fields/image' => __DIR__ . '/../../blueprints/fields/image.yml',
+	'pagewizard/fields/image-crop' => __DIR__ . '/../../blueprints/fields/image-crop.yml',
+	'pagewizard/fields/image-ratio' => __DIR__ . '/../../blueprints/fields/image-ratio.yml',
+	'pagewizard/fields/image-zoom' => __DIR__ . '/../../blueprints/fields/image-zoom.yml',
+	'pagewizard/fields/images' => __DIR__ . '/../../blueprints/fields/images.yml',
 	'pagewizard/fields/level' => __DIR__ . '/../../blueprints/fields/level.yml',
 	'pagewizard/fields/link-external' => __DIR__ . '/../../blueprints/fields/link-external.yml',
 	'pagewizard/fields/link-internal' => __DIR__ . '/../../blueprints/fields/link-internal.yml',
@@ -44,6 +49,9 @@
 	'pagewizard/fields/link-target' => __DIR__ . '/../../blueprints/fields/link-target.yml',
 	'pagewizard/fields/link-text' => __DIR__ . '/../../blueprints/fields/link-text.yml',
 	'pagewizard/fields/link-type' => __DIR__ . '/../../blueprints/fields/link-type.yml',
+	'pagewizard/fields/media-position' => __DIR__ . '/../../blueprints/fields/media-position.yml',
+	'pagewizard/fields/media-size' => __DIR__ . '/../../blueprints/fields/media-size.yml',
+	'pagewizard/fields/media-type' => __DIR__ . '/../../blueprints/fields/media-type.yml',
 	'pagewizard/fields/meta-author' => __DIR__ . '/../../blueprints/fields/meta-author.yml',
 	'pagewizard/fields/meta-description' => __DIR__ . '/../../blueprints/fields/meta-description.yml',
 	'pagewizard/fields/meta-keywords' => __DIR__ . '/../../blueprints/fields/meta-keywords.yml',
@@ -57,6 +65,16 @@
 	'pagewizard/fields/text-quote' => __DIR__ . '/../../blueprints/fields/text-quote.yml',
 	'pagewizard/fields/text-textarea' => __DIR__ . '/../../blueprints/fields/text-textarea.yml',
 	'pagewizard/fields/text-writer' => __DIR__ . '/../../blueprints/fields/text-writer.yml',
+	'pagewizard/fields/video' => __DIR__ . '/../../blueprints/fields/video.yml',
+	'pagewizard/fields/video-autoplay' => __DIR__ . '/../../blueprints/fields/video-autoplay.yml',
+	'pagewizard/fields/video-controls' => __DIR__ . '/../../blueprints/fields/video-controls.yml',
+	'pagewizard/fields/video-loop' => __DIR__ . '/../../blueprints/fields/video-loop.yml',
+	'pagewizard/fields/video-muted' => __DIR__ . '/../../blueprints/fields/video-muted.yml',
+	'pagewizard/fields/video-poster' => __DIR__ . '/../../blueprints/fields/video-poster.yml',
+	'pagewizard/fields/video-preload' => __DIR__ . '/../../blueprints/fields/video-preload.yml',
+	'pagewizard/fields/video-ratio' => __DIR__ . '/../../blueprints/fields/video-ratio.yml',
+	'pagewizard/fields/video-source' => __DIR__ . '/../../blueprints/fields/video-source.yml',
+	'pagewizard/fields/video-url' => __DIR__ . '/../../blueprints/fields/video-url.yml',
 
 	/* -------------- Headlines --------------*/
 	'pagewizard/headlines/accessibility' => __DIR__ . '/../../blueprints/headlines/accessibility.yml',
@@ -74,5 +92,5 @@
 	'pagewizard/headlines/socialmedia' => __DIR__ . '/../../blueprints/headlines/socialmedia.yml',
 
 	/* -------------- Files --------------*/
-	'pagewizard/files/default' => __DIR__ . '/../../blueprints/files/default.yml',
+	'files/pwImage' => __DIR__ . '/../../blueprints/files/pwImage.yml',
 ];

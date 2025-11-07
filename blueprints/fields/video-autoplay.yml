@@ -1,0 +1,9 @@
+---
+type: toggle
+label: pw.field.video-autoplay
+help: pw.field.video-autoplay.help
+default: false
+text:
+  - pw.option.no
+  - pw.option.yes
+width: 1/3

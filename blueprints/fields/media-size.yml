@@ -1,0 +1,21 @@
+---
+label: pw.field.media-size
+type: toggles
+required: true
+default: small
+options:
+  - value: small
+    text:
+      *: pw.option.small
+  - value: medium
+    text:
+      *: pw.option.medium
+  - value: large
+    text:
+      *: pw.option.large
+  - value: fullscreen
+    text:
+      *: pw.option.fullscreen
+help: pw.field.media-size.help
+width: 1/2
+translate: false

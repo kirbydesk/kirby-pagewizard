@@ -10,7 +10,10 @@
 export default {
   props: {
     value: String,
-		level: String
+		level: {
+      type: String,
+      default: 'h2'
+    }
   }
 }
 </script>

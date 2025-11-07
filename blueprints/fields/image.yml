@@ -1,0 +1,9 @@
+---
+label: pw.field.image
+type: files
+layout: cards
+size: full
+multiple: false
+text: '{{ file.filename }}<br><em style="color:#9b9b9b">{{file.dimensions}}</em><br><span style="color:#307DCA">{{file.nicesize}}</span>'
+empty: pw.field.image.empty
+help: pw.field.image.help

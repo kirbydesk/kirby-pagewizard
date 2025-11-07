@@ -1,0 +1,10 @@
+---
+title: pw.file.image
+options:
+  changeTemplate: false
+accept:
+  mime: image/*
+  type: image
+create:
+  width: 1280
+  format: webp

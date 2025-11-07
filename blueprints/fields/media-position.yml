@@ -1,0 +1,17 @@
+---
+label: pw.field.mediaposition.label
+type: toggles
+required: true
+labels: false
+default: left
+options:
+  - value: left
+    text:
+      *: pw.option.left
+    icon: text-left
+  - value: right
+    text:
+      *: pw.option.right
+    icon: text-right
+help: pw.field.mediaposition.help
+width: 1/3

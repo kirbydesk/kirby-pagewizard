@@ -1,0 +1,9 @@
+---
+label: pw.field.image.zoom
+type: toggle
+default: false
+text:
+  - pw.option.no
+  - pw.option.yes
+help: pw.field.image.zoom.help
+width: 1/3

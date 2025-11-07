@@ -1,0 +1,11 @@
+---
+type: select
+default: auto
+required: true
+options:
+  - auto
+  - metadata
+  - none
+label: pw.field.video-preload
+help: pw.field.video-preload.help
+width: 1/4

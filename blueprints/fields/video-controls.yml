@@ -1,0 +1,9 @@
+---
+type: toggle
+label: pw.field.video-controls
+help: pw.field.video-controls.help
+default: false
+text:
+  - pw.option.no
+  - pw.option.yes
+width: 1/4

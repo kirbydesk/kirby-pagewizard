@@ -25,11 +25,7 @@ export default {
     setDrawerClass() {
       const drawers = document.querySelectorAll('.k-drawer.k-form-drawer');
       drawers.forEach(drawer => {
-        if (this.content.togglelayout === 'disabled') {
-          drawer.classList.add('hide-layout-tab');
-        } else {
-          drawer.classList.remove('hide-layout-tab');
-        }
+        drawer.classList.toggle('hide-layout-tab', this.content.togglelayout === false);
       });
     }
   }

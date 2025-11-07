@@ -1,0 +1,9 @@
+---
+label: pw.field.image.crop
+type: toggle
+default: false
+text:
+  - pw.option.no
+  - pw.option.yes
+help: pw.field.image.crop.help
+width: 1/3

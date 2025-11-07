@@ -1,0 +1,14 @@
+---
+label: pw.field.video-source
+type: toggles
+required: true
+default: external
+options:
+  - value: internal
+    text:
+      *: pw.option.internal
+  - value: external
+    text:
+      *: pw.option.external
+help: pw.field.video-source.help
+width: 1/3

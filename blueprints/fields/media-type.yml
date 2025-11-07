@@ -1,0 +1,22 @@
+---
+label: pw.field.media-type
+type: toggles
+required: true
+labels: true
+default: image
+options:
+  - value: image
+    text:
+      *: pw.option.image
+    icon: image
+  - value: slideshow
+    text:
+      *: pw.option.slideshow
+    icon: images
+  - value: video
+    text:
+      *: pw.option.video
+    icon: video
+help: pw.field.media-type.help
+width: 1/2
+translate: false
