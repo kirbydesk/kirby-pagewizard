@@ -1,7 +1,0 @@
----
-label: pw.field.aria-describedby
-type: text
-icon: accessibility
-placeholder: pw.field.aria-describedby.placeholder
-counter: false
-help: pw.field.aria-describedby.help

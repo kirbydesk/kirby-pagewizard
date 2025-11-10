@@ -1,0 +1,32 @@
+---
+label: pw.tab.accessibility
+icon: accessibility
+columns:
+  - width: 2/3
+    sections:
+      arias:
+        type: fields
+        fields:
+          headlineAccessibility:
+            extends: pagewizard/headlines/accessibility
+          ariaLabel:
+            extends: pagewizard/fields/aria-label-video
+          ariaDescribedby:
+            extends: pagewizard/fields/aria-describedby-video
+          videoTranscript:
+            extends: pagewizard/fields/video-transcript
+  - width: 1/3
+    sections:
+      subs:
+        type: fields
+        fields:
+          headlineSubtitles:
+            extends: pagewizard/headlines/subtitles
+          videoAudiodescription:
+            extends: pagewizard/fields/video-audiodescription
+          videoCaption:
+            extends: pagewizard/fields/video-caption
+          videoSubtitle:
+            extends: pagewizard/fields/video-subtitle
+          videoChapters:
+            extends: pagewizard/fields/video-chapters

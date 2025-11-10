@@ -1,0 +1,7 @@
+---
+label: pw.field.video-description
+type: textarea
+buttons: false
+size: small
+help: pw.field.video-description.help
+placeholder: pw.field.video-description.placeholder

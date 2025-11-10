@@ -1,0 +1,24 @@
+---
+label: pw.tab.content
+icon: page
+columns:
+  - width: 3/4
+    sections:
+      main:
+        type: fields
+        fields:
+          headlineContent:
+            extends: pagewizard/headlines/content-video
+          videoTitle:
+            extends: pagewizard/fields/video-title
+          videoDescription:
+            extends: pagewizard/fields/video-description
+  - width: 1/4
+    sections:
+      aside:
+        type: fields
+        fields:
+          headlinePreview:
+            extends: pagewizard/headlines/preview
+          videoPoster:
+            extends: pagewizard/fields/video-poster

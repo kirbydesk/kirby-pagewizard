@@ -1,0 +1,12 @@
+---
+title: pw.file.video
+options:
+  changeTemplate: false
+accept:
+  mime: video/*
+  type: video
+tabs:
+  content: tabs/content-video
+  accessibility: tabs/accessibility-video
+  settings: tabs/settings-video
+  legal: tabs/legal

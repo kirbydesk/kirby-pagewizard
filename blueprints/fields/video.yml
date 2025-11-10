@@ -1,8 +1,9 @@
 ---
-label: pw.field.video.label
+label: pw.field.video
 type: files
-layout: cards
+layout: list
 multiple: false
-text: '{{ file.filename }}<br><em style="color:#9b9b9b">{{file.mime}}</em><br><span style="color:#307DCA">{{file.nicesize}}</span>'
+text: '{{ file.filename }}'
 empty: pw.field.video.empty
 help: pw.field.video.help
+width: 2/3

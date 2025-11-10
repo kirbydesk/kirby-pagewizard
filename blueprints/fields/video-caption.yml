@@ -1,0 +1,6 @@
+---
+label: pw.field.video-caption
+type: files
+multiple: false
+empty: pw.field.video-caption.empty
+help: pw.field.video-caption.help

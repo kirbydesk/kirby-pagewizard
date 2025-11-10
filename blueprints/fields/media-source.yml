@@ -1,0 +1,5 @@
+---
+label: pw.field.media-source
+type: text
+help: pw.field.media-source.help
+placeholder: pw.field.media-source.placeholder

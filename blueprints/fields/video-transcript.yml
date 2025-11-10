@@ -1,0 +1,12 @@
+---
+label: pw.field.video-transcript
+type: writer
+counter: false
+inline: true
+marks:
+  - bold
+  - italic
+  - underline
+  - strike
+placeholder: pw.field.video-transcript.placeholder
+help: pw.field.video-transcript.help

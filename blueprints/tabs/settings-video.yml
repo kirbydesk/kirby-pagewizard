@@ -1,0 +1,18 @@
+---
+label: pw.tab.settings
+icon: settings
+fields:
+  headlinePlayer:
+    extends: pagewizard/headlines/player
+  videoAutoplay:
+    extends: pagewizard/fields/video-autoplay
+  videoMuted:
+    extends: pagewizard/fields/video-muted
+  videoLoop:
+    extends: pagewizard/fields/video-loop
+  videoControls:
+    extends: pagewizard/fields/video-controls
+  videoRatio:
+    extends: pagewizard/fields/video-ratio
+  videoPreload:
+    extends: pagewizard/fields/video-preload

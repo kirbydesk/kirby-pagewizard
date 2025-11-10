@@ -1,0 +1,7 @@
+---
+label: pw.field.aria-video-describedby
+type: text
+icon: accessibility
+placeholder: pw.field.aria-video-describedby.placeholder
+counter: false
+help: pw.field.aria-video-describedby.help

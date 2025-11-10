@@ -1,9 +1,9 @@
 ---
-label: pw.field.images
+label: pw.field.file-images
 type: files
 layout: cards
 size: small
 text: '{{ file.filename }}'
 info: '{{ file.dimensions }}'
-empty: pw.field.images.empty
-help: pw.field.images.help
+empty: pw.field.file-images.empty
+help: pw.field.file-images.help

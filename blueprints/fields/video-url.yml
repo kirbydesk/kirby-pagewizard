@@ -1,7 +1,6 @@
 ---
 label: pw.field.video-url
-type: link
-options:
-  - url
+type: url
 width: 2/3
+placeholder: pw.field.video-url.placeholder
 help: pw.field.video-url.help

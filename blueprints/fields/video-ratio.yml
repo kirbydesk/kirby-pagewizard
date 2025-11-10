@@ -1,5 +1,5 @@
 ---
-label: pw.field.video.ratio
+label: pw.field.video-ratio
 type: select
 required: true
 default: 1/1
@@ -13,5 +13,5 @@ options:
   5/3: '5:3'
   3/2: '3:2'
   3/1: '3:1'
-help: pw.field.video.ratio.help
+help: pw.field.video-ratio.help
 width: 1/3

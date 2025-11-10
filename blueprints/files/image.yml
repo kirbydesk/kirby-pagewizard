@@ -1,0 +1,15 @@
+---
+title: pw.file.image
+options:
+  changeTemplate: false
+accept:
+  mime: image/*
+  type: image
+create:
+  width: 1280
+  format: webp
+tabs:
+  content: tabs/content-image
+  accessibility: tabs/accessibility-image
+  settings: tabs/settings-image
+  legal: tabs/legal

@@ -1,0 +1,38 @@
+---
+label: pw.field.media-license
+type: select
+default: all-rights-reserved
+options:
+  adobe-stock-extended: Adobe Stock – Extended
+  adobe-stock-standard: Adobe Stock – Standard
+  all-rights-reserved: All rights reserved
+  cc-by-nc-nd: CC BY-NC-ND – Non-Commercial & No Derivatives
+  cc-by-nc-sa: CC BY-NC-SA – Non-Commercial & ShareAlike
+  cc-by-nc: CC BY-NC – Non-Commercial
+  cc-by-nd: CC BY-ND – No Derivatives
+  cc-by-sa: CC BY-SA – ShareAlike
+  cc-by: CC BY – Attribution
+  cc0: CC0 – Public Domain
+  custom-license: Custom license agreement
+  editorial-use-only: Editorial use only
+  educational-use: Educational use only
+  extended-license: Extended License
+  getty-commercial: Getty – Commercial
+  getty-editorial: Getty – Editorial
+  internal-use: Internal use only
+  nasa-license: NASA Media Guidelines
+  non-profit-use: Non-profit use only
+  pexels-license: Pexels License
+  pixabay-license: Pixabay License
+  press-license: Press / Media use only
+  public-domain-mark: Public Domain Mark
+  rights-managed: Rights-Managed (restricted use)
+  royalty-free: Royalty-Free (commercial use allowed)
+  shutterstock-enhanced: Shutterstock – Enhanced
+  shutterstock-standard: Shutterstock – Standard
+  unsplash-license: Unsplash License
+  us-government-work: US Government Work
+  vimeo-standard: Vimeo Standard License
+  wikimedia-commons: Wikimedia Commons
+  youtube-standard: YouTube Standard License
+help: pw.field.media-license.help

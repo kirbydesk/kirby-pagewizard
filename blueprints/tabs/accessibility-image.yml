@@ -1,0 +1,15 @@
+---
+label: pw.tab.accessibility
+icon: accessibility
+columns:
+  - width: 2/3
+    sections:
+      arias:
+        type: fields
+        fields:
+          headlineAccessibility:
+            extends: pagewizard/headlines/accessibility
+          ariaLabel:
+            extends: pagewizard/fields/aria-label-image
+          ariaDescribedby:
+            extends: pagewizard/fields/aria-describedby-image

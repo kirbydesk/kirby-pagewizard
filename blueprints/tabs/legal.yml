@@ -1,0 +1,28 @@
+---
+label: pw.tab.legal
+icon: legal
+columns:
+  - width: 2/3
+    sections:
+      legal:
+        type: fields
+        fields:
+          headlineCopyrights:
+            extends: pagewizard/headlines/copyrights
+          mediaCreator:
+            extends: pagewizard/fields/media-creator
+          mediaCredit:
+            extends: pagewizard/fields/media-credit
+          mediaCopyright:
+            extends: pagewizard/fields/media-copyright
+  - width: 1/3
+    sections:
+      license:
+        type: fields
+        fields:
+          headlineLicense:
+            extends: pagewizard/headlines/license
+          mediaLicense:
+            extends: pagewizard/fields/media-license
+          mediaSource:
+            extends: pagewizard/fields/media-source

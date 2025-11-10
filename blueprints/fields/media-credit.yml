@@ -1,0 +1,5 @@
+---
+label: pw.field.media-credit
+type: text
+help: pw.field.media-credit.help
+placeholder: pw.field.media-credit.placeholder

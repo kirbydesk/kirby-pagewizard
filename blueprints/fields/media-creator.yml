@@ -1,0 +1,5 @@
+---
+label: pw.field.media-creator
+type: text
+help: pw.field.media-creator.help
+placeholder: pw.field.media-creator.placeholder

@@ -1,0 +1,6 @@
+---
+label: pw.field.video-chapters
+type: files
+multiple: false
+empty: pw.field.video-chapters.empty
+help: pw.field.video-chapters.help

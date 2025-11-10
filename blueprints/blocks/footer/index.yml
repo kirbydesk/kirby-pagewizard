@@ -3,7 +3,7 @@ name: pw.footer
 icon: folder-structure
 tabs:
   content:
-     fields:
+    fields:
       name:
         label: pw.footer.name
         type: text

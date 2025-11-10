@@ -8,4 +8,4 @@ options:
   - none
 label: pw.field.video-preload
 help: pw.field.video-preload.help
-width: 1/4
+width: 1/3

@@ -1,0 +1,5 @@
+---
+label: pw.field.video-title
+type: text
+help: pw.field.video-title.help
+placeholder: pw.field.video-title.placeholder

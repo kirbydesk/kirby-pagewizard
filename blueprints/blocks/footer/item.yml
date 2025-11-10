@@ -34,7 +34,7 @@ tabs:
       headlineAccessibility:
         extends: pagewizard/headlines/accessibility
       ariaLabel:
-        extends: pagewizard/fields/aria-label
+        extends: pagewizard/fields/aria-label-link
       ariaDescribedby:
-        extends: pagewizard/fields/aria-describedby
+        extends: pagewizard/fields/aria-describedby-link
 
