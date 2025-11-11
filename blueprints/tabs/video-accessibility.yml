@@ -10,9 +10,9 @@ columns:
           headlineAccessibility:
             extends: pagewizard/headlines/accessibility
           ariaLabel:
-            extends: pagewizard/fields/aria-label-video
+            extends: pagewizard/fields/video-aria-label
           ariaDescribedby:
-            extends: pagewizard/fields/aria-describedby-video
+            extends: pagewizard/fields/video-aria-describedby
           videoTranscript:
             extends: pagewizard/fields/video-transcript
   - width: 1/3

@@ -1,6 +1,0 @@
----
-label: pw.tab.settings
-icon: settings
-fields:
-  headlinePlayer:
-    extends: pagewizard/headlines/settings

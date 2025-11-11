@@ -28,12 +28,7 @@ tabs:
           linkTarget: true
       linkText:
         extends: pagewizard/fields/link-text
-  accessibility:
-    label: pw.tab.accessibility
-    fields:
-      headlineAccessibility:
-        extends: pagewizard/headlines/accessibility
       ariaLabel:
-        extends: pagewizard/fields/aria-label-link
+        extends: pagewizard/fields/link-aria-label
       ariaDescribedby:
-        extends: pagewizard/fields/aria-describedby-link
+        extends: pagewizard/fields/link-aria-describedby

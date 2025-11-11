@@ -1,0 +1,8 @@
+---
+label: pw.field.image-type
+type: toggle
+default: true
+text:
+  - pw.option.decorative
+  - pw.option.informative
+help: pw.field.image-type.help

@@ -1,0 +1,8 @@
+---
+label: pw.field.image-aria-describedby
+type: textarea
+buttons: false
+icon: accessibility
+placeholder: pw.field.image-aria-describedby.placeholder
+counter: false
+help: pw.field.image-aria-describedby.help

@@ -1,0 +1,5 @@
+---
+label: pw.field.image-caption
+type: text
+placeholder: pw.field.image-caption.placeholder
+help: pw.field.image-caption.help

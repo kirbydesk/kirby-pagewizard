@@ -1,0 +1,43 @@
+---
+label: pw.tab.image
+icon: image
+columns:
+  - width: 2/3
+    sections:
+      main:
+        type: fields
+        fields:
+          headlineImage:
+            extends: pagewizard/headlines/image
+          imageTitle:
+            extends: pagewizard/fields/image-title
+          imageDescription:
+            extends: pagewizard/fields/image-description
+            when:
+              imageType: true
+          ariaDescribedby:
+            extends: pagewizard/fields/image-aria-describedby
+            when:
+              imageType: true
+          imageCaption:
+            extends: pagewizard/fields/image-caption
+  - width: 1/3
+    sections:
+      aside:
+        type: fields
+        fields:
+          headlineSettings:
+            extends: pagewizard/headlines/imagesettings
+          imageType:
+            extends: pagewizard/fields/image-type
+          imageZoom:
+            extends: pagewizard/fields/image-zoom
+          imageRatio:
+            extends: pagewizard/fields/image-ratio
+          imageCrop:
+            extends: pagewizard/fields/image-crop
+
+
+
+
+

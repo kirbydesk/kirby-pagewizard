@@ -1,6 +1,0 @@
----
-label: pw.field.videourl.label
-type: url
-placeholder: pw.field.videourl.placeholder
-help: pw.field.videourl.help
-width: 2/3

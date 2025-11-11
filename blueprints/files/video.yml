@@ -6,7 +6,7 @@ accept:
   mime: video/*
   type: video
 tabs:
-  content: tabs/content-video
-  accessibility: tabs/accessibility-video
-  settings: tabs/settings-video
+  content: tabs/video
+  accessibility: tabs/video-accessibility
+  player: tabs/video-player
   legal: tabs/legal

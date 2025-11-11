@@ -9,7 +9,5 @@ create:
   width: 1280
   format: webp
 tabs:
-  content: tabs/content-image
-  accessibility: tabs/accessibility-image
-  settings: tabs/settings-image
+  image: tabs/image
   legal: tabs/legal

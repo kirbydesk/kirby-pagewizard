@@ -2,7 +2,7 @@
 label: pw.field.video-source
 type: toggles
 required: true
-default: external
+default: internal
 options:
   - value: internal
     text:
