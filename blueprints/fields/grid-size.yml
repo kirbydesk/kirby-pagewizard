@@ -6,5 +6,5 @@ max: 12
 step: 1
 after: /12
 help: pw.field.grid-size.help
-width: 2/3
+width: 1/2
 translate: false

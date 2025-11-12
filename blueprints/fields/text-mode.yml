@@ -11,10 +11,6 @@ options:
     text:
       *: pw.option.writer
     icon: text
-  - value: quote
-    text:
-      *: pw.option.quote
-    icon: quote
   - value: markdown
     text:
       *: pw.option.markdown

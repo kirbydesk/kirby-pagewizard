@@ -42,6 +42,7 @@ class pwGrid
 				'headlineSm' => [
 					'type' => 'htmlheadline',
 					'class' => 'subheadline',
+					'width' => '1/4',
 					'label' => 'pw.headline.screen.sm',
 					'help' => 'pw.headline.screen.sm.help'
 				],
@@ -57,13 +58,10 @@ class pwGrid
 					'label' => 'pw.field.grid-offset.sm',
 					'help' => 'pw.field.grid-offset.sm.help'
 				],
-				'lineSm' => [
-					'type' => 'line',
-					'class' => 'small',
-				],
 				'headlineMd' => [
 					'type' => 'htmlheadline',
 					'class' => 'subheadline',
+					'width' => '1/4',
 					'label' => 'pw.headline.screen.md',
 					'help' => 'pw.headline.screen.md.help'
 				],
@@ -79,13 +77,10 @@ class pwGrid
 					'label' => 'pw.field.grid-offset.md',
 					'help' => 'pw.field.grid-offset.md.help'
 				],
-				'lineMd' => [
-					'type' => 'line',
-					'class' => 'small',
-				],
 				'headlineLg' => [
 					'type' => 'htmlheadline',
 					'class' => 'subheadline',
+					'width' => '1/4',
 					'label' => 'pw.headline.screen.lg',
 					'help' => 'pw.headline.screen.lg.help'
 				],
@@ -101,13 +96,10 @@ class pwGrid
 					'label' => 'pw.field.grid-offset.lg',
 					'help' => 'pw.field.grid-offset.lg.help'
 				],
-				'lineLg' => [
-					'type' => 'line',
-					'class' => 'small',
-				],
 				'headlineXl' => [
 					'type' => 'htmlheadline',
 					'class' => 'subheadline',
+					'width' => '1/4',
 					'label' => 'pw.headline.screen.xl',
 					'help' => 'pw.headline.screen.xl.help'
 				],
