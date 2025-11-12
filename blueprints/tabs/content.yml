@@ -17,4 +17,5 @@ columns:
                 type: group
                 fieldsets:
                   - pwText
+                  - pwQuote
                   - pwMedia
