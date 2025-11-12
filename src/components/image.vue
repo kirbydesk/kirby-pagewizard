@@ -90,7 +90,7 @@ div.wrap {
 }
 
 div.image, div.controls {
-	display: flex;
+	display: block;
 	width: 100%;
 
 	div.pattern {
@@ -135,6 +135,9 @@ div.image, div.controls {
 }
 
 @media (min-width: 640px) {
+	div.image, div.controls {
+		display: flex;
+	}
 	.small { width: 25%;}
 	.medium { width: 50%;}
 	.large { width: 75%;}

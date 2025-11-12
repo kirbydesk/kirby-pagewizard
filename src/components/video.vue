@@ -73,7 +73,7 @@ export default {
 
 <style scoped>
 div.video {
-	display: flex;
+	display: block;
 	width: 100%;
 
 	&[data-align="left"] {
@@ -95,6 +95,9 @@ div.video {
 	}
 }
 @media (min-width: 640px) {
+	div.video {
+		display: flex;
+	}
 	.small { width: 25%;}
 	.medium { width: 50%;}
 	.large { width: 75%;}
