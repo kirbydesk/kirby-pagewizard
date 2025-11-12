@@ -3,10 +3,10 @@
 		<div class="pattern">
 			<figure
 				class="k-frame k-image-frame k-image"
-				:class="{ 'zoom': zoom }"
+				:class="{ 'zoom': computedZoom }"
 				:style="{
-					'--fit': crop ? 'cover' : 'contain',
-					'--ratio': ratio || '1/1'
+					'--fit': computedCrop ? 'cover' : 'contain',
+					'--ratio': computedRatio
 				}"
 			>
 				<img v-if="src.length"
@@ -27,15 +27,44 @@ export default {
 	props: {
 		src: String,
 		srcset: String,
-		crop: String,
-		ratio: String,
 		size: String,
-		zoom: String,
+		image: Object,
 		count: {
 			type: Number,
 			default: 0
 		}
-  }
+  },
+	data() {
+		return {
+			imageContent: null
+		}
+	},
+	computed: {
+		computedCrop() {
+			return this.imageContent?.imagecrop || false;
+		},
+		computedRatio() {
+			return this.imageContent?.imageratio || '1/1';
+		},
+		computedZoom() {
+			return this.imageContent?.imagezoom || false;
+		}
+	},
+	async mounted() {
+		if (this.image?.link) {
+			await this.loadImageContent();
+		}
+	},
+	methods: {
+		async loadImageContent() {
+			try {
+				const response = await this.$api.get(this.image.link);
+				this.imageContent = response?.content || null;
+			} catch (error) {
+				console.error('Error loading image content:', error);
+			}
+		}
+	}
 }
 </script>
 

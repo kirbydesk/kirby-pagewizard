@@ -2,7 +2,7 @@
 label: pw.field.video-ratio
 type: select
 required: true
-default: 1/1
+default: 16/9
 options:
   1/1: '1:1'
   16/9: '16:9'

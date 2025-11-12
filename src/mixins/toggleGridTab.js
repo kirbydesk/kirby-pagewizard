@@ -3,7 +3,7 @@ export default {
     this.setDrawerClass();
 
     this.$watch(
-      () => this.content.togglelayout,
+      () => this.content.togglegrid,
       () => {
         this.setDrawerClass();
       }
@@ -25,7 +25,7 @@ export default {
     setDrawerClass() {
       const drawers = document.querySelectorAll('.k-drawer.k-form-drawer');
       drawers.forEach(drawer => {
-        drawer.classList.toggle('hide-layout-tab', this.content.togglelayout === false);
+        drawer.classList.toggle('hide-grid-tab', this.content.togglegrid === false);
       });
     }
   }

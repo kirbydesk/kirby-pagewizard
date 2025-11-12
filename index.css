@@ -45,9 +45,29 @@ div.k-block-container {
 	}
 }
 
+/* Extend Kirby field headline with class property */
+.k-headline-field.subheadline {
+	padding-top: 0;
+	h2.k-headline {
+		font-size: var(--text-lg);
+	}
+}
+/* Extend Kirby field line with class property */
+.k-line-field.small {
+	height: 2px;
+}
 
-/* Hide Layout tab if set */
-.k-form-drawer.hide-layout-tab nav.k-drawer-tabs button:nth-child(2) {
+
+
+
+/* Patch Kirby Background color for empty files field */
+.k-box.k-empty {
+	background-color: light-dark(var(--color-gray-250),var(--color-gray-950));
+}
+
+
+/* Hide Grid tab if set */
+.k-form-drawer.hide-layout-tab nav.k-drawer-tabs button[aria-label="Grid"] {
 	display: none !important;
 }
 
