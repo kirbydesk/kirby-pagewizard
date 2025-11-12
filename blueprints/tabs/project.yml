@@ -29,9 +29,8 @@ columns:
             type: object
             label: pw.field.address
             empty: pw.field.address.empty
+            help: pw.field.address.help
             fields:
-              headlineAddress:
-                extends: pagewizard/headlines/address
               addressName:
                 extends: pagewizard/fields/address-name
               address:
@@ -46,9 +45,8 @@ columns:
             type: object
             label: pw.field.socialmedia
             empty: pw.field.socialmedia.empty
+            help: pw.field.socialmedia.help
             fields:
-              headlineSocialmedia:
-                extends: pagewizard/headlines/socialmedia
               bluesky:
                 type: url
                 label: Bluesky

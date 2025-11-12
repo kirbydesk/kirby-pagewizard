@@ -1,6 +1,6 @@
 ---
 label: pw.field.text-textarea
-type: textarea
+type: pwtextarea
 buttons: false
 size: medium
 placeholder: pw.field.text-textarea.placeholder

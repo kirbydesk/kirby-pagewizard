@@ -1,14 +1,12 @@
 <template>
-	<div class="video" :class="size">
-		<div class="pattern">
-			<div v-if="url || videoUrl">
-				<k-frame v-if="source == 'internal'" :ratio="computedRatio">
-					<video :src="videoUrl" controls />
-				</k-frame>
-				<k-frame v-else-if="source == 'external'" ratio="16/9" class="external">
-					<iframe :src="getEmbedUrl(url)" />
-				</k-frame>
-			</div>
+	<div class="video" v-if="url || videoUrl" :data-align="alignment">
+		<div class="pattern" :class="size" >
+			<k-frame v-if="source == 'internal'" :ratio="computedRatio">
+				<video :src="videoUrl" controls />
+			</k-frame>
+			<k-frame v-else-if="source == 'external'" ratio="16/9" class="external">
+				<iframe :src="getEmbedUrl(url)" />
+			</k-frame>
 		</div>
 	</div>
 </template>
@@ -19,6 +17,10 @@ export default {
 		url: String,
 		source: String,
 		size: String,
+		alignment: {
+			type: String,
+			default: 'left'
+		},
 		video: Object
   },
 	data() {
@@ -71,8 +73,18 @@ export default {
 
 <style scoped>
 div.video {
+	display: flex;
 	width: 100%;
 
+	&[data-align="left"] {
+		justify-content: flex-start;
+	}
+	&[data-align="center"] {
+		justify-content: center;
+	}
+	&[data-align="right"] {
+		justify-content: flex-end;
+	}
 	div.pattern {
 		background: var(--pattern);
 	}
@@ -83,19 +95,9 @@ div.video {
 	}
 }
 @media (min-width: 640px) {
-	div.video {
-		&.small {
-			width: 25%;
-		}
-		&.medium {
-			width: 50%;
-		}
-		&.large {
-			width: 75%;
-		}
-		&.fullscreen {
-			width: 100%;
-		}
-	}
+	.small { width: 25%;}
+	.medium { width: 50%;}
+	.large { width: 75%;}
+	.fullscreen { width: 100%;}
 }
 </style>

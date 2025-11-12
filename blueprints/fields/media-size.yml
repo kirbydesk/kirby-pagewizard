@@ -17,5 +17,5 @@ options:
     text:
       *: pw.option.fullscreen
 help: pw.field.media-size.help
-width: 1/2
+width: 2/3
 translate: false

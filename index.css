@@ -46,32 +46,60 @@ div.k-block-container {
 }
 
 
-/* Extend kirby field textextended */
+/* Extend kirby field text */
 .k-text-field[data-align], .k-text-field[data-level] {
   position: relative;
 
-	.k-input-icon svg.k-icon {
-		color: light-dark(var(--color-gray-600), var(--color-gray-500));
-  	cursor: pointer;
+	.k-input-icon {
+		position: relative;
+		cursor: pointer;
+
+		svg {
+			color: light-dark(var(--color-gray-600), var(--color-gray-500));
+  		cursor: pointer;
+		}
 	}
 }
-.k-text-field .pw-text-dropdown {
+.pw-dropdown {
   position: absolute;
   top: 100%;
-  right: 0;
+	right: 0;
   z-index: 100;
 
 	.k-dropdown-item {
 		min-width: auto;
-		padding: 0.5rem;
+		padding: 0.2rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
-	.k-button-icon {
-		margin: 0;
+}
+
+/* Extend kirby field textarea */
+.pw-textarea-field {
+  position: relative;
+
+	.pw-textarea {
+		padding-right: 2.5rem;
+		min-height: 2.5rem;
+		resize: vertical;
+	}
+	.pw-textarea-icon {
+		cursor: pointer;
+		position: absolute;
+		top: 2.5rem;
+		right: 0;
+		z-index: 100;
+		pointer-events: all;
+		padding-bottom: 0.5rem;
+
+		svg {
+			color: light-dark(var(--color-gray-600), var(--color-gray-500));
+		}
 	}
 }
+
+
 
 
 /* Add custom Panel tags */

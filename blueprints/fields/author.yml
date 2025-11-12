@@ -1,6 +1,7 @@
 ---
 label: pw.field.author
-type: text
+type: pwtext
+align: left
 counter: false
 placeholder: pw.field.author.placeholder
 help: pw.field.author.help

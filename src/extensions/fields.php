@@ -34,5 +34,13 @@ return [
 				return $level;
 			}
     ]
+	],
+	'pwtextarea' => [
+		'extends' => 'textarea',
+		'props' => [
+			'align' => function (string $align = null) {
+				return $align;
+			}
+		]
 	]
 ];

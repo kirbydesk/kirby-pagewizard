@@ -59,6 +59,7 @@
 	'pagewizard/fields/link-target' => __DIR__ . '/../../blueprints/fields/link-target.yml',
 	'pagewizard/fields/link-text' => __DIR__ . '/../../blueprints/fields/link-text.yml',
 	'pagewizard/fields/link-type' => __DIR__ . '/../../blueprints/fields/link-type.yml',
+	'pagewizard/fields/media-alignment' => __DIR__ . '/../../blueprints/fields/media-alignment.yml',
 	'pagewizard/fields/media-copyright' => __DIR__ . '/../../blueprints/fields/media-copyright.yml',
 	'pagewizard/fields/media-creator' => __DIR__ . '/../../blueprints/fields/media-creator.yml',
 	'pagewizard/fields/media-credit' => __DIR__ . '/../../blueprints/fields/media-credit.yml',
@@ -102,7 +103,6 @@
 
 	/* -------------- Headlines --------------*/
 	'pagewizard/headlines/accessibility' => __DIR__ . '/../../blueprints/headlines/accessibility.yml',
-	'pagewizard/headlines/address' => __DIR__ . '/../../blueprints/headlines/address.yml',
 	'pagewizard/headlines/blockcontent' => __DIR__ . '/../../blueprints/headlines/blockcontent.yml',
 	'pagewizard/headlines/blockproperties' => __DIR__ . '/../../blueprints/headlines/blockproperties.yml',
 	'pagewizard/headlines/contact' => __DIR__ . '/../../blueprints/headlines/contact.yml',
@@ -123,7 +123,6 @@
 	'pagewizard/headlines/properties' => __DIR__ . '/../../blueprints/headlines/properties.yml',
 	'pagewizard/headlines/seo' => __DIR__ . '/../../blueprints/headlines/seo.yml',
 	'pagewizard/headlines/slideshow' => __DIR__ . '/../../blueprints/headlines/slideshow.yml',
-	'pagewizard/headlines/socialmedia' => __DIR__ . '/../../blueprints/headlines/socialmedia.yml',
 	'pagewizard/headlines/subtitles' => __DIR__ . '/../../blueprints/headlines/subtitles.yml',
 	'pagewizard/headlines/video' => __DIR__ . '/../../blueprints/headlines/video.yml',
 

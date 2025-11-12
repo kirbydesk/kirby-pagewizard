@@ -1,6 +1,6 @@
 ---
 label: pw.field.text-quote
-type: textarea
+type: pwtextarea
 buttons: false
 size: medium
 placeholder: pw.field.text-quote.placeholder

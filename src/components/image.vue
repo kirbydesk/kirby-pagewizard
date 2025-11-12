@@ -1,23 +1,24 @@
 <template>
-  <div class="image" :class="size">
-		<div class="pattern">
-			<figure
-				class="k-frame k-image-frame k-image"
-				:class="{ 'zoom': computedZoom }"
-				:style="{
-					'--fit': computedCrop ? 'cover' : 'contain',
-					'--ratio': computedRatio
-				}"
-			>
-				<img v-if="src.length"
-					:src="src"
-					:srcset="srcset"
-				/>
-				<div><k-icon type="search"></k-icon></div>
-			</figure>
+	<div class="wrap" v-if="src.length" :data-align="alignment">
+		<div class="image">
+			<div class="pattern" :class="size">
+				<figure
+					class="k-frame k-image-frame k-image"
+					:class="{ 'zoom': computedZoom }"
+					:style="{
+						'--fit': computedCrop ? 'cover' : 'contain',
+						'--ratio': computedRatio
+					}"
+				>
+					<img :src="src" :srcset="srcset" />
+					<div><k-icon type="search"></k-icon></div>
+				</figure>
+			</div>
 		</div>
-		<div v-if="count > 1" class="dots">
-			<span v-for="n in count" :key="n" class="dot"></span>
+		<div v-if="count > 1" class="controls">
+			<div class="dots" :class="size">
+				<span v-for="n in count" :key="n" class="dot"></span>
+			</div>
 		</div>
 	</div>
 </template>
@@ -28,6 +29,10 @@ export default {
 		src: String,
 		srcset: String,
 		size: String,
+		alignment: {
+			type: String,
+			default: 'left'
+		},
 		image: Object,
 		count: {
 			type: Number,
@@ -69,7 +74,23 @@ export default {
 </script>
 
 <style scoped>
-div.image {
+div.wrap {
+	&[data-align="left"] div.image,
+	&[data-align="left"] div.controls {
+		justify-content: flex-start;
+	}
+	&[data-align="center"] div.image,
+	&[data-align="center"] div.controls {
+		justify-content: center;
+	}
+	&[data-align="right"] div.image,
+	&[data-align="right"] div.controls {
+		justify-content: flex-end;
+	}
+}
+
+div.image, div.controls {
+	display: flex;
 	width: 100%;
 
 	div.pattern {
@@ -114,19 +135,10 @@ div.image {
 }
 
 @media (min-width: 640px) {
-	div.image {
-		&.small {
-			width: 25%;
-		}
-		&.medium {
-			width: 50%;
-		}
-		&.large {
-			width: 75%;
-		}
-		&.fullscreen {
-			width: 100%;
-		}
-	}
+	.small { width: 25%;}
+	.medium { width: 50%;}
+	.large { width: 75%;}
+	.fullscreen { width: 100%;}
 }
+
 </style>
