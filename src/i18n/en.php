@@ -112,8 +112,6 @@
 	'pw.field.image-zoom' => 'Image enlargement',
 	'pw.field.image-zoom.help' =>	'Enable or disable the option to allow image enlargement.',
 	'pw.field.layout' => 'Layout',
-	'pw.field.level' => 'Level',
-	'pw.field.level.help' => 'Heading level',
 	'pw.field.link-aria-describedby' => 'Additional link description',
 	'pw.field.link-aria-describedby.help' => 'This field is output as an `aria-describedby` attribute and provides additional context for screen reader users. It does not replace aria-label, but complements it. Use this field to reference an element that contains further information about the link. Avoid long subordinate clauses or complex explanations (max 100 characters).',
 	'pw.field.link-aria-describedby.placeholder' => 'e.g. "The page contains information about fees, benefits, and cancellation terms."',

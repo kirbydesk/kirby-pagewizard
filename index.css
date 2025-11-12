@@ -46,6 +46,33 @@ div.k-block-container {
 }
 
 
+/* Extend kirby field textextended */
+.k-text-field[data-align], .k-text-field[data-level] {
+  position: relative;
+
+	.k-input-icon svg.k-icon {
+		color: light-dark(var(--color-gray-600), var(--color-gray-500));
+  	cursor: pointer;
+	}
+}
+.k-text-field .pw-text-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 100;
+
+	.k-dropdown-item {
+		min-width: auto;
+		padding: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.k-button-icon {
+		margin: 0;
+	}
+}
+
 
 /* Add custom Panel tags */
 span.tag.screensize {
@@ -58,7 +85,6 @@ span.tag.screensize {
   outline: 1px solid light-dark(var(--color-yellow-500),var(--color-yellow-900));
   outline-offset: -1px;
 }
-
 
 /* Extend Kirby field headline with class property */
 .k-headline-field.subheadline {

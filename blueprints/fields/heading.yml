@@ -1,7 +1,8 @@
 ---
 label: pw.field.heading
-type: text
+type: pwtext
+align: left
+level: h2
 counter: false
-width: 4/5
 placeholder: pw.field.heading.placeholder
 help: pw.field.heading.help

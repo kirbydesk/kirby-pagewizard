@@ -23,5 +23,16 @@ return [
 				return $class;
 			}
 		]
+	],
+	'pwtext' => [
+		'extends' => 'text',
+		'props' => [
+			'align' => function (string $align = null) {
+				return $align;
+			},
+			'level' => function (string $level = null) {
+				return $level;
+			}
+    ]
 	]
 ];
