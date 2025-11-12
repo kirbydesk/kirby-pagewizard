@@ -45,6 +45,21 @@ div.k-block-container {
 	}
 }
 
+
+
+/* Add custom Panel tags */
+span.tag.screensize {
+	display: inline-flex;
+  padding-inline: var(--spacing-1);
+  font-size: var(--text-xs);
+	background: var(--color-yellow-300);
+  border-radius: var(--rounded);
+	color: light-dark(var(--color-yellow-800),var(--color-yellow-900));
+  outline: 1px solid light-dark(var(--color-yellow-500),var(--color-yellow-900));
+  outline-offset: -1px;
+}
+
+
 /* Extend Kirby field headline with class property */
 .k-headline-field.subheadline {
 	padding-top: 0;
@@ -57,14 +72,10 @@ div.k-block-container {
 	height: 2px;
 }
 
-
-
-
 /* Patch Kirby Background color for empty files field */
 .k-box.k-empty {
 	background-color: light-dark(var(--color-gray-250),var(--color-gray-950));
 }
-
 
 /* Hide Grid tab if set */
 .k-form-drawer.hide-layout-tab nav.k-drawer-tabs button[aria-label="Grid"] {

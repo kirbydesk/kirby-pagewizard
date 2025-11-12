@@ -8,7 +8,14 @@ return [
 				return $class;
 			}
 		]
-		],
+	],
+	'htmlheadline' => [
+		'props' => [
+			'label' => function ($label = null) {
+				return $label;
+			}
+		]
+	],
 	'line' => [
 		'extends' => 'line',
 		'props' => [

@@ -39,12 +39,8 @@ class pwGrid
 				'headlineGrid' => [
 					'extends' => 'pagewizard/headlines/grid',
 				],
-				'line' => [
-					'type' => 'line',
-					'class' => 'small',
-				],
 				'headlineSm' => [
-					'type' => 'headline',
+					'type' => 'htmlheadline',
 					'class' => 'subheadline',
 					'label' => 'pw.headline.screen.sm',
 					'help' => 'pw.headline.screen.sm.help'
@@ -66,7 +62,7 @@ class pwGrid
 					'class' => 'small',
 				],
 				'headlineMd' => [
-					'type' => 'headline',
+					'type' => 'htmlheadline',
 					'class' => 'subheadline',
 					'label' => 'pw.headline.screen.md',
 					'help' => 'pw.headline.screen.md.help'
@@ -88,7 +84,7 @@ class pwGrid
 					'class' => 'small',
 				],
 				'headlineLg' => [
-					'type' => 'headline',
+					'type' => 'htmlheadline',
 					'class' => 'subheadline',
 					'label' => 'pw.headline.screen.lg',
 					'help' => 'pw.headline.screen.lg.help'
@@ -110,7 +106,7 @@ class pwGrid
 					'class' => 'small',
 				],
 				'headlineXl' => [
-					'type' => 'headline',
+					'type' => 'htmlheadline',
 					'class' => 'subheadline',
 					'label' => 'pw.headline.screen.xl',
 					'help' => 'pw.headline.screen.xl.help'
