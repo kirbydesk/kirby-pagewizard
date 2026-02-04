@@ -1,7 +1,14 @@
+.k-drawer.k-form-drawer.hide-grid-tab .k-tabs-button[aria-label="Grid"] {
+  display: none !important;
+}
+
+
+
 div.k-blocks {
 	background-color: transparent !important;
 	box-shadow: none !important;
 }
+
 div.k-block-container {
 	border-bottom: 0 !important;
 	margin-bottom: var(--spacing-1);
