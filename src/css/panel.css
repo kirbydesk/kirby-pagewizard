@@ -25,6 +25,20 @@ div.k-block-container {
 		position: relative;
 		border-radius: var(--rounded) !important;
 
+		&[data-margintop="true"] {
+			margin-top: 2rem;
+		}
+		&[data-marginbottom="true"] {
+			margin-bottom: 2rem;
+		}
+		&[data-paddingtop="true"] {
+			padding-top: 2rem;
+		}
+		&[data-paddingbottom="true"] {
+			padding-bottom: 2rem;
+		}
+
+
 		.placeholder {
 			font-weight: var(--font-normal);
 			color: var(--input-color-placeholder);
