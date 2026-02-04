@@ -37,6 +37,10 @@ columns:
                 extends: pagewizard/fields/address
               addressPhone:
                 extends: pagewizard/fields/address-phone
+              addressFax:
+                extends: pagewizard/fields/address-fax
+              addressWhatsapp:
+                extends: pagewizard/fields/address-whatsapp
               addressEmail:
                 extends: pagewizard/fields/address-email
               addressCountry:

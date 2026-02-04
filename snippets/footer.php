@@ -1,7 +1,4 @@
-<?php snippet('sections/quiz'); ?>
-<?php snippet('sections/contact'); ?>
 <footer>
-
 
 	<div class="p-3 mx-auto md:p-4 lg:p-6 xl:p-8 max-w-7xl">
 

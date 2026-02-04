@@ -1,28 +1,28 @@
 export default {
   mounted() {
-    this.setDrawerClass();
+    this.setGridDrawerClass();
 
     this.$watch(
       () => this.content.togglegrid,
       () => {
-        this.setDrawerClass();
+        this.setGridDrawerClass();
       }
     );
 
-    this.drawerObserver = new MutationObserver(() => {
-      this.setDrawerClass();
+    this.gridDrawerObserver = new MutationObserver(() => {
+      this.setGridDrawerClass();
     });
-    this.drawerObserver.observe(document.body, { childList: true, subtree: true });
+    this.gridDrawerObserver.observe(document.body, { childList: true, subtree: true });
   },
 
   beforeDestroy() {
-    if (this.drawerObserver) {
-      this.drawerObserver.disconnect();
+    if (this.gridDrawerObserver) {
+      this.gridDrawerObserver.disconnect();
     }
   },
 
   methods: {
-    setDrawerClass() {
+    setGridDrawerClass() {
       const drawers = document.querySelectorAll('.k-drawer.k-form-drawer');
       drawers.forEach(drawer => {
         drawer.classList.toggle('hide-grid-tab', this.content.togglegrid === false);

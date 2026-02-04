@@ -1,5 +1,5 @@
-<?php snippet('sections/header'); ?>
+<?php snippet('header'); ?>
 	<main>
 			<?=$page->blocks()->toBlocks() ?>
 	</main>
-<?php snippet('sections/footer');
+<?php snippet('footer');
