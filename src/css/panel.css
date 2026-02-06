@@ -32,13 +32,6 @@ div.k-block-container {
 		&[data-marginbottom="true"] {
 			margin-bottom: 2rem;
 		}
-		&[data-paddingtop="true"] {
-			padding-top: 2rem;
-		}
-		&[data-paddingbottom="true"] {
-			padding-bottom: 2rem;
-		}
-
 
 		.placeholder {
 			font-weight: var(--font-normal);
@@ -224,6 +217,13 @@ span.tag.screensize {
 
 	.pwGridItem {
 		display: block;
+
+		&[data-paddingtop="true"] {
+			padding-top: 2rem;
+		}
+		&[data-paddingbottom="true"] {
+			padding-bottom: 2rem;
+		}
 	}
 }
 @media (min-width: 640px) {

@@ -5,6 +5,11 @@ const GRID_TAB_HIDDEN_CLASS = 'hide-grid-tab';
 
 export default {
   mounted() {
+    // Claim drawer on mount (for new blocks that open immediately)
+    setTimeout(() => {
+      this.claimActiveDrawerForGrid();
+    }, 100);
+
     // Watch for toggle changes in block settings
     this.$watch(
       () => this.content.togglegrid,
@@ -16,11 +21,9 @@ export default {
     // Listen for double-clicks on this block to claim the drawer
     if (this.$el) {
       this._handleDblClick = () => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            this.claimActiveDrawerForGrid();
-          });
-        });
+        setTimeout(() => {
+          this.claimActiveDrawerForGrid();
+        }, 20);
       };
       this.$el.addEventListener('dblclick', this._handleDblClick);
     }

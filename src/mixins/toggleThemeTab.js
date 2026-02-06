@@ -5,6 +5,11 @@ const THEME_TAB_HIDDEN_CLASS = 'hide-theme-tab';
 
 export default {
   mounted() {
+    // Claim drawer on mount (for new blocks that open immediately)
+    setTimeout(() => {
+      this.claimActiveDrawerForTheme();
+    }, 100);
+
     // Watch for toggle changes in block settings
     this.$watch(
       () => this.content.toggletheme,
@@ -16,11 +21,9 @@ export default {
     // Listen for double-clicks on this block to claim the drawer
     if (this.$el) {
       this._handleDblClickTheme = () => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            this.claimActiveDrawerForTheme();
-          });
-        });
+        setTimeout(() => {
+          this.claimActiveDrawerForTheme();
+        }, 20);
       };
       this.$el.addEventListener('dblclick', this._handleDblClickTheme);
     }

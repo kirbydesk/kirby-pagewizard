@@ -25,14 +25,8 @@ class pwTheme
 					'extends' => 'pagewizard/headlines/theme',
 				],
 				'theme' => [
-					'type'    => 'select',
-					'label'   => 'pw.field.theme',
-					'options' => [
-						['value' => 'default', 'text' => 'pw.option.default'],
-						['value' => 'variant', 'text' => 'pw.option.variant'],
-					],
-					'default' => $defaults['theme'],
-					'help'    => 'pw.field.theme.help'
+					'extends' => 'pagewizard/fields/style',
+					'default' => $defaults['theme']
 				]
 			]
 		];

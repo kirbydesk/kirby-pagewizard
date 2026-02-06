@@ -77,6 +77,7 @@
 	'pagewizard/fields/meta-teaser' => __DIR__ . '/../../blueprints/fields/meta-teaser.yml',
 	'pagewizard/fields/seo-canonical' => __DIR__ . '/../../blueprints/fields/seo-canonical.yml',
 	'pagewizard/fields/seo-robots' => __DIR__ . '/../../blueprints/fields/seo-robots.yml',
+	'pagewizard/fields/style' => __DIR__ . '/../../blueprints/fields/style.yml',
 	'pagewizard/fields/tagline' => __DIR__ . '/../../blueprints/fields/tagline.yml',
 	'pagewizard/fields/text-markdown' => __DIR__ . '/../../blueprints/fields/text-markdown.yml',
 	'pagewizard/fields/text-mode' => __DIR__ . '/../../blueprints/fields/text-mode.yml',
@@ -118,6 +119,7 @@
 	'pagewizard/headlines/image' => __DIR__ . '/../../blueprints/headlines/image.yml',
 	'pagewizard/headlines/imagesettings' => __DIR__ . '/../../blueprints/headlines/imagesettings.yml',
 	'pagewizard/headlines/layout' => __DIR__ . '/../../blueprints/headlines/layout.yml',
+	'pagewizard/headlines/layoutsettings' => __DIR__ . '/../../blueprints/headlines/layoutsettings.yml',
 	'pagewizard/headlines/license' => __DIR__ . '/../../blueprints/headlines/license.yml',
 	'pagewizard/headlines/link' => __DIR__ . '/../../blueprints/headlines/link.yml',
 	'pagewizard/headlines/meta' => __DIR__ . '/../../blueprints/headlines/meta.yml',
@@ -128,6 +130,7 @@
 	'pagewizard/headlines/slideshow' => __DIR__ . '/../../blueprints/headlines/slideshow.yml',
 	'pagewizard/headlines/spacing' => __DIR__ . '/../../blueprints/headlines/spacing.yml',
 	'pagewizard/headlines/subtitles' => __DIR__ . '/../../blueprints/headlines/subtitles.yml',
+	'pagewizard/headlines/theme' => __DIR__ . '/../../blueprints/headlines/theme.yml',
 	'pagewizard/headlines/video' => __DIR__ . '/../../blueprints/headlines/video.yml',
 
 	/* -------------- Files --------------*/

@@ -1,6 +1,7 @@
 ---
 label: pw.field.text-mode
 type: toggles
+required: true
 width: 1/1
 options:
   - value: textarea

@@ -5,6 +5,11 @@ const SPACING_TAB_HIDDEN_CLASS = 'hide-spacing-tab';
 
 export default {
   mounted() {
+    // Claim drawer on mount (for new blocks that open immediately)
+    setTimeout(() => {
+      this.claimActiveDrawerForSpacing();
+    }, 100);
+
     // Watch for toggle changes in block settings
     this.$watch(
       () => this.content.togglespacing,
@@ -16,11 +21,9 @@ export default {
     // Listen for double-clicks on this block to claim the drawer
     if (this.$el) {
       this._handleDblClickSpacing = () => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            this.claimActiveDrawerForSpacing();
-          });
-        });
+        setTimeout(() => {
+          this.claimActiveDrawerForSpacing();
+        }, 20);
       };
       this.$el.addEventListener('dblclick', this._handleDblClickSpacing);
     }

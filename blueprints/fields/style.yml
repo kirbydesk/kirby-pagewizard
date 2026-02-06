@@ -1,0 +1,12 @@
+label: pw.field.style
+type: toggles
+required: true
+width: 1/1
+options:
+  - value: default
+    text:
+      *: pw.option.default
+  - value: variant
+    text:
+      *: pw.option.variant
+help: pw.field.style.help
