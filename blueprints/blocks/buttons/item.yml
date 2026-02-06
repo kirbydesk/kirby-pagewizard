@@ -9,11 +9,11 @@ tabs:
         extends: pagewizard/headlines/link
       linkType:
         extends: pagewizard/fields/link-type
-      link-internal:
+      linkInternal:
         extends: pagewizard/fields/link-internal
         when:
           linkType: false
-      link-external:
+      linkExternal:
         extends: pagewizard/fields/link-external
         when:
           linkType: true

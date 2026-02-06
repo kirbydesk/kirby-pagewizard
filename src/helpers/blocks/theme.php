@@ -6,7 +6,7 @@ class pwTheme
 	{
 		// 1. Start with block defaults
 		$defaults = [
-			'theme' => 'default',
+			'style' => 'default',
 		];
 
 		// 2. Merge with block-specific defaults from blueprint
@@ -24,9 +24,9 @@ class pwTheme
 				'headlineTheme' => [
 					'extends' => 'pagewizard/headlines/theme',
 				],
-				'theme' => [
+				'style' => [
 					'extends' => 'pagewizard/fields/style',
-					'default' => $defaults['theme']
+					'default' => $defaults['style']
 				]
 			]
 		];
