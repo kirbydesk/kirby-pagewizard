@@ -1,4 +1,3 @@
-const DRAWER_OPEN_DELAY = 50; // ms to wait for drawer to appear
 const DRAWER_SELECTOR = '.k-drawer.k-form-drawer';
 const DRAWER_ACTIVE_SELECTOR = `${DRAWER_SELECTOR}[aria-current="true"]`;
 const DRAWER_CLOSED_SELECTOR = `${DRAWER_SELECTOR}[aria-current="false"][data-block-id]`;
@@ -17,9 +16,11 @@ export default {
     // Listen for double-clicks on this block to claim the drawer
     if (this.$el) {
       this._handleDblClickSpacing = () => {
-        setTimeout(() => {
-          this.claimActiveDrawerForSpacing();
-        }, DRAWER_OPEN_DELAY);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            this.claimActiveDrawerForSpacing();
+          });
+        });
       };
       this.$el.addEventListener('dblclick', this._handleDblClickSpacing);
     }
@@ -64,8 +65,16 @@ export default {
       // Claim the active drawer for this block
       const activeDrawer = document.querySelector(DRAWER_ACTIVE_SELECTOR);
       if (activeDrawer) {
+        const isOff = this.content.togglespacing === false || this.content.togglespacing === 'false';
+
+        // Set data-block-id and class state together in same frame to prevent flicker
         activeDrawer.setAttribute('data-block-id', this.id);
-        this.setSpacingDrawerClass();
+
+        if (isOff) {
+          activeDrawer.classList.add(SPACING_TAB_HIDDEN_CLASS);
+        } else {
+          activeDrawer.classList.remove(SPACING_TAB_HIDDEN_CLASS);
+        }
       }
     },
 

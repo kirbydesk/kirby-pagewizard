@@ -147,6 +147,19 @@ span.tag.screensize {
 }
 
 /* Hide Grid tab if set */
+/* Initial state: hide Grid/Spacing/Theme tabs in new drawers (before JS runs) */
+.k-form-drawer:not([data-block-id]) nav.k-drawer-tabs button[aria-label="Grid"],
+.k-form-drawer:not([data-block-id]) nav.k-drawer-tabs button[aria-label="Spacing"],
+.k-form-drawer:not([data-block-id]) nav.k-drawer-tabs button[aria-label="Theme"] {
+	opacity: 0;
+	max-width: 0;
+	padding-left: 0;
+	padding-right: 0;
+	margin: 0;
+	transform: scale(0.8);
+	pointer-events: none;
+	transition: none; /* No transition on initial render */
+}
 .k-form-drawer nav.k-drawer-tabs button[aria-label="Grid"] {
 	opacity: 1;
 	max-width: 200px;
