@@ -1,7 +1,12 @@
+const DRAWER_OPEN_DELAY = 50; // ms to wait for drawer to appear
+const DRAWER_SELECTOR = '.k-drawer.k-form-drawer';
+const DRAWER_ACTIVE_SELECTOR = `${DRAWER_SELECTOR}[aria-current="true"]`;
+const DRAWER_CLOSED_SELECTOR = `${DRAWER_SELECTOR}[aria-current="false"][data-block-id]`;
+const THEME_TAB_HIDDEN_CLASS = 'hide-theme-tab';
+
 export default {
   mounted() {
-    this.setThemeDrawerClass();
-
+    // Watch for toggle changes in block settings
     this.$watch(
       () => this.content.toggletheme,
       () => {
@@ -9,24 +14,68 @@ export default {
       }
     );
 
-    this.themeDrawerObserver = new MutationObserver(() => {
-      this.setThemeDrawerClass();
+    // Listen for double-clicks on this block to claim the drawer
+    if (this.$el) {
+      this._handleDblClickTheme = () => {
+        setTimeout(() => {
+          this.claimActiveDrawerForTheme();
+        }, DRAWER_OPEN_DELAY);
+      };
+      this.$el.addEventListener('dblclick', this._handleDblClickTheme);
+    }
+
+    // Watch for drawer state changes (e.g., when reopening)
+    this.themeDrawerObserver = new MutationObserver((mutations) => {
+      const relevantChange = mutations.some(mutation => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'aria-current') {
+          const blockId = mutation.target.getAttribute('data-block-id');
+          return blockId === this.id;
+        }
+        return false;
+      });
+
+      if (relevantChange) {
+        this.setThemeDrawerClass();
+      }
     });
-    this.themeDrawerObserver.observe(document.body, { childList: true, subtree: true });
+
+    this.themeDrawerObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['aria-current'],
+      subtree: true
+    });
   },
 
   beforeDestroy() {
     if (this.themeDrawerObserver) {
       this.themeDrawerObserver.disconnect();
     }
+    if (this.$el && this._handleDblClickTheme) {
+      this.$el.removeEventListener('dblclick', this._handleDblClickTheme);
+    }
   },
 
   methods: {
+    claimActiveDrawerForTheme() {
+      // Clean up closed drawers
+      const closedDrawers = document.querySelectorAll(DRAWER_CLOSED_SELECTOR);
+      closedDrawers.forEach(drawer => drawer.removeAttribute('data-block-id'));
+
+      // Claim the active drawer for this block
+      const activeDrawer = document.querySelector(DRAWER_ACTIVE_SELECTOR);
+      if (activeDrawer) {
+        activeDrawer.setAttribute('data-block-id', this.id);
+        this.setThemeDrawerClass();
+      }
+    },
+
     setThemeDrawerClass() {
-      const drawers = document.querySelectorAll('.k-drawer.k-form-drawer');
-      drawers.forEach(drawer => {
-        drawer.classList.toggle('hide-theme-tab', this.content.toggletheme === false);
-      });
+      const drawer = document.querySelector(`${DRAWER_SELECTOR}[data-block-id="${this.id}"]`);
+
+      if (drawer) {
+        const isOff = this.content.toggletheme === false || this.content.toggletheme === 'false';
+        drawer.classList.toggle(THEME_TAB_HIDDEN_CLASS, isOff);
+      }
     }
   }
 };

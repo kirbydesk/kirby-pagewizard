@@ -1,7 +1,12 @@
+const DRAWER_OPEN_DELAY = 50; // ms to wait for drawer to appear
+const DRAWER_SELECTOR = '.k-drawer.k-form-drawer';
+const DRAWER_ACTIVE_SELECTOR = `${DRAWER_SELECTOR}[aria-current="true"]`;
+const DRAWER_CLOSED_SELECTOR = `${DRAWER_SELECTOR}[aria-current="false"][data-block-id]`;
+const SPACING_TAB_HIDDEN_CLASS = 'hide-spacing-tab';
+
 export default {
   mounted() {
-    this.setSpacingDrawerClass();
-
+    // Watch for toggle changes in block settings
     this.$watch(
       () => this.content.togglespacing,
       () => {
@@ -9,24 +14,68 @@ export default {
       }
     );
 
-    this.spacingDrawerObserver = new MutationObserver(() => {
-      this.setSpacingDrawerClass();
+    // Listen for double-clicks on this block to claim the drawer
+    if (this.$el) {
+      this._handleDblClickSpacing = () => {
+        setTimeout(() => {
+          this.claimActiveDrawerForSpacing();
+        }, DRAWER_OPEN_DELAY);
+      };
+      this.$el.addEventListener('dblclick', this._handleDblClickSpacing);
+    }
+
+    // Watch for drawer state changes (e.g., when reopening)
+    this.spacingDrawerObserver = new MutationObserver((mutations) => {
+      const relevantChange = mutations.some(mutation => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'aria-current') {
+          const blockId = mutation.target.getAttribute('data-block-id');
+          return blockId === this.id;
+        }
+        return false;
+      });
+
+      if (relevantChange) {
+        this.setSpacingDrawerClass();
+      }
     });
-    this.spacingDrawerObserver.observe(document.body, { childList: true, subtree: true });
+
+    this.spacingDrawerObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['aria-current'],
+      subtree: true
+    });
   },
 
   beforeDestroy() {
     if (this.spacingDrawerObserver) {
       this.spacingDrawerObserver.disconnect();
     }
+    if (this.$el && this._handleDblClickSpacing) {
+      this.$el.removeEventListener('dblclick', this._handleDblClickSpacing);
+    }
   },
 
   methods: {
+    claimActiveDrawerForSpacing() {
+      // Clean up closed drawers
+      const closedDrawers = document.querySelectorAll(DRAWER_CLOSED_SELECTOR);
+      closedDrawers.forEach(drawer => drawer.removeAttribute('data-block-id'));
+
+      // Claim the active drawer for this block
+      const activeDrawer = document.querySelector(DRAWER_ACTIVE_SELECTOR);
+      if (activeDrawer) {
+        activeDrawer.setAttribute('data-block-id', this.id);
+        this.setSpacingDrawerClass();
+      }
+    },
+
     setSpacingDrawerClass() {
-      const drawers = document.querySelectorAll('.k-drawer.k-form-drawer');
-      drawers.forEach(drawer => {
-        drawer.classList.toggle('hide-spacing-tab', this.content.togglespacing === false);
-      });
+      const drawer = document.querySelector(`${DRAWER_SELECTOR}[data-block-id="${this.id}"]`);
+
+      if (drawer) {
+        const isOff = this.content.togglespacing === false || this.content.togglespacing === 'false';
+        drawer.classList.toggle(SPACING_TAB_HIDDEN_CLASS, isOff);
+      }
     }
   }
 };

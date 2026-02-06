@@ -1,9 +1,3 @@
-.k-drawer.k-form-drawer.hide-grid-tab .k-tabs-button[aria-label="Grid"] {
-  display: none !important;
-}
-
-
-
 div.k-blocks {
 	background-color: transparent !important;
 	box-shadow: none !important;
@@ -180,6 +174,25 @@ span.tag.screensize {
 	transition: opacity 0.3s ease, max-width 0.3s ease, transform 0.3s ease;
 }
 .k-form-drawer.hide-spacing-tab nav.k-drawer-tabs button[aria-label="Spacing"] {
+	opacity: 0;
+	max-width: 0;
+	padding-left: 0;
+	padding-right: 0;
+	margin: 0;
+	transform: scale(0.8);
+	pointer-events: none;
+	transition: opacity 0.3s ease, max-width 0.3s ease, transform 0.3s ease, padding 0.3s ease, margin 0.3s ease;
+}
+
+/* Hide Theme tab if set */
+.k-form-drawer nav.k-drawer-tabs button[aria-label="Theme"] {
+	opacity: 1;
+	max-width: 200px;
+	overflow: hidden;
+	transform: scale(1);
+	transition: opacity 0.3s ease, max-width 0.3s ease, transform 0.3s ease;
+}
+.k-form-drawer.hide-theme-tab nav.k-drawer-tabs button[aria-label="Theme"] {
 	opacity: 0;
 	max-width: 0;
 	padding-left: 0;
