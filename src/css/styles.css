@@ -222,3 +222,52 @@ header.mobile {
 main {
 	@apply md:pt-[var(--header-tablet-nav-height)] lg:pt-[var(--header-desktop-nav-height)];
 }
+
+
+
+
+
+/*------------------------------------------------------------------------------------------------
+	Grid
+------------------------------------------------------------------------------------------------*/
+@import './grid.css';
+
+
+
+
+/*------------------------------------------------------------------------------------------------
+	Data Fields
+------------------------------------------------------------------------------------------------*/
+[data-align="left"] {
+		text-align: left;
+}
+[data-align="center"] {
+	text-align: center;
+}
+[data-align="right"] {
+	text-align: right;
+}
+
+
+
+
+
+[data-field="tagline"] {
+	color: orange;
+}
+
+[data-field="heading"] {
+	color: green;
+}
+
+[data-field="textarea"] {
+	color: purple;
+}
+
+[data-field="writer"] {
+	color: yellowgreen;
+}
+
+[data-field="markdown"] {
+	color: blue
+}

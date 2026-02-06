@@ -1,0 +1,180 @@
+/*------------------------------------------------------------------------------------------------
+	Grid System - 12 Column Responsive Grid
+	Grid activates at 640px and above. Below 640px, content spans full width.
+------------------------------------------------------------------------------------------------*/
+
+/* Grid Container - Default (< 640px): No Grid */
+[data-layout="grid"] {
+	@apply block;
+}
+
+/* Grid Container - Active from 640px */
+@media (min-width: 640px) {
+	[data-layout="grid"] {
+		@apply grid gap-4;
+		grid-template-columns: repeat(12, 1fr);
+	}
+
+	/* Grid Size - Small (default from 640px) */
+	[data-layout="grid"] > * {
+		grid-column: span var(--grid-size-sm, 12);
+	}
+}
+
+/* Grid Size - Medium */
+@media (min-width: 768px) {
+	[data-layout="grid"] {
+		@apply gap-8;
+	}
+	[data-layout="grid"] > * {
+		grid-column: span var(--grid-size-md, 12);
+	}
+}
+
+/* Grid Size - Large */
+@media (min-width: 1024px) {
+	[data-layout="grid"] {
+		@apply gap-12;
+	}
+	[data-layout="grid"] > * {
+		grid-column: span var(--grid-size-lg, 12);
+	}
+}
+
+/* Grid Size - Extra Large */
+@media (min-width: 1280px) {
+	[data-layout="grid"] {
+		@apply gap-16;
+	}
+	[data-layout="grid"] > * {
+		grid-column: span var(--grid-size-xl, 12);
+	}
+}
+
+/* Grid Column Sizes - Small (from 640px) */
+@media (min-width: 640px) {
+	[data-layout="grid"] > [data-grid-size-sm="1"] { grid-column-end: span 1; }
+	[data-layout="grid"] > [data-grid-size-sm="2"] { grid-column-end: span 2; }
+	[data-layout="grid"] > [data-grid-size-sm="3"] { grid-column-end: span 3; }
+	[data-layout="grid"] > [data-grid-size-sm="4"] { grid-column-end: span 4; }
+	[data-layout="grid"] > [data-grid-size-sm="5"] { grid-column-end: span 5; }
+	[data-layout="grid"] > [data-grid-size-sm="6"] { grid-column-end: span 6; }
+	[data-layout="grid"] > [data-grid-size-sm="7"] { grid-column-end: span 7; }
+	[data-layout="grid"] > [data-grid-size-sm="8"] { grid-column-end: span 8; }
+	[data-layout="grid"] > [data-grid-size-sm="9"] { grid-column-end: span 9; }
+	[data-layout="grid"] > [data-grid-size-sm="10"] { grid-column-end: span 10; }
+	[data-layout="grid"] > [data-grid-size-sm="11"] { grid-column-end: span 11; }
+	[data-layout="grid"] > [data-grid-size-sm="12"] { grid-column-end: span 12; }
+}
+
+/* Grid Column Sizes - Medium */
+@media (min-width: 768px) {
+	[data-layout="grid"] > [data-grid-size-md="1"] { grid-column-end: span 1; }
+	[data-layout="grid"] > [data-grid-size-md="2"] { grid-column-end: span 2; }
+	[data-layout="grid"] > [data-grid-size-md="3"] { grid-column-end: span 3; }
+	[data-layout="grid"] > [data-grid-size-md="4"] { grid-column-end: span 4; }
+	[data-layout="grid"] > [data-grid-size-md="5"] { grid-column-end: span 5; }
+	[data-layout="grid"] > [data-grid-size-md="6"] { grid-column-end: span 6; }
+	[data-layout="grid"] > [data-grid-size-md="7"] { grid-column-end: span 7; }
+	[data-layout="grid"] > [data-grid-size-md="8"] { grid-column-end: span 8; }
+	[data-layout="grid"] > [data-grid-size-md="9"] { grid-column-end: span 9; }
+	[data-layout="grid"] > [data-grid-size-md="10"] { grid-column-end: span 10; }
+	[data-layout="grid"] > [data-grid-size-md="11"] { grid-column-end: span 11; }
+	[data-layout="grid"] > [data-grid-size-md="12"] { grid-column-end: span 12; }
+}
+
+/* Grid Column Sizes - Large */
+@media (min-width: 1024px) {
+	[data-layout="grid"] > [data-grid-size-lg="1"] { grid-column-end: span 1; }
+	[data-layout="grid"] > [data-grid-size-lg="2"] { grid-column-end: span 2; }
+	[data-layout="grid"] > [data-grid-size-lg="3"] { grid-column-end: span 3; }
+	[data-layout="grid"] > [data-grid-size-lg="4"] { grid-column-end: span 4; }
+	[data-layout="grid"] > [data-grid-size-lg="5"] { grid-column-end: span 5; }
+	[data-layout="grid"] > [data-grid-size-lg="6"] { grid-column-end: span 6; }
+	[data-layout="grid"] > [data-grid-size-lg="7"] { grid-column-end: span 7; }
+	[data-layout="grid"] > [data-grid-size-lg="8"] { grid-column-end: span 8; }
+	[data-layout="grid"] > [data-grid-size-lg="9"] { grid-column-end: span 9; }
+	[data-layout="grid"] > [data-grid-size-lg="10"] { grid-column-end: span 10; }
+	[data-layout="grid"] > [data-grid-size-lg="11"] { grid-column-end: span 11; }
+	[data-layout="grid"] > [data-grid-size-lg="12"] { grid-column-end: span 12; }
+}
+
+/* Grid Column Sizes - Extra Large */
+@media (min-width: 1280px) {
+	[data-layout="grid"] > [data-grid-size-xl="1"] { grid-column-end: span 1; }
+	[data-layout="grid"] > [data-grid-size-xl="2"] { grid-column-end: span 2; }
+	[data-layout="grid"] > [data-grid-size-xl="3"] { grid-column-end: span 3; }
+	[data-layout="grid"] > [data-grid-size-xl="4"] { grid-column-end: span 4; }
+	[data-layout="grid"] > [data-grid-size-xl="5"] { grid-column-end: span 5; }
+	[data-layout="grid"] > [data-grid-size-xl="6"] { grid-column-end: span 6; }
+	[data-layout="grid"] > [data-grid-size-xl="7"] { grid-column-end: span 7; }
+	[data-layout="grid"] > [data-grid-size-xl="8"] { grid-column-end: span 8; }
+	[data-layout="grid"] > [data-grid-size-xl="9"] { grid-column-end: span 9; }
+	[data-layout="grid"] > [data-grid-size-xl="10"] { grid-column-end: span 10; }
+	[data-layout="grid"] > [data-grid-size-xl="11"] { grid-column-end: span 11; }
+	[data-layout="grid"] > [data-grid-size-xl="12"] { grid-column-end: span 12; }
+}
+
+/* Grid Offsets - Small (from 640px) */
+@media (min-width: 640px) {
+	[data-layout="grid"] > [data-grid-offset-sm="0"] { grid-column-start: auto; }
+	[data-layout="grid"] > [data-grid-offset-sm="1"] { grid-column-start: 1; }
+	[data-layout="grid"] > [data-grid-offset-sm="2"] { grid-column-start: 2; }
+	[data-layout="grid"] > [data-grid-offset-sm="3"] { grid-column-start: 3; }
+	[data-layout="grid"] > [data-grid-offset-sm="4"] { grid-column-start: 4; }
+	[data-layout="grid"] > [data-grid-offset-sm="5"] { grid-column-start: 5; }
+	[data-layout="grid"] > [data-grid-offset-sm="6"] { grid-column-start: 6; }
+	[data-layout="grid"] > [data-grid-offset-sm="7"] { grid-column-start: 7; }
+	[data-layout="grid"] > [data-grid-offset-sm="8"] { grid-column-start: 8; }
+	[data-layout="grid"] > [data-grid-offset-sm="9"] { grid-column-start: 9; }
+	[data-layout="grid"] > [data-grid-offset-sm="10"] { grid-column-start: 10; }
+	[data-layout="grid"] > [data-grid-offset-sm="11"] { grid-column-start: 11; }
+}
+
+/* Grid Offsets - Medium */
+@media (min-width: 768px) {
+	[data-layout="grid"] > [data-grid-offset-md="0"] { grid-column-start: auto; }
+	[data-layout="grid"] > [data-grid-offset-md="1"] { grid-column-start: 1; }
+	[data-layout="grid"] > [data-grid-offset-md="2"] { grid-column-start: 2; }
+	[data-layout="grid"] > [data-grid-offset-md="3"] { grid-column-start: 3; }
+	[data-layout="grid"] > [data-grid-offset-md="4"] { grid-column-start: 4; }
+	[data-layout="grid"] > [data-grid-offset-md="5"] { grid-column-start: 5; }
+	[data-layout="grid"] > [data-grid-offset-md="6"] { grid-column-start: 6; }
+	[data-layout="grid"] > [data-grid-offset-md="7"] { grid-column-start: 7; }
+	[data-layout="grid"] > [data-grid-offset-md="8"] { grid-column-start: 8; }
+	[data-layout="grid"] > [data-grid-offset-md="9"] { grid-column-start: 9; }
+	[data-layout="grid"] > [data-grid-offset-md="10"] { grid-column-start: 10; }
+	[data-layout="grid"] > [data-grid-offset-md="11"] { grid-column-start: 11; }
+}
+
+/* Grid Offsets - Large */
+@media (min-width: 1024px) {
+	[data-layout="grid"] > [data-grid-offset-lg="0"] { grid-column-start: auto; }
+	[data-layout="grid"] > [data-grid-offset-lg="1"] { grid-column-start: 1; }
+	[data-layout="grid"] > [data-grid-offset-lg="2"] { grid-column-start: 2; }
+	[data-layout="grid"] > [data-grid-offset-lg="3"] { grid-column-start: 3; }
+	[data-layout="grid"] > [data-grid-offset-lg="4"] { grid-column-start: 4; }
+	[data-layout="grid"] > [data-grid-offset-lg="5"] { grid-column-start: 5; }
+	[data-layout="grid"] > [data-grid-offset-lg="6"] { grid-column-start: 6; }
+	[data-layout="grid"] > [data-grid-offset-lg="7"] { grid-column-start: 7; }
+	[data-layout="grid"] > [data-grid-offset-lg="8"] { grid-column-start: 8; }
+	[data-layout="grid"] > [data-grid-offset-lg="9"] { grid-column-start: 9; }
+	[data-layout="grid"] > [data-grid-offset-lg="10"] { grid-column-start: 10; }
+	[data-layout="grid"] > [data-grid-offset-lg="11"] { grid-column-start: 11; }
+}
+
+/* Grid Offsets - Extra Large */
+@media (min-width: 1280px) {
+	[data-layout="grid"] > [data-grid-offset-xl="0"] { grid-column-start: auto; }
+	[data-layout="grid"] > [data-grid-offset-xl="1"] { grid-column-start: 1; }
+	[data-layout="grid"] > [data-grid-offset-xl="2"] { grid-column-start: 2; }
+	[data-layout="grid"] > [data-grid-offset-xl="3"] { grid-column-start: 3; }
+	[data-layout="grid"] > [data-grid-offset-xl="4"] { grid-column-start: 4; }
+	[data-layout="grid"] > [data-grid-offset-xl="5"] { grid-column-start: 5; }
+	[data-layout="grid"] > [data-grid-offset-xl="6"] { grid-column-start: 6; }
+	[data-layout="grid"] > [data-grid-offset-xl="7"] { grid-column-start: 7; }
+	[data-layout="grid"] > [data-grid-offset-xl="8"] { grid-column-start: 8; }
+	[data-layout="grid"] > [data-grid-offset-xl="9"] { grid-column-start: 9; }
+	[data-layout="grid"] > [data-grid-offset-xl="10"] { grid-column-start: 10; }
+	[data-layout="grid"] > [data-grid-offset-xl="11"] { grid-column-start: 11; }
+}
