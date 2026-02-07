@@ -1,0 +1,27 @@
+/*------------------------------------------------------------------------------------------------
+	Field Styles - Using Color Variables
+	Fields inherit color variables from their parent blocks
+------------------------------------------------------------------------------------------------*/
+
+/* Tagline */
+[data-field="tagline"] {
+	color: var(--pw-color-primary);
+}
+
+/* Heading */
+[data-field="heading"] {
+	color: var(--pw-color-secondary);
+}
+
+/* Text Fields */
+[data-field="textarea"] {
+	color: var(--pw-color-text);
+}
+
+[data-field="writer"] {
+	color: var(--pw-color-text);
+}
+
+[data-field="markdown"] {
+	color: var(--pw-color-text);
+}
