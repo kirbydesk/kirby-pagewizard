@@ -1,7 +1,6 @@
 <?php
 
 /* -------------- Helpers --------------*/
-require_once __DIR__ . '/src/helpers/colors.php';
 require_once __DIR__ . '/src/helpers/blocks/grid.php';
 require_once __DIR__ . '/src/helpers/blocks/spacing.php';
 require_once __DIR__ . '/src/helpers/blocks/theme.php';

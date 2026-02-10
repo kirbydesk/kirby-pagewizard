@@ -5,12 +5,12 @@
 
 /* Tagline */
 [data-field="tagline"] {
-	color: var(--pw-color-primary);
+	color: var(--pw-color-tagline);
 }
 
 /* Heading */
 [data-field="heading"] {
-	color: var(--pw-color-secondary);
+	color: var(--pw-color-heading);
 }
 
 /* Text Fields */
