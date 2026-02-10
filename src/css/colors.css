@@ -1,34 +1,59 @@
 /*------------------------------------------------------------------------------------------------
-	Pagewizard Color Variables - Global Defaults
-	Can be overridden per block in config.php
+	Pagewizard Color Variables - Plugin Defaults
+
+	Override Hierarchy (CSS Import Order):
+	1. Plugin Defaults (this file)
+	2. Project Colors (site/config/project.css)
 ------------------------------------------------------------------------------------------------*/
 
 :root {
-	/* Primary Colors */
-	--pw-color-primary: #00BBFF;
-	--pw-color-secondary: #101828;
-	--pw-color-accent: #FF0000;
+	/* Default Colors */
+	--pw-color-body-background: #FFFFFF;
 
-	/* Neutral Colors */
-	--pw-color-background: #FFFFFF;
-	--pw-color-text: #101828;
+	/* Element Colors */
+	--pw-color-heading: #262626;
+	--pw-color-tagline: #1D548B;
+	--pw-color-text: #262626;
+	--pw-color-button-text: #FFFFFF;
+	--pw-color-button-background: #1D548B;
+
+	/* Block Colors */
+	--pw-color-block-background: #FFFFFF;
 }
 
 /*------------------------------------------------------------------------------------------------
-	Block-Specific Color Overrides
+	Variant Color Overrides
+------------------------------------------------------------------------------------------------*/
+
+section[data-style="variant"] {
+
+	/* Element Colors */
+	--pw-color-heading: #FFFFFF;
+	--pw-color-tagline: #8CBAE7;
+	--pw-color-text: #FFFFFF;
+	--pw-color-button-text: #262626;
+	--pw-color-button-background: #FFFFFF;
+
+	/* Block Colors */
+	--pw-color-block-background: #1D548B;
+}
+
+/*------------------------------------------------------------------------------------------------
+	Block-Specific Selectors (Higher Specificity)
+	Use attribute selectors for block-specific color customization
 ------------------------------------------------------------------------------------------------*/
 
 /* Text Block */
 section[data-block="text"] {
-	--pw-color-accent: purple;
+
 }
 
 /* Quote Block */
 section[data-block="quote"] {
-	--pw-color-accent: blue;
+
 }
 
 /* Media Block */
 section[data-block="media"] {
-	--pw-color-accent: green;
+
 }
