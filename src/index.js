@@ -1,5 +1,5 @@
 // Styles
-import "./css/panel.css";
+import "./panel.css";
 
 // Blocks
 import pwFooter from "@/blocks/footer/index.vue";
