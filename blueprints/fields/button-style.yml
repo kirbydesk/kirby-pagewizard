@@ -1,0 +1,15 @@
+---
+label: pw.field.button-style.label
+type: toggles
+required: true
+translate: false
+default: "default"
+options:
+  - value: default
+    text:
+      *: pw.option.default
+  - value: variant
+    text:
+      *: pw.option.variant
+help: pw.field.button-style.help
+width: 1/3

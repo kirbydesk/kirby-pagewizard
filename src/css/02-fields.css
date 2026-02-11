@@ -3,28 +3,25 @@
 	Fields inherit color variables from their parent blocks
 ------------------------------------------------------------------------------------------------*/
 
-/* Tagline */
-[data-field="tagline"] {
-	color: var(--pw-color-tagline);
-	text-decoration: underline;
-}
 
-/* Heading */
-[data-field="heading"] {
-	color: var(--pw-color-heading);
-}
+/* Field colors (only when no custom theme) */
+[data-block]:not([data-style="custom"]) {
 
-/* Text Fields */
-[data-field="textarea"] {
-	color: var(--pw-color-text);
-}
+	/* Tagline */
+	& [data-field="tagline"] {
+		color: var(--pw-color-tagline);
+	}
+	/* Heading */
+	& [data-field="heading"] {
+		color: var(--pw-color-heading);
+	}
 
-[data-field="writer"] {
-	color: var(--pw-color-text);
-}
-
-[data-field="markdown"] {
-	color: var(--pw-color-text);
+	/* Text Fields */
+	& [data-field="textarea"],
+	& [data-field="writer"],
+	& [data-field="markdown"] {
+		color: var(--pw-color-text);
+	}
 }
 
 /* Button */

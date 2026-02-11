@@ -8,6 +8,7 @@
 	'pages/home' => __DIR__ . '/../../blueprints/pages/home.yml',
 
 	/* -------------- Tabs --------------*/
+	'tabs/backgroundimage' => __DIR__ . '/../../blueprints/tabs/backgroundimage.yml',
 	'tabs/content' => __DIR__ . '/../../blueprints/tabs/content.yml',
 	'tabs/image' => __DIR__ . '/../../blueprints/tabs/image.yml',
 	'tabs/home' => __DIR__ . '/../../blueprints/tabs/home.yml',
@@ -38,6 +39,7 @@
 	'pagewizard/fields/author' => __DIR__ . '/../../blueprints/fields/author.yml',
 	'pagewizard/fields/background-color' => __DIR__ . '/../../blueprints/fields/background-color.yml',
 	'pagewizard/fields/background-image' => __DIR__ . '/../../blueprints/fields/background-image.yml',
+	'pagewizard/fields/button-style' => __DIR__ . '/../../blueprints/fields/button-style.yml',
 	'pagewizard/fields/copyright' => __DIR__ . '/../../blueprints/fields/copyright.yml',
 	'pagewizard/fields/customtheme' => __DIR__ . '/../../blueprints/fields/customtheme.yml',
 	'pagewizard/fields/field-visibility' => __DIR__ . '/../../blueprints/fields/field-visibility.yml',
@@ -82,6 +84,7 @@
 	'pagewizard/fields/seo-robots' => __DIR__ . '/../../blueprints/fields/seo-robots.yml',
 	'pagewizard/fields/style' => __DIR__ . '/../../blueprints/fields/style.yml',
 	'pagewizard/fields/tagline' => __DIR__ . '/../../blueprints/fields/tagline.yml',
+	'pagewizard/fields/text-color' => __DIR__ . '/../../blueprints/fields/text-color.yml',
 	'pagewizard/fields/text-markdown' => __DIR__ . '/../../blueprints/fields/text-markdown.yml',
 	'pagewizard/fields/text-mode' => __DIR__ . '/../../blueprints/fields/text-mode.yml',
 	'pagewizard/fields/text-quote' => __DIR__ . '/../../blueprints/fields/text-quote.yml',
@@ -137,6 +140,7 @@
 	'pagewizard/headlines/video' => __DIR__ . '/../../blueprints/headlines/video.yml',
 
 	/* -------------- Files --------------*/
+	'files/backgroundimage' => __DIR__ . '/../../blueprints/files/backgroundimage.yml',
 	'files/pwImage' => __DIR__ . '/../../blueprints/files/image.yml',
 	'files/pwVideo' => __DIR__ . '/../../blueprints/files/video.yml',
 	'files/pwVideoPoster' => __DIR__ . '/../../blueprints/files/poster.yml',

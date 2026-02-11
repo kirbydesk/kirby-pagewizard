@@ -28,21 +28,24 @@ class pwTheme
 					'extends' => 'pagewizard/fields/style',
 					'default' => $defaults['style']
 				],
-				'customtheme' => [
-					'extends' => 'pagewizard/fields/customtheme',
+				'textcolor' => [
+					'extends' => 'pagewizard/fields/text-color',
+					'when' => [
+						'style' => 'custom'
+					]
 				],
 				'backgroundcolor' => [
 					'extends' => 'pagewizard/fields/background-color',
 					'when' => [
-						'customtheme' => 'backgroundcolor',
+						'style' => 'custom'
 					]
 				],
-				'backgroundimage' => [
-					'extends' => 'pagewizard/fields/background-image',
+				'buttonstyle' => [
+					'extends' => 'pagewizard/fields/button-style',
 					'when' => [
-						'customtheme' => 'backgroundimage',
-					],
-				],
+						'style' => 'custom'
+					]
+				]
 			]
 		];
 	}

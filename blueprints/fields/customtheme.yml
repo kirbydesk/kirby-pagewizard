@@ -1,5 +1,5 @@
 ---
-label: pw.field.customtheme.label
+label: pw.field.custombackground.label
 type: toggles
 required: true
 translate: false
@@ -11,5 +11,5 @@ options:
   - value: backgroundimage
     text:
       *: pw.option.backgroundimage
-help: pw.field.customtheme.help
-width: 1/3
+help: pw.field.custombackground.help
+width: 1/2

@@ -1,6 +1,7 @@
 ---
 label: pw.field.background-color.label
 type: color
+default: "#b991d6"
 translate: false
 help: pw.field.background-color.help
 width: 1/3

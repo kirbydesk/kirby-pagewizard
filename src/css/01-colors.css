@@ -1,13 +1,14 @@
 /*------------------------------------------------------------------------------------------------
 	Pagewizard Color Variables - Plugin Defaults
 
-	Override Hierarchy (CSS Import Order):
-	1. Plugin Defaults (this file)
-	2. Project Colors (site/config/project.css)
+	Override: Activate patch file site/patches/css/kirby-pagewizard/_01-colors.css
 ------------------------------------------------------------------------------------------------*/
 
 :root {
-	/* Default Colors */
+
+/*------------------------------------------------------------------------------------------------
+	Default Colors
+------------------------------------------------------------------------------------------------*/
 	--pw-color-body-background: #FFFFFF;
 
 	/* Element Colors */
@@ -21,10 +22,10 @@
 	--pw-color-block-background: #FFFFFF;
 }
 
+
 /*------------------------------------------------------------------------------------------------
 	Variant Color Overrides
 ------------------------------------------------------------------------------------------------*/
-
 section[data-style="variant"] {
 
 	/* Element Colors */
@@ -38,6 +39,19 @@ section[data-style="variant"] {
 	--pw-color-block-background: #1D548B;
 }
 
+
+/*------------------------------------------------------------------------------------------------
+	Custom Color Overrides
+------------------------------------------------------------------------------------------------*/
+section[data-style="custom"]{
+
+	&[data-button-style="variant"] {
+		--pw-color-button-text: #262626;
+		--pw-color-button-background: #FFFFFF;
+	}
+}
+
+
 /*------------------------------------------------------------------------------------------------
 	Block-Specific Selectors (Higher Specificity)
 	Use attribute selectors for block-specific color customization
@@ -45,15 +59,15 @@ section[data-style="variant"] {
 
 /* Text Block */
 section[data-block="text"] {
-
+	background-color: var(--pw-color-block-background);
 }
 
 /* Quote Block */
 section[data-block="quote"] {
-
+	background-color: var(--pw-color-block-background);
 }
 
 /* Media Block */
 section[data-block="media"] {
-
+	background-color: var(--pw-color-block-background);
 }

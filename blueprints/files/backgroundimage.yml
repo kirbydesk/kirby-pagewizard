@@ -1,0 +1,13 @@
+---
+title: pw.file.backgroundimage
+options:
+  changeTemplate: false
+accept:
+  mime: image/*
+  type: image
+create:
+  width: 1280
+  format: webp
+tabs:
+  image: tabs/backgroundimage
+  legal: tabs/legal
