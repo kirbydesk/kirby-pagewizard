@@ -1,0 +1,6 @@
+---
+label: pw.field.background-color.label
+type: color
+translate: false
+help: pw.field.background-color.help
+width: 1/3

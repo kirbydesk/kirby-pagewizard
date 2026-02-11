@@ -1,0 +1,15 @@
+---
+label: pw.field.customtheme.label
+type: toggles
+required: true
+translate: false
+default: backgroundcolor
+options:
+  - value: backgroundcolor
+    text:
+      *: pw.option.backgroundcolor
+  - value: backgroundimage
+    text:
+      *: pw.option.backgroundimage
+help: pw.field.customtheme.help
+width: 1/3

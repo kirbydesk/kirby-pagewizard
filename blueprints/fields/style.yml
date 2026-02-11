@@ -9,4 +9,7 @@ options:
   - value: variant
     text:
       *: pw.option.variant
+  - value: custom
+    text:
+      *: pw.option.custom
 help: pw.field.style.help

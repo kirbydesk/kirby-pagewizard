@@ -27,7 +27,22 @@ class pwTheme
 				'style' => [
 					'extends' => 'pagewizard/fields/style',
 					'default' => $defaults['style']
-				]
+				],
+				'customtheme' => [
+					'extends' => 'pagewizard/fields/customtheme',
+				],
+				'backgroundcolor' => [
+					'extends' => 'pagewizard/fields/background-color',
+					'when' => [
+						'customtheme' => 'backgroundcolor',
+					]
+				],
+				'backgroundimage' => [
+					'extends' => 'pagewizard/fields/background-image',
+					'when' => [
+						'customtheme' => 'backgroundimage',
+					],
+				],
 			]
 		];
 	}

@@ -19,8 +19,8 @@ columns:
                 fieldsets:
                   - pwHero
                   - pwIntro
-                  - pwText
-                  - pwQuote
+                  - pwtext
+                  - pwquote
                   - pwDefinitionlist
                   - pwCardlet
                   - pwGallery

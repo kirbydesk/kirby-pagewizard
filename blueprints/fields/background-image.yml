@@ -1,0 +1,6 @@
+---
+label: pw.field.background-image.label
+type: file
+translate: false
+help: pw.field.background-image.help
+width: 1/3

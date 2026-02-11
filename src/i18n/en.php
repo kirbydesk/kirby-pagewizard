@@ -267,6 +267,7 @@
 
 	'pw.option.blank' => 'New tab',
 	'pw.option.bookmark' => 'Permalink',
+	'pw.option.custom' => 'Custom',
 	'pw.option.decorative' => 'Decorative',
 	'pw.option.default' => 'Default',
 	'pw.option.disabled' => 'Disabled',

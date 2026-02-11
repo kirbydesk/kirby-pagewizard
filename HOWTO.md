@@ -20,7 +20,7 @@ Das PageWizard Plugin verwendet zwei verschiedene Override-Mechanismen, um Defau
    ↓ überschrieben von
 3. Config Global               (kirbydesk.pagewizard.colors)
    ↓ überschrieben von
-4. Config Block-Spezifisch     (kirbydesk.pagewizard.kirbyblocks.pwText.colors)
+4. Config Block-Spezifisch     (kirbydesk.pagewizard.kirbyblocks.pwtext.colors)
 ```
 
 ### Ebene 1: CSS Global Defaults
@@ -90,12 +90,12 @@ section[data-block="media"] {
     'accent' => '#FF6B35',  // Global: Orange für alle Blöcke
   ],
   'kirbyblocks' => [
-    'pwText' => [
+    'pwtext' => [
       'colors' => [
         'accent' => '#9333EA',  // NUR für Text-Blöcke: Lila
       ]
     ],
-    'pwQuote' => [
+    'pwquote' => [
       'colors' => [
         'accent' => '#10B981',  // NUR für Quote-Blöcke: Grün
       ]
@@ -131,7 +131,7 @@ function pwGetColorStyles(string $blockType): string
 
 ```php
 echo '<section';
-echo pwGetColorStyles('pwText');  // Generates inline styles
+echo pwGetColorStyles('pwtext');  // Generates inline styles
 echo '>';
 ```
 
@@ -153,7 +153,7 @@ echo '>';
     'accent'    => '#EF4444',  // Rot (für alle Blöcke)
   ],
   'kirbyblocks' => [
-    'pwText' => [
+    'pwtext' => [
       'colors' => [
         'accent' => '#8B5CF6',  // Lila (nur für Text-Blöcke)
       ]
@@ -176,7 +176,7 @@ echo '>';
 ```
 1. Blueprint Defaults          ($defaults array in blueprints.php)
    ↓ überschrieben von
-2. Config Overrides            (kirbydesk.pagewizard.kirbyblocks.pwText)
+2. Config Overrides            (kirbydesk.pagewizard.kirbyblocks.pwtext)
 ```
 
 ### Ebene 1: Blueprint Defaults
@@ -217,7 +217,7 @@ $defaults = [
 ```php
 'kirbydesk.pagewizard' => [
   'kirbyblocks' => [
-    'pwText' => [
+    'pwtext' => [
       'heading'        => false,         // Überschreibt true → false
       'buttons'        => false,         // Überschreibt true → false
       'text-mode'      => 'writer',      // Überschreibt 'textarea' → 'writer'
@@ -243,7 +243,7 @@ $defaults = [
 ];
 
 // 2. Read config overrides
-$raw = option('kirbydesk.pagewizard.kirbyblocks.pwText', []);
+$raw = option('kirbydesk.pagewizard.kirbyblocks.pwtext', []);
 
 // 3. Merge (config overwrites defaults)
 $cfg = array_merge($defaults, is_array($raw) ? $raw : []);
@@ -262,7 +262,7 @@ $gridSizeSm = $cfg['grid-size-sm'];         // 10 (from config)
 // config.php - Projekt-spezifische Anpassungen
 'kirbydesk.pagewizard' => [
   'kirbyblocks' => [
-    'pwText' => [
+    'pwtext' => [
       // Field visibility
       'heading'        => false,      // Heading-Field deaktivieren
       'tagline'        => true,       // Tagline-Field aktivieren
@@ -357,7 +357,7 @@ $gridSizeSm = $cfg['grid-size-sm'];         // 10 (from config)
 ```php
 // In einem Snippet oder Template
 $globalColors = option('kirbydesk.pagewizard.colors', []);
-$blockColors = option('kirbydesk.pagewizard.kirbyblocks.pwText.colors', []);
+$blockColors = option('kirbydesk.pagewizard.kirbyblocks.pwtext.colors', []);
 
 dump($globalColors);   // Zeigt globale Config-Farben
 dump($blockColors);    // Zeigt block-spezifische Config-Farben
@@ -367,7 +367,7 @@ dump($blockColors);    // Zeigt block-spezifische Config-Farben
 
 ```php
 // In blueprints.php während Entwicklung
-$raw = option('kirbydesk.pagewizard.kirbyblocks.pwText', []);
+$raw = option('kirbydesk.pagewizard.kirbyblocks.pwtext', []);
 dump($raw);           // Zeigt Config-Overrides
 dump($cfg);           // Zeigt finale merged Config
 ```
@@ -393,7 +393,7 @@ console.log(styles.getPropertyValue('--pw-color-accent'));
 | `--pw-color-background` | #FFFFFF | Hintergrund-Farbe |
 | `--pw-color-text` | #101828 | Text-Farbe |
 
-## Referenz: Verfügbare Block-Settings (pwText)
+## Referenz: Verfügbare Block-Settings (pwtext)
 
 | Setting | Typ | Standard | Beschreibung |
 |---------|-----|----------|--------------|
