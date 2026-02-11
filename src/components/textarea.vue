@@ -1,5 +1,5 @@
 <template>
-  <div class="pwText" :data-align="align">
+  <div class="pwtext" :data-align="align">
     <div v-if="text" v-html="nl2br(text)"></div>
     <div v-else class="placeholder">
       {{ $t('pw.field.text-textarea.placeholder') }}
@@ -43,7 +43,7 @@ export default {
 }
 </script>
 <style scoped>
-div.pwText {
+div.pwtext {
   font-size: var(--text-sm);
 	line-height: var(--text-line-height);
 	margin-bottom: var(--spacing-2);

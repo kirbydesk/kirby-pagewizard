@@ -1,5 +1,5 @@
 <template>
-  <div class="pwText">
+  <div class="pwtext">
     <div v-if="value" v-html="value"></div>
     <div v-else class="placeholder">
       {{ $t('pw.field.text-writer.placeholder') }}
@@ -14,7 +14,7 @@ export default {
 }
 </script>
 <style scoped>
-div.pwText {
+div.pwtext {
   font-size: var(--text-sm);
 
 	:deep(h1) {

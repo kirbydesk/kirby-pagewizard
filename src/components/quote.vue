@@ -1,5 +1,5 @@
 <template>
-  <div class="pwQuote">
+  <div class="pwquote">
     <div v-if="quoteText" class="quote" :data-align="quoteAlign" v-html="nl2br(quoteText)"></div>
     <div v-else class="quote placeholder">
       {{ $t('pw.field.text-quote.placeholder') }}
@@ -61,7 +61,7 @@ export default {
 }
 </script>
 <style scoped>
-div.pwQuote {
+div.pwquote {
 	div.quote,
 	div.author {
 		&[data-align="left"] {
