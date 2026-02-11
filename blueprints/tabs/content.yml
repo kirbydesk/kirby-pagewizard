@@ -16,6 +16,3 @@ columns:
                 label: Kirbydesk Blocks
                 type: group
                 fieldsets:
-                  - pwtext
-                  - pwquote
-                  - pwmedia
