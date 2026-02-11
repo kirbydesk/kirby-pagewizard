@@ -6,8 +6,8 @@
 	'navigation' => __DIR__ . '/../../snippets/navigation.php',
 
 	/* -------------- Field Snippets --------------*/
-	'field/buttons' => __DIR__ . '/../../snippets/fields/buttons.php',
-	'field/heading' => __DIR__ . '/../../snippets/fields/heading.php',
-	'field/tagline' => __DIR__ . '/../../snippets/fields/tagline.php',
-	'field/text' => __DIR__ . '/../../snippets/fields/text.php',
+	'buttons' => __DIR__ . '/../../snippets/buttons.php',
+	'heading' => __DIR__ . '/../../snippets/heading.php',
+	'tagline' => __DIR__ . '/../../snippets/tagline.php',
+	'text' => __DIR__ . '/../../snippets/text.php',
 ];
