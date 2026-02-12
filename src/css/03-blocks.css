@@ -1,0 +1,73 @@
+/*------------------------------------------------------------------------------------------------
+	Block Definitions
+
+	Override: Activate patch file site/patches/css/kirby-pagewizard/_03-blocks.css
+------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------
+	Block Variables
+------------------------------------------------------------------------------------------------*/
+
+:root {
+	--pw-padding-block-top: 1.5rem; /* 24px */
+	--pw-padding-block-bottom: 1.5rem; /* 24px */
+	--pw-padding-block-left: 1.5rem; /* 24px */
+	--pw-padding-block-right: 1.5rem; /* 24px */
+	--pw-margin-block-top: 1.5rem; /* 24px */
+	--pw-margin-block-bottom: 1.5rem; /* 24px */
+	--pw-margin-block-left: 0;
+	--pw-margin-block-right: 0;
+	--pw-border-block: none;
+	--pw-border-radius-block: 0;
+	--pw-shadow-block: none;
+
+}
+
+
+/*------------------------------------------------------------------------------------------------
+	Base Block Styles
+------------------------------------------------------------------------------------------------*/
+section[data-block] {
+	padding: 0 var(--pw-padding-block-right) 0 var(--pw-padding-block-left);
+	margin: 0 var(--pw-margin-block-right) 0 var(--pw-margin-block-left);
+	border: var(--pw-border-block);
+	border-radius: var(--pw-border-radius-block);
+	box-shadow: var(--pw-shadow-block);
+	background-color: var(--pw-color-block-background);
+}
+
+
+/*------------------------------------------------------------------------------------------------
+	Block Background Size (via data attributes)
+------------------------------------------------------------------------------------------------*/
+section[data-block]:not([data-background-size="content"]) [data-layout="grid"] {
+	padding-left: var(--pw-padding-block-left);
+	padding-right: var(--pw-padding-block-right);
+}
+
+section[data-block][data-background-size="content"] {
+	max-width: 1280px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+/*------------------------------------------------------------------------------------------------
+	Block Spacing (via data attributes)
+------------------------------------------------------------------------------------------------*/
+section[data-block][data-padding-top="true"] {
+	padding-top: var(--pw-padding-block-top);
+}
+
+section[data-block][data-padding-bottom="true"] {
+	padding-bottom: var(--pw-padding-block-bottom);
+}
+
+section[data-block][data-margin-top="true"] {
+	margin-top: var(--pw-margin-block-top);
+}
+
+section[data-block][data-margin-bottom="true"] {
+	margin-bottom: var(--pw-margin-block-bottom);
+}

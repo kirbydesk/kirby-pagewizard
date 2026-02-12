@@ -6,6 +6,9 @@
 /* Grid Container - Default (< 640px): No Grid */
 [data-layout="grid"] {
 	@apply block;
+	max-width: 1280px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* Grid Container - Active from 640px */

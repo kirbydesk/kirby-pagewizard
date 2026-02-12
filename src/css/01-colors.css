@@ -15,13 +15,15 @@
 	--pw-color-heading: #262626;
 	--pw-color-tagline: #1D548B;
 	--pw-color-text: #262626;
-	--pw-color-button-text: #FFFFFF;
-	--pw-color-button-background: #1D548B;
+	--pw-color-caption: #6B7280;
+	--pw-color-quote: #262626;
+	--pw-color-cite: #6B7280;
+	--pw-color-breadcrumb: #6B7280;
+	--pw-color-link: #1D548B;
 
 	/* Block Colors */
 	--pw-color-block-background: #FFFFFF;
 }
-
 
 /*------------------------------------------------------------------------------------------------
 	Variant Color Overrides
@@ -32,42 +34,48 @@ section[data-style="variant"] {
 	--pw-color-heading: #FFFFFF;
 	--pw-color-tagline: #8CBAE7;
 	--pw-color-text: #FFFFFF;
-	--pw-color-button-text: #262626;
-	--pw-color-button-background: #FFFFFF;
+	--pw-color-caption: #B0C4DE;
+	--pw-color-quote: #FFFFFF;
+	--pw-color-cite: #B0C4DE;
+	--pw-color-breadcrumb: #B0C4DE;
+	--pw-color-link: #8CBAE7;
 
 	/* Block Colors */
 	--pw-color-block-background: #1D548B;
 }
 
+/*------------------------------------------------------------------------------------------------
+	Button Colors
+------------------------------------------------------------------------------------------------*/
+:root {
+	--pw-color-button-text: #FFFFFF;
+	--pw-color-button-background: #1D548B;
+	--pw-color-button-border: transparent;
+	--pw-color-button-text-hover: #FFFFFF;
+	--pw-color-button-background-hover: #2A6FAE;
+	--pw-color-button-border-hover: transparent;
+	--pw-color-button-text-active: #FFFFFF;
+	--pw-color-button-background-active: #164073;
+	--pw-color-button-border-active: transparent;
+}
 
 /*------------------------------------------------------------------------------------------------
-	Custom Color Overrides
+	Variant Button Colors
+	Applies to variant theme AND custom theme with variant button style
 ------------------------------------------------------------------------------------------------*/
-section[data-style="custom"]{
+section[data-style="variant"],
+section[data-style="custom"][data-button-style="variant"] {
 
-	&[data-button-style="variant"] {
-		--pw-color-button-text: #262626;
-		--pw-color-button-background: #FFFFFF;
-	}
+	/* Button Colors */
+	--pw-color-button-text: #262626;
+	--pw-color-button-background: #FFFFFF;
+	--pw-color-button-border: transparent;
+	--pw-color-button-text-hover: #262626;
+	--pw-color-button-background-hover: #E6E6E6;
+	--pw-color-button-border-hover: transparent;
+	--pw-color-button-text-active: #262626;
+	--pw-color-button-background-active: #CCCCCC;
+	--pw-color-button-border-active: transparent;
 }
 
 
-/*------------------------------------------------------------------------------------------------
-	Block-Specific Selectors (Higher Specificity)
-	Use attribute selectors for block-specific color customization
-------------------------------------------------------------------------------------------------*/
-
-/* Text Block */
-section[data-block="text"] {
-	background-color: var(--pw-color-block-background);
-}
-
-/* Quote Block */
-section[data-block="quote"] {
-	background-color: var(--pw-color-block-background);
-}
-
-/* Media Block */
-section[data-block="media"] {
-	background-color: var(--pw-color-block-background);
-}
