@@ -39,6 +39,7 @@
 	'pagewizard/fields/author' => __DIR__ . '/../../blueprints/fields/author.yml',
 	'pagewizard/fields/background-color' => __DIR__ . '/../../blueprints/fields/background-color.yml',
 	'pagewizard/fields/background-image' => __DIR__ . '/../../blueprints/fields/background-image.yml',
+	'pagewizard/fields/background-size' => __DIR__ . '/../../blueprints/fields/background-size.yml',
 	'pagewizard/fields/button-style' => __DIR__ . '/../../blueprints/fields/button-style.yml',
 	'pagewizard/fields/copyright' => __DIR__ . '/../../blueprints/fields/copyright.yml',
 	'pagewizard/fields/customtheme' => __DIR__ . '/../../blueprints/fields/customtheme.yml',

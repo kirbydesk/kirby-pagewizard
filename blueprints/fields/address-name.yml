@@ -1,5 +1,5 @@
 ---
-label: pw.field.address-name
+label: pw.field.address-name.label
 type: writer
 counter: false
 inline: true

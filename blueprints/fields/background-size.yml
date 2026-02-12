@@ -1,0 +1,13 @@
+label: pw.field.background-size.label
+type: toggles
+default: "content"
+required: true
+width: 1/2
+options:
+  - value: content
+    text:
+      *: pw.option.maincontent
+  - value: fullscreen
+    text:
+      *: pw.option.fullscreen
+help: pw.field.background-size.help

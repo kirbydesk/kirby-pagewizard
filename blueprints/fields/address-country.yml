@@ -1,4 +1,4 @@
 ---
-label: pw.field.address-country
+label: pw.field.address-country.label
 type: text
 counter: false

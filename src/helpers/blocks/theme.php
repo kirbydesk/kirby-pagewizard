@@ -28,6 +28,9 @@ class pwTheme
 					'extends' => 'pagewizard/fields/style',
 					'default' => $defaults['style']
 				],
+				'backgroundsize' => [
+					'extends' => 'pagewizard/fields/background-size',
+				],
 				'textcolor' => [
 					'extends' => 'pagewizard/fields/text-color',
 					'when' => [

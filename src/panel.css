@@ -1,6 +1,11 @@
 div.k-blocks {
 	background-color: transparent !important;
 	box-shadow: none !important;
+
+	.k-blocks-list {
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 div.k-block-container {
@@ -8,6 +13,13 @@ div.k-block-container {
 	margin-bottom: var(--spacing-1);
 	padding: 0;
 	box-shadow: var(--shadow);
+
+	&:has(.pwPreview[data-margintop="true"]) {
+		margin-top: 1rem;
+	}
+	&:has(.pwPreview[data-marginbottom="true"]) {
+		margin-bottom: 1rem;
+	}
 
 	&[data-selected="true"] {
 		div.pwPreview div.blockinfo div {
@@ -25,13 +37,6 @@ div.k-block-container {
 	div.pwPreview {
 		position: relative;
 		border-radius: var(--rounded) !important;
-
-		&[data-margintop="true"] {
-			margin-top: 2rem;
-		}
-		&[data-marginbottom="true"] {
-			margin-bottom: 2rem;
-		}
 
 		.placeholder {
 			font-weight: var(--font-normal);
