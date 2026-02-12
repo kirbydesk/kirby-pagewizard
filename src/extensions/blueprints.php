@@ -43,7 +43,6 @@
 	'pagewizard/fields/button-style' => __DIR__ . '/../../blueprints/fields/button-style.yml',
 	'pagewizard/fields/copyright' => __DIR__ . '/../../blueprints/fields/copyright.yml',
 	'pagewizard/fields/customtheme' => __DIR__ . '/../../blueprints/fields/customtheme.yml',
-	'pagewizard/fields/field-visibility' => __DIR__ . '/../../blueprints/fields/field-visibility.yml',
 	'pagewizard/fields/fragment' => __DIR__ . '/../../blueprints/fields/fragment.yml',
 	'pagewizard/fields/grid-offset' => __DIR__ . '/../../blueprints/fields/grid-offset.yml',
 	'pagewizard/fields/grid-size' => __DIR__ . '/../../blueprints/fields/grid-size.yml',
