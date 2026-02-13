@@ -90,3 +90,73 @@ figure[data-zoom] div .zoom-icon {
 	color: white;
 	line-height: 0;
 }
+
+figure[data-zoom] {
+	cursor: zoom-in;
+}
+
+/*------------------------------------------------------------------------------------------------
+	Lightbox
+------------------------------------------------------------------------------------------------*/
+.pw-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.9);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s, visibility 0.3s;
+}
+
+.pw-lightbox.is-active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.pw-lightbox-content {
+	max-width: 90vw;
+	max-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.pw-lightbox-content img {
+	max-width: 90vw;
+	max-height: 85vh;
+	object-fit: contain;
+	transform: scale(0.95);
+	transition: transform 0.3s;
+}
+
+.pw-lightbox.is-active .pw-lightbox-content img {
+	transform: scale(1);
+}
+
+.pw-lightbox-caption {
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 0.875rem;
+	margin-top: 0.75rem;
+	text-align: center;
+}
+
+.pw-lightbox-close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: none;
+	border: none;
+	color: white;
+	cursor: pointer;
+	padding: 0.5rem;
+	opacity: 0.7;
+	transition: opacity 0.2s;
+	line-height: 0;
+}
+
+.pw-lightbox-close:hover {
+	opacity: 1;
+}
