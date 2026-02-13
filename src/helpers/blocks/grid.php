@@ -4,35 +4,6 @@ class pwGrid
 {
 	public static function layout(string $blockType, array $blockDefaults = []): array
 	{
-		// 1. Start with block defaults
-		$defaults = [
-			'gridSizeSm'   => null,
-			'gridOffsetSm' => null,
-			'gridSizeMd'   => null,
-			'gridOffsetMd' => null,
-			'gridSizeLg'   => null,
-			'gridOffsetLg' => null,
-			'gridSizeXl'   => null,
-			'gridOffsetXl' => null,
-		];
-
-		// 2. Merge with block-specific defaults from blueprint
-		$defaults = array_merge($defaults, $blockDefaults);
-
-		// 3. Override with config values if they exist
-		$config = kirby()->option('kirbydesk.pagewizard.kirbyblocks.' . $blockType, []);
-
-		if (!empty($config)) {
-			if (isset($config['grid-size-sm']))   $defaults['gridSizeSm']   = $config['grid-size-sm'];
-			if (isset($config['grid-offset-sm'])) $defaults['gridOffsetSm'] = $config['grid-offset-sm'];
-			if (isset($config['grid-size-md']))   $defaults['gridSizeMd']   = $config['grid-size-md'];
-			if (isset($config['grid-offset-md'])) $defaults['gridOffsetMd'] = $config['grid-offset-md'];
-			if (isset($config['grid-size-lg']))   $defaults['gridSizeLg']   = $config['grid-size-lg'];
-			if (isset($config['grid-offset-lg'])) $defaults['gridOffsetLg'] = $config['grid-offset-lg'];
-			if (isset($config['grid-size-xl']))   $defaults['gridSizeXl']   = $config['grid-size-xl'];
-			if (isset($config['grid-offset-xl'])) $defaults['gridOffsetXl'] = $config['grid-offset-xl'];
-		}
-
 		return [
 			'label'  => 'pw.tab.grid',
 			'fields' => [
@@ -48,13 +19,13 @@ class pwGrid
 				],
 				'gridSizeSm' => [
 					'extends' => 'pagewizard/fields/grid-size',
-					'default' => $defaults['gridSizeSm'],
+					'default' => $blockDefaults['gridSizeSm'],
 					'label' => 'pw.field.grid-size.sm',
 					'help' => 'pw.field.grid-size.sm.help'
 				],
 				'gridOffsetSm' => [
 					'extends' => 'pagewizard/fields/grid-offset',
-					'default' => $defaults['gridOffsetSm'],
+					'default' => $blockDefaults['gridOffsetSm'],
 					'label' => 'pw.field.grid-offset.sm',
 					'help' => 'pw.field.grid-offset.sm.help'
 				],
@@ -67,13 +38,13 @@ class pwGrid
 				],
 				'gridSizeMd' => [
 					'extends' => 'pagewizard/fields/grid-size',
-					'default' => $defaults['gridSizeMd'],
+					'default' => $blockDefaults['gridSizeMd'],
 					'label' => 'pw.field.grid-size.md',
 					'help' => 'pw.field.grid-size.md.help'
 				],
 				'gridOffsetMd' => [
 					'extends' => 'pagewizard/fields/grid-offset',
-					'default' => $defaults['gridOffsetMd'],
+					'default' => $blockDefaults['gridOffsetMd'],
 					'label' => 'pw.field.grid-offset.md',
 					'help' => 'pw.field.grid-offset.md.help'
 				],
@@ -86,13 +57,13 @@ class pwGrid
 				],
 				'gridSizeLg' => [
 					'extends' => 'pagewizard/fields/grid-size',
-					'default' => $defaults['gridSizeLg'],
+					'default' => $blockDefaults['gridSizeLg'],
 					'label' => 'pw.field.grid-size.lg',
 					'help' => 'pw.field.grid-size.lg.help'
 				],
 				'gridOffsetLg' => [
 					'extends' => 'pagewizard/fields/grid-offset',
-					'default' => $defaults['gridOffsetLg'],
+					'default' => $blockDefaults['gridOffsetLg'],
 					'label' => 'pw.field.grid-offset.lg',
 					'help' => 'pw.field.grid-offset.lg.help'
 				],
@@ -105,13 +76,13 @@ class pwGrid
 				],
 				'gridSizeXl' => [
 					'extends' => 'pagewizard/fields/grid-size',
-					'default' => $defaults['gridSizeXl'],
+					'default' => $blockDefaults['gridSizeXl'],
 					'label' => 'pw.field.grid-size.xl',
 					'help' => 'pw.field.grid-size.xl.help'
 				],
 				'gridOffsetXl' => [
 					'extends' => 'pagewizard/fields/grid-offset',
-					'default' => $defaults['gridOffsetXl'],
+					'default' => $blockDefaults['gridOffsetXl'],
 					'label' => 'pw.field.grid-offset.xl',
 					'help' => 'pw.field.grid-offset.xl.help'
 				],

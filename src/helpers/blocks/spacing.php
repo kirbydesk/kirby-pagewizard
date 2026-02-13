@@ -4,27 +4,6 @@ class pwSpacing
 {
 	public static function options(string $blockType, array $blockDefaults = []): array
 	{
-		// 1. Start with block defaults
-		$defaults = [
-			'marginTop'    => null,
-			'marginBottom' => null,
-			'paddingTop'   => null,
-			'paddingBottom'=> null,
-		];
-
-		// 2. Merge with block-specific defaults from blueprint
-		$defaults = array_merge($defaults, $blockDefaults);
-
-		// 3. Override with config values if they exist
-		$config = kirby()->option('kirbydesk.pagewizard.kirbyblocks.' . $blockType, []);
-
-		if (!empty($config)) {
-			if (isset($config['margin-top']))   	$defaults['marginTop']		= $config['margin-top'];
-			if (isset($config['margin-bottom']))	$defaults['marginBottom']	= $config['margin-bottom'];
-			if (isset($config['padding-top']))		$defaults['paddingTop']   = $config['padding-top'];
-			if (isset($config['padding-bottom']))	$defaults['paddingBottom']= $config['padding-bottom'];
-		}
-
 		return [
 			'label'  => 'pw.tab.spacing',
 			'fields' => [
@@ -40,13 +19,13 @@ class pwSpacing
 				],
 				'paddingTop' => [
 					'extends' => 'pagewizard/fields/toggle-spacing',
-					'default' => $defaults['paddingTop'],
+					'default' => $blockDefaults['paddingTop'],
 					'label' => 'pw.field.padding-top',
 					'help' => 'pw.field.padding-top.help'
 				],
 				'paddingBottom' => [
 					'extends' => 'pagewizard/fields/toggle-spacing',
-					'default' => $defaults['paddingBottom'],
+					'default' => $blockDefaults['paddingBottom'],
 					'label' => 'pw.field.padding-bottom',
 					'help' => 'pw.field.padding-bottom.help'
 				],
@@ -59,13 +38,13 @@ class pwSpacing
 				],
 				'marginTop' => [
 					'extends' => 'pagewizard/fields/toggle-spacing',
-					'default' => $defaults['marginTop'],
+					'default' => $blockDefaults['marginTop'],
 					'label' => 'pw.field.margin-top',
 					'help' => 'pw.field.margin-top.help'
 				],
 				'marginBottom' => [
 					'extends' => 'pagewizard/fields/toggle-spacing',
-					'default' => $defaults['marginBottom'],
+					'default' => $blockDefaults['marginBottom'],
 					'label' => 'pw.field.margin-bottom',
 					'help' => 'pw.field.margin-bottom.help'
 				],
