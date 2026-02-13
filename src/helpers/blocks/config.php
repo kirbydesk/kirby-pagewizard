@@ -5,11 +5,23 @@ class pwConfig
 	private static array $configPaths = [];
 
 	/**
-	 * Load settings and defaults from JSON files, merged with config.php overrides.
+	 * Register a block type's config directory (call from plugin index.php).
 	 */
-	public static function load(string $blockType, string $configDir): array
+	public static function register(string $blockType, string $configDir): void
 	{
 		self::$configPaths[$blockType] = $configDir;
+	}
+
+	/**
+	 * Load settings and defaults from JSON files, merged with config.php overrides.
+	 */
+	public static function load(string $blockType): array
+	{
+		$configDir = self::$configPaths[$blockType] ?? null;
+
+		if ($configDir === null) {
+			return ['settings' => [], 'defaults' => []];
+		}
 
 		/* -------------- Block Settings (feature toggles) --------------*/
 		$settingsFile = $configDir . '/settings.json';
@@ -40,14 +52,11 @@ class pwConfig
 	}
 
 	/**
-	 * Get settings for a block type (uses cached config path).
+	 * Get settings for a block type.
 	 */
 	public static function settings(string $blockType): array
 	{
-		if (!isset(self::$configPaths[$blockType])) {
-			return [];
-		}
-		return self::load($blockType, self::$configPaths[$blockType])['settings'];
+		return self::load($blockType)['settings'];
 	}
 
 	/**
