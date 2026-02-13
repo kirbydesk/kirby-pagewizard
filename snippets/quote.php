@@ -11,7 +11,7 @@
 
 		// Author
 		if (!empty($author['text'])):
-			echo '<figcaption data-field="author" data-align="'.$author['align'].'">'.$author['text'].'</figcaption>'."\n";
+			echo '<figcaption><cite data-field="cite" data-align="'.$author['align'].'">'.$author['text'].'</cite></figcaption>'."\n";
 		endif;
 
 		echo '</figure>'."\n";
