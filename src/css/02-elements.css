@@ -115,7 +115,7 @@
 	--pw-text-transform-caption: none;
 	--pw-font-style-caption: normal;
 	--pw-margin-caption: 0;
-	--pw-padding-caption: 0;
+	--pw-padding-caption: 0.5rem 0 0; /* 14px 0 0 */
 
 	/* Quote */
 	--pw-font-quote: 'Inter', system-ui, sans-serif;

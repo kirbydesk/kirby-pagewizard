@@ -140,7 +140,7 @@
 	'pagewizard/headlines/video' => __DIR__ . '/../../blueprints/headlines/video.yml',
 
 	/* -------------- Files --------------*/
-	'files/backgroundimage' => __DIR__ . '/../../blueprints/files/backgroundimage.yml',
+	'files/pwBackgroundimage' => __DIR__ . '/../../blueprints/files/backgroundimage.yml',
 	'files/pwImage' => __DIR__ . '/../../blueprints/files/image.yml',
 	'files/pwVideo' => __DIR__ . '/../../blueprints/files/video.yml',
 	'files/pwVideoPoster' => __DIR__ . '/../../blueprints/files/poster.yml',

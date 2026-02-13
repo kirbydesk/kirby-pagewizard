@@ -29,6 +29,7 @@
 	Base Block Styles
 ------------------------------------------------------------------------------------------------*/
 section[data-block] {
+	width: 100%;
 	padding: 0 var(--pw-padding-block-right) 0 var(--pw-padding-block-left);
 	margin: 0 var(--pw-margin-block-right) 0 var(--pw-margin-block-left);
 	border: var(--pw-border-block);

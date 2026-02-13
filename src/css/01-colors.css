@@ -23,6 +23,9 @@
 
 	/* Block Colors */
 	--pw-color-block-background: #FFFFFF;
+
+	/* Media Colors */
+	--pw-color-image-letterbox: #262626;
 }
 
 /*------------------------------------------------------------------------------------------------
