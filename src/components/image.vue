@@ -139,9 +139,9 @@ div.image, div.controls {
 		display: flex;
 	}
 	.small { width: 25%;}
-	.medium { width: 50%;}
-	.large { width: 75%;}
-	.fullscreen { width: 100%;}
+	.medium { width: 32%;}
+	.large { width: 40%;}
+	.fullscreen { width: 50%;}
 }
 
 </style>
