@@ -64,6 +64,21 @@ class pwConfig
 	 */
 	public static function buildTabs(string $blockType, array $defaults, array $settings, array &$tabs): void
 	{
+		/* -------------- Spacing Tab --------------*/
+		$spacingDefaults = [
+			'marginTop'    => $defaults['margin-top'],
+			'marginBottom' => $defaults['margin-bottom'],
+			'paddingTop'   => $defaults['padding-top'],
+			'paddingBottom'=> $defaults['padding-bottom'],
+		];
+		if (!empty($settings['tab-spacing'])) {
+			$tabs['spacing'] = pwSpacing::options($blockType, $spacingDefaults);
+		} else {
+			foreach ($spacingDefaults as $key => $value) {
+				$tabs['content']['fields'][$key] = ['type' => 'hidden', 'default' => $value];
+			}
+		}
+
 		/* -------------- Grid Tab --------------*/
 		$gridDefaults = [
 			'gridSizeSm'   => $defaults['grid-size-sm'],
@@ -79,21 +94,6 @@ class pwConfig
 			$tabs['grid'] = pwGrid::layout($blockType, $gridDefaults);
 		} else {
 			foreach ($gridDefaults as $key => $value) {
-				$tabs['content']['fields'][$key] = ['type' => 'hidden', 'default' => $value];
-			}
-		}
-
-		/* -------------- Spacing Tab --------------*/
-		$spacingDefaults = [
-			'marginTop'    => $defaults['margin-top'],
-			'marginBottom' => $defaults['margin-bottom'],
-			'paddingTop'   => $defaults['padding-top'],
-			'paddingBottom'=> $defaults['padding-bottom'],
-		];
-		if (!empty($settings['tab-spacing'])) {
-			$tabs['spacing'] = pwSpacing::options($blockType, $spacingDefaults);
-		} else {
-			foreach ($spacingDefaults as $key => $value) {
 				$tabs['content']['fields'][$key] = ['type' => 'hidden', 'default' => $value];
 			}
 		}

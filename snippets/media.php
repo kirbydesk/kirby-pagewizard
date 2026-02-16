@@ -11,7 +11,7 @@
 	// Images
 	elseif ($content->mediatype()->value() === 'slideshow'):
 		snippet('images', [
-			'file' => $content->images(),
+			'files' => $content->slideshow(),
 			'size' => $content->mediasize()->value(),
 			'alignment' => $content->mediaalignment()->value(),
 		]);

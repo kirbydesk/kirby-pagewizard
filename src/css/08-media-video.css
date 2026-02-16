@@ -1,0 +1,17 @@
+/*------------------------------------------------------------------------------------------------
+	Video
+------------------------------------------------------------------------------------------------*/
+[data-field="video"] {
+
+	/* Sizes */
+	video, iframe { width: 100%; height: auto; }
+	&[data-size="small"] { max-width: 480px; }
+	&[data-size="medium"] { max-width: 720px; }
+	&[data-size="large"] { max-width: 960px; }
+	&[data-size="full"] { max-width: 100%; }
+
+	/* Alignment */
+	&[data-align="left"] { margin-right: auto; }
+	&[data-align="center"] { margin-left: auto; margin-right: auto; }
+	&[data-align="right"] { margin-left: auto; }
+}

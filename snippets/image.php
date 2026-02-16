@@ -65,4 +65,13 @@ if ($file):
 	e($file->imageCaption()->isNotEmpty(), '<figcaption data-field="caption">'.esc($file->imageCaption()->value()).'</figcaption>');
 	echo '</figure>';
 	echo '</div>';
+
+	// Load lightbox module once per page (only when zoom is used)
+	if ($zoom):
+		static $lightboxLoaded = false;
+		if (!$lightboxLoaded):
+			echo '<script src="'.$kirby->urls()->index().'/assets/js/lightbox.min.js" defer></script>';
+			$lightboxLoaded = true;
+		endif;
+	endif;
 endif;

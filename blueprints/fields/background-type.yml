@@ -1,0 +1,12 @@
+label: pw.field.background-type.label
+type: toggles
+options:
+  - value: image
+    text:
+      *: pw.option.image
+    icon: image
+  - value: video
+    text:
+      *: pw.option.video
+    icon: video
+help: pw.field.background-type.help

@@ -1,211 +1,35 @@
 /*------------------------------------------------------------------------------------------------
-	Media Sizes
-------------------------------------------------------------------------------------------------*/
-[data-field="image"] img {
-	width: 100%;
-	height: auto;
-}
-
-[data-field="image"][data-size="small"] {
-	max-width: 480px;
-}
-
-[data-field="image"][data-size="medium"] {
-	max-width: 720px;
-}
-
-[data-field="image"][data-size="large"] {
-	max-width: 960px;
-}
-
-[data-field="image"][data-size="full"] {
-	max-width: 100%;
-}
-
-/*------------------------------------------------------------------------------------------------
-	Image Alignment
-------------------------------------------------------------------------------------------------*/
-[data-field="image"][data-align="left"] {
-	margin-right: auto;
-}
-
-[data-field="image"][data-align="center"] {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-[data-field="image"][data-align="right"] {
-	margin-left: auto;
-}
-
-/*------------------------------------------------------------------------------------------------
-	Video Sizes
-------------------------------------------------------------------------------------------------*/
-[data-field="video"] video,
-[data-field="video"] iframe {
-	width: 100%;
-	height: auto;
-}
-
-[data-field="video"][data-size="small"] {
-	max-width: 480px;
-}
-
-[data-field="video"][data-size="medium"] {
-	max-width: 720px;
-}
-
-[data-field="video"][data-size="large"] {
-	max-width: 960px;
-}
-
-[data-field="video"][data-size="full"] {
-	max-width: 100%;
-}
-
-/*------------------------------------------------------------------------------------------------
-	Video Alignment
-------------------------------------------------------------------------------------------------*/
-[data-field="video"][data-align="left"] {
-	margin-right: auto;
-}
-
-[data-field="video"][data-align="center"] {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-[data-field="video"][data-align="right"] {
-	margin-left: auto;
-}
-
-/*------------------------------------------------------------------------------------------------
 	Crop & Ratio
 ------------------------------------------------------------------------------------------------*/
-figure[data-ratio] div {
+figure[data-ratio] > div {
 	overflow: hidden;
 	background: var(--pw-color-image-letterbox);
+
+	img, video {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	iframe {
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
 }
 
-figure[data-ratio] div img,
-figure[data-ratio] div video {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
+figure[data-crop="cover"] > div {
+	img, video {
+		object-fit: cover;
+	}
 }
 
-figure[data-ratio] div iframe {
-	width: 100%;
-	height: 100%;
-	border: 0;
-}
-
-figure[data-crop="cover"] div img,
-figure[data-crop="cover"] div video {
-	object-fit: cover;
-}
-
-figure[data-ratio="1/1"] div { aspect-ratio: 1 / 1; }
-figure[data-ratio="16/9"] div { aspect-ratio: 16 / 9; }
-figure[data-ratio="10/8"] div { aspect-ratio: 10 / 8; }
-figure[data-ratio="21/9"] div { aspect-ratio: 21 / 9; }
-figure[data-ratio="7/5"] div { aspect-ratio: 7 / 5; }
-figure[data-ratio="4/3"] div { aspect-ratio: 4 / 3; }
-figure[data-ratio="5/3"] div { aspect-ratio: 5 / 3; }
-figure[data-ratio="3/2"] div { aspect-ratio: 3 / 2; }
-figure[data-ratio="3/1"] div { aspect-ratio: 3 / 1; }
-
-/*------------------------------------------------------------------------------------------------
-	Image Zoom Indicator
-------------------------------------------------------------------------------------------------*/
-figure div .zoom-icon {
-	position: absolute;
-	right: -99999px;
-	bottom: 0;
-}
-
-figure[data-zoom] div {
-	position: relative;
-}
-
-figure[data-zoom] div .zoom-icon {
-	display: block;
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	z-index: 1;
-	background-color: rgba(0, 0, 0, 0.7);
-	padding: 0.5rem;
-	color: white;
-	line-height: 0;
-}
-
-figure[data-zoom] {
-	cursor: zoom-in;
-}
-
-/*------------------------------------------------------------------------------------------------
-	Lightbox
-------------------------------------------------------------------------------------------------*/
-.pw-lightbox {
-	position: fixed;
-	inset: 0;
-	z-index: 9999;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: rgba(0, 0, 0, 0.9);
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.3s, visibility 0.3s;
-}
-
-.pw-lightbox.is-active {
-	opacity: 1;
-	visibility: visible;
-}
-
-.pw-lightbox-content {
-	max-width: 90vw;
-	max-height: 90vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.pw-lightbox-content img {
-	max-width: 90vw;
-	max-height: 85vh;
-	object-fit: contain;
-	transform: scale(0.95);
-	transition: transform 0.3s;
-}
-
-.pw-lightbox.is-active .pw-lightbox-content img {
-	transform: scale(1);
-}
-
-.pw-lightbox-caption {
-	color: rgba(255, 255, 255, 0.8);
-	font-size: 0.875rem;
-	margin-top: 0.75rem;
-	text-align: center;
-}
-
-.pw-lightbox-close {
-	position: absolute;
-	top: 1rem;
-	right: 1rem;
-	background: none;
-	border: none;
-	color: white;
-	cursor: pointer;
-	padding: 0.5rem;
-	opacity: 0.7;
-	transition: opacity 0.2s;
-	line-height: 0;
-}
-
-.pw-lightbox-close:hover {
-	opacity: 1;
-}
+figure[data-ratio="1/1"] > div { aspect-ratio: 1 / 1; }
+figure[data-ratio="16/9"] > div { aspect-ratio: 16 / 9; }
+figure[data-ratio="10/8"] > div { aspect-ratio: 10 / 8; }
+figure[data-ratio="21/9"] > div { aspect-ratio: 21 / 9; }
+figure[data-ratio="7/5"] > div { aspect-ratio: 7 / 5; }
+figure[data-ratio="4/3"] > div { aspect-ratio: 4 / 3; }
+figure[data-ratio="5/3"] > div { aspect-ratio: 5 / 3; }
+figure[data-ratio="3/2"] > div { aspect-ratio: 3 / 2; }
+figure[data-ratio="3/1"] > div { aspect-ratio: 3 / 1; }
