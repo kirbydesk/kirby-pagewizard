@@ -5,7 +5,12 @@
 				<video :src="videoUrl" controls />
 			</k-frame>
 			<k-frame v-else-if="source == 'external'" ratio="16/9" class="external">
-				<iframe :src="getEmbedUrl(url)" />
+				<iframe
+					:src="getEmbedUrl(url)"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="origin"
+					allowfullscreen
+				/>
 			</k-frame>
 		</div>
 	</div>
@@ -51,13 +56,14 @@ export default {
 			}
 		},
     getEmbedUrl(url) {
-      // YouTube
+      // YouTube (already an embed URL)
       if (url.includes('youtube.com/embed/') || url.includes('youtube-nocookie.com/embed/')) {
-        return url;
+        return url.includes('?') ? url + `&origin=${window.location.origin}` : url + `?origin=${window.location.origin}`;
       }
+      // YouTube (watch or short URL)
       const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]+)/);
       if (ytMatch && ytMatch[1]) {
-        return `https://www.youtube-nocookie.com/embed/${ytMatch[1]}`;
+        return `https://www.youtube.com/embed/${ytMatch[1]}?origin=${window.location.origin}`;
       }
       // Vimeo
       const vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
@@ -90,6 +96,7 @@ div.video {
 	}
 	iframe {
 		width: 100%;
+		height: 100%;
 		display: block;
 		border: 0;
 	}

@@ -22,3 +22,6 @@ columns:
             extends: pagewizard/headlines/preview
           videoPoster:
             extends: pagewizard/fields/video-poster
+            uploads:
+              template: pwPoster
+            query: file.parent.files.template("pwPoster")

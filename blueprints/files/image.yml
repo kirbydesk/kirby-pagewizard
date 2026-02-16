@@ -9,5 +9,5 @@ create:
   width: 1280
   format: webp
 tabs:
-  image: tabs/image
-  legal: tabs/legal
+  image: tabs/files/image
+  legal: tabs/files/legal

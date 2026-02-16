@@ -9,7 +9,7 @@
 		]);
 
 	// Images
-	elseif ($content->mediatype()->value() === 'images'):
+	elseif ($content->mediatype()->value() === 'slideshow'):
 		snippet('images', [
 			'file' => $content->images(),
 			'size' => $content->mediasize()->value(),
@@ -18,8 +18,9 @@
 
 	// Video
 	elseif ($content->mediatype()->value() === 'video'):
-		snippet('images', [
+		snippet('video', [
 			'file' => $content->video(),
+			'url' => $content->videourl()->value(),
 			'size' => $content->mediasize()->value(),
 			'alignment' => $content->mediaalignment()->value(),
 			'source' => $content->videosource()->value(),

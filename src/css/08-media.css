@@ -39,20 +39,69 @@
 }
 
 /*------------------------------------------------------------------------------------------------
-	Image Crop & Ratio
+	Video Sizes
+------------------------------------------------------------------------------------------------*/
+[data-field="video"] video,
+[data-field="video"] iframe {
+	width: 100%;
+	height: auto;
+}
+
+[data-field="video"][data-size="small"] {
+	max-width: 480px;
+}
+
+[data-field="video"][data-size="medium"] {
+	max-width: 720px;
+}
+
+[data-field="video"][data-size="large"] {
+	max-width: 960px;
+}
+
+[data-field="video"][data-size="full"] {
+	max-width: 100%;
+}
+
+/*------------------------------------------------------------------------------------------------
+	Video Alignment
+------------------------------------------------------------------------------------------------*/
+[data-field="video"][data-align="left"] {
+	margin-right: auto;
+}
+
+[data-field="video"][data-align="center"] {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+[data-field="video"][data-align="right"] {
+	margin-left: auto;
+}
+
+/*------------------------------------------------------------------------------------------------
+	Crop & Ratio
 ------------------------------------------------------------------------------------------------*/
 figure[data-ratio] div {
 	overflow: hidden;
 	background: var(--pw-color-image-letterbox);
 }
 
-figure[data-ratio] div img {
+figure[data-ratio] div img,
+figure[data-ratio] div video {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
 }
 
-figure[data-crop="cover"] div img {
+figure[data-ratio] div iframe {
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+figure[data-crop="cover"] div img,
+figure[data-crop="cover"] div video {
 	object-fit: cover;
 }
 

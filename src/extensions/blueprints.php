@@ -8,19 +8,19 @@
 	'pages/home' => __DIR__ . '/../../blueprints/pages/home.yml',
 
 	/* -------------- Tabs --------------*/
-	'tabs/backgroundimage' => __DIR__ . '/../../blueprints/tabs/backgroundimage.yml',
 	'tabs/content' => __DIR__ . '/../../blueprints/tabs/content.yml',
-	'tabs/image' => __DIR__ . '/../../blueprints/tabs/image.yml',
+	'tabs/files/backgroundimage' => __DIR__ . '/../../blueprints/tabs/files/backgroundimage.yml',
+	'tabs/files/image' => __DIR__ . '/../../blueprints/tabs/files/image.yml',
+	'tabs/files/legal' => __DIR__ . '/../../blueprints/tabs/files/legal.yml',
+	'tabs/files/video' => __DIR__ . '/../../blueprints/tabs/files/video.yml',
+	'tabs/files/video-accessibility' => __DIR__ . '/../../blueprints/tabs/files/video-accessibility.yml',
+	'tabs/files/video-player' => __DIR__ . '/../../blueprints/tabs/files/video-player.yml',
 	'tabs/home' => __DIR__ . '/../../blueprints/tabs/home.yml',
-	'tabs/legal' => __DIR__ . '/../../blueprints/tabs/legal.yml',
 	'tabs/project' => __DIR__ . '/../../blueprints/tabs/project.yml',
 	'tabs/properties' => __DIR__ . '/../../blueprints/tabs/properties.yml',
 	'tabs/settings' => __DIR__ . '/../../blueprints/tabs/settings.yml',
 	'tabs/site' => __DIR__ . '/../../blueprints/tabs/site.yml',
 	'tabs/structure' => __DIR__ . '/../../blueprints/tabs/structure.yml',
-	'tabs/video' => __DIR__ . '/../../blueprints/tabs/video.yml',
-	'tabs/video-accessibility' => __DIR__ . '/../../blueprints/tabs/video-accessibility.yml',
-	'tabs/video-player' => __DIR__ . '/../../blueprints/tabs/video-player.yml',
 
 	/* -------------- Blocks --------------*/
 	'blocks/pwButtons' => __DIR__ . '/../../blueprints/blocks/buttons/index.yml',
@@ -142,6 +142,7 @@
 	/* -------------- Files --------------*/
 	'files/pwBackgroundimage' => __DIR__ . '/../../blueprints/files/backgroundimage.yml',
 	'files/pwImage' => __DIR__ . '/../../blueprints/files/image.yml',
+	'files/pwPoster' => __DIR__ . '/../../blueprints/files/poster.yml',
 	'files/pwVideo' => __DIR__ . '/../../blueprints/files/video.yml',
 	'files/pwVideoPoster' => __DIR__ . '/../../blueprints/files/poster.yml',
 ];

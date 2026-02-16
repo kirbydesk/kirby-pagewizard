@@ -1,5 +1,5 @@
 ---
-title: pw.file.backgroundimage
+title: pw.file.image
 options:
   changeTemplate: false
 accept:
@@ -9,5 +9,5 @@ create:
   width: 1280
   format: webp
 tabs:
-  image: tabs/backgroundimage
-  legal: tabs/legal
+  image: tabs/files/backgroundimage
+  legal: tabs/files/legal

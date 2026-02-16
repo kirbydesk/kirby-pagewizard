@@ -1,5 +1,5 @@
 ---
-title: pw.file.poster
+title: pw.file.image
 options:
   changeTemplate: false
 accept:
@@ -8,3 +8,6 @@ accept:
 create:
   width: 1280
   format: webp
+focus: false
+tabs:
+  legal: tabs/files/legal

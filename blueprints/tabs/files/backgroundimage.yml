@@ -1,5 +1,5 @@
 ---
-label: pw.tab.backgroundimage
+label: pw.tab.image
 icon: image
 columns:
   - width: 1/3
