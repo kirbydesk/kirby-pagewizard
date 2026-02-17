@@ -1,6 +1,6 @@
 ---
 type: toggle
-width: 1/3
+width: 1/4
 default: false
 text:
   - *: pw.option.disabled

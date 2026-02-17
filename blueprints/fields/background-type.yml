@@ -1,6 +1,12 @@
 label: pw.field.background-type.label
 type: toggles
+required: true
+width: 1/2
 options:
+  - value: color
+    text:
+      *: pw.option.color
+    icon: palette
   - value: image
     text:
       *: pw.option.image
