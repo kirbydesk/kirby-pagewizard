@@ -1,0 +1,20 @@
+---
+label: pw.field.position-vertical.label
+type: toggles
+required: true
+
+options:
+  - value: top
+    text:
+      *: pw.option.top
+    icon: text-top
+  - value: middle
+    text:
+      *: pw.option.middle
+    icon: text-middle
+  - value: bottom
+    text:
+      *: pw.option.bottom
+    icon: text-bottom
+help: pw.field.position-vertical.help
+width: 1/2

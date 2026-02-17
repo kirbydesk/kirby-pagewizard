@@ -1,0 +1,20 @@
+---
+label: pw.field.position-horizontal.label
+type: toggles
+required: true
+
+options:
+  - value: left
+    text:
+      *: pw.option.left
+    icon: text-left
+  - value: center
+    text:
+      *: pw.option.center
+    icon: text-center
+  - value: right
+    text:
+      *: pw.option.right
+    icon: text-right
+help: pw.field.position-horizontal.help
+width: 1/2
