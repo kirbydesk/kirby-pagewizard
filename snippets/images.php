@@ -68,11 +68,11 @@ if ($images && $images->count() > 0):
 	endforeach;
 
 	echo '</div>'; // swiper-wrapper
-	echo '<div class="swiper-pagination"></div>';
 	echo '</div>'; // swiper
 
 	echo '</div>'; // figure > div
 	echo '</figure>';
+	echo '<div class="swiper-pagination" id="'.$slideshowId.'-pagination"></div>';
 	echo '</div>'; // data-field="slideshow"
 
 	// Load Swiper JS module once per page
@@ -88,7 +88,7 @@ if ($images && $images->count() > 0):
 	echo 'spaceBetween:0,';
 	echo 'centeredSlides:true,';
 	echo 'autoplay:{delay:4000,disableOnInteraction:false},';
-	echo 'pagination:{el:"#'.$slideshowId.' .swiper-pagination",clickable:true}';
+	echo 'pagination:{el:"#'.$slideshowId.'-pagination",clickable:true}';
 	echo '});';
 	echo '</script>';
 

@@ -37,7 +37,7 @@ figure[data-zoom] {
 			bottom: 0;
 			right: 0;
 			z-index: 1;
-			background-color: rgba(0, 0, 0, 0.7);
+			background-color: var(--pw-color-zoom-icon-background);
 			padding: 0.5rem;
 			color: white;
 			line-height: 0;
@@ -55,7 +55,7 @@ figure[data-zoom] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: rgba(0, 0, 0, 0.9);
+	background: var(--pw-color-lightbox-background);
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity 0.3s, visibility 0.3s;
@@ -87,7 +87,7 @@ figure[data-zoom] {
 }
 
 .pw-lightbox-caption {
-	color: rgba(255, 255, 255, 0.8);
+	color: var(--pw-color-lightbox-caption);
 	font-size: 0.875rem;
 	margin-top: 0.75rem;
 	text-align: center;

@@ -26,6 +26,11 @@
 
 	/* Media Colors */
 	--pw-color-image-letterbox: #262626;
+	--pw-color-pagination-bullet: #000000;
+	--pw-color-pagination-bullet-active: #333333;
+	--pw-color-zoom-icon-background: rgba(0, 0, 0, 0.7);
+	--pw-color-lightbox-background: rgba(0, 0, 0, 0.9);
+	--pw-color-lightbox-caption: rgba(255, 255, 255, 0.8);
 }
 
 /*------------------------------------------------------------------------------------------------
@@ -45,6 +50,10 @@ section[data-style="variant"] {
 
 	/* Block Colors */
 	--pw-color-block-background: #1D548B;
+
+	/* Media Colors */
+	--pw-color-pagination-bullet:  rgba(255, 255, 255, 0.8);
+	--pw-color-pagination-bullet-active: #FFFFFF;
 }
 
 /*------------------------------------------------------------------------------------------------
