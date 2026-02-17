@@ -73,12 +73,16 @@
   const pwButton = __component__$1.exports;
   const _sfc_main = {
     props: {
-      value: String
+      value: String,
+      align: {
+        type: String,
+        default: "left"
+      }
     }
   };
   var _sfc_render = function render() {
     var _vm = this, _c = _vm._self._c;
-    return _vm.value && _vm.value.length ? _c("div", { staticClass: "k-button-group" }, _vm._l(_vm.value, function(item) {
+    return _vm.value && _vm.value.length ? _c("div", { staticClass: "k-button-group", attrs: { "data-align": _vm.align } }, _vm._l(_vm.value, function(item) {
       return _c("div", { key: item.id, class: { "ishidden": item.isHidden } }, [_c("button", { staticClass: "k-button", attrs: { "type": "button", "data-has-text": "true", "data-responsive": "true", "data-size": "md", "data-variant": "filled" } }, [item.content.linktext.length ? _c("span", { staticClass: "k-button-text" }, [_vm._v(" " + _vm._s(item.content.linktext) + " ")]) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])])]);
     }), 0) : _vm._e();
   };
@@ -434,6 +438,122 @@
 					</footer>
 				</div>
       `
+      },
+      pwalign: {
+        props: {
+          value: String
+        },
+        data() {
+          return {
+            current: this.value || "left",
+            show: false,
+            iconEl: null,
+            dropdownEl: null,
+            container: null,
+            _closeHandler: null
+          };
+        },
+        watch: {
+          value(v) {
+            this.current = v || "left";
+            this.updateIcon();
+          }
+        },
+        mounted() {
+          this.$nextTick(() => {
+            const wrapper = this.$el.closest(".k-column");
+            if (wrapper) wrapper.style.display = "none";
+            const nextColumn = wrapper == null ? void 0 : wrapper.nextElementSibling;
+            const header = nextColumn == null ? void 0 : nextColumn.querySelector(".k-field-header");
+            if (!header) return;
+            this.container = document.createElement("span");
+            this.container.className = "pw-align-icon";
+            this.container.style.cssText = "position:relative;cursor:pointer;display:flex;align-items:center;color:light-dark(var(--color-gray-600),var(--color-gray-500));";
+            this.iconEl = document.createElement("span");
+            this.iconEl.className = "k-input-icon";
+            this.updateIcon();
+            this.container.appendChild(this.iconEl);
+            this.container.addEventListener("click", (e) => {
+              e.stopPropagation();
+              this.toggleDropdown();
+            });
+            this._closeHandler = (e) => {
+              if (!this.container.contains(e.target)) {
+                this.closeDropdown();
+              }
+            };
+            document.addEventListener("click", this._closeHandler, true);
+            const counter = header.querySelector(".k-counter");
+            if (counter) {
+              this.container.style.marginRight = "auto";
+              counter.after(this.container);
+            } else {
+              this.container.style.marginRight = "-20px";
+              const label = header.querySelector("label, .k-label, .k-field-label");
+              if (label) {
+                label.after(this.container);
+              } else {
+                header.prepend(this.container);
+              }
+            }
+          });
+        },
+        methods: {
+          updateIcon() {
+            if (!this.iconEl) return;
+            this.iconEl.innerHTML = '<svg class="k-icon"><use xlink:href="#icon-text-' + this.current + '"></use></svg>';
+          },
+          toggleDropdown() {
+            if (this.show) {
+              this.closeDropdown();
+            } else {
+              this.showDropdown();
+            }
+          },
+          showDropdown() {
+            if (this.dropdownEl) this.dropdownEl.remove();
+            this.dropdownEl = document.createElement("dialog");
+            this.dropdownEl.className = "k-dropdown-content pw-dropdown";
+            this.dropdownEl.setAttribute("data-theme", "dark");
+            this.dropdownEl.setAttribute("open", "");
+            this.dropdownEl.style.marginTop = ".5rem";
+            const navEl = document.createElement("div");
+            navEl.className = "k-navigate";
+            ["left", "center", "right"].forEach((opt) => {
+              const btn = document.createElement("button");
+              btn.type = "button";
+              btn.className = "k-button k-dropdown-item";
+              btn.setAttribute("data-has-icon", "true");
+              btn.innerHTML = '<span class="k-button-icon"><svg class="k-icon"><use xlink:href="#icon-text-' + opt + '"></use></svg></span>';
+              btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                this.select(opt);
+              });
+              navEl.appendChild(btn);
+            });
+            this.dropdownEl.appendChild(navEl);
+            this.container.appendChild(this.dropdownEl);
+            this.show = true;
+          },
+          closeDropdown() {
+            if (this.dropdownEl) {
+              this.dropdownEl.remove();
+              this.dropdownEl = null;
+            }
+            this.show = false;
+          },
+          select(opt) {
+            this.current = opt;
+            this.updateIcon();
+            this.closeDropdown();
+            this.$emit("input", opt);
+          }
+        },
+        beforeDestroy() {
+          if (this.container) this.container.remove();
+          if (this._closeHandler) document.removeEventListener("click", this._closeHandler, true);
+        },
+        template: '<div style="display:none"></div>'
       }
     }
   });

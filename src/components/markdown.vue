@@ -1,5 +1,5 @@
 <template>
-  <div class="pwMarkdown">
+  <div class="pwMarkdown" :data-align="align">
     <div v-if="value" v-html="renderedMarkdown"></div>
     <div v-else class="placeholder">
       {{ $t('pw.field.text-markdown.placeholder') }}
@@ -13,7 +13,8 @@ marked.setOptions({ breaks: true });
 
 export default {
   props: {
-    value: String
+    value: String,
+    align: { type: String, default: 'left' }
   },
 	computed: {
     renderedMarkdown() {
@@ -27,6 +28,10 @@ export default {
 <style>
 .pwMarkdown {
   line-height: var(--text-line-height);
+
+	&[data-align="left"] { text-align: left; }
+	&[data-align="center"] { text-align: center; }
+	&[data-align="right"] { text-align: right; }
 
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: bold;

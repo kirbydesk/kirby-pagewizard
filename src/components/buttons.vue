@@ -1,5 +1,5 @@
 <template>
-	<div class="k-button-group" v-if="value && value.length">
+	<div class="k-button-group" v-if="value && value.length" :data-align="align">
 		<div v-for="item in value" :key="item.id" :class="{'ishidden': item.isHidden}">
 			<button
 				type="button"
@@ -19,12 +19,23 @@
 export default {
 	props: {
 		value: String,
+		align: {
+			type: String,
+			default: 'left'
+		}
 	}
 }
 </script>
 <style scoped>
 .k-button-group {
 	margin: var(--spacing-4) 0 var(--spacing-2);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-2);
+
+	&[data-align="left"] { justify-content: flex-start; }
+	&[data-align="center"] { justify-content: center; }
+	&[data-align="right"] { justify-content: flex-end; }
 }
 button {
 	padding: var(--spacing-4) var(--spacing-2);

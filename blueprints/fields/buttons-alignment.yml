@@ -1,0 +1,15 @@
+---
+label: pw.field.buttons-alignment
+type: toggles
+required: true
+labels: false
+default: left
+options:
+  - value: left
+    icon: text-left
+  - value: center
+    icon: text-center
+  - value: right
+    icon: text-right
+help: pw.field.buttons-alignment.help
+width: 1/3

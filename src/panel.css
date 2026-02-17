@@ -155,10 +155,16 @@ span.tag.screensize {
 		display: block;
 
 		&[data-paddingtop="true"] {
-			padding-top: 2rem;
+			padding-top: 1rem;
+		}
+		&[data-paddingright="true"] {
+			padding-right: 1rem;
 		}
 		&[data-paddingbottom="true"] {
-			padding-bottom: 2rem;
+			padding-bottom: 1rem;
+		}
+		&[data-paddingleft="true"] {
+			padding-left: 1rem;
 		}
 	}
 }
@@ -171,7 +177,7 @@ span.tag.screensize {
 		gap: 1rem;
 
 		.pwGridItem {
-			padding: var(--spacing-3);
+			/*padding: var(--spacing-3);*/
 			border-radius: var(--rounded) !important;
 			background-color: var(--block-color-back);
 			grid-column: var(--grid-start-sm) / span var(--grid-span-sm);

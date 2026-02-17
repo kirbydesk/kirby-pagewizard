@@ -155,10 +155,16 @@ span.tag.screensize {
 		display: block;
 
 		&[data-paddingtop="true"] {
-			padding-top: 2rem;
+			padding-top: 1rem;
+		}
+		&[data-paddingright="true"] {
+			padding-right: 1rem;
 		}
 		&[data-paddingbottom="true"] {
-			padding-bottom: 2rem;
+			padding-bottom: 1rem;
+		}
+		&[data-paddingleft="true"] {
+			padding-left: 1rem;
 		}
 	}
 }
@@ -171,7 +177,7 @@ span.tag.screensize {
 		gap: 1rem;
 
 		.pwGridItem {
-			padding: var(--spacing-3);
+			/*padding: var(--spacing-3);*/
 			border-radius: var(--rounded) !important;
 			background-color: var(--block-color-back);
 			grid-column: var(--grid-start-sm) / span var(--grid-span-sm);
@@ -208,6 +214,15 @@ button[data-v-10e849d1] {
 
 .k-button-group[data-v-a81c040e] {
 	margin: var(--spacing-4) 0 var(--spacing-2);
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-2);
+&[data-align="left"][data-v-a81c040e] { justify-content: flex-start;
+}
+&[data-align="center"][data-v-a81c040e] { justify-content: center;
+}
+&[data-align="right"][data-v-a81c040e] { justify-content: flex-end;
+}
 }
 button[data-v-a81c040e] {
 	padding: var(--spacing-4) var(--spacing-2);

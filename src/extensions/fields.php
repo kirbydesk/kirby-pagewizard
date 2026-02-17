@@ -42,5 +42,13 @@ return [
 				return $align;
 			}
 		]
+	],
+	'pwalign' => [
+		'extends' => 'text',
+		'props' => [
+			'value' => function (string $value = 'left') {
+				return $value;
+			}
+		]
 	]
 ];

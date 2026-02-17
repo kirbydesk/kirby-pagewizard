@@ -1,5 +1,5 @@
 <template>
-  <div class="pwtext">
+  <div class="pwtext" :data-align="align">
     <div v-if="value" v-html="value"></div>
     <div v-else class="placeholder">
       {{ $t('pw.field.text-writer.placeholder') }}
@@ -9,13 +9,18 @@
 <script>
 export default {
   props: {
-    value: String
+    value: String,
+    align: { type: String, default: 'left' }
   }
 }
 </script>
 <style scoped>
 div.pwtext {
   font-size: var(--text-sm);
+
+	&[data-align="left"] { text-align: left; }
+	&[data-align="center"] { text-align: center; }
+	&[data-align="right"] { text-align: right; }
 
 	:deep(h1) {
 		font-size: var(--text-2xl);

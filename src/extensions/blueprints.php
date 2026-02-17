@@ -42,6 +42,7 @@
 	'pagewizard/fields/background-size' => __DIR__ . '/../../blueprints/fields/background-size.yml',
 	'pagewizard/fields/background-type' => __DIR__ . '/../../blueprints/fields/background-type.yml',
 	'pagewizard/fields/button-style' => __DIR__ . '/../../blueprints/fields/button-style.yml',
+	'pagewizard/fields/buttons-alignment' => __DIR__ . '/../../blueprints/fields/buttons-alignment.yml',
 	'pagewizard/fields/copyright' => __DIR__ . '/../../blueprints/fields/copyright.yml',
 	'pagewizard/fields/customtheme' => __DIR__ . '/../../blueprints/fields/customtheme.yml',
 	'pagewizard/fields/fragment' => __DIR__ . '/../../blueprints/fields/fragment.yml',
@@ -117,6 +118,7 @@
 	/* -------------- Headlines --------------*/
 	'pagewizard/headlines/accessibility' => __DIR__ . '/../../blueprints/headlines/accessibility.yml',
 	'pagewizard/headlines/background' => __DIR__ . '/../../blueprints/headlines/background.yml',
+	'pagewizard/headlines/blocksettings' => __DIR__ . '/../../blueprints/headlines/blocksettings.yml',
 	'pagewizard/headlines/color' => __DIR__ . '/../../blueprints/headlines/color.yml',
 	'pagewizard/headlines/contact' => __DIR__ . '/../../blueprints/headlines/contact.yml',
 	'pagewizard/headlines/content' => __DIR__ . '/../../blueprints/headlines/content.yml',
@@ -137,7 +139,6 @@
 	'pagewizard/headlines/preview' => __DIR__ . '/../../blueprints/headlines/preview.yml',
 	'pagewizard/headlines/properties' => __DIR__ . '/../../blueprints/headlines/properties.yml',
 	'pagewizard/headlines/seo' => __DIR__ . '/../../blueprints/headlines/seo.yml',
-	'pagewizard/headlines/settings' => __DIR__ . '/../../blueprints/headlines/settings.yml',
 	'pagewizard/headlines/slideshow' => __DIR__ . '/../../blueprints/headlines/slideshow.yml',
 	'pagewizard/headlines/spacing' => __DIR__ . '/../../blueprints/headlines/spacing.yml',
 	'pagewizard/headlines/style' => __DIR__ . '/../../blueprints/headlines/style.yml',

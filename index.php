@@ -3,8 +3,9 @@
 /* -------------- Helpers --------------*/
 require_once __DIR__ . '/src/helpers/blocks/config.php';
 require_once __DIR__ . '/src/helpers/blocks/grid.php';
-require_once __DIR__ . '/src/helpers/blocks/spacing.php';
-require_once __DIR__ . '/src/helpers/blocks/theme.php';
+require_once __DIR__ . '/src/helpers/blocks/layout.php';
+require_once __DIR__ . '/src/helpers/blocks/style.php';
+require_once __DIR__ . '/src/helpers/blocks/settings.php';
 
 Kirby::plugin('kirbydesk/kirby-pagewizard', [
 
