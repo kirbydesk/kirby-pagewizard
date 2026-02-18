@@ -1,15 +1,15 @@
 ---
-label: pw.field.media-size
+label: pw.field.height.label
 type: toggles
 required: true
 default: small
 options:
-  - value: xsmall
+  - value: auto
     text:
-      *: "25%"
+      *: pw.option.auto
   - value: small
     text:
-      *: "33%"
+      *: "25%"
   - value: medium
     text:
       *: "50%"
@@ -19,6 +19,6 @@ options:
   - value: fullscreen
     text:
       *: "100%"
-help: pw.field.media-size.help
+help: pw.field.height.help
 width: 1/2
 translate: false

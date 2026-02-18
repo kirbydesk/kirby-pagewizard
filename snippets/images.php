@@ -30,9 +30,10 @@ if ($images && $images->count() > 0):
 		$thumbOptions = ['width' => 1280, 'quality' => 90, 'format' => 'webp'];
 		$srcset = $image->srcset([480, 720, 960, 1280]);
 		$sizes = match($size) {
-			'small'  => 'min(480px, 100vw)',
-			'medium' => 'min(720px, 100vw)',
-			'large'  => 'min(960px, 100vw)',
+			'xsmall' => '25vw',
+			'small'  => '33vw',
+			'medium' => '50vw',
+			'large'  => '75vw',
 			default  => '100vw',
 		};
 

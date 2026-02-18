@@ -5,10 +5,11 @@
 
 	/* Sizes */
 	img { width: 100%; height: auto; }
-	&[data-size="small"] { max-width: 480px; }
-	&[data-size="medium"] { max-width: 720px; }
-	&[data-size="large"] { max-width: 960px; }
-	&[data-size="full"] { max-width: 100%; }
+	&[data-size="xsmall"] { max-width: 25%; }
+	&[data-size="small"] { max-width: 33%; }
+	&[data-size="medium"] { max-width: 50%; }
+	&[data-size="large"] { max-width: 75%; }
+	&[data-size="fullscreen"] { max-width: 100%; }
 
 	/* Alignment */
 	&[data-align="left"] { margin-right: auto; }
@@ -31,6 +32,12 @@ figure[data-zoom] {
 	> div {
 		position: relative;
 
+		a.glightbox {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+
 		.zoom-icon {
 			display: block;
 			position: absolute;
@@ -41,72 +48,34 @@ figure[data-zoom] {
 			padding: 0.5rem;
 			color: white;
 			line-height: 0;
+			pointer-events: none;
 		}
 	}
 }
 
 /*------------------------------------------------------------------------------------------------
-	Lightbox
+	GLightbox Overrides
 ------------------------------------------------------------------------------------------------*/
-.pw-lightbox {
-	position: fixed;
-	inset: 0;
-	z-index: 9999;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: var(--pw-color-lightbox-background);
-	opacity: 0;
-	visibility: hidden;
-	transition: opacity 0.3s, visibility 0.3s;
-
-	&.is-active {
-		opacity: 1;
-		visibility: visible;
-
-		.pw-lightbox-content img {
-			transform: scale(1);
-		}
-	}
+.goverlay {
+	background: rgba(0, 0, 0, 0.9) !important;
 }
 
-.pw-lightbox-content {
-	max-width: 90vw;
-	max-height: 90vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-
-	img {
-		max-width: 90vw;
-		max-height: 85vh;
-		object-fit: contain;
-		transform: scale(0.95);
-		transition: transform 0.3s;
-	}
+.gfadeIn {
+	animation-duration: 0.2s !important;
 }
 
-.pw-lightbox-caption {
-	color: var(--pw-color-lightbox-caption);
-	font-size: 0.875rem;
-	margin-top: 0.75rem;
-	text-align: center;
+.gfadeOut {
+	animation-duration: 0.15s !important;
 }
 
-.pw-lightbox-close {
-	position: absolute;
-	top: 1rem;
-	right: 1rem;
-	background: none;
-	border: none;
-	color: white;
-	cursor: pointer;
-	padding: 0.5rem;
-	opacity: 0.7;
-	transition: opacity 0.2s;
-	line-height: 0;
+.gslide-description {
+	background: transparent !important;
+}
 
-	&:hover {
-		opacity: 1;
-	}
+.gdesc-inner {
+	color: white !important;
+}
+
+.gslide-title {
+	color: white !important;
 }

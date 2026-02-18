@@ -71,6 +71,7 @@
 
 
 		// Output
-		e(!empty($items), '<div data-field="buttons">'.$items.'</div>'."\n");
+		$align = $content->buttonsalignment()->isNotEmpty() ? $content->buttonsalignment()->value() : 'left';
+		e(!empty($items), '<div data-field="buttons" data-align="'.$align.'">'.$items.'</div>'."\n");
 
 	endif;

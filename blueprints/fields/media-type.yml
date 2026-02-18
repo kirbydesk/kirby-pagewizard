@@ -18,5 +18,5 @@ options:
       *: pw.option.video
     icon: video
 help: pw.field.media-type.help
-width: 1/1
+width: 1/2
 translate: false

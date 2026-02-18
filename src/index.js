@@ -408,17 +408,16 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 					document.addEventListener('click', this._closeHandler, true);
 
 					const counter = header.querySelector('.k-counter');
+					const label = header.querySelector('label, .k-label, .k-field-label');
 					if (counter) {
 						this.container.style.marginRight = 'auto';
 						counter.after(this.container);
+					} else if (label) {
+						const hasRequired = label.querySelector('abbr');
+						this.container.style.marginRight = hasRequired ? '0' : '-20px';
+						label.after(this.container);
 					} else {
-						this.container.style.marginRight = '-20px';
-						const label = header.querySelector('label, .k-label, .k-field-label');
-						if (label) {
-							label.after(this.container);
-						} else {
-							header.prepend(this.container);
-						}
+						header.prepend(this.container);
 					}
 				});
 			},

@@ -103,6 +103,8 @@
 	'pw.field.heading' => 'Heading',
 	'pw.field.heading.help' => 'The heading is a short title that introduces and summarizes the content of this block.',
 	'pw.field.heading.placeholder' => 'Heading ...',
+	'pw.field.height.label' => 'Height',
+	'pw.field.height.help' => 'Defines the height of the block. <code>Auto</code> adjusts the height to fit the content. The percentage values represent the height relative to the viewport.',
 	'pw.field.file-image' => 'File',
 	'pw.field.file-image.empty' => 'No image file	uploaded',
 	'pw.field.file-image.help' => 'Please upload an image file for this block.',
@@ -183,7 +185,7 @@
 	'pw.field.media-source' => 'Source (optional)',
 	'pw.field.media-source.help' => 'Source (if not self-created) – For transparency when using third-party material.',
 	'pw.field.media-source.placeholder' => 'e.g. "Unsplash / Pexels / Getty Images"',
-	'pw.field.media-type' => 'Media type',
+	'pw.field.media-type' => 'Media',
 	'pw.field.media-type.help' => 'Type of the media element in this block.',
 	'pw.field.meta-author' => 'Author',
 	'pw.field.meta-author.empty' => 'No author selected',
@@ -279,6 +281,9 @@
 	'pw.field.video-url.help' => 'Enter a valid URL to a video platform (e.g. YouTube, Vimeo, etc).',
 	'pw.field.video-url.placeholder' => 'e.g. https://youtube.com/?v=',
 
+	'pw.lightbox.open' => 'Open image in lightbox',
+
+	'pw.option.auto' => 'Auto',
 	'pw.option.backgroundcolor' => 'Background color',
 	'pw.option.backgroundimage' => 'Background Image',
 	'pw.option.blank' => 'New tab',

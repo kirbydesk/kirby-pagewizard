@@ -11,9 +11,10 @@ if ($file):
 	// Srcset (Feature 2: responsive file sizes)
 	$srcset = $file->srcset([480, 720, 960, 1280]);
 	$sizes = match($size) {
-		'small'  => 'min(480px, 100vw)',
-		'medium' => 'min(720px, 100vw)',
-		'large'  => 'min(960px, 100vw)',
+		'xsmall' => '25vw',
+		'small'  => '33vw',
+		'medium' => '50vw',
+		'large'  => '75vw',
 		default  => '100vw',
 	};
 
@@ -48,6 +49,13 @@ if ($file):
 	e($zoom, ' data-zoom');
 	echo '>';
 	echo '<div>';
+	if ($zoom):
+		$captionText = $file->imageCaption()->isNotEmpty() ? esc($file->imageCaption()->value()) : '';
+		$lightboxId = 'img-' . uniqid();
+		echo '<a href="'.$file->url().'" class="glightbox" data-gallery="'.$lightboxId.'" aria-label="'.t('pw.lightbox.open').'"';
+		e(!empty($captionText), ' data-description="'.$captionText.'"');
+		echo '>';
+	endif;
 	echo '<img';
 	echo ' src="'.$file->thumb($thumbOptions)->url().'"';
 	echo ' srcset="'.$srcset.'"';
@@ -56,21 +64,25 @@ if ($file):
 	e(!empty($title), ' title="'.$title.'"');
 	e(!empty($describedbyId), ' aria-describedby="'.$describedbyId.'"');
 	e(!$isInformative, ' role="presentation"');
-	e($zoom, ' data-full="'.$file->url().'"');
 	e($crop, ' style="object-position:'.$focus.'"');
 	echo ' loading="lazy">';
-	e($zoom, '<span class="zoom-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>');
+	if ($zoom):
+		echo '<span class="zoom-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>';
+		echo '</a>';
+	endif;
 	echo '</div>';
 	e(!empty($describedby), '<p id="'.$describedbyId.'" hidden>'.$describedby.'</p>');
 	e($file->imageCaption()->isNotEmpty(), '<figcaption data-field="caption">'.esc($file->imageCaption()->value()).'</figcaption>');
 	echo '</figure>';
 	echo '</div>';
 
-	// Load lightbox module once per page (only when zoom is used)
+	// Load GLightbox once per page (only when zoom is used)
 	if ($zoom):
 		static $lightboxLoaded = false;
 		if (!$lightboxLoaded):
-			echo '<script src="'.$kirby->urls()->index().'/assets/js/lightbox.min.js" defer></script>';
+			echo '<link rel="stylesheet" href="'.$kirby->urls()->index().'/assets/css/glightbox.min.css">';
+			echo '<script src="'.$kirby->urls()->index().'/assets/js/glightbox.min.js" defer></script>';
+			echo '<script defer>document.addEventListener("DOMContentLoaded",function(){GLightbox({selector:".glightbox",touchNavigation:false,loop:false,draggable:false,closeOnOutsideClick:true,zoomable:false,openEffect:"fade",closeEffect:"fade"})});</script>';
 			$lightboxLoaded = true;
 		endif;
 	endif;

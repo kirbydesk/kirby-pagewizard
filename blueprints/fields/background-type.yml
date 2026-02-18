@@ -1,7 +1,6 @@
 label: pw.field.background-type.label
 type: toggles
 required: true
-width: 1/2
 options:
   - value: color
     text:
@@ -16,3 +15,4 @@ options:
       *: pw.option.video
     icon: video
 help: pw.field.background-type.help
+translate: false

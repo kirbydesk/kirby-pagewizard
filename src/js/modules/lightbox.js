@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	var overlay, img, caption, isOpen = false;
+	var overlay, content, img, caption, closeBtn, isOpen = false;
 
 	function init() {
 		overlay = document.createElement('div');
@@ -21,10 +21,30 @@
 
 		img = overlay.querySelector('img');
 		caption = overlay.querySelector('.pw-lightbox-caption');
+		closeBtn = overlay.querySelector('.pw-lightbox-close');
+		content = overlay.querySelector('.pw-lightbox-content');
 
-		// Close on overlay background or close button
-		overlay.addEventListener('click', function (e) {
-			if (e.target === overlay || e.target.closest('.pw-lightbox-close')) {
+		// Close button
+		closeBtn.addEventListener('mousedown', function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			close();
+		});
+
+		// Click on backdrop (the overlay background itself)
+		overlay.addEventListener('mousedown', function (e) {
+			if (e.target === overlay) {
+				e.preventDefault();
+				e.stopPropagation();
+				close();
+			}
+		});
+
+		// Click on content area but not on the image
+		content.addEventListener('mousedown', function (e) {
+			if (e.target !== img) {
+				e.preventDefault();
+				e.stopPropagation();
 				close();
 			}
 		});
@@ -41,11 +61,7 @@
 			var figure = e.target.closest('figure[data-zoom]');
 			if (!figure) return;
 
-			// Don't open if click originated inside lightbox overlay
-			if (e.target.closest('.pw-lightbox')) return;
-
 			e.preventDefault();
-			e.stopPropagation();
 
 			var sourceImg = figure.querySelector('img');
 			if (!sourceImg) return;
@@ -56,7 +72,7 @@
 			var captionText = captionEl ? captionEl.textContent : '';
 
 			open(fullSrc, altText, captionText);
-		}, true);
+		});
 	}
 
 	function open(src, alt, captionText) {
@@ -73,12 +89,15 @@
 		isOpen = true;
 		overlay.classList.add('is-active');
 		document.documentElement.style.overflow = 'hidden';
+		document.body.style.overflow = 'hidden';
 	}
 
 	function close() {
+		if (!isOpen) return;
 		isOpen = false;
 		overlay.classList.remove('is-active');
 		document.documentElement.style.overflow = '';
+		document.body.style.overflow = '';
 		img.src = '';
 	}
 

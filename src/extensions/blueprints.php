@@ -49,6 +49,7 @@
 	'pagewizard/fields/grid-offset' => __DIR__ . '/../../blueprints/fields/grid-offset.yml',
 	'pagewizard/fields/grid-size' => __DIR__ . '/../../blueprints/fields/grid-size.yml',
 	'pagewizard/fields/heading' => __DIR__ . '/../../blueprints/fields/heading.yml',
+	'pagewizard/fields/height' => __DIR__ . '/../../blueprints/fields/height.yml',
 	'pagewizard/fields/image' => __DIR__ . '/../../blueprints/fields/image.yml',
 	'pagewizard/fields/image-aria-describedby' => __DIR__ . '/../../blueprints/fields/image-aria-describedby.yml',
 	'pagewizard/fields/image-aria-label' => __DIR__ . '/../../blueprints/fields/image-aria-label.yml',

@@ -4,6 +4,8 @@ class pwStyle
 {
 	public static function options(string $blockType, array $defaults, array $extraFields = []): array
 	{
+		$settings = pwConfig::settings($blockType);
+
 		$fields = [
 			'headlineStyle' => ['extends' => 'pagewizard/headlines/style'],
 			'style' => [
@@ -24,12 +26,18 @@ class pwStyle
 					'style' => 'custom'
 				]
 			],
-			'buttonstyle' => [
+		];
+
+		if (!empty($settings['buttons'])) {
+			$fields['buttonstyle'] = [
 				'extends' => 'pagewizard/fields/button-style',
 				'when' => [
 					'style' => 'custom'
 				]
-			],
+			];
+		}
+
+		$fields +=  [
 			'headlineBackground' => ['extends' => 'pagewizard/headlines/background'],
 			'backgroundSize' => [
 				'extends' => 'pagewizard/fields/background-size',

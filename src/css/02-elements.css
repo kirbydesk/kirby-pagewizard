@@ -251,6 +251,9 @@ body {
 	flex-wrap: wrap;
 	gap: var(--pw-gap-text-elements);
 
+	&[data-align="center"] { justify-content: center; }
+	&[data-align="right"]  { justify-content: flex-end; }
+
 	[data-field="button"] a {
 		font-family: var(--pw-font-button);
 		font-size: var(--pw-font-size-button);
