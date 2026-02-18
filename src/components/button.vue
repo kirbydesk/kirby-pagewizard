@@ -16,7 +16,7 @@ button {
 	color: white;
 
 	.k-button-text.placeholder {
-		color: white;
+		opacity: 0.5;
 	}
 }
 </style>

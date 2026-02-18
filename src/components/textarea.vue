@@ -47,6 +47,7 @@ div.pwtext {
   font-size: var(--text-sm);
 	line-height: var(--text-line-height);
 	margin-bottom: var(--spacing-2);
+	color: var(--pw-color-text, inherit);
 
 	&[data-align="left"] {
     text-align: left;

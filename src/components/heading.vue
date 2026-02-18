@@ -44,6 +44,7 @@ export default {
 div.pwHeading {
 	margin-bottom: var(--spacing-2);
 	line-height: var(--text-line-height);
+	color: var(--pw-color-heading, inherit);
 
 	&[data-lvl="h1"]{
 		font-size: var(--text-2xl);

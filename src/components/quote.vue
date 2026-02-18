@@ -78,11 +78,12 @@ div.pwquote {
 	div.quote {
 		font-size: var(--text-3xl);
 		line-height: var(--text-line-height);
+		color: var(--pw-color-quote, inherit);
 	}
 	div.author {
-		opacity: 0.8;
 		margin: var(--spacing-2) 0;
 		font-style: italic;
+		color: var(--pw-color-cite, inherit);
 	}
 }
 </style>

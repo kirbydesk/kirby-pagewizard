@@ -30,8 +30,9 @@
 ------------------------------------------------------------------------------------------------*/
 section[data-block] {
 	width: 100%;
-	padding: 0 var(--pw-padding-block-right) 0 var(--pw-padding-block-left);
-	margin: 0 var(--pw-margin-block-right) 0 var(--pw-margin-block-left);
+	padding: 0;
+	/*margin: 0 var(--pw-margin-block-right) 0 var(--pw-margin-block-left);*/
+	margin: 0;
 	border: var(--pw-border-block);
 	border-radius: var(--pw-border-radius-block);
 	box-shadow: var(--pw-shadow-block);
@@ -42,11 +43,6 @@ section[data-block] {
 /*------------------------------------------------------------------------------------------------
 	Block Background Size (via data attributes)
 ------------------------------------------------------------------------------------------------*/
-section[data-block]:not([data-background-size="content"]) [data-layout="grid"] {
-	padding-left: var(--pw-padding-block-left);
-	padding-right: var(--pw-padding-block-right);
-}
-
 section[data-block][data-background-size="content"] {
 	max-width: 1280px;
 	margin-left: auto;
@@ -57,12 +53,20 @@ section[data-block][data-background-size="content"] {
 /*------------------------------------------------------------------------------------------------
 	Block Spacing (via data attributes)
 ------------------------------------------------------------------------------------------------*/
-section[data-block][data-padding-top="true"] {
+section[data-block][data-padding-top="true"] [data-layout="grid-item"]{
 	padding-top: var(--pw-padding-block-top);
 }
 
-section[data-block][data-padding-bottom="true"] {
+section[data-block][data-padding-right="true"] [data-layout="grid-item"]{
+	padding-right: var(--pw-padding-block-right);
+}
+
+section[data-block][data-padding-bottom="true"] [data-layout="grid-item"]{
 	padding-bottom: var(--pw-padding-block-bottom);
+}
+
+section[data-block][data-padding-left="true"] [data-layout="grid-item"]{
+	padding-left: var(--pw-padding-block-left);
 }
 
 section[data-block][data-margin-top="true"] {

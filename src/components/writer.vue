@@ -17,6 +17,7 @@ export default {
 <style scoped>
 div.pwtext {
   font-size: var(--text-sm);
+	color: var(--pw-color-text, inherit);
 
 	&[data-align="left"] { text-align: left; }
 	&[data-align="center"] { text-align: center; }
@@ -57,7 +58,7 @@ div.pwtext {
 		line-height: var(--text-line-height);
 	}
 	:deep(a) {
-		color: var(--link-color, #0070f3);
+		color: var(--pw-color-link, #0070f3);
 		text-decoration: underline;
 	}
 }

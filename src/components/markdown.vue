@@ -28,6 +28,7 @@ export default {
 <style>
 .pwMarkdown {
   line-height: var(--text-line-height);
+	color: var(--pw-color-text, inherit);
 
 	&[data-align="left"] { text-align: left; }
 	&[data-align="center"] { text-align: center; }
@@ -91,7 +92,7 @@ export default {
 }
 
 .pwMarkdown a {
-  color: #307DCA;
+  color: var(--pw-color-link, #307DCA);
   text-decoration: underline;
   word-break: break-all;
 }

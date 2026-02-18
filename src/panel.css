@@ -37,10 +37,11 @@ div.k-block-container {
 	div.pwPreview {
 		position: relative;
 		border-radius: var(--rounded) !important;
+		background-color: var(--pw-color-block-background, transparent);
 
 		.placeholder {
 			font-weight: var(--font-normal);
-			color: var(--input-color-placeholder);
+			opacity: 0.4;
 		}
 		.linktext {
 			display: inline-flex;
@@ -153,6 +154,8 @@ span.tag.screensize {
 
 	.pwGridItem {
 		display: block;
+		border-left: 1px dashed rgba(255, 255, 255, 0.5);
+		border-right: 1px dashed rgba(255, 255, 255, 0.5);
 
 		&[data-paddingtop="true"] {
 			padding-top: 1rem;
@@ -173,13 +176,12 @@ span.tag.screensize {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
 		padding: 0;
-		background-color: light-dark(var(--color-gray-250), var(--menu-color-back));
 		gap: 1rem;
 
 		.pwGridItem {
 			/*padding: var(--spacing-3);*/
 			border-radius: var(--rounded) !important;
-			background-color: var(--block-color-back);
+			background-color: var(--pw-color-block-background, var(--block-color-back));
 			grid-column: var(--grid-start-sm) / span var(--grid-span-sm);
 		}
 	}

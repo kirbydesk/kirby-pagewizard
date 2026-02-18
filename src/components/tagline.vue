@@ -41,6 +41,7 @@ div.pwTagline {
   font-size: var(--text-sm);
 	line-height: var(--text-line-height);
 	margin-bottom: var(--spacing-1);
+	color: var(--pw-color-tagline, inherit);
 
 	&[data-align="left"] {
     text-align: left;
