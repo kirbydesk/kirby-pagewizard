@@ -1,7 +1,3 @@
 ---
 label: pw.field.text-quote
-type: pwtextarea
-buttons: false
-size: medium
-placeholder: pw.field.text-quote.placeholder
-help: pw.field.text-quote.help
+type: pweditor

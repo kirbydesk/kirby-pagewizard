@@ -56,7 +56,7 @@ export default {
 			};
 			document.addEventListener('click', this._closeHandler);
 
-			// Insert inside the same action group as the Add/options buttons (no extra gap)
+			// Insert inside the same action group as the Add/options buttons
 			const existingBtn = header.querySelector('.k-button');
 			if (existingBtn && existingBtn.parentElement !== header) {
 				existingBtn.parentElement.prepend(this.container);

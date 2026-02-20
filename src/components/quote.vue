@@ -19,11 +19,15 @@ export default {
 	computed: {
     parsedQuoteData() {
       const val = this.quote;
-      if (!val) return { text: '', align: 'left' };
+      if (!val) return { text: '', align: 'left', html: false };
       try {
-        return typeof val === 'string' ? JSON.parse(val) : val;
+        const d = typeof val === 'string' ? JSON.parse(val) : val;
+        if (d.mode !== undefined) {
+          return { text: d.writer || d.textarea || d.markdown || '', align: d.align || 'left', html: d.mode === 'writer' };
+        }
+        return { text: d.text || '', align: d.align || 'left', html: false };
       } catch(e) {
-        return { text: val, align: 'left' };
+        return { text: val, align: 'left', html: false };
       }
     },
     parsedAuthorData() {
@@ -36,8 +40,8 @@ export default {
       }
     },
     quoteText() {
-      const { text = '' } = this.parsedQuoteData;
-      return text;
+      const { text = '', html = false } = this.parsedQuoteData;
+      return html ? text : this.nl2br(text);
     },
     authorText() {
       const { text = '' } = this.parsedAuthorData;

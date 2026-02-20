@@ -41,12 +41,7 @@ export default {
 			}
 		},
 		emitValue(text, align, level) {
-			const data = {
-				text: text,
-				align: align,
-				level: level
-			};
-			this.$emit('input', JSON.stringify(data));
+			this.$emit('input', JSON.stringify({ text, align, level }));
 		},
 		updateAlign(value) {
 			this.currentAlign = value;
@@ -81,12 +76,10 @@ export default {
 			}
 		},
 		handleEscape(event) {
-			if (event.key === 'Escape') {
-				if (this.showAlignDropdown || this.showLevelDropdown) {
-					event.stopPropagation();
-					event.preventDefault();
-					this.closeDropdowns();
-				}
+			if (event.key === 'Escape' && (this.showAlignDropdown || this.showLevelDropdown)) {
+				event.stopPropagation();
+				event.preventDefault();
+				this.closeDropdowns();
 			}
 		}
 	},
@@ -102,10 +95,77 @@ export default {
 	},
 	template: `
 		<div class="k-field k-text-field" :data-align="currentAlign" :data-level="currentLevel">
-			<header v-if="label" class="k-field-header">
-				<label class="k-label k-field-label">
+			<header class="k-field-header" style="display:flex;align-items:center;overflow:visible;">
+				<label v-if="label" class="k-label k-field-label" style="flex:1;">
 					<span class="k-label-text">{{ label }}</span>
 				</label>
+				<span v-else style="flex:1;"></span>
+				<div v-if="align || level" class="k-button-group">
+					<span v-if="align" style="position:relative;">
+						<button
+							data-has-icon="true"
+							data-has-text="false"
+							aria-label="Align"
+							data-size="xs"
+							data-variant="filled"
+							type="button"
+							class="input-focus k-button"
+							@click.stop="toggleAlignDropdown"
+						><span class="k-button-icon">
+							<svg aria-hidden="true" class="k-icon">
+								<use :xlink:href="'#icon-text-' + currentAlign"></use>
+							</svg>
+						</span></button>
+						<dialog v-if="showAlignDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
+							<div class="k-navigate">
+								<button
+									v-for="option in alignOptions"
+									:key="option"
+									@click.stop="updateAlign(option)"
+									type="button"
+									class="k-button k-dropdown-item"
+									data-has-icon="true"
+								>
+									<span class="k-button-icon">
+										<svg class="k-icon"><use :xlink:href="'#icon-text-' + option"></use></svg>
+									</span>
+								</button>
+							</div>
+						</dialog>
+					</span>
+					<span v-if="level" style="position:relative;">
+						<button
+							data-has-icon="true"
+							data-has-text="false"
+							aria-label="Level"
+							data-size="xs"
+							data-variant="filled"
+							type="button"
+							class="input-focus k-button"
+							@click.stop="toggleLevelDropdown"
+						><span class="k-button-icon">
+							<svg aria-hidden="true" class="k-icon">
+								<use :xlink:href="'#icon-' + currentLevel"></use>
+							</svg>
+						</span></button>
+						<dialog v-if="showLevelDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
+							<div class="k-navigate">
+								<button
+									v-for="option in levelOptions"
+									:key="option"
+									@click.stop="updateLevel(option)"
+									type="button"
+									class="k-button k-dropdown-item"
+									data-has-icon="true"
+								>
+									<span class="k-button-icon">
+										<svg class="k-icon"><use :xlink:href="'#icon-' + option"></use></svg>
+									</span>
+								</button>
+							</div>
+						</dialog>
+					</span>
+				</div>
 			</header>
 			<div class="k-input" data-type="text">
 				<span class="k-input-element">
@@ -116,48 +176,6 @@ export default {
 						type="text"
 						class="k-string-input k-text-input"
 					/>
-				</span>
-				<span v-if="level" class="k-input-icon" @click.stop="toggleLevelDropdown">
-					<svg aria-hidden="true" :data-type="currentLevel" class="k-icon">
-						<use :xlink:href="'#icon-' + currentLevel"></use>
-					</svg>
-					<dialog v-if="showLevelDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
-						<div class="k-navigate">
-							<button
-								v-for="option in levelOptions"
-								:key="option"
-								@click.stop="updateLevel(option)"
-								type="button"
-								class="k-button k-dropdown-item"
-								data-has-icon="true"
-							>
-								<span class="k-button-icon">
-									<svg class="k-icon"><use :xlink:href="'#icon-' + option"></use></svg>
-								</span>
-							</button>
-						</div>
-					</dialog>
-				</span>
-				<span v-if="align" class="k-input-icon" @click.stop="toggleAlignDropdown">
-					<svg aria-hidden="true" :data-type="'text-' + currentAlign" class="k-icon">
-						<use :xlink:href="'#icon-text-' + currentAlign"></use>
-					</svg>
-					<dialog v-if="showAlignDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
-						<div class="k-navigate">
-							<button
-								v-for="option in alignOptions"
-								:key="option"
-								@click.stop="updateAlign(option)"
-								type="button"
-								class="k-button k-dropdown-item"
-								data-has-icon="true"
-							>
-								<span class="k-button-icon">
-									<svg class="k-icon"><use :xlink:href="'#icon-text-' + option"></use></svg>
-								</span>
-							</button>
-						</div>
-					</dialog>
 				</span>
 			</div>
 			<footer v-if="help" class="k-field-footer">

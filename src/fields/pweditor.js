@@ -29,6 +29,9 @@ export default {
 		showModeSwitcher() {
 			return this.writerModes.length >= 2;
 		},
+		translatedFieldLabel() {
+			return this.label ? this.$t(this.label, this.label) : this.$t('pw.field.text');
+		},
 		translatedLabel() {
 			return this.$t('pw.field.text-' + this.current.mode, this.current.mode);
 		},
@@ -119,26 +122,24 @@ export default {
 		<div class="k-field pw-editor-field">
 			<header class="k-field-header" style="display:flex;align-items:center;overflow:visible;">
 				<label class="k-label k-field-label" style="flex:1;">
-					<span class="k-label-text">{{ $t('pw.field.text') }}</span>
+					<span class="k-label-text">{{ translatedFieldLabel }}</span>
 				</label>
-				<span style="display:flex;align-items:center;">
+				<div class="k-button-group">
 					<span style="position:relative;">
 						<button
 							data-has-icon="true"
 							data-has-text="false"
 							aria-label="Align"
-							data-responsive="true"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
 							class="input-focus k-button"
 							@click.stop="toggleAlignDropdown"
-							><span class="k-button-icon">
-								<svg aria-hidden="true" data-type="editor-mode" class="k-icon">
-									<use :xlink:href="'#icon-text-' + current.align"></use>
-								</svg>
-							</span>
-						</button>
+						><span class="k-button-icon">
+							<svg aria-hidden="true" class="k-icon">
+								<use :xlink:href="'#icon-text-' + current.align"></use>
+							</svg>
+						</span></button>
 						<dialog v-if="showAlignDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
 							<div class="k-navigate">
 								<button v-for="opt in ['left','center','right']" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setAlign(opt)">
@@ -152,21 +153,21 @@ export default {
 							data-has-icon="false"
 							data-has-text="true"
 							aria-label="Mode"
-							data-responsive="true"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
 							class="input-focus k-button"
 							@click.stop="toggleModeDropdown"
-							><span class="k-button-text"> {{ translatedLabel }} </span>
-						</button>
-						<div v-if="showModeDropdown" style="position:absolute;top:100%;right:0;left:auto;z-index:9999;background:var(--color-black);border-radius:var(--rounded);padding:4px;white-space:nowrap;box-shadow:var(--shadow);" @click.stop>
-							<button v-for="m in writerModes" :key="m" type="button" style="display:block;width:100%;text-align:left;padding:.52rem .6rem;color:#fff;background:none;border:none;cursor:pointer;white-space:nowrap;" @click.stop="setMode(m)">
-								{{ $t('pw.field.text-' + m) }}
-							</button>
-						</div>
+						><span class="k-button-text"> {{ translatedLabel }} </span></button>
+						<dialog v-if="showModeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
+							<div class="k-navigate">
+								<button v-for="m in writerModes" :key="m" type="button" class="k-button k-dropdown-item" data-has-text="true" data-has-icon="false" @click.stop="setMode(m)">
+									<span class="k-button-text">{{ $t('pw.field.text-' + m) }}</span>
+								</button>
+							</div>
+						</dialog>
 					</span>
-				</span>
+				</div>
 			</header>
 			<div v-show="current.mode === 'textarea'" class="k-input pw-editor-textarea" data-type="textarea">
 				<span class="k-input-element">
