@@ -105,9 +105,10 @@ div.video {
 	div.video {
 		display: flex;
 	}
-	.small { width: 25%;}
-	.medium { width: 50%;}
-	.large { width: 75%;}
-	.fullscreen { width: 100%;}
+	.xsmall { width: 100%;max-width: 25%;}
+	.small { width: 100%;max-width: 33%;}
+	.medium { width: 100%;max-width: 50%;}
+	.large { width: 100%;max-width: 75%;}
+	.fullscreen { width: 100%;max-width: 100%;}
 }
 </style>

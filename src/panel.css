@@ -145,17 +145,18 @@ span.tag.screensize {
 	background-color: light-dark(var(--color-gray-250),var(--color-gray-950));
 }
 
+/* Patch Kirbyblock Multicolumn: 2 headline fields in drawer side-by-side */
+.k-headline-field.patch {
+	padding-top: 0;
+}
 
 /* Grid settings */
 .pwGrid {
   display: block;
-	padding: var(--spacing-3);
 	border-radius: var(--rounded) !important;
 
 	.pwGridItem {
 		display: block;
-		border-left: 1px dashed rgba(255, 255, 255, 0.5);
-		border-right: 1px dashed rgba(255, 255, 255, 0.5);
 
 		&[data-paddingtop="true"] {
 			padding-top: 1rem;
@@ -180,6 +181,8 @@ span.tag.screensize {
 
 		.pwGridItem {
 			/*padding: var(--spacing-3);*/
+			border-left: 1px dashed color-mix(in srgb, var(--pw-color-text) 40%, transparent);
+			border-right: 1px dashed color-mix(in srgb, var(--pw-color-text) 40%, transparent);
 			border-radius: var(--rounded) !important;
 			background-color: var(--pw-color-block-background, var(--block-color-back));
 			grid-column: var(--grid-start-sm) / span var(--grid-span-sm);

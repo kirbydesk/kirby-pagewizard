@@ -1,0 +1,18 @@
+---
+label: pw.field.distribution.label
+type: toggles
+required: true
+default: "dist-3-3"
+options:
+  - value: "dist-1-5"
+    text: "1 | 5"
+  - value: "dist-2-4"
+    text: "2 | 4"
+  - value: "dist-3-3"
+    text: "3 | 3"
+  - value: "dist-4-2"
+    text: "4 | 2"
+  - value: "dist-5-1"
+    text: "5 | 1"
+help: pw.field.distribution.help
+translate: false
