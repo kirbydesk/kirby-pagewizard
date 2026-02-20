@@ -13,6 +13,7 @@
 	'media' => __DIR__ . '/../../snippets/media.php',
 	'quote' => __DIR__ . '/../../snippets/quote.php',
 	'tagline' => __DIR__ . '/../../snippets/tagline.php',
+	'editor' => __DIR__ . '/../../snippets/editor.php',
 	'text' => __DIR__ . '/../../snippets/text.php',
 	'video' => __DIR__ . '/../../snippets/video.php',
 ];

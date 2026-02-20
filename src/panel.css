@@ -74,9 +74,11 @@ div.k-block-container {
 		}
 	}
 }
+
 .pw-dropdown {
   position: absolute;
   top: 100%;
+  left: auto;
 	right: 0;
   z-index: 100;
 

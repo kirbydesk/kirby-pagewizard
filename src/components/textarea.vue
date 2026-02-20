@@ -10,28 +10,11 @@
 export default {
   props: {
     value: String,
-    content: {
-      type: Object,
-      default: () => ({})
-    }
+    align: { type: String, default: 'left' }
   },
   computed: {
-    parsedData() {
-      const val = this.content?.text || this.value;
-      if (!val) return { text: '', align: 'left' };
-      try {
-        return typeof val === 'string' ? JSON.parse(val) : val;
-      } catch(e) {
-        return { text: val, align: 'left' };
-      }
-    },
     text() {
-      const { text = '' } = this.parsedData;
-      return text;
-    },
-    align() {
-      const { align = 'left' } = this.parsedData;
-      return align;
+      return this.value || '';
     }
   },
   methods: {

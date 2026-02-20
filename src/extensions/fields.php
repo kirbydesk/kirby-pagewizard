@@ -43,6 +43,14 @@ return [
 			}
 		]
 	],
+	'pweditor' => [
+		'extends' => 'text',
+		'props' => [
+			'value' => function (string $value = null) {
+				return $value;
+			}
+		]
+	],
 	'pwalign' => [
 		'extends' => 'text',
 		'props' => [
