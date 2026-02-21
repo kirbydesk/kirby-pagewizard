@@ -29,9 +29,6 @@ export default {
 		showModeSwitcher() {
 			return this.writerModes.length >= 2;
 		},
-		translatedFieldLabel() {
-			return this.label ? this.$t(this.label, this.label) : this.$t('pw.field.text');
-		},
 		translatedLabel() {
 			return this.$t('pw.field.text-' + this.current.mode, this.current.mode);
 		},
@@ -122,7 +119,7 @@ export default {
 		<div class="k-field pw-editor-field">
 			<header class="k-field-header" style="display:flex;align-items:center;overflow:visible;">
 				<label class="k-label k-field-label" style="flex:1;">
-					<span class="k-label-text">{{ translatedFieldLabel }}</span>
+					<span class="k-label-text">{{ $t('pw.field.text') }}</span>
 				</label>
 				<div class="k-button-group">
 					<span style="position:relative;">
