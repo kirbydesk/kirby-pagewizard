@@ -20,7 +20,7 @@ class pwConfig
 		$configDir = self::$configPaths[$blockType] ?? null;
 
 		if ($configDir === null) {
-			return ['settings' => [], 'defaults' => []];
+			return ['settings' => [], 'defaults' => [], 'editor' => []];
 		}
 
 		/* -------------- Block Settings (feature toggles) --------------*/
@@ -35,6 +35,12 @@ class pwConfig
 			? json_decode(file_get_contents($defaultsFile), true)
 			: [];
 
+		/* -------------- Editor config --------------*/
+		$editorFile = $configDir . '/editor.json';
+		$editor = file_exists($editorFile)
+			? json_decode(file_get_contents($editorFile), true)
+			: [];
+
 		/* -------------- Config overrides from config.php --------------*/
 		$raw = option("kirbydesk.pagewizard.kirbyblocks.{$blockType}", []);
 		$cfg = is_array($raw) ? $raw : [];
@@ -44,10 +50,14 @@ class pwConfig
 		if (!empty($cfg['defaults']) && is_array($cfg['defaults'])) {
 			$defaults = array_merge($defaults, $cfg['defaults']);
 		}
+		if (!empty($cfg['editor']) && is_array($cfg['editor'])) {
+			$editor = array_merge($editor, $cfg['editor']);
+		}
 
 		return [
 			'settings' => $settings,
 			'defaults' => $defaults,
+			'editor'   => $editor,
 		];
 	}
 
