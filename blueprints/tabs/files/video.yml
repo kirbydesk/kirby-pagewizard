@@ -2,7 +2,7 @@
 label: pw.tab.video
 icon: video
 columns:
-  - width: 3/4
+  - width: 2/3
     sections:
       main:
         type: fields
@@ -13,7 +13,7 @@ columns:
             extends: pagewizard/fields/video-title
           videoDescription:
             extends: pagewizard/fields/video-description
-  - width: 1/4
+  - width: 1/3
     sections:
       aside:
         type: fields

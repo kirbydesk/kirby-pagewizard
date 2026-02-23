@@ -1,0 +1,24 @@
+---
+label: pw.field.fade-size
+type: toggles
+required: true
+default: "medium"
+options:
+  - value: xsmall
+    text:
+      *: "25%"
+  - value: small
+    text:
+      *: "33%"
+  - value: medium
+    text:
+      *: "50%"
+  - value: large
+    text:
+      *: "75%"
+  - value: fullscreen
+    text:
+      *: "100%"
+help: pw.field.fade-size.help
+width: 3/4
+translate: false

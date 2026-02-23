@@ -374,6 +374,8 @@
 	'pw.headline.distribution.help' => 'Define the distribution ratio of the columns.',
 	'pw.headline.editorsettings' => 'Editor settings',
 	'pw.headline.editorsettings.help' => 'You can overwrite the default setting for this editor field as needed.',
+	'pw.headline.effects' => 'Effects',
+	'pw.headline.effects.help' => 'Define additional effects for this block.',
 	'pw.headline.fieldsettings' => 'Field settings',
 	'pw.headline.fieldsettings.help' => 'You can overwrite the default field settings for this block and enable or disable block fields as needed.',
 	'pw.headline.footer' => 'Footer',

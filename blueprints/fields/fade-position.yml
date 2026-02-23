@@ -1,0 +1,24 @@
+---
+label: pw.field.fade-position.label
+type: toggles
+required: true
+default: "left"
+options:
+  - value: left
+    text:
+      *: pw.option.left
+    icon: align-left
+  - value: right
+    text:
+      *: pw.option.right
+    icon: align-right
+  - value: top
+    text:
+      *: pw.option.top
+    icon: text-top
+  - value: bottom
+    text:
+      *: pw.option.bottom
+    icon: text-bottom
+help: pw.field.fade-position.help
+translate: false
