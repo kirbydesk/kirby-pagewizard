@@ -12,6 +12,7 @@ import pwButtons from "@/components/buttons.vue";
 // Fields
 import htmlheadline from "@/fields/htmlheadline.js";
 import pwtext      from "@/fields/pwtext.js";
+import pwtextarea  from "@/fields/pwtextarea.js";
 import pweditor    from "@/fields/pweditor.js";
 import pwalign     from "@/fields/pwalign.js";
 
@@ -26,6 +27,7 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 	fields: {
 		htmlheadline,
 		pwtext,
+		pwtextarea,
 		pweditor,
 		pwalign,
 	},

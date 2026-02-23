@@ -14,29 +14,34 @@
 export default {
   props: {
     quote: String,
-    author: String
+    author: String,
+    alignQuoteDefault:  { type: String, default: 'left' },
+    alignAuthorDefault: { type: String, default: 'left' },
+    alignQuote:  { type: String, default: null },
+    alignAuthor: { type: String, default: null }
   },
 	computed: {
     parsedQuoteData() {
       const val = this.quote;
-      if (!val) return { text: '', align: 'left', html: false };
+      if (!val) return { text: '', align: this.alignQuoteDefault, html: false };
       try {
         const d = typeof val === 'string' ? JSON.parse(val) : val;
         if (d.mode !== undefined) {
-          return { text: d.writer || d.textarea || d.markdown || '', align: d.align || 'left', html: d.mode === 'writer' };
+          return { text: d.writer || d.textarea || d.markdown || '', align: d.align || this.alignQuoteDefault, html: d.mode === 'writer' };
         }
-        return { text: d.text || '', align: d.align || 'left', html: false };
+        return { text: d.text || '', align: d.align || this.alignQuoteDefault, html: false };
       } catch(e) {
-        return { text: val, align: 'left', html: false };
+        return { text: val, align: this.alignQuoteDefault, html: false };
       }
     },
     parsedAuthorData() {
       const val = this.author;
-      if (!val) return { text: '' };
+      if (!val) return { text: '', align: this.alignAuthorDefault };
       try {
-        return typeof val === 'string' ? JSON.parse(val) : val;
+        const d = typeof val === 'string' ? JSON.parse(val) : val;
+        return { text: d.text || '', align: d.align || this.alignAuthorDefault };
       } catch(e) {
-        return { text: val };
+        return { text: val, align: this.alignAuthorDefault };
       }
     },
     quoteText() {
@@ -48,11 +53,13 @@ export default {
       return text;
     },
     quoteAlign() {
-      const { align = 'left' } = this.parsedQuoteData;
+      if (this.alignQuote) return this.alignQuote;
+      const { align = this.alignQuoteDefault } = this.parsedQuoteData;
       return align;
     },
     authorAlign() {
-      const { align = 'left' } = this.parsedAuthorData;
+      if (this.alignAuthor) return this.alignAuthor;
+      const { align = this.alignAuthorDefault } = this.parsedAuthorData;
       return align;
     }
   },

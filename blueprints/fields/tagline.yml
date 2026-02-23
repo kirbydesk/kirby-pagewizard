@@ -1,7 +1,6 @@
 ---
 label: pw.field.tagline
 type: pwtext
-align: left
 counter: false
 placeholder: pw.field.tagline.placeholder
 help: pw.field.tagline.help

@@ -20,20 +20,26 @@ class pwConfig
 		$configDir = self::$configPaths[$blockType] ?? null;
 
 		if ($configDir === null) {
-			return ['settings' => [], 'defaults' => [], 'editor' => []];
+			return ['settings' => [], 'tabs' => [], 'defaults' => [], 'fields' => [], 'editor' => []];
 		}
 
 		/* -------------- Block Settings (feature toggles) --------------*/
 		$settingsFile = $configDir . '/settings.json';
-		$settings = file_exists($settingsFile)
+		$settingsRaw = file_exists($settingsFile)
 			? json_decode(file_get_contents($settingsFile), true)
 			: [];
 
+		$settings    = $settingsRaw['fields'] ?? $settingsRaw;
+		$tabSettings = $settingsRaw['tabs']   ?? [];
+
 		/* -------------- Block Defaults (field values) --------------*/
 		$defaultsFile = $configDir . '/defaults.json';
-		$defaults = file_exists($defaultsFile)
+		$defaultsRaw = file_exists($defaultsFile)
 			? json_decode(file_get_contents($defaultsFile), true)
 			: [];
+
+		$defaults = $defaultsRaw['block']  ?? $defaultsRaw;
+		$fields   = $defaultsRaw['fields'] ?? [];
 
 		/* -------------- Editor config --------------*/
 		$editorFile = $configDir . '/editor.json';
@@ -47,16 +53,30 @@ class pwConfig
 		if (!empty($cfg['settings']) && is_array($cfg['settings'])) {
 			$settings = array_merge($settings, $cfg['settings']);
 		}
+		if (!empty($cfg['tabs']) && is_array($cfg['tabs'])) {
+			$tabSettings = array_merge($tabSettings, $cfg['tabs']);
+		}
 		if (!empty($cfg['defaults']) && is_array($cfg['defaults'])) {
 			$defaults = array_merge($defaults, $cfg['defaults']);
 		}
+		if (!empty($cfg['fields']) && is_array($cfg['fields'])) {
+			$fields = array_merge($fields, $cfg['fields']);
+		}
 		if (!empty($cfg['editor']) && is_array($cfg['editor'])) {
-			$editor = array_merge($editor, $cfg['editor']);
+			foreach ($cfg['editor'] as $key => $value) {
+				if (is_array($value) && isset($editor[$key]) && is_array($editor[$key])) {
+					$editor[$key] = array_merge($editor[$key], $value);
+				} else {
+					$editor[$key] = $value;
+				}
+			}
 		}
 
 		return [
 			'settings' => $settings,
+			'tabs'     => $tabSettings,
 			'defaults' => $defaults,
+			'fields'   => $fields,
 			'editor'   => $editor,
 		];
 	}
@@ -72,7 +92,7 @@ class pwConfig
 	/**
 	 * Build common tabs (grid, spacing, theme) and add them to $tabs.
 	 */
-	public static function buildTabs(string $blockType, array $defaults, array $settings, array &$tabs): void
+	public static function buildTabs(string $blockType, array $defaults, array $tabSettings, array &$tabs): void
 	{
 		/* -------------- Grid Tab --------------*/
 		$gridDefaults = [
@@ -85,7 +105,7 @@ class pwConfig
 			'gridSizeXl'   => $defaults['grid-size-xl'],
 			'gridOffsetXl' => $defaults['grid-offset-xl'],
 		];
-		if (!empty($settings['tab-grid'])) {
+		if (!empty($tabSettings['grid']) || !empty($tabSettings['tab-grid'])) {
 			$tabs['grid'] = pwGrid::layout($blockType, $gridDefaults);
 		} else {
 			foreach ($gridDefaults as $key => $value) {

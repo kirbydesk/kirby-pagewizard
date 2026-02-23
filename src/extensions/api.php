@@ -6,7 +6,8 @@ return [
 		[
 			'pattern' => 'pagewizard/settings/(:any)',
 			'action'  => function (string $blockType) {
-				return ['settings' => pwConfig::settings($blockType)];
+				$config = pwConfig::load($blockType);
+				return ['settings' => $config['settings'], 'fields' => $config['fields']];
 			}
 		],
 		[

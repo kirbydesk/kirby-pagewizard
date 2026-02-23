@@ -2,7 +2,7 @@
 
 class pwEditor
 {
-	public static function contentField(array $defaults, array $editorConfig = [], array $settings = []): array
+	public static function contentField(array $defaults, array $editorConfig = [], array $settings = [], array $fields = []): array
 	{
 		// Allowed modes: settings['editor'] is either false or an array of mode names
 		$allModes    = ['textarea', 'writer', 'markdown'];
@@ -24,11 +24,13 @@ class pwEditor
 		$writerHeadings = $editorConfig['headings'] ?? [2, 3, 4];
 		$writerToolbar  = $editorConfig['toolbar']  ?? ['inline' => false];
 
+		$defaultAlign = $fields['align-editor'] ?? 'left';
+
 		return [
-			'type'           => 'pweditor',
-			'label'          => 'pw.field.text',
-			'default'        => $defaultMode,
-			'writerModes'    => $writerModes,
+			'type'         => 'pweditor',
+			'label'        => 'pw.field.text',
+			'align'        => $defaultAlign,
+			'writerModes'  => $writerModes,
 			'writerMarks'    => $writerMarks,
 			'writerNodes'    => $writerNodes,
 			'writerHeadings' => $writerHeadings,

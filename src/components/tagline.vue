@@ -13,16 +13,17 @@ export default {
     content: {
       type: Object,
       default: () => ({})
-    }
+    },
+    alignDefault: { type: String, default: 'left' }
   },
   computed: {
     parsedData() {
       const val = this.content?.tagline || this.value;
-      if (!val) return { text: '', align: 'left' };
+      if (!val) return { text: '', align: this.alignDefault };
       try {
         return typeof val === 'string' ? JSON.parse(val) : val;
       } catch(e) {
-        return { text: val, align: 'left' };
+        return { text: val, align: this.alignDefault };
       }
     },
     text() {
@@ -30,7 +31,7 @@ export default {
       return text;
     },
     align() {
-      const { align = 'left' } = this.parsedData;
+      const { align = this.alignDefault } = this.parsedData;
       return align;
     }
   }
@@ -40,6 +41,7 @@ export default {
 div.pwTagline {
   font-size: var(--text-sm);
 	line-height: var(--text-line-height);
+	text-transform: uppercase;
 	margin-bottom: var(--spacing-1);
 	color: var(--pw-color-tagline, inherit);
 

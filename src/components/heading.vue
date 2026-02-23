@@ -13,16 +13,17 @@ export default {
     content: {
       type: Object,
       default: () => ({})
-    }
+    },
+    alignDefault: { type: String, default: 'left' }
   },
   computed: {
     parsedData() {
       const val = this.content?.heading || this.value;
-      if (!val) return { text: '', level: 'h2', align: 'left' };
+      if (!val) return { text: '', level: 'h2', align: this.alignDefault };
       try {
         return typeof val === 'string' ? JSON.parse(val) : val;
       } catch(e) {
-        return { text: val, level: 'h2', align: 'left' };
+        return { text: val, level: 'h2', align: this.alignDefault };
       }
     },
     text() {
@@ -34,7 +35,7 @@ export default {
       return level;
     },
     align() {
-      const { align = 'left' } = this.parsedData;
+      const { align = this.alignDefault } = this.parsedData;
       return align;
     }
   }

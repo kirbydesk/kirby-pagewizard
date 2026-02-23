@@ -1,9 +1,7 @@
 export default {
 	props: {
 		value: String,
-		label: String,
-		help: String,
-		placeholder: String,
+		align:          { type: String, default: 'left' },
 		writerModes:    { type: Array,  default: () => ['textarea', 'writer', 'markdown'] },
 		writerMarks:    { type: Array,  default: () => ['bold', 'italic', 'underline', 'strike', 'link'] },
 		writerNodes:    { type: Array,  default: () => ['heading', 'bulletList', 'orderedList'] },
@@ -42,7 +40,7 @@ export default {
 	methods: {
 		parse(val) {
 			const fallbackMode = this.writerModes[0] || 'textarea';
-			const base = { mode: fallbackMode, align: 'left', textarea: '', writer: '', markdown: '' };
+			const base = { mode: fallbackMode, align: this.align, textarea: '', writer: '', markdown: '' };
 			if (!val) return base;
 			try {
 				const d = JSON.parse(val);
@@ -50,7 +48,7 @@ export default {
 					const mode = this.writerModes.includes(d.mode) ? d.mode : fallbackMode;
 					return {
 						mode,
-						align: d.align || 'left',
+						align: d.align || this.align,
 						textarea: d.textarea || '',
 						writer: d.writer || '',
 						markdown: d.markdown || '',
@@ -124,19 +122,19 @@ export default {
 				<div class="k-button-group">
 					<span style="position:relative;">
 						<button
-							data-has-icon="true"
-							data-has-text="false"
+							:data-has-icon="current.align ? 'true' : 'false'"
+							:data-has-text="current.align ? 'false' : 'true'"
 							aria-label="Align"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
 							class="input-focus k-button"
 							@click.stop="toggleAlignDropdown"
-						><span class="k-button-icon">
+						><span v-if="current.align" class="k-button-icon">
 							<svg aria-hidden="true" class="k-icon">
 								<use :xlink:href="'#icon-text-' + current.align"></use>
 							</svg>
-						</span></button>
+						</span><span v-else class="k-button-text">···</span></button>
 						<dialog v-if="showAlignDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
 							<div class="k-navigate">
 								<button v-for="opt in ['left','center','right']" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setAlign(opt)">
@@ -194,6 +192,7 @@ export default {
 				:nodes="writerNodes"
 				:headings="writerHeadings"
 				:toolbar="writerToolbar"
+				:placeholder="translatedPlaceholder"
 				@input="onWriterInput"
 			></k-input>
 			<footer v-if="translatedHelp" class="k-field-footer">

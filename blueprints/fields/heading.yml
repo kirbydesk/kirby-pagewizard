@@ -1,7 +1,6 @@
 ---
 label: pw.field.heading
 type: pwtext
-align: left
 level: h2
 counter: false
 placeholder: pw.field.heading.placeholder

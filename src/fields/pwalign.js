@@ -1,10 +1,12 @@
 export default {
 	props: {
-		value: String
+		value: String,
+		align: { type: String, default: 'left' },
+		alwaysVisible: { type: Boolean, default: false }
 	},
 	data() {
 		return {
-			current: this.value || 'left',
+			current: this.value || this.align,
 			show: false,
 			btnEl: null,
 			dropdownEl: null,
@@ -16,11 +18,14 @@ export default {
 	},
 	watch: {
 		value(v) {
-			this.current = v || 'left';
+			this.current = v || this.align;
 			this.updateIcon();
 		}
 	},
 	mounted() {
+		if (!this.value && this.current) {
+			this.$emit('input', this.current);
+		}
 		this.$nextTick(() => {
 			const wrapper = this.$el.closest('.k-column');
 			if (wrapper) wrapper.style.display = 'none';
@@ -76,12 +81,17 @@ export default {
 	methods: {
 		updateVisibility() {
 			if (!this.container || !this._nextColumn) return;
+			if (this.alwaysVisible) {
+				this.container.style.display = 'flex';
+				return;
+			}
 			const hasItems = this._nextColumn.querySelector('.k-item, .k-block, .k-structure-item') !== null;
 			this.container.style.display = hasItems ? 'flex' : 'none';
 		},
 		updateIcon() {
 			if (!this.btnEl) return;
-			this.btnEl.innerHTML = '<span class="k-button-icon"><svg class="k-icon"><use xlink:href="#icon-text-' + this.current + '"></use></svg></span>';
+			const icon = this.current || 'left';
+			this.btnEl.innerHTML = '<span class="k-button-icon"><svg class="k-icon"><use xlink:href="#icon-text-' + icon + '"></use></svg></span>';
 		},
 		toggleDropdown() {
 			if (this.show) {

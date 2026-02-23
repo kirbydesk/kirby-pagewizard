@@ -1,5 +1,5 @@
 <template>
-  <div class="pw-editor">
+  <div class="pwEditor">
     <pw-textarea v-if="mode === 'textarea'" :value="text" :align="align" />
     <pw-writer   v-else-if="mode === 'writer'"   :value="text" :align="align" />
     <pw-markdown v-else-if="mode === 'markdown'" :value="text" :align="align" />
@@ -20,23 +20,31 @@ export default {
     content: {
       type: Object,
       default: () => ({})
-    }
+    },
+    alignDefault: { type: String, default: 'left' }
   },
   computed: {
     parsed() {
       const val = this.content?.editor;
-      if (!val) return { mode: 'textarea', text: '', align: 'left' };
+      if (!val) return { mode: 'textarea', text: '', align: this.alignDefault };
       try {
         const data = typeof val === 'string' ? JSON.parse(val) : val;
         const mode = data.mode || 'textarea';
-        return { mode, text: data[mode] || '', align: data.align || 'left' };
+        return { mode, text: data[mode] || '', align: data.align || this.alignDefault };
       } catch(e) {
-        return { mode: 'textarea', text: '', align: 'left' };
+        return { mode: 'textarea', text: '', align: this.alignDefault };
       }
     },
     mode()  { return this.parsed.mode; },
     text()  { return this.parsed.text; },
-    align() { return this.parsed.align; }
+    align() {
+      return this.parsed.align || this.alignDefault;
+    }
   }
 }
 </script>
+<style scoped>
+div.pwEditor {
+	margin-bottom: var(--spacing-4);
+}
+</style>
