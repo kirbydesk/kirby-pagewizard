@@ -779,6 +779,64 @@
     },
     template: '<div style="display:none"></div>'
   };
+  const pwicon = {
+    props: {
+      value: String,
+      label: String,
+      help: String,
+      disabled: Boolean
+    },
+    data() {
+      return {
+        current: this.value || "",
+        icons: []
+      };
+    },
+    watch: {
+      value(v) {
+        this.current = v || "";
+      }
+    },
+    async created() {
+      try {
+        const res = await this.$api.get("pagewizard/icons");
+        this.icons = Array.isArray(res) ? res : [];
+      } catch (e) {
+        this.icons = [];
+      }
+    },
+    methods: {
+      select(id) {
+        if (this.disabled) return;
+        this.current = id;
+        this.$emit("input", id);
+      }
+    },
+    template: `
+		<k-field v-bind="$props" class="pw-icon-field">
+			<div class="pw-icon-grid">
+				<button
+					type="button"
+					class="pw-icon-btn pw-icon-none"
+					:class="{ 'is-active': !current }"
+					:disabled="disabled"
+					title="None"
+					@click="select('')"
+				>–</button>
+				<button
+					v-for="icon in icons"
+					:key="icon.id"
+					type="button"
+					class="pw-icon-btn"
+					:class="{ 'is-active': current === icon.id }"
+					:disabled="disabled"
+					:title="icon.label"
+					@click="select(icon.id)"
+				><span v-html="icon.svg"></span></button>
+			</div>
+		</k-field>
+	`
+  };
   panel.plugin("kirbydesk/kirby-pagewizard", {
     blocks: {
       pwButton,
@@ -791,7 +849,8 @@
       pwtext,
       pwtextarea,
       pweditor,
-      pwalign
+      pwalign,
+      pwicon
     },
     icons: {
       "expand-left": '<path d="M10.071 4.92896L11.4852 6.34317L6.82834 11L16.0002 11.0002L16.0002 13.0002L6.82839 13L11.4852 17.6569L10.071 19.0711L2.99994 12L10.071 4.92896ZM18.0001 19V4.99997H20.0001V19H18.0001Z"/>',
@@ -803,7 +862,8 @@
       "featurelist": '<path d="M13 4H21V6H13V4ZM13 11H21V13H13V11ZM13 18H21V20H13V18ZM6.5 19C5.39543 19 4.5 18.1046 4.5 17C4.5 15.8954 5.39543 15 6.5 15C7.60457 15 8.5 15.8954 8.5 17C8.5 18.1046 7.60457 19 6.5 19ZM6.5 21C8.70914 21 10.5 19.2091 10.5 17C10.5 14.7909 8.70914 13 6.5 13C4.29086 13 2.5 14.7909 2.5 17C2.5 19.2091 4.29086 21 6.5 21ZM5 6V9H8V6H5ZM3 4H10V11H3V4Z"/>',
       "cardlets": '<path d="M3 4C3 3.44772 3.44772 3 4 3H10C10.5523 3 11 3.44772 11 4V10C11 10.5523 10.5523 11 10 11H4C3.44772 11 3 10.5523 3 10V4ZM3 14C3 13.4477 3.44772 13 4 13H10C10.5523 13 11 13.4477 11 14V20C11 20.5523 10.5523 21 10 21H4C3.44772 21 3 20.5523 3 20V14ZM13 4C13 3.44772 13.4477 3 14 3H20C20.5523 3 21 3.44772 21 4V10C21 10.5523 20.5523 11 20 11H14C13.4477 11 13 10.5523 13 10V4ZM13 14C13 13.4477 13.4477 13 14 13H20C20.5523 13 21 13.4477 21 14V20C21 20.5523 20.5523 21 20 21H14C13.4477 21 13 20.5523 13 20V14ZM15 5V9H19V5H15ZM15 15V19H19V15H15ZM5 5V9H9V5H5ZM5 15V19H9V15H5Z"/>',
       "faq": '<path d="M5.45455 15L1 18.5V3C1 2.44772 1.44772 2 2 2H17C17.5523 2 18 2.44772 18 3V15H5.45455ZM4.76282 13H16V4H3V14.3851L4.76282 13ZM8 17H18.2372L20 18.3851V8H21C21.5523 8 22 8.44772 22 9V22.5L17.5455 19H9C8.44772 19 8 18.5523 8 18V17Z"/>',
-      "definitionlist": '<path d="M8 4H21V6H8V4ZM3 3.5H6V6.5H3V3.5ZM3 10.5H6V13.5H3V10.5ZM3 17.5H6V20.5H3V17.5ZM8 11H21V13H8V11ZM8 18H21V20H8V18Z"/>'
+      "definitionlist": '<path d="M8 4H21V6H8V4ZM3 3.5H6V6.5H3V3.5ZM3 10.5H6V13.5H3V10.5ZM3 17.5H6V20.5H3V17.5ZM8 11H21V13H8V11ZM8 18H21V20H8V18Z"/>',
+      "item": '<path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM5 5V19H19V5H5ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"/>'
     }
   });
 })();

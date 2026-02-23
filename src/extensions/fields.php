@@ -58,5 +58,13 @@ return [
 				return $value;
 			}
 		]
+	],
+	'pwicon' => [
+		'extends' => 'text',
+		'props' => [
+			'value' => function (string $value = null) {
+				return $value;
+			}
+		]
 	]
 ];

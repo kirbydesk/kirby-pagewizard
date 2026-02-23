@@ -1,3 +1,50 @@
+/* ---- pwicon field ---- */
+.pw-icon-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--spacing-1);
+	padding: var(--spacing-2) 0;
+}
+
+.pw-icon-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: var(--rounded);
+	border: 1px solid var(--color-border);
+	background: var(--color-white);
+	color: var(--color-gray-600);
+	cursor: pointer;
+	transition: border-color .15s, background .15s, color .15s;
+
+	svg {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+
+	span {
+		display: flex;
+	}
+
+	&:hover {
+		border-color: var(--color-blue-400);
+		color: var(--color-blue-600);
+	}
+
+	&.is-active {
+		border-color: var(--color-blue-500);
+		background: var(--color-blue-500);
+		color: var(--color-white);
+	}
+
+	&.pw-icon-none {
+		font-size: var(--text-sm);
+		color: var(--color-gray-400);
+	}
+}
+
 div.k-blocks {
 	background-color: transparent !important;
 	box-shadow: none !important;
@@ -97,7 +144,8 @@ span.pw-align-btn {
 
 /* Add custom Panel tags */
 span.tag.screensize {
-	display: inline-flex;
+	display: inline-block;
+	margin-bottom: .3rem;
   padding-inline: var(--spacing-1);
   font-size: var(--text-xs);
 	background: var(--color-yellow-300);

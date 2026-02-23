@@ -1,0 +1,22 @@
+---
+label: pw.field.columns
+type: toggles
+required: true
+options:
+  - value: "1"
+    text:
+      *: pw.option.1column
+  - value: "2"
+    text:
+      *: pw.option.2columns
+  - value: "3"
+    text:
+      *: pw.option.3columns
+  - value: "4"
+    text:
+      *: pw.option.4columns
+  - value: "5"
+    text:
+      *: pw.option.5columns
+help: pw.field.columns.help
+translate: false

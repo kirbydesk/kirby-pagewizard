@@ -15,6 +15,7 @@ import pwtext      from "@/fields/pwtext.js";
 import pwtextarea  from "@/fields/pwtextarea.js";
 import pweditor    from "@/fields/pweditor.js";
 import pwalign     from "@/fields/pwalign.js";
+import pwicon      from "@/fields/pwicon.js";
 
 // Render
 panel.plugin("kirbydesk/kirby-pagewizard", {
@@ -30,6 +31,7 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		pwtextarea,
 		pweditor,
 		pwalign,
+		pwicon,
 	},
 	icons: {
     "expand-left":
@@ -51,6 +53,8 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		"faq":
 			'<path d="M5.45455 15L1 18.5V3C1 2.44772 1.44772 2 2 2H17C17.5523 2 18 2.44772 18 3V15H5.45455ZM4.76282 13H16V4H3V14.3851L4.76282 13ZM8 17H18.2372L20 18.3851V8H21C21.5523 8 22 8.44772 22 9V22.5L17.5455 19H9C8.44772 19 8 18.5523 8 18V17Z"/>',
 		"definitionlist":
-			'<path d="M8 4H21V6H8V4ZM3 3.5H6V6.5H3V3.5ZM3 10.5H6V13.5H3V10.5ZM3 17.5H6V20.5H3V17.5ZM8 11H21V13H8V11ZM8 18H21V20H8V18Z"/>'
-  }
+			'<path d="M8 4H21V6H8V4ZM3 3.5H6V6.5H3V3.5ZM3 10.5H6V13.5H3V10.5ZM3 17.5H6V20.5H3V17.5ZM8 11H21V13H8V11ZM8 18H21V20H8V18Z"/>',
+		"item":
+			'<path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM5 5V19H19V5H5ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"/>'
+		}
 });

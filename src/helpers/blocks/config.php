@@ -38,8 +38,17 @@ class pwConfig
 			? json_decode(file_get_contents($defaultsFile), true)
 			: [];
 
-		$defaults = $defaultsRaw['block']  ?? $defaultsRaw;
-		$fields   = $defaultsRaw['fields'] ?? [];
+		$fields = $defaultsRaw['fields'] ?? [];
+		if (isset($defaultsRaw['block'])) {
+			$defaults = $defaultsRaw['block'];
+		} else {
+			$defaults = array_merge(
+				$defaultsRaw['layout']   ?? [],
+				$defaultsRaw['style']    ?? [],
+				$defaultsRaw['grid']     ?? [],
+				$defaultsRaw['settings'] ?? []
+			);
+		}
 
 		/* -------------- Editor config --------------*/
 		$editorFile = $configDir . '/editor.json';
