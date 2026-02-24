@@ -20,6 +20,8 @@
 	--pw-color-cite: #6B7280;
 	--pw-color-breadcrumb: #6B7280;
 	--pw-color-link: #1D548B;
+	--pw-color-icon: #1D548B;
+	--pw-color-text-dimmed: color-mix(in srgb, var(--pw-color-text) 80%, transparent);
 
 	/* Block Colors */
 	--pw-color-block-background: #f0f6fc;
@@ -47,6 +49,8 @@ section[data-style="variant"] {
 	--pw-color-cite: #B0C4DE;
 	--pw-color-breadcrumb: #B0C4DE;
 	--pw-color-link: #8CBAE7;
+	--pw-color-icon: #8CBAE7;
+	--pw-color-text-dimmed: color-mix(in srgb, var(--pw-color-text) 80%, transparent);
 
 	/* Block Colors */
 	--pw-color-block-background: #1D548B;

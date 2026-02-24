@@ -15,12 +15,29 @@
       options
     };
   }
-  const _sfc_main$3 = {};
-  var _sfc_render$3 = function render() {
+  const _sfc_main$4 = {};
+  var _sfc_render$4 = function render() {
     var _vm = this, _c = _vm._self._c;
     return _c("div", { staticClass: "pwPreview", on: { "dblclick": _vm.open } }, [_vm.content.name ? _c("div", { staticClass: "heading" }, [_vm._v(" " + _vm._s(_vm.content.name) + " ")]) : _c("div", { staticClass: "heading placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.footer.name")) + " ... ")]), _vm._l(_vm.content.blocks, function(item) {
       return _c("div", { key: item.id, staticClass: "items" }, [_c("div", { staticClass: "linktext", class: { placeholder: !item.content.linktext } }, [_c("span", [_vm._v(_vm._s(item.content.linktext || _vm.$t("pw.field.link-text.placeholder")))]), item.content.linktarget ? _c("span", { staticClass: "k-icon" }, [_c("k-icon", { attrs: { "type": "open" } })], 1) : _vm._e()])]);
     })], 2);
+  };
+  var _sfc_staticRenderFns$4 = [];
+  _sfc_render$4._withStripped = true;
+  var __component__$4 = /* @__PURE__ */ normalizeComponent(
+    _sfc_main$4,
+    _sfc_render$4,
+    _sfc_staticRenderFns$4,
+    false,
+    null,
+    "40650bd6"
+  );
+  __component__$4.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/blocks/footer/index.vue";
+  const pwFooter = __component__$4.exports;
+  const _sfc_main$3 = {};
+  var _sfc_render$3 = function render() {
+    var _vm = this, _c = _vm._self._c;
+    return _c("div", { staticClass: "pwPreview", on: { "dblclick": _vm.open } }, [_vm.content.linktext ? _c("div", { staticClass: "linktext" }, [_c("span", [_vm._v(_vm._s(_vm.content.linktext))]), _vm.content.linktarget ? _c("span", { staticClass: "k-icon" }, [_c("k-icon", { attrs: { "type": "open" } })], 1) : _vm._e()]) : _c("div", { staticClass: "placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])]);
   };
   var _sfc_staticRenderFns$3 = [];
   _sfc_render$3._withStripped = true;
@@ -30,14 +47,17 @@
     _sfc_staticRenderFns$3,
     false,
     null,
-    "40650bd6"
+    "f57ea2ba"
   );
-  __component__$3.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/blocks/footer/index.vue";
-  const pwFooter = __component__$3.exports;
+  __component__$3.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/blocks/footer/item.vue";
+  const pwFooterItem = __component__$3.exports;
   const _sfc_main$2 = {};
   var _sfc_render$2 = function render() {
     var _vm = this, _c = _vm._self._c;
-    return _c("div", { staticClass: "pwPreview", on: { "dblclick": _vm.open } }, [_vm.content.linktext ? _c("div", { staticClass: "linktext" }, [_c("span", [_vm._v(_vm._s(_vm.content.linktext))]), _vm.content.linktarget ? _c("span", { staticClass: "k-icon" }, [_c("k-icon", { attrs: { "type": "open" } })], 1) : _vm._e()]) : _c("div", { staticClass: "placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])]);
+    _vm._self._setupProxy;
+    return _c("div", { on: { "dblclick": _vm.open } }, [_c("button", { staticClass: "k-button", attrs: { "data-has-text": "true", "data-responsive": "true", "data-size": "sm", "data-variant": "filled", "type": "button" } }, [_vm.content.linktext.length ? _c("span", { staticClass: "k-button-text", domProps: { "innerHTML": _vm._s(_vm.content.linktext) }, on: { "blur": function($event) {
+      return _vm.update({ linktext: $event.target.innerText });
+    } } }) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])])]);
   };
   var _sfc_staticRenderFns$2 = [];
   _sfc_render$2._withStripped = true;
@@ -47,17 +67,24 @@
     _sfc_staticRenderFns$2,
     false,
     null,
-    "f57ea2ba"
+    "10e849d1"
   );
-  __component__$2.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/blocks/footer/item.vue";
-  const pwFooterItem = __component__$2.exports;
-  const _sfc_main$1 = {};
+  __component__$2.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/components/button.vue";
+  const pwButton = __component__$2.exports;
+  const _sfc_main$1 = {
+    props: {
+      value: String,
+      align: {
+        type: String,
+        default: "left"
+      }
+    }
+  };
   var _sfc_render$1 = function render() {
     var _vm = this, _c = _vm._self._c;
-    _vm._self._setupProxy;
-    return _c("div", { on: { "dblclick": _vm.open } }, [_c("button", { staticClass: "k-button", attrs: { "data-has-text": "true", "data-responsive": "true", "data-size": "sm", "data-variant": "filled", "type": "button" } }, [_vm.content.linktext.length ? _c("span", { staticClass: "k-button-text", domProps: { "innerHTML": _vm._s(_vm.content.linktext) }, on: { "blur": function($event) {
-      return _vm.update({ linktext: $event.target.innerText });
-    } } }) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])])]);
+    return _vm.value && _vm.value.length ? _c("div", { staticClass: "k-button-group", attrs: { "data-align": _vm.align } }, _vm._l(_vm.value, function(item) {
+      return _c("div", { key: item.id, class: { "ishidden": item.isHidden } }, [_c("button", { staticClass: "k-button", attrs: { "type": "button", "data-has-text": "true", "data-responsive": "true", "data-size": "md", "data-variant": "filled" } }, [item.content.linktext.length ? _c("span", { staticClass: "k-button-text" }, [_vm._v(" " + _vm._s(item.content.linktext) + " ")]) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])])]);
+    }), 0) : _vm._e();
   };
   var _sfc_staticRenderFns$1 = [];
   _sfc_render$1._withStripped = true;
@@ -67,37 +94,10 @@
     _sfc_staticRenderFns$1,
     false,
     null,
-    "10e849d1"
-  );
-  __component__$1.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/components/button.vue";
-  const pwButton = __component__$1.exports;
-  const _sfc_main = {
-    props: {
-      value: String,
-      align: {
-        type: String,
-        default: "left"
-      }
-    }
-  };
-  var _sfc_render = function render() {
-    var _vm = this, _c = _vm._self._c;
-    return _vm.value && _vm.value.length ? _c("div", { staticClass: "k-button-group", attrs: { "data-align": _vm.align } }, _vm._l(_vm.value, function(item) {
-      return _c("div", { key: item.id, class: { "ishidden": item.isHidden } }, [_c("button", { staticClass: "k-button", attrs: { "type": "button", "data-has-text": "true", "data-responsive": "true", "data-size": "md", "data-variant": "filled" } }, [item.content.linktext.length ? _c("span", { staticClass: "k-button-text" }, [_vm._v(" " + _vm._s(item.content.linktext) + " ")]) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])])]);
-    }), 0) : _vm._e();
-  };
-  var _sfc_staticRenderFns = [];
-  _sfc_render._withStripped = true;
-  var __component__ = /* @__PURE__ */ normalizeComponent(
-    _sfc_main,
-    _sfc_render,
-    _sfc_staticRenderFns,
-    false,
-    null,
     "a81c040e"
   );
-  __component__.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/components/buttons.vue";
-  const pwButtons = __component__.exports;
+  __component__$1.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/components/buttons.vue";
+  const pwButtons = __component__$1.exports;
   const htmlheadline = {
     props: {
       label: String,
@@ -789,7 +789,9 @@
     data() {
       return {
         current: this.value || "",
-        icons: []
+        icons: [],
+        search: "",
+        setName: ""
       };
     },
     watch: {
@@ -797,46 +799,161 @@
         this.current = v || "";
       }
     },
+    computed: {
+      filtered() {
+        const q = this.search.trim().toLowerCase();
+        if (!q) return [];
+        return this.icons.filter((i) => i.id.toLowerCase().includes(q));
+      },
+      selectedIcon() {
+        if (!this.current) return null;
+        return this.icons.find((i) => i.svg === this.current) || null;
+      },
+      showCount() {
+        return this.search.trim() ? this.filtered.length : this.icons.length;
+      }
+    },
     async created() {
       try {
-        const res = await this.$api.get("pagewizard/icons");
+        const config = await this.$api.get("pagewizard/config");
+        const activeSet = config["icon-set"];
+        this.setName = config["icon-set-name"] || activeSet;
+        const res = await this.$api.get("pagewizard/icons/" + activeSet);
         this.icons = Array.isArray(res) ? res : [];
       } catch (e) {
         this.icons = [];
       }
     },
     methods: {
-      select(id) {
+      select(icon) {
         if (this.disabled) return;
-        this.current = id;
-        this.$emit("input", id);
+        this.current = icon ? icon.svg : "";
+        this.$emit("input", this.current);
+      },
+      clear() {
+        if (this.disabled) return;
+        this.current = "";
+        this.$emit("input", "");
+      },
+      isActive(icon) {
+        return this.current === icon.svg;
       }
     },
     template: `
 		<k-field v-bind="$props" class="pw-icon-field">
+			<div class="pw-icon-search">
+				<div class="pw-icon-input-wrap">
+					<k-input
+						type="text"
+						:placeholder="$t('pw.field.icon.placeholder')"
+						:value="search"
+						@input="search = $event"
+					/>
+					<span class="pw-icon-count">{{ showCount }}</span>
+				</div>
+				<button
+					v-if="current"
+					type="button"
+					class="pw-icon-preview"
+					:title="selectedIcon ? selectedIcon.label : ''"
+					:disabled="disabled"
+					@click="clear()"
+				><span v-html="current"></span></button>
+			</div>
+			<div class="k-help k-field-help k-text" style="margin-top: var(--spacing-2); margin-bottom: var(--spacing-8)"><p v-html="$t('pw.field.icon.help', { total: icons.length, set: setName })"></p></div>
 			<div class="pw-icon-grid">
 				<button
-					type="button"
-					class="pw-icon-btn pw-icon-none"
-					:class="{ 'is-active': !current }"
-					:disabled="disabled"
-					title="None"
-					@click="select('')"
-				>–</button>
-				<button
-					v-for="icon in icons"
+					v-for="icon in filtered"
 					:key="icon.id"
 					type="button"
 					class="pw-icon-btn"
-					:class="{ 'is-active': current === icon.id }"
+					:class="{ 'is-active': isActive(icon), 'is-custom': icon.custom }"
 					:disabled="disabled"
 					:title="icon.label"
-					@click="select(icon.id)"
+					@click="select(icon)"
 				><span v-html="icon.svg"></span></button>
 			</div>
 		</k-field>
 	`
   };
+  const _sfc_main = {
+    data() {
+      return {
+        sets: [],
+        activeSet: null,
+        icons: [],
+        search: "",
+        copied: null
+      };
+    },
+    computed: {
+      filtered() {
+        const q = this.search.trim().toLowerCase();
+        if (!q) return this.icons;
+        return this.icons.filter((i) => i.id.toLowerCase().includes(q));
+      }
+    },
+    async created() {
+      try {
+        this.sets = await this.$api.get("pagewizard/icons/sets");
+        if (this.sets.length) {
+          const preferred = this.sets.find((s) => s !== "custom") || this.sets[0];
+          await this.loadSet(preferred);
+        }
+      } catch (e) {
+      }
+    },
+    methods: {
+      async loadSet(set) {
+        this.activeSet = set;
+        this.search = "";
+        try {
+          const res = await this.$api.get("pagewizard/icons/" + set);
+          this.icons = Array.isArray(res) ? res : [];
+        } catch (e) {
+          this.icons = [];
+        }
+      },
+      async copy(id) {
+        try {
+          await navigator.clipboard.writeText(id);
+          this.copied = id;
+          setTimeout(() => {
+            this.copied = null;
+          }, 2e3);
+        } catch (e) {
+        }
+      }
+    }
+  };
+  var _sfc_render = function render() {
+    var _vm = this, _c = _vm._self._c;
+    return _c("k-panel-inside", { staticClass: "pw-icons-view" }, [_c("k-header", { scopedSlots: _vm._u([{ key: "right", fn: function() {
+      return [_c("k-button-group", _vm._l(_vm.sets, function(s) {
+        return _c("k-button", { key: s, attrs: { "text": s, "theme": _vm.activeSet === s ? "positive" : null, "variant": "filled", "size": "sm" }, on: { "click": function($event) {
+          return _vm.loadSet(s);
+        } } });
+      }), 1)];
+    }, proxy: true }]) }, [_vm._v(" " + _vm._s(_vm.$t("pw.icon.reference")) + " ")]), _c("div", { staticClass: "pw-icons-search" }, [_c("k-input", { attrs: { "type": "text", "placeholder": _vm.$t("pw.icon.search"), "value": _vm.search }, on: { "input": function($event) {
+      _vm.search = $event;
+    } } }), _c("span", { staticClass: "pw-icons-count" }, [_vm._v(_vm._s(_vm.filtered.length) + " / " + _vm._s(_vm.icons.length))])], 1), _c("div", { staticClass: "pw-icons-grid" }, _vm._l(_vm.filtered, function(icon) {
+      return _c("button", { key: icon.id, staticClass: "pw-icons-item", class: { "is-custom": icon.custom }, attrs: { "title": icon.id }, on: { "click": function($event) {
+        return _vm.copy(icon.id);
+      } } }, [_c("span", { staticClass: "pw-icons-svg", domProps: { "innerHTML": _vm._s(icon.svg) } }), _c("span", { staticClass: "pw-icons-label" }, [_vm._v(_vm._s(icon.id))])]);
+    }), 0), _vm.copied ? _c("k-notification", { attrs: { "theme": "positive", "type": "alert" } }, [_vm._v(' "' + _vm._s(_vm.copied) + '" ' + _vm._s(_vm.$t("pw.icon.copied")) + " ")]) : _vm._e()], 1);
+  };
+  var _sfc_staticRenderFns = [];
+  _sfc_render._withStripped = true;
+  var __component__ = /* @__PURE__ */ normalizeComponent(
+    _sfc_main,
+    _sfc_render,
+    _sfc_staticRenderFns,
+    false,
+    null,
+    null
+  );
+  __component__.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/views/icons.vue";
+  const iconsView = __component__.exports;
   panel.plugin("kirbydesk/kirby-pagewizard", {
     blocks: {
       pwButton,
@@ -851,6 +968,9 @@
       pweditor,
       pwalign,
       pwicon
+    },
+    components: {
+      "pw-icons-view": iconsView
     },
     icons: {
       "expand-left": '<path d="M10.071 4.92896L11.4852 6.34317L6.82834 11L16.0002 11.0002L16.0002 13.0002L6.82839 13L11.4852 17.6569L10.071 19.0711L2.99994 12L10.071 4.92896ZM18.0001 19V4.99997H20.0001V19H18.0001Z"/>',

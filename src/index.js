@@ -17,6 +17,9 @@ import pweditor    from "@/fields/pweditor.js";
 import pwalign     from "@/fields/pwalign.js";
 import pwicon      from "@/fields/pwicon.js";
 
+// Views
+import iconsView from "@/views/icons.vue";
+
 // Render
 panel.plugin("kirbydesk/kirby-pagewizard", {
   blocks: {
@@ -32,6 +35,9 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		pweditor,
 		pwalign,
 		pwicon,
+	},
+	components: {
+		'pw-icons-view': iconsView,
 	},
 	icons: {
     "expand-left":
