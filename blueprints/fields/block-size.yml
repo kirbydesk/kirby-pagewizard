@@ -1,4 +1,4 @@
-label: pw.field.background-size.label
+label: pw.field.block-size.label
 type: toggles
 default: "content"
 required: true
@@ -10,4 +10,4 @@ options:
   - value: fullscreen
     text:
       *: pw.option.fullscreen
-help: pw.field.background-size.help
+help: pw.field.block-size.help

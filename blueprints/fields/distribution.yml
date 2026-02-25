@@ -1,8 +1,6 @@
 ---
 label: pw.field.distribution.label
 type: toggles
-required: true
-default: "dist-3-3"
 options:
   - value: "dist-1-5"
     text: "1 | 5"

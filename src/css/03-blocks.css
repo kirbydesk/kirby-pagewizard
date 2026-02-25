@@ -14,6 +14,7 @@
 	--pw-padding-block-bottom: 1.5rem; /* 24px */
 	--pw-padding-block-left: 1.5rem; /* 24px */
 	--pw-padding-block-right: 1.5rem; /* 24px */
+	--pw-gap-block: 1.5rem; /* 24px */
 	--pw-margin-block-top: 1.5rem; /* 24px */
 	--pw-margin-block-bottom: 1.5rem; /* 24px */
 	--pw-margin-block-left: 0;
@@ -43,7 +44,7 @@ section[data-block] {
 /*------------------------------------------------------------------------------------------------
 	Block Background Size (via data attributes)
 ------------------------------------------------------------------------------------------------*/
-section[data-block][data-background-size="content"] {
+section[data-block][data-block-size="content"] {
 	max-width: 1280px;
 	margin-left: auto;
 	margin-right: auto;

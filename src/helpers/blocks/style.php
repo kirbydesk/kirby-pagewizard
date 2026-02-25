@@ -37,14 +37,6 @@ class pwStyle
 			];
 		}
 
-		$fields +=  [
-			'headlineBackground' => ['extends' => 'pagewizard/headlines/background'],
-			'backgroundSize' => [
-				'extends' => 'pagewizard/fields/background-size',
-				'default' => $defaults['background-size']
-			],
-		];
-
 		if (!empty($extraFields)) {
 			$fields = array_merge($fields, $extraFields);
 		}

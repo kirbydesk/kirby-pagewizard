@@ -10,20 +10,22 @@ class pwSettings
 				'extends' => 'pagewizard/fields/fragment'
 			],
 			'headlineBlocksettings' => ['extends' => 'pagewizard/headlines/blocksettings'],
+			'blockSize' => [
+				'extends' => 'pagewizard/fields/block-size',
+				'default' => $defaults['block-size']
+			],
 			'marginTop' => [
 				'extends' => 'pagewizard/fields/toggle-spacing',
 				'default' => $defaults['margin-top'],
-				'width' => '1/2',
 				'label' => 'pw.field.margin-top',
 				'help' => 'pw.field.margin-top.help'
 			],
 			'marginBottom' => [
 				'extends' => 'pagewizard/fields/toggle-spacing',
 				'default' => $defaults['margin-bottom'],
-				'width' => '1/2',
 				'label' => 'pw.field.margin-bottom',
 				'help' => 'pw.field.margin-bottom.help'
-			],
+			]
 		];
 
 		if (!empty($extraFields)) {
