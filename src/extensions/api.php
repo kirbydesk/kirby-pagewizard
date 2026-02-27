@@ -82,18 +82,16 @@ return [
 		[
 			'pattern' => 'pagewizard/colors',
 			'action'  => function () {
-				$patchFile   = kirby()->root('site') . '/patches/css/kirby-pagewizard/01-colors.css';
-				$defaultFile = __DIR__ . '/../../src/css/01-colors.css';
-				$colorsFile  = file_exists($patchFile) ? $patchFile : (file_exists($defaultFile) ? $defaultFile : null);
+				$colorsFile = __DIR__ . '/../../src/panel-colors.css';
 
-				if (!$colorsFile) {
+				if (!file_exists($colorsFile)) {
 					return ['default' => [], 'variant' => []];
 				}
 
 				$css = file_get_contents($colorsFile);
 				$panelColors = ['default' => [], 'variant' => []];
 
-				// Parse alle :root Blöcke → default
+				// :root {} → default colors
 				preg_match_all('/:root\s*\{([^}]+)\}/s', $css, $rootBlocks);
 				foreach ($rootBlocks[1] as $block) {
 					preg_match_all('/--(pw-color-[\w-]+)\s*:\s*([^;]+);/', $block, $vars, PREG_SET_ORDER);
@@ -102,16 +100,8 @@ return [
 					}
 				}
 
-				// Parse section[data-style="variant"] Block → variant
-				if (preg_match('/section\[data-style="variant"\]\s*\{([^}]+)\}/s', $css, $m)) {
-					preg_match_all('/--(pw-color-[\w-]+)\s*:\s*([^;]+);/', $m[1], $vars, PREG_SET_ORDER);
-					foreach ($vars as $v) {
-						$panelColors['variant'][$v[1]] = trim($v[2]);
-					}
-				}
-
-				// Parse variant button colors (multi-selector block)
-				if (preg_match('/section\[data-style="variant"\],\s*\n\s*section\[data-style="custom"\]\[data-button-style="variant"\]\s*\{([^}]+)\}/s', $css, $m)) {
+				// [data-style="variant"] {} → variant colors
+				if (preg_match('/\[data-style="variant"\]\s*\{([^}]+)\}/s', $css, $m)) {
 					preg_match_all('/--(pw-color-[\w-]+)\s*:\s*([^;]+);/', $m[1], $vars, PREG_SET_ORDER);
 					foreach ($vars as $v) {
 						$panelColors['variant'][$v[1]] = trim($v[2]);
