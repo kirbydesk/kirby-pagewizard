@@ -439,6 +439,7 @@
     props: {
       value: String,
       align: { type: String, default: "left" },
+      defaultMode: { type: String, default: null },
       writerModes: { type: Array, default: () => ["textarea", "writer", "markdown"] },
       writerMarks: { type: Array, default: () => ["bold", "italic", "underline", "strike", "link"] },
       writerNodes: { type: Array, default: () => ["heading", "bulletList", "orderedList"] },
@@ -476,7 +477,7 @@
     },
     methods: {
       parse(val) {
-        const fallbackMode = this.writerModes[0] || "textarea";
+        const fallbackMode = this.defaultMode && this.writerModes.includes(this.defaultMode) ? this.defaultMode : this.writerModes[0] || "textarea";
         const base = { mode: fallbackMode, align: this.align, textarea: "", writer: "", markdown: "" };
         if (!val) return base;
         try {

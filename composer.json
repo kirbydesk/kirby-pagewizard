@@ -2,7 +2,7 @@
 	"name": "kirbydesk/kirby-pagewizard",
 	"description": "Pagewizard for Kirby CMS",
 	"type": "kirby-plugin",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"keywords": [
 		"kirby",
 		"kirby-plugin"

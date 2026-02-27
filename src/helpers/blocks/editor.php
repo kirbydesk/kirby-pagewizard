@@ -27,10 +27,11 @@ class pwEditor
 		$defaultAlign = $fields['align-editor'] ?? 'left';
 
 		return [
-			'type'         => 'pweditor',
-			'label'        => 'pw.field.text',
-			'align'        => $defaultAlign,
-			'writerModes'  => $writerModes,
+			'type'           => 'pweditor',
+			'label'          => 'pw.field.text',
+			'align'          => $defaultAlign,
+			'defaultMode'    => $defaultMode,
+			'writerModes'    => $writerModes,
 			'writerMarks'    => $writerMarks,
 			'writerNodes'    => $writerNodes,
 			'writerHeadings' => $writerHeadings,

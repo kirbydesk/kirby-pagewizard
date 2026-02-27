@@ -46,7 +46,8 @@ class pwConfig
 				$defaultsRaw['layout']   ?? [],
 				$defaultsRaw['style']    ?? [],
 				$defaultsRaw['grid']     ?? [],
-				$defaultsRaw['settings'] ?? []
+				$defaultsRaw['settings'] ?? [],
+				$defaultsRaw['effects']  ?? []
 			);
 		}
 
@@ -59,15 +60,40 @@ class pwConfig
 		/* -------------- Config overrides from config.php --------------*/
 		$raw = option("kirbydesk.pagewizard.kirbyblocks.{$blockType}", []);
 		$cfg = is_array($raw) ? $raw : [];
+
+		// settings: nested { fields: {}, tabs: {} } or flat { toggle: value }
 		if (!empty($cfg['settings']) && is_array($cfg['settings'])) {
-			$settings = array_merge($settings, $cfg['settings']);
+			if (isset($cfg['settings']['fields']) || isset($cfg['settings']['tabs'])) {
+				if (!empty($cfg['settings']['fields'])) $settings    = array_merge($settings, $cfg['settings']['fields']);
+				if (!empty($cfg['settings']['tabs']))   $tabSettings = array_merge($tabSettings, $cfg['settings']['tabs']);
+			} else {
+				$settings = array_merge($settings, $cfg['settings']);
+			}
 		}
+		// tabs: flat top-level (flat format only)
 		if (!empty($cfg['tabs']) && is_array($cfg['tabs'])) {
 			$tabSettings = array_merge($tabSettings, $cfg['tabs']);
 		}
+		// defaults: nested { layout: {}, style: {}, grid: {}, settings: {}, fields: {} } or flat
 		if (!empty($cfg['defaults']) && is_array($cfg['defaults'])) {
-			$defaults = array_merge($defaults, $cfg['defaults']);
+			$isNested = isset($cfg['defaults']['layout']) || isset($cfg['defaults']['style'])
+				|| isset($cfg['defaults']['grid']) || isset($cfg['defaults']['settings'])
+				|| isset($cfg['defaults']['effects']);
+			if ($isNested) {
+				$flatOverrides = array_merge(
+					$cfg['defaults']['layout']   ?? [],
+					$cfg['defaults']['style']    ?? [],
+					$cfg['defaults']['grid']     ?? [],
+					$cfg['defaults']['settings'] ?? [],
+					$cfg['defaults']['effects']  ?? []
+				);
+				$defaults = array_merge($defaults, $flatOverrides);
+				if (!empty($cfg['defaults']['fields'])) $fields = array_merge($fields, $cfg['defaults']['fields']);
+			} else {
+				$defaults = array_merge($defaults, $cfg['defaults']);
+			}
 		}
+		// fields: flat top-level (flat format only)
 		if (!empty($cfg['fields']) && is_array($cfg['fields'])) {
 			$fields = array_merge($fields, $cfg['fields']);
 		}
@@ -99,27 +125,28 @@ class pwConfig
 	}
 
 	/**
+	 * Add a tab or, if disabled, inject its fields as hidden fields into the content tab.
+	 */
+	public static function addTab(array &$tabs, string $tabKey, bool $enabled, array $tabOptions): void
+	{
+		if ($enabled) {
+			$tabs[$tabKey] = $tabOptions;
+		} else {
+			foreach ($tabOptions['fields'] as $key => $field) {
+				if (array_key_exists('default', $field)) {
+					$tabs['content']['fields'] += [$key => ['type' => 'hidden', 'default' => $field['default']]];
+				}
+			}
+		}
+	}
+
+	/**
 	 * Build common tabs (grid, spacing, theme) and add them to $tabs.
 	 */
 	public static function buildTabs(string $blockType, array $defaults, array $tabSettings, array &$tabs): void
 	{
 		/* -------------- Grid Tab --------------*/
-		$gridDefaults = [
-			'gridSizeSm'   => $defaults['grid-size-sm'],
-			'gridOffsetSm' => $defaults['grid-offset-sm'],
-			'gridSizeMd'   => $defaults['grid-size-md'],
-			'gridOffsetMd' => $defaults['grid-offset-md'],
-			'gridSizeLg'   => $defaults['grid-size-lg'],
-			'gridOffsetLg' => $defaults['grid-offset-lg'],
-			'gridSizeXl'   => $defaults['grid-size-xl'],
-			'gridOffsetXl' => $defaults['grid-offset-xl'],
-		];
-		if (!empty($tabSettings['grid']) || !empty($tabSettings['tab-grid'])) {
-			$tabs['grid'] = pwGrid::layout($blockType, $gridDefaults);
-		} else {
-			foreach ($gridDefaults as $key => $value) {
-				$tabs['content']['fields'][$key] = ['type' => 'hidden', 'default' => $value];
-			}
-		}
+		$enabled = !empty($tabSettings['grid']) || !empty($tabSettings['tab-grid']);
+		self::addTab($tabs, 'grid', $enabled, pwGrid::layout($blockType, $defaults));
 	}
 }
