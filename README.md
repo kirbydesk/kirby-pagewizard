@@ -1,1 +1,1 @@
-# Kirby Pagewizard
+# KirbyCMS Pagewizard
