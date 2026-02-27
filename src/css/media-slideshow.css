@@ -63,8 +63,6 @@
 		height: 10px;
 		display: inline-block;
 		border-radius: 50%;
-		background: var(--pw-color-pagination-bullet);
-		opacity: 0.3;
 		margin: 0 4px;
 		cursor: pointer;
 	}
@@ -77,10 +75,6 @@
 	}
 	.swiper-pagination-bullet:only-child {
 		display: none !important;
-	}
-	.swiper-pagination-bullet-active {
-		opacity: 1;
-		background: var(--pw-color-pagination-bullet-active);
 	}
 
 	/* Swiper a11y */

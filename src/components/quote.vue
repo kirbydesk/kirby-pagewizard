@@ -2,7 +2,7 @@
   <div class="pwquote">
     <div v-if="quoteText" class="quote" :data-align="quoteAlign" v-html="nl2br(quoteText)"></div>
     <div v-else class="quote placeholder" :data-align="quoteAlign">
-      {{ $t('pw.field.text-quote.placeholder') }}
+      {{ $t('pw.field.quote.placeholder') }}
     </div>
 		<div v-if="authorText" class="author" :data-align="authorAlign">{{ authorText }}</div>
     <div v-else class="author placeholder" :data-align="authorAlign">

@@ -1,19 +1,21 @@
 <?php
 
-	$quote 	= json_decode($content->textquote()->value(), true);
-	$author = json_decode($content->author()->value(), true);
+$quoteRaw  = $content->quote()->value();
+$authorRaw = $content->author()->value();
 
-	if (!empty($quote['text'])):
+$quote  = ($quoteRaw === null || $quoteRaw === '') ? [] : (json_decode($quoteRaw, true) ?? []);
+$author = ($authorRaw === null || $authorRaw === '') ? [] : (json_decode($authorRaw, true) ?? []);
 
-		// Quote
-		echo '<figure>'."\n";
-		echo '<blockquote data-field="quote" data-align="'.$quote['align'].'">'.$quote['text'].'</blockquote>'."\n";
 
-		// Author
-		if (!empty($author['text'])):
-			echo '<figcaption><cite data-field="cite" data-align="'.$author['align'].'">'.$author['text'].'</cite></figcaption>'."\n";
-		endif;
+if (!empty($quote['text'])):
 
-		echo '</figure>'."\n";
+	echo '<figure>' . "\n";
+	echo '<blockquote data-field="quote" data-align="'.$quote['align'].'">'.$quote['text'].'</blockquote>' . "\n";
 
+	if (!empty($author['text'])):
+		echo '<figcaption><cite data-field="cite" data-align="'.$author['align'].'">'.$author['text'].'</cite></figcaption>' . "\n";
 	endif;
+
+	echo '</figure>' . "\n";
+
+endif;

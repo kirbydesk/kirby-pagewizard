@@ -1,0 +1,116 @@
+/*------------------------------------------------------------------------------------------------
+	Element Definitions
+
+	Override: Activate patch file site/patches/css/kirby-pagewizard/_01-body.css
+------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------
+	Font Face - Inter (Variable Font)
+	https://rsms.me/inter/ - SIL Open Font License
+	Font files: public/assets/fonts/
+
+	Variable Font supports any weight from 100 to 900:
+	100 = Thin, 200 = ExtraLight, 300 = Light, 400 = Regular,
+	500 = Medium, 600 = SemiBold, 700 = Bold, 800 = ExtraBold, 900 = Black
+
+	Usage:
+	font-weight: 400;            (Regular)
+	font-weight: 700;            (Bold)
+	font-style: italic;          (Italic - loads InterVariable-Italic.woff2)
+	font-weight: 600;            (SemiBold)
+	font-style: italic;          (SemiBold Italic)
+------------------------------------------------------------------------------------------------*/
+
+@font-face {
+	font-family: 'Inter';
+	src: url('/assets/fonts/InterVariable.woff2') format('woff2');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('/assets/fonts/InterVariable-Italic.woff2') format('woff2');
+	font-weight: 100 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+/* -------------- Body --------------*/
+body {
+	font-family: 'Inter', system-ui, sans-serif;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	letter-spacing: normal;
+	text-transform: none;
+	font-style: normal;
+	flex-direction: column;
+
+	main {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+/* -------------- Links --------------*/
+a {
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+}
+
+/* -------------- Alignments --------------*/
+[data-align="left"] {
+	text-align: left;
+}
+[data-align="center"] {
+	text-align: center;
+}
+[data-align="right"] {
+	text-align: right;
+}
+[data-position="top"] {
+	align-self: start;
+}
+[data-position="middle"] {
+	align-self: center;
+}
+[data-position="bottom"] {
+	align-self: end;
+}
+
+/* -------------- Blocks --------------*/
+section[data-block] {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+
+	&[data-block-size="content"] {
+		max-width: 1280px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	&[data-padding-top="true"] [data-layout="grid-item"]{
+		padding-top: 1.5rem;
+	}
+	&[data-padding-right="true"] [data-layout="grid-item"]{
+		padding-right: 1.5rem;
+	}
+	&[data-padding-bottom="true"] [data-layout="grid-item"]{
+		padding-bottom: 1.5rem;
+	}
+	&[data-padding-left="true"] [data-layout="grid-item"]{
+		padding-left: 1.5rem;
+	}
+	&[data-margin-top="true"] {
+		margin-top: 1.5rem;
+	}
+	&[data-margin-bottom="true"] {
+		margin-bottom: 1.5rem;
+	}
+}

@@ -1,0 +1,236 @@
+/*------------------------------------------------------------------------------------------------
+	Pagewizard Color Variables - Plugin Defaults
+
+	Override: Activate patch file site/patches/css/kirby-pagewizard/_00-colors.css
+------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------
+	Global colors
+------------------------------------------------------------------------------------------------*/
+body {
+	background-color: #FFFFFF;
+}
+
+
+/*------------------------------------------------------------------------------------------------
+	Default colors
+------------------------------------------------------------------------------------------------*/
+section[data-block]{
+	background-color: #f0f6fc;
+
+	/* -------------- Links --------------*/
+	a {
+		color: #1D548B;
+
+		&:hover {
+			color: #1A4E7A;
+		}
+		&:active {
+			color: #163F5C;
+		}
+	}
+
+	/* -------------- Heading --------------*/
+	[data-field="heading"] {
+		color: #262626;
+	}
+
+	/* -------------- Tagline --------------*/
+	[data-field="tagline"] {
+		color: #1D548B;
+	}
+
+	/* -------------- Editor --------------*/
+	[data-field="textarea"],
+	[data-field="writer"],
+	[data-field="markdown"] {
+		color: #262626;
+	}
+
+	/* -------------- Buttons --------------*/
+	[data-field="buttons"] [data-field="button"] a {
+		color: #FFFFFF;
+		background-color: #1D548B;
+		border-color: transparent;
+
+		&:hover {
+			color: #FFFFFF;
+			background-color: #2A6FAE;
+			border-color: transparent;
+		}
+		&:active {
+			color: #FFFFFF;
+			background-color: #164073;
+			border-color: transparent;
+		}
+	}
+
+	/* -------------- Icon --------------*/
+	[data-field="icon"] svg {
+		fill: #6B7280;
+	}
+
+	/* -------------- Caption --------------*/
+	[data-field="caption"] {
+		color: #6B7280;
+	}
+
+	/* -------------- Quote --------------*/
+	[data-field="quote"] {
+		color: #262626;
+	}
+
+	/* -------------- Cite --------------*/
+	[data-field="cite"] {
+		color: #6B7280;
+	}
+
+	/* -------------- Breadcrumb --------------*/
+	[data-field="breadcrumb"] {
+		color: #6B7280;
+	}
+
+	/* -------------- Dimmed text --------------*/
+	[data-opacity="dimmed"] {
+		color: color-mix(in srgb, #262626 80%, transparent);
+	}
+
+	/* -------------- Media --------------*/
+	figure[data-ratio] > div {
+		background: #262626
+	}
+	figure[data-zoom] > div .zoom-icon {
+		color: #FFFFFF;
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+	[data-field="slideshow"] {
+		.swiper-pagination-bullet {
+			opacity: 0.3;
+			background: #262626;
+		}
+		.swiper-pagination-bullet-active {
+			opacity: 1;
+			background: #262626;
+		}
+	}
+}
+
+
+/*------------------------------------------------------------------------------------------------
+	Variant colors (overwrites default colors when variant style is active)
+------------------------------------------------------------------------------------------------*/
+section[data-block][data-style="variant"] {
+	background-color: #1D548B;
+
+	/* -------------- Links --------------*/
+	a {
+		color: #8CBAE7;
+
+		&:hover {
+			color: #7AA9D0;
+		}
+		&:active {
+			color: #6680A8;
+		}
+	}
+
+	/* -------------- Heading --------------*/
+	[data-field="heading"] {
+		color: #FFFFFF;
+	}
+
+	/* -------------- Tagline --------------*/
+	[data-field="tagline"] {
+		color: #8CBAE7;
+	}
+
+	/* -------------- Editor --------------*/
+	[data-field="textarea"],
+	[data-field="writer"],
+	[data-field="markdown"] {
+		color: #FFFFFF;
+	}
+
+	/* -------------- Buttons --------------*/
+	[data-field="buttons"] [data-field="button"] a {
+		color: #262626;
+		background-color: #FFFFFF;
+		border-color: transparent;
+
+		&:hover {
+			color: #262626;
+			background-color: #E6E6E6;
+			border-color: transparent;
+		}
+		&:active {
+			color: #262626;
+			background-color: #CCCCCC;
+			border-color: transparent;
+		}
+	}
+
+	/* -------------- Icon --------------*/
+	[data-field="icon"] svg {
+		fill: #B0C4DE;
+	}
+
+	/* -------------- Caption --------------*/
+	[data-field="caption"] {
+		color: #B0C4DE;
+	}
+
+	/* -------------- Quote --------------*/
+	[data-field="quote"] {
+		color: #FFFFFF;
+	}
+
+	/* -------------- Cite --------------*/
+	[data-field="cite"] {
+		color: #B0C4DE;
+	}
+
+	/* -------------- Breadcrumb --------------*/
+	[data-field="breadcrumb"] {
+		color: #B0C4DE;
+	}
+
+	/* -------------- Dimmed text --------------*/
+	[data-opacity="dimmed"] {
+		color: color-mix(in srgb, #FFFFFF 80%, transparent);
+	}
+
+	/* -------------- Media --------------*/
+	[data-field="slideshow"] {
+		.swiper-pagination-bullet,
+		.swiper-pagination-bullet-active {
+			background: #FFFFFF;
+		}
+	}
+}
+
+
+/*------------------------------------------------------------------------------------------------
+	Button color styles
+------------------------------------------------------------------------------------------------*/
+section[data-block][data-style="variant"],
+section[data-block][data-style="custom"][data-button-style="variant"] {
+
+	/* -------------- Buttons --------------*/
+	[data-field="buttons"] [data-field="button"] a {
+		color: #262626;
+		background-color: #FFFFFF;
+		border-color: transparent;
+
+		&:hover {
+			color: #262626;
+			background-color: #E6E6E6;
+			border-color: transparent;
+		}
+		&:active {
+			color: #262626;
+			background-color: #CCCCCC;
+			border-color: transparent;
+		}
+	}
+}

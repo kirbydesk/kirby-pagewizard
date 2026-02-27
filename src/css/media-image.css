@@ -37,16 +37,13 @@ figure[data-zoom] {
 			width: 100%;
 			height: 100%;
 		}
-
 		.zoom-icon {
 			display: block;
 			position: absolute;
 			bottom: 0;
 			right: 0;
 			z-index: 1;
-			background-color: var(--pw-color-zoom-icon-background);
 			padding: 0.5rem;
-			color: white;
 			line-height: 0;
 			pointer-events: none;
 		}

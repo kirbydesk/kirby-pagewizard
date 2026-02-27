@@ -3,14 +3,12 @@
 ------------------------------------------------------------------------------------------------*/
 figure[data-ratio] > div {
 	overflow: hidden;
-	background: var(--pw-color-image-letterbox);
 
 	img, video {
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
 	}
-
 	iframe {
 		width: 100%;
 		height: 100%;
