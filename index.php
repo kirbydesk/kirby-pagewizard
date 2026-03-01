@@ -12,6 +12,7 @@ Kirby::plugin('kirbydesk/kirby-pagewizard', [
 
 	/* -------------- Extensions --------------*/
 	'api'						=> require_once 'src/extensions/api.php',
+	'routes'				=> require_once 'src/extensions/routes.php',
   'areas' 				=> require_once 'src/extensions/areas.php',
 	'blueprints'		=> require_once 'src/extensions/blueprints.php',
 	'fields'				=> require_once 'src/extensions/fields.php',
