@@ -8,7 +8,14 @@
 	'pages/home' => __DIR__ . '/../../blueprints/pages/home.yml',
 
 	/* -------------- Tabs --------------*/
-	'tabs/content' => __DIR__ . '/../../blueprints/tabs/content.yml',
+	'tabs/content' => function() {
+		$data = \Kirby\Data\Data::read(__DIR__ . '/../../blueprints/tabs/content.yml');
+		$blocks = option('kirbydesk.pagewizard.blocks', []);
+		if (!empty($blocks)) {
+			$data['columns'][0]['sections']['content']['fields']['blocks']['fieldsets']['static']['fieldsets'] = $blocks;
+		}
+		return $data;
+	},
 	'tabs/files/backgroundimage' => __DIR__ . '/../../blueprints/tabs/files/backgroundimage.yml',
 	'tabs/files/image' => __DIR__ . '/../../blueprints/tabs/files/image.yml',
 	'tabs/files/legal' => __DIR__ . '/../../blueprints/tabs/files/legal.yml',
