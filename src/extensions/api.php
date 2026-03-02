@@ -82,7 +82,9 @@ return [
 		[
 			'pattern' => 'pagewizard/colors',
 			'action'  => function () {
-				$colorsFile = __DIR__ . '/../../src/panel-colors.css';
+				$publicFile  = kirby()->root('index') . '/assets/css/panel-colors.css';
+				$pluginFile  = __DIR__ . '/../../src/panel-colors.css';
+				$colorsFile  = file_exists($publicFile) ? $publicFile : $pluginFile;
 
 				if (!file_exists($colorsFile)) {
 					return ['default' => [], 'variant' => []];

@@ -359,6 +359,8 @@
 	'pw.headline.backgroundimage' => 'Background Image',
 	'pw.headline.blockcontent' => 'Content',
 	'pw.headline.blockcontent.help' => 'Define the content and messaging of this block.',
+	'pw.headline.blockradius' => 'Block radius',
+	'pw.headline.blockradius.help' => 'Define the radius settings for this block.',
 	'pw.headline.blocksettings' => 'Block settings',
 	'pw.headline.blocksettings.help' => 'You can overwrite the default settings for this block as needed.',
 	'pw.headline.columns' => 'Columns',

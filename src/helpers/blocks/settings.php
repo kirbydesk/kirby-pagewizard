@@ -15,13 +15,13 @@ class pwSettings
 				'default' => $defaults['block-size']
 			],
 			'marginTop' => [
-				'extends' => 'pagewizard/fields/toggle-spacing',
+				'extends' => 'pagewizard/fields/toggle',
 				'default' => $defaults['margin-top'],
 				'label' => 'pw.field.margin-top',
 				'help' => 'pw.field.margin-top.help'
 			],
 			'marginBottom' => [
-				'extends' => 'pagewizard/fields/toggle-spacing',
+				'extends' => 'pagewizard/fields/toggle',
 				'default' => $defaults['margin-bottom'],
 				'label' => 'pw.field.margin-bottom',
 				'help' => 'pw.field.margin-bottom.help'

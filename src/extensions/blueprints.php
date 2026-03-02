@@ -110,7 +110,7 @@
 	'pagewizard/fields/text-mode' => __DIR__ . '/../../blueprints/fields/text-mode.yml',
 	'pagewizard/fields/text-textarea' => __DIR__ . '/../../blueprints/fields/text-textarea.yml',
 	'pagewizard/fields/text-writer' => __DIR__ . '/../../blueprints/fields/text-writer.yml',
-	'pagewizard/fields/toggle-spacing' => __DIR__ . '/../../blueprints/fields/toggle-spacing.yml',
+	'pagewizard/fields/toggle' => __DIR__ . '/../../blueprints/fields/toggle.yml',
 	'pagewizard/fields/video' => __DIR__ . '/../../blueprints/fields/video.yml',
 	'pagewizard/fields/video-aria-describedby' => __DIR__ . '/../../blueprints/fields/video-aria-describedby.yml',
 	'pagewizard/fields/video-aria-label' => __DIR__ . '/../../blueprints/fields/video-aria-label.yml',
@@ -134,6 +134,7 @@
 	/* -------------- Headlines --------------*/
 	'pagewizard/headlines/accessibility' => __DIR__ . '/../../blueprints/headlines/accessibility.yml',
 	'pagewizard/headlines/background' => __DIR__ . '/../../blueprints/headlines/background.yml',
+	'pagewizard/headlines/blockradius' => __DIR__ . '/../../blueprints/headlines/blockradius.yml',
 	'pagewizard/headlines/blocksettings' => __DIR__ . '/../../blueprints/headlines/blocksettings.yml',
 	'pagewizard/headlines/color' => __DIR__ . '/../../blueprints/headlines/color.yml',
 	'pagewizard/headlines/columns' => __DIR__ . '/../../blueprints/headlines/columns.yml',
