@@ -14,7 +14,7 @@ export default {
 	computed: {
 		colorVars() {
 			if (!this.colors) return {};
-			const style = this.content.style || 'default';
+			const style = this.content.theme || 'default';
 			const vars = {};
 
 			if (style === 'custom') {

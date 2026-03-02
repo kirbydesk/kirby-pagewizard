@@ -20,7 +20,7 @@ class pwConfig
 		$configDir = self::$configPaths[$blockType] ?? null;
 
 		if ($configDir === null) {
-			return ['settings' => [], 'tabs' => [], 'defaults' => [], 'fields' => [], 'editor' => []];
+			return ['content' => [], 'tabs' => [], 'defaults' => [], 'fields' => [], 'editor' => [], 'layout' => [], 'style' => [], 'settings' => []];
 		}
 
 		/* -------------- Block Settings (feature toggles) --------------*/
@@ -29,8 +29,15 @@ class pwConfig
 			? json_decode(file_get_contents($settingsFile), true)
 			: [];
 
-		$settings    = $settingsRaw['fields'] ?? $settingsRaw;
-		$tabSettings = $settingsRaw['tabs']   ?? [];
+		$tabSettings = $settingsRaw['tabs'] ?? [];
+
+		// fields: nested { content: {}, layout: {}, style: {}, settings: {} } or flat (legacy)
+		$fieldsRaw   = $settingsRaw['fields'] ?? [];
+		$isNested    = isset($fieldsRaw['content']) || isset($fieldsRaw['layout']) || isset($fieldsRaw['style']) || isset($fieldsRaw['settings']);
+		$settings    = $isNested ? ($fieldsRaw['content']  ?? []) : $fieldsRaw;
+		$layoutVis   = $isNested ? ($fieldsRaw['layout']   ?? []) : [];
+		$styleVis    = $isNested ? ($fieldsRaw['style']    ?? []) : [];
+		$settingsVis = $isNested ? ($fieldsRaw['settings'] ?? []) : [];
 
 		/* -------------- Block Defaults (field values) --------------*/
 		$defaultsFile = $configDir . '/defaults.json';
@@ -38,7 +45,7 @@ class pwConfig
 			? json_decode(file_get_contents($defaultsFile), true)
 			: [];
 
-		$fields = $defaultsRaw['fields'] ?? [];
+		$fields = $defaultsRaw['content'] ?? [];
 		if (isset($defaultsRaw['block'])) {
 			$defaults = $defaultsRaw['block'];
 		} else {
@@ -61,20 +68,18 @@ class pwConfig
 		$raw = option("kirbydesk.pagewizard.kirbyblocks.{$blockType}", []);
 		$cfg = is_array($raw) ? $raw : [];
 
-		// settings: nested { fields: {}, tabs: {} } or flat { toggle: value }
-		if (!empty($cfg['settings']) && is_array($cfg['settings'])) {
-			if (isset($cfg['settings']['fields']) || isset($cfg['settings']['tabs'])) {
-				if (!empty($cfg['settings']['fields'])) $settings    = array_merge($settings, $cfg['settings']['fields']);
-				if (!empty($cfg['settings']['tabs']))   $tabSettings = array_merge($tabSettings, $cfg['settings']['tabs']);
-			} else {
-				$settings = array_merge($settings, $cfg['settings']);
-			}
-		}
-		// tabs: flat top-level (flat format only)
+		// tabs
 		if (!empty($cfg['tabs']) && is_array($cfg['tabs'])) {
 			$tabSettings = array_merge($tabSettings, $cfg['tabs']);
 		}
-		// defaults: nested { layout: {}, style: {}, grid: {}, settings: {}, fields: {} } or flat
+		// fields: nested { content: {}, layout: {}, style: {}, settings: {} }
+		if (!empty($cfg['fields']) && is_array($cfg['fields'])) {
+			if (!empty($cfg['fields']['content']))  $settings    = array_merge($settings,    $cfg['fields']['content']);
+			if (!empty($cfg['fields']['layout']))   $layoutVis   = array_merge($layoutVis,   $cfg['fields']['layout']);
+			if (!empty($cfg['fields']['style']))    $styleVis    = array_merge($styleVis,     $cfg['fields']['style']);
+			if (!empty($cfg['fields']['settings'])) $settingsVis = array_merge($settingsVis, $cfg['fields']['settings']);
+		}
+		// defaults: nested { layout: {}, style: {}, grid: {}, settings: {}, effects: {} } or flat
 		if (!empty($cfg['defaults']) && is_array($cfg['defaults'])) {
 			$isNested = isset($cfg['defaults']['layout']) || isset($cfg['defaults']['style'])
 				|| isset($cfg['defaults']['grid']) || isset($cfg['defaults']['settings'])
@@ -88,14 +93,10 @@ class pwConfig
 					$cfg['defaults']['effects']  ?? []
 				);
 				$defaults = array_merge($defaults, $flatOverrides);
-				if (!empty($cfg['defaults']['fields'])) $fields = array_merge($fields, $cfg['defaults']['fields']);
+				if (!empty($cfg['defaults']['content'])) $fields = array_merge($fields, $cfg['defaults']['content']);
 			} else {
 				$defaults = array_merge($defaults, $cfg['defaults']);
 			}
-		}
-		// fields: flat top-level (flat format only)
-		if (!empty($cfg['fields']) && is_array($cfg['fields'])) {
-			$fields = array_merge($fields, $cfg['fields']);
 		}
 		if (!empty($cfg['editor']) && is_array($cfg['editor'])) {
 			foreach ($cfg['editor'] as $key => $value) {
@@ -108,11 +109,14 @@ class pwConfig
 		}
 
 		return [
-			'settings' => $settings,
-			'tabs'     => $tabSettings,
-			'defaults' => $defaults,
-			'fields'   => $fields,
-			'editor'   => $editor,
+			'content'     => $settings,
+			'tabs'        => $tabSettings,
+			'defaults'    => $defaults,
+			'fields'      => $fields,
+			'editor'      => $editor,
+			'layout'      => $layoutVis,
+			'style'       => $styleVis,
+			'settings'    => $settingsVis,
 		];
 	}
 
@@ -121,7 +125,7 @@ class pwConfig
 	 */
 	public static function settings(string $blockType): array
 	{
-		return self::load($blockType)['settings'];
+		return self::load($blockType)['content'];
 	}
 
 	/**

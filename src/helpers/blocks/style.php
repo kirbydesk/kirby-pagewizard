@@ -2,28 +2,28 @@
 
 class pwStyle
 {
-	public static function options(string $blockType, array $defaults, array $extraFields = []): array
+	public static function options(string $blockType, array $defaults, array $extraFields = [], array $fieldVisibility = []): array
 	{
 		$settings = pwConfig::settings($blockType);
 
 		$fields = [
 			'headlineStyle' => ['extends' => 'pagewizard/headlines/style'],
-			'style' => [
+			'theme' => [
 				'extends' => 'pagewizard/fields/style',
 				'width' => '1/1',
 				'label'	=> 'pw.headline.theme',
-				'default' => $defaults['style']
+				'default' => $defaults['theme']
 			],
 			'textcolor' => [
 				'extends' => 'pagewizard/fields/text-color',
 				'when' => [
-					'style' => 'custom'
+					'theme' => 'custom'
 				]
 			],
 			'backgroundcolor' => [
 				'extends' => 'pagewizard/fields/background-color',
 				'when' => [
-					'style' => 'custom'
+					'theme' => 'custom'
 				]
 			],
 		];
@@ -32,9 +32,17 @@ class pwStyle
 			$fields['buttonstyle'] = [
 				'extends' => 'pagewizard/fields/button-style',
 				'when' => [
-					'style' => 'custom'
+					'theme' => 'custom'
 				]
 			];
+		}
+
+		if (isset($fieldVisibility['theme']) && $fieldVisibility['theme'] === false) {
+			unset($fields['headlineStyle']);
+			$fields['theme'] = ['type' => 'hidden', 'default' => $defaults['theme']];
+			if (isset($fields['textcolor']))       unset($fields['textcolor']);
+			if (isset($fields['backgroundcolor'])) unset($fields['backgroundcolor']);
+			if (isset($fields['buttonstyle']))     unset($fields['buttonstyle']);
 		}
 
 		if (!empty($extraFields)) {

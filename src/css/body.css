@@ -87,7 +87,6 @@ section[data-block] {
 	padding: 0;
 	margin: 0;
 	border: none;
-	border-radius: 0;
 	box-shadow: none;
 
 	&[data-block-size="content"] {
@@ -112,5 +111,17 @@ section[data-block] {
 	}
 	&[data-margin-bottom="true"] {
 		margin-bottom: 1.5rem;
+	}
+	&[data-radius-top-left="true"] {
+		border-top-left-radius: 1.5rem;
+	}
+	&[data-radius-top-right="true"] {
+		border-top-right-radius: 1.5rem;
+	}
+	&[data-radius-bottom-right="true"] {
+		border-bottom-right-radius: 1.5rem;
+	}
+	&[data-radius-bottom-left="true"] {
+		border-bottom-left-radius: 1.5rem;
 	}
 }
