@@ -1,7 +1,12 @@
 export default {
 	props: {
 		value: String,
+		label:       String,
+		placeholder: String,
+		fieldHelp:   String,
 		align:          { type: String, default: 'left' },
+		size:           { type: String, default: null },
+		sizeOptions:    { type: Array,  default: () => ['normal', 'large', 'xlarge'] },
 		defaultMode:    { type: String, default: null },
 		writerModes:    { type: Array,  default: () => ['textarea', 'writer', 'markdown'] },
 		writerMarks:    { type: Array,  default: () => ['bold', 'italic', 'underline', 'strike', 'link'] },
@@ -12,8 +17,9 @@ export default {
 	data() {
 		return {
 			current: this.parse(this.value),
-			showModeDropdown: false,
+			showModeDropdown:  false,
 			showAlignDropdown: false,
+			showSizeDropdown:  false,
 			_closeHandler: null,
 			_updating: false,
 		};
@@ -29,13 +35,16 @@ export default {
 			return this.writerModes.length >= 2;
 		},
 		translatedLabel() {
+			return this.label || this.$t('pw.field.text');
+		},
+		modeLabel() {
 			return this.$t('pw.field.text-' + this.current.mode, this.current.mode);
 		},
 		translatedHelp() {
-			return this.$t('pw.field.text-' + this.current.mode + '.help', '');
+			return this.fieldHelp || this.$t('pw.field.text-' + this.current.mode + '.help', '');
 		},
 		translatedPlaceholder() {
-			return this.$t('pw.field.text-' + this.current.mode + '.placeholder', '');
+			return this.placeholder || this.$t('pw.field.text-' + this.current.mode + '.placeholder', '');
 		}
 	},
 	methods: {
@@ -43,7 +52,7 @@ export default {
 			const fallbackMode = (this.defaultMode && this.writerModes.includes(this.defaultMode))
 				? this.defaultMode
 				: (this.writerModes[0] || 'textarea');
-			const base = { mode: fallbackMode, align: this.align, textarea: '', writer: '', markdown: '' };
+			const base = { mode: fallbackMode, align: this.align, size: this.size, textarea: '', writer: '', markdown: '' };
 			if (!val) return base;
 			try {
 				const d = JSON.parse(val);
@@ -52,6 +61,7 @@ export default {
 					return {
 						mode,
 						align: d.align || this.align,
+						size: d.size || this.size,
 						textarea: d.textarea || '',
 						writer: d.writer || '',
 						markdown: d.markdown || '',
@@ -76,6 +86,14 @@ export default {
 			this.showAlignDropdown = false;
 			this.emit();
 		},
+		setSize(size) {
+			this.current = { ...this.current, size };
+			this.showSizeDropdown = false;
+			this.emit();
+		},
+		sizeIcon(size) {
+			return 'textsize-' + (size || 'normal');
+		},
 		onTextInput(e) {
 			this.current = { ...this.current, [this.current.mode]: e.target.value };
 			this.autoResize(e.target);
@@ -88,20 +106,24 @@ export default {
 		autoResize(el) {
 			el.style.height = 'auto';
 			el.style.height = el.scrollHeight + 'px';
-			el.style.minHeight = el.scrollHeight + 'px';
 		},
 		toggleModeDropdown() {
 			this.showModeDropdown = !this.showModeDropdown;
-			if (this.showModeDropdown) this.showAlignDropdown = false;
+			if (this.showModeDropdown) { this.showAlignDropdown = false; this.showSizeDropdown = false; }
 		},
 		toggleAlignDropdown() {
 			this.showAlignDropdown = !this.showAlignDropdown;
-			if (this.showAlignDropdown) this.showModeDropdown = false;
+			if (this.showAlignDropdown) { this.showModeDropdown = false; this.showSizeDropdown = false; }
+		},
+		toggleSizeDropdown() {
+			this.showSizeDropdown = !this.showSizeDropdown;
+			if (this.showSizeDropdown) { this.showAlignDropdown = false; this.showModeDropdown = false; }
 		},
 		handleClose(e) {
 			if (!this.$el.contains(e.target)) {
 				this.showModeDropdown = false;
 				this.showAlignDropdown = false;
+				this.showSizeDropdown = false;
 			}
 		}
 	},
@@ -120,7 +142,7 @@ export default {
 		<div class="k-field pw-editor-field">
 			<header class="k-field-header" style="display:flex;align-items:center;overflow:visible;">
 				<label class="k-label k-field-label" style="flex:1;">
-					<span class="k-label-text">{{ $t('pw.field.text') }}</span>
+					<span class="k-label-text">{{ translatedLabel }}</span>
 				</label>
 				<div class="k-button-group">
 					<span style="position:relative;">
@@ -146,6 +168,29 @@ export default {
 							</div>
 						</dialog>
 					</span>
+					<span v-if="size" style="position:relative;">
+						<button
+							data-has-icon="true"
+							data-has-text="false"
+							aria-label="Size"
+							data-size="xs"
+							data-variant="filled"
+							type="button"
+							class="input-focus k-button"
+							@click.stop="toggleSizeDropdown"
+						><span class="k-button-icon">
+							<svg aria-hidden="true" class="k-icon">
+								<use :xlink:href="'#icon-' + sizeIcon(current.size)"></use>
+							</svg>
+						</span></button>
+						<dialog v-if="showSizeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
+							<div class="k-navigate">
+								<button v-for="opt in sizeOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setSize(opt)">
+									<span class="k-button-icon"><svg class="k-icon"><use :xlink:href="'#icon-' + sizeIcon(opt)"></use></svg></span>
+								</button>
+							</div>
+						</dialog>
+					</span>
 					<span v-if="showModeSwitcher" style="position:relative;">
 						<button
 							data-has-icon="false"
@@ -156,7 +201,7 @@ export default {
 							type="button"
 							class="input-focus k-button"
 							@click.stop="toggleModeDropdown"
-						><span class="k-button-text"> {{ translatedLabel }} </span></button>
+						><span class="k-button-text"> {{ modeLabel }} </span></button>
 						<dialog v-if="showModeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
 							<div class="k-navigate">
 								<button v-for="m in writerModes" :key="m" type="button" class="k-button k-dropdown-item" data-has-text="true" data-has-icon="false" @click.stop="setMode(m)">

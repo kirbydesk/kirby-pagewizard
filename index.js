@@ -129,6 +129,7 @@
       value: String,
       align: String,
       level: String,
+      size: String,
       alignOptions: {
         type: Array,
         default: () => ["left", "center", "right"]
@@ -136,14 +137,20 @@
       levelOptions: {
         type: Array,
         default: () => ["h1", "h2", "h3", "h4"]
+      },
+      sizeOptions: {
+        type: Array,
+        default: () => ["normal", "large", "xlarge"]
       }
     },
     data() {
       return {
         currentAlign: this.parseValue().align || (this.align || "left"),
         currentLevel: this.parseValue().level || (this.level || "h2"),
+        currentSize: this.parseValue().size || this.size || "normal",
         showAlignDropdown: false,
-        showLevelDropdown: false
+        showLevelDropdown: false,
+        showSizeDropdown: false
       };
     },
     watch: {
@@ -151,6 +158,7 @@
         const parsed = this.parseValue();
         if (parsed.align) this.currentAlign = parsed.align;
         if (parsed.level) this.currentLevel = parsed.level;
+        if (parsed.size) this.currentSize = parsed.size;
       }
     },
     methods: {
@@ -162,35 +170,49 @@
           return { text: this.value };
         }
       },
-      emitValue(text, align, level) {
-        this.$emit("input", JSON.stringify({ text, align, level }));
+      emitValue(text, align, level, size) {
+        this.$emit("input", JSON.stringify({ text, align, level, size }));
       },
       updateAlign(value) {
         this.currentAlign = value;
         this.showAlignDropdown = false;
         const parsed = this.parseValue();
-        this.emitValue(parsed.text || "", value, parsed.level || this.currentLevel);
+        this.emitValue(parsed.text || "", value, parsed.level || this.currentLevel, parsed.size || this.currentSize);
       },
       updateLevel(value) {
         this.currentLevel = value;
         this.showLevelDropdown = false;
         const parsed = this.parseValue();
-        this.emitValue(parsed.text || "", parsed.align || this.currentAlign, value);
+        this.emitValue(parsed.text || "", parsed.align || this.currentAlign, value, parsed.size || this.currentSize);
+      },
+      updateSize(value) {
+        this.currentSize = value;
+        this.showSizeDropdown = false;
+        const parsed = this.parseValue();
+        this.emitValue(parsed.text || "", parsed.align || this.currentAlign, parsed.level || this.currentLevel, value);
       },
       handleInput(event) {
-        this.emitValue(event.target.value, this.currentAlign, this.currentLevel);
+        this.emitValue(event.target.value, this.currentAlign, this.currentLevel, this.currentSize);
       },
       closeDropdowns() {
         this.showAlignDropdown = false;
         this.showLevelDropdown = false;
+        this.showSizeDropdown = false;
       },
       toggleLevelDropdown() {
         this.showAlignDropdown = false;
+        this.showSizeDropdown = false;
         this.showLevelDropdown = !this.showLevelDropdown;
       },
       toggleAlignDropdown() {
         this.showLevelDropdown = false;
+        this.showSizeDropdown = false;
         this.showAlignDropdown = !this.showAlignDropdown;
+      },
+      toggleSizeDropdown() {
+        this.showAlignDropdown = false;
+        this.showLevelDropdown = false;
+        this.showSizeDropdown = !this.showSizeDropdown;
       },
       handleClickOutside(event) {
         if (!this.$el.contains(event.target)) {
@@ -198,11 +220,14 @@
         }
       },
       handleEscape(event) {
-        if (event.key === "Escape" && (this.showAlignDropdown || this.showLevelDropdown)) {
+        if (event.key === "Escape" && (this.showAlignDropdown || this.showLevelDropdown || this.showSizeDropdown)) {
           event.stopPropagation();
           event.preventDefault();
           this.closeDropdowns();
         }
+      },
+      sizeIcon(size) {
+        return "textsize-" + (size || "normal");
       }
     },
     mounted() {
@@ -216,13 +241,13 @@
       document.removeEventListener("keydown", this.handleEscape);
     },
     template: `
-		<div class="k-field k-text-field" :data-align="currentAlign" :data-level="currentLevel">
+		<div class="k-field k-text-field" :data-align="currentAlign" :data-level="currentLevel" :data-size="currentSize">
 			<header class="k-field-header" style="display:flex;align-items:center;overflow:visible;">
 				<label v-if="label" class="k-label k-field-label" style="flex:1;">
 					<span class="k-label-text">{{ label }}</span>
 				</label>
 				<span v-else style="flex:1;"></span>
-				<div v-if="align || level" class="k-button-group">
+				<div v-if="align || level || size" class="k-button-group">
 					<span v-if="align" style="position:relative;">
 						<button
 							data-has-icon="true"
@@ -250,6 +275,38 @@
 								>
 									<span class="k-button-icon">
 										<svg class="k-icon"><use :xlink:href="'#icon-text-' + option"></use></svg>
+									</span>
+								</button>
+							</div>
+						</dialog>
+					</span>
+					<span v-if="size" style="position:relative;">
+						<button
+							data-has-icon="true"
+							data-has-text="false"
+							aria-label="Size"
+							data-size="xs"
+							data-variant="filled"
+							type="button"
+							class="input-focus k-button"
+							@click.stop="toggleSizeDropdown"
+						><span class="k-button-icon">
+							<svg aria-hidden="true" class="k-icon">
+								<use :xlink:href="'#icon-' + sizeIcon(currentSize)"></use>
+							</svg>
+						</span></button>
+						<dialog v-if="showSizeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
+							<div class="k-navigate">
+								<button
+									v-for="option in sizeOptions"
+									:key="option"
+									@click.stop="updateSize(option)"
+									type="button"
+									class="k-button k-dropdown-item"
+									data-has-icon="true"
+								>
+									<span class="k-button-icon">
+										<svg class="k-icon"><use :xlink:href="'#icon-' + sizeIcon(option)"></use></svg>
 									</span>
 								</button>
 							</div>
@@ -306,139 +363,15 @@
 		</div>
 	`
   };
-  const pwtextarea = {
-    props: {
-      value: String,
-      label: String,
-      help: String,
-      placeholder: String,
-      align: { type: String, default: "left" },
-      alignOptions: {
-        type: Array,
-        default: () => ["left", "center", "right"]
-      }
-    },
-    data() {
-      return {
-        current: this.parse(this.value),
-        showAlignDropdown: false,
-        _closeHandler: null
-      };
-    },
-    watch: {
-      value(v) {
-        this.current = this.parse(v);
-      }
-    },
-    methods: {
-      parse(val) {
-        if (!val) return { text: "", align: this.align };
-        try {
-          const d = JSON.parse(val);
-          return { text: d.text || "", align: d.align || this.align };
-        } catch (e) {
-          return { text: val, align: "left" };
-        }
-      },
-      emit() {
-        this.$emit("input", JSON.stringify({ text: this.current.text, align: this.current.align }));
-      },
-      onInput(e) {
-        this.current.text = e.target.value;
-        this.autoResize(e.target);
-        this.emit();
-      },
-      setAlign(align) {
-        this.current.align = align;
-        this.showAlignDropdown = false;
-        this.emit();
-      },
-      toggleAlignDropdown() {
-        this.showAlignDropdown = !this.showAlignDropdown;
-      },
-      autoResize(el) {
-        el.style.height = "auto";
-        el.style.height = el.scrollHeight + "px";
-      },
-      handleClose(e) {
-        if (!this.$el.contains(e.target)) {
-          this.showAlignDropdown = false;
-        }
-      }
-    },
-    mounted() {
-      this._closeHandler = this.handleClose;
-      document.addEventListener("click", this._closeHandler, true);
-      this.$nextTick(() => {
-        const ta = this.$el.querySelector("textarea");
-        if (ta) this.autoResize(ta);
-      });
-    },
-    beforeDestroy() {
-      document.removeEventListener("click", this._closeHandler, true);
-    },
-    template: `
-		<div class="k-field pw-textarea-field">
-			<header class="k-field-header" style="display:flex;align-items:center;overflow:visible;">
-				<label v-if="label" class="k-label k-field-label" style="flex:1;">
-					<span class="k-label-text">{{ label }}</span>
-				</label>
-				<span v-else style="flex:1;"></span>
-				<div class="k-button-group">
-					<span style="position:relative;">
-						<button
-							data-has-icon="true"
-							data-has-text="false"
-							aria-label="Align"
-							data-size="xs"
-							data-variant="filled"
-							type="button"
-							class="input-focus k-button"
-							@click.stop="toggleAlignDropdown"
-						><span class="k-button-icon">
-							<svg aria-hidden="true" class="k-icon">
-								<use :xlink:href="'#icon-text-' + current.align"></use>
-							</svg>
-						</span></button>
-						<dialog v-if="showAlignDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
-							<div class="k-navigate">
-								<button
-									v-for="opt in alignOptions"
-									:key="opt"
-									type="button"
-									class="k-button k-dropdown-item"
-									data-has-icon="true"
-									@click.stop="setAlign(opt)"
-								>
-									<span class="k-button-icon">
-										<svg class="k-icon"><use :xlink:href="'#icon-text-' + opt"></use></svg>
-									</span>
-								</button>
-							</div>
-						</dialog>
-					</span>
-				</div>
-			</header>
-			<div class="k-input pw-textarea-field" data-type="textarea">
-				<span class="k-input-element">
-					<textarea
-						:value="current.text"
-						:placeholder="placeholder"
-						class="k-string-input k-textarea-input pw-textarea"
-						@input="onInput"
-					></textarea>
-				</span>
-			</div>
-			<footer v-if="help" class="k-field-footer">
-				<div class="k-help k-field-help k-text" v-html="help"></div>
-			</footer>
-		</div>
-	`
-  };
   const pweditor = {
     props: {
       value: String,
+      label: String,
+      placeholder: String,
+      fieldHelp: String,
       align: { type: String, default: "left" },
+      size: { type: String, default: null },
+      sizeOptions: { type: Array, default: () => ["normal", "large", "xlarge"] },
       defaultMode: { type: String, default: null },
       writerModes: { type: Array, default: () => ["textarea", "writer", "markdown"] },
       writerMarks: { type: Array, default: () => ["bold", "italic", "underline", "strike", "link"] },
@@ -451,6 +384,7 @@
         current: this.parse(this.value),
         showModeDropdown: false,
         showAlignDropdown: false,
+        showSizeDropdown: false,
         _closeHandler: null,
         _updating: false
       };
@@ -466,19 +400,22 @@
         return this.writerModes.length >= 2;
       },
       translatedLabel() {
+        return this.label || this.$t("pw.field.text");
+      },
+      modeLabel() {
         return this.$t("pw.field.text-" + this.current.mode, this.current.mode);
       },
       translatedHelp() {
-        return this.$t("pw.field.text-" + this.current.mode + ".help", "");
+        return this.fieldHelp || this.$t("pw.field.text-" + this.current.mode + ".help", "");
       },
       translatedPlaceholder() {
-        return this.$t("pw.field.text-" + this.current.mode + ".placeholder", "");
+        return this.placeholder || this.$t("pw.field.text-" + this.current.mode + ".placeholder", "");
       }
     },
     methods: {
       parse(val) {
         const fallbackMode = this.defaultMode && this.writerModes.includes(this.defaultMode) ? this.defaultMode : this.writerModes[0] || "textarea";
-        const base = { mode: fallbackMode, align: this.align, textarea: "", writer: "", markdown: "" };
+        const base = { mode: fallbackMode, align: this.align, size: this.size, textarea: "", writer: "", markdown: "" };
         if (!val) return base;
         try {
           const d = JSON.parse(val);
@@ -487,6 +424,7 @@
             return {
               mode,
               align: d.align || this.align,
+              size: d.size || this.size,
               textarea: d.textarea || "",
               writer: d.writer || "",
               markdown: d.markdown || ""
@@ -514,6 +452,14 @@
         this.showAlignDropdown = false;
         this.emit();
       },
+      setSize(size) {
+        this.current = { ...this.current, size };
+        this.showSizeDropdown = false;
+        this.emit();
+      },
+      sizeIcon(size) {
+        return "textsize-" + (size || "normal");
+      },
       onTextInput(e) {
         this.current = { ...this.current, [this.current.mode]: e.target.value };
         this.autoResize(e.target);
@@ -526,20 +472,33 @@
       autoResize(el) {
         el.style.height = "auto";
         el.style.height = el.scrollHeight + "px";
-        el.style.minHeight = el.scrollHeight + "px";
       },
       toggleModeDropdown() {
         this.showModeDropdown = !this.showModeDropdown;
-        if (this.showModeDropdown) this.showAlignDropdown = false;
+        if (this.showModeDropdown) {
+          this.showAlignDropdown = false;
+          this.showSizeDropdown = false;
+        }
       },
       toggleAlignDropdown() {
         this.showAlignDropdown = !this.showAlignDropdown;
-        if (this.showAlignDropdown) this.showModeDropdown = false;
+        if (this.showAlignDropdown) {
+          this.showModeDropdown = false;
+          this.showSizeDropdown = false;
+        }
+      },
+      toggleSizeDropdown() {
+        this.showSizeDropdown = !this.showSizeDropdown;
+        if (this.showSizeDropdown) {
+          this.showAlignDropdown = false;
+          this.showModeDropdown = false;
+        }
       },
       handleClose(e) {
         if (!this.$el.contains(e.target)) {
           this.showModeDropdown = false;
           this.showAlignDropdown = false;
+          this.showSizeDropdown = false;
         }
       }
     },
@@ -558,7 +517,7 @@
 		<div class="k-field pw-editor-field">
 			<header class="k-field-header" style="display:flex;align-items:center;overflow:visible;">
 				<label class="k-label k-field-label" style="flex:1;">
-					<span class="k-label-text">{{ $t('pw.field.text') }}</span>
+					<span class="k-label-text">{{ translatedLabel }}</span>
 				</label>
 				<div class="k-button-group">
 					<span style="position:relative;">
@@ -584,6 +543,29 @@
 							</div>
 						</dialog>
 					</span>
+					<span v-if="size" style="position:relative;">
+						<button
+							data-has-icon="true"
+							data-has-text="false"
+							aria-label="Size"
+							data-size="xs"
+							data-variant="filled"
+							type="button"
+							class="input-focus k-button"
+							@click.stop="toggleSizeDropdown"
+						><span class="k-button-icon">
+							<svg aria-hidden="true" class="k-icon">
+								<use :xlink:href="'#icon-' + sizeIcon(current.size)"></use>
+							</svg>
+						</span></button>
+						<dialog v-if="showSizeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
+							<div class="k-navigate">
+								<button v-for="opt in sizeOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setSize(opt)">
+									<span class="k-button-icon"><svg class="k-icon"><use :xlink:href="'#icon-' + sizeIcon(opt)"></use></svg></span>
+								</button>
+							</div>
+						</dialog>
+					</span>
 					<span v-if="showModeSwitcher" style="position:relative;">
 						<button
 							data-has-icon="false"
@@ -594,7 +576,7 @@
 							type="button"
 							class="input-focus k-button"
 							@click.stop="toggleModeDropdown"
-						><span class="k-button-text"> {{ translatedLabel }} </span></button>
+						><span class="k-button-text"> {{ modeLabel }} </span></button>
 						<dialog v-if="showModeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
 							<div class="k-navigate">
 								<button v-for="m in writerModes" :key="m" type="button" class="k-button k-dropdown-item" data-has-text="true" data-has-icon="false" @click.stop="setMode(m)">
@@ -965,7 +947,6 @@
     fields: {
       htmlheadline,
       pwtext,
-      pwtextarea,
       pweditor,
       pwalign,
       pwicon
@@ -985,8 +966,11 @@
       "faq": '<path d="M5.45455 15L1 18.5V3C1 2.44772 1.44772 2 2 2H17C17.5523 2 18 2.44772 18 3V15H5.45455ZM4.76282 13H16V4H3V14.3851L4.76282 13ZM8 17H18.2372L20 18.3851V8H21C21.5523 8 22 8.44772 22 9V22.5L17.5455 19H9C8.44772 19 8 18.5523 8 18V17Z"/>',
       "definitionlist": '<path d="M8 4H21V6H8V4ZM3 3.5H6V6.5H3V3.5ZM3 10.5H6V13.5H3V10.5ZM3 17.5H6V20.5H3V17.5ZM8 11H21V13H8V11ZM8 18H21V20H8V18Z"/>',
       "item": '<path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM5 5V19H19V5H5ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"/>',
-      "align-left": '<path transform="rotate(-90 12 12)"  d="M3 3H21V5H3V3ZM8 11V21H6V11H3L7 7L11 11H8ZM18 11V21H16V11H13L17 7L21 11H18Z"/>',
-      "align-right": '<path transform="rotate(90 12 12)"  d="M3 3H21V5H3V3ZM8 11V21H6V11H3L7 7L11 11H8ZM18 11V21H16V11H13L17 7L21 11H18Z"/>'
+      "align-left": '<path transform="rotate(-90 12 12)" d="M3 3H21V5H3V3ZM8 11V21H6V11H3L7 7L11 11H8ZM18 11V21H16V11H13L17 7L21 11H18Z"/>',
+      "align-right": '<path transform="rotate(90 12 12)" d="M3 3H21V5H3V3ZM8 11V21H6V11H3L7 7L11 11H8ZM18 11V21H16V11H13L17 7L21 11H18Z"/>',
+      "textsize-normal": '<path d="M10 6V21H8V6H2V4H16V6H10ZM18 14V21H16V14H13V12H21V14H18Z"/>',
+      "textsize-large": '<path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"/>',
+      "textsize-xlarge": '<path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"/>'
     }
   });
 })();

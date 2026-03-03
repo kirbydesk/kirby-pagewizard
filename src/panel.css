@@ -1,3 +1,186 @@
+div.k-blocks {
+	background-color: transparent !important;
+	box-shadow: none !important;
+
+	.k-blocks-list {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+div.k-block-container {
+	border-bottom: 0 !important;
+	margin-bottom: var(--spacing-1);
+	padding: 0;
+	box-shadow: var(--shadow);
+
+	&:has(.pwPreview[data-margintop="true"]) {
+		margin-top: 1rem;
+	}
+	&:has(.pwPreview[data-marginbottom="true"]) {
+		margin-bottom: 1rem;
+	}
+
+	&[data-selected="true"] {
+		div.pwPreview div.blockinfo div {
+			display: flex;
+			gap: var(--spacing-1);
+		}
+		&[data-hidden="true"] div.pwPreview div.blockinfo div {
+			display: none;
+		}
+	}
+	.ishidden {
+		opacity:.25;
+	}
+
+	div.pwPreview {
+		position: relative;
+		border-radius: var(--rounded) !important;
+		background-color: var(--pw-color-block-background, transparent);
+
+		.placeholder {
+			font-weight: var(--font-normal);
+			opacity: 0.4;
+		}
+		.linktext {
+			display: inline-flex;
+			align-items: center;
+			gap: var(--spacing-1);
+
+			.k-icon {
+				color: var(--color-text-dimmed);
+			}
+		}
+
+		.items {
+			padding: var(--spacing-2) 0;
+		}
+	}
+}
+
+
+span.pw-align-btn {
+	margin-right: 0.4rem;
+}
+
+.pw-dropdown {
+  position: absolute;
+  top: 100%;
+  left: auto;
+	right: 0;
+  z-index: 100;
+
+	.k-dropdown-item {
+		min-width: auto;
+		padding: 0.2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.k-dropdown-item[data-has-text="true"] {
+		justify-content: flex-start;
+		padding-inline: 0.5rem;
+	}
+}
+
+/* Extend kirby field textarea */
+.pw-editor-field {
+	.pw-textarea {
+		min-height: 4.5em;
+		resize: vertical;
+	}
+}
+
+
+
+
+/* Add custom Panel tags */
+span.tag.screensize {
+	display: inline-block;
+	margin-bottom: .3rem;
+  padding-inline: var(--spacing-1);
+  font-size: var(--text-xs);
+	background: var(--color-yellow-300);
+  border-radius: var(--rounded);
+	color: light-dark(var(--color-yellow-800),var(--color-yellow-900));
+  outline: 1px solid light-dark(var(--color-yellow-500),var(--color-yellow-900));
+  outline-offset: -1px;
+}
+
+/* Extend Kirby field headline with class property */
+.k-headline-field.subheadline {
+	padding-top: 0;
+	h2.k-headline {
+		font-size: var(--text-lg);
+	}
+}
+/* Extend Kirby field line with class property */
+.k-line-field.small {
+	height: 2px;
+}
+
+/* Patch Kirby Background color for empty files field */
+.k-box.k-empty {
+	background-color: light-dark(var(--color-gray-250),var(--color-gray-950));
+}
+
+/* Patch Kirbyblock Multicolumn: 2 headline fields in drawer side-by-side */
+.k-headline-field.patch {
+	padding-top: 0;
+}
+
+/* Grid settings */
+.pwGrid {
+  display: block;
+	border-radius: var(--rounded) !important;
+
+	.pwGridItem {
+		display: block;
+
+		&[data-paddingtop="true"] {
+			padding-top: 1rem;
+		}
+		&[data-paddingright="true"] {
+			padding-right: 1rem;
+		}
+		&[data-paddingbottom="true"] {
+			padding-bottom: 1rem;
+		}
+		&[data-paddingleft="true"] {
+			padding-left: 1rem;
+		}
+	}
+
+	.contents > * + * {
+  	margin-top: .6rem; /* > * + * = all direct children except the first (lobotomized owl) */
+	}
+
+}
+@media (min-width: 640px) {
+  .pwGrid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+		padding: 0;
+		gap: 1rem;
+
+		.pwGridItem {
+			/*padding: var(--spacing-3);*/
+			border-left: 1px dashed color-mix(in srgb, var(--pw-color-text) 40%, transparent);
+			border-right: 1px dashed color-mix(in srgb, var(--pw-color-text) 40%, transparent);
+			border-radius: var(--rounded) !important;
+			background-color: var(--pw-color-block-background, var(--block-color-back));
+			grid-column: var(--grid-start-sm) / span var(--grid-span-sm);
+		}
+	}
+}
+@media (min-width: 768px){.pwGrid .pwGridItem { grid-column: var(--grid-start-md) / span var(--grid-span-md);}}
+@media (min-width: 1024px){.pwGrid .pwGridItem { grid-column: var(--grid-start-lg) / span var(--grid-span-lg);}}
+@media (min-width: 1280px){.pwGrid .pwGridItem { grid-column: var(--grid-start-xl) / span var(--grid-span-xl);}}
+
+
+
+
 /* ---- pwicon field ---- */
 .pw-icon-search {
 	display: flex;
@@ -130,178 +313,3 @@
 		line-height: 1.2;
 	}
 }
-
-div.k-blocks {
-	background-color: transparent !important;
-	box-shadow: none !important;
-
-	.k-blocks-list {
-		display: flex;
-		flex-direction: column;
-	}
-}
-
-div.k-block-container {
-	border-bottom: 0 !important;
-	margin-bottom: var(--spacing-1);
-	padding: 0;
-	box-shadow: var(--shadow);
-
-	&:has(.pwPreview[data-margintop="true"]) {
-		margin-top: 1rem;
-	}
-	&:has(.pwPreview[data-marginbottom="true"]) {
-		margin-bottom: 1rem;
-	}
-
-	&[data-selected="true"] {
-		div.pwPreview div.blockinfo div {
-			display: flex;
-			gap: var(--spacing-1);
-		}
-		&[data-hidden="true"] div.pwPreview div.blockinfo div {
-			display: none;
-		}
-	}
-	.ishidden {
-		opacity:.25;
-	}
-
-	div.pwPreview {
-		position: relative;
-		border-radius: var(--rounded) !important;
-		background-color: var(--pw-color-block-background, transparent);
-
-		.placeholder {
-			font-weight: var(--font-normal);
-			opacity: 0.4;
-		}
-		.linktext {
-			display: inline-flex;
-			align-items: center;
-			gap: var(--spacing-1);
-
-			.k-icon {
-				color: var(--color-text-dimmed);
-			}
-		}
-
-		.items {
-			padding: var(--spacing-2) 0;
-		}
-	}
-}
-
-
-span.pw-align-btn {
-	margin-right: 0.4rem;
-}
-
-.pw-dropdown {
-  position: absolute;
-  top: 100%;
-  left: auto;
-	right: 0;
-  z-index: 100;
-
-	.k-dropdown-item {
-		min-width: auto;
-		padding: 0.2rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.k-dropdown-item[data-has-text="true"] {
-		justify-content: flex-start;
-		padding-inline: 0.5rem;
-	}
-}
-
-/* Extend kirby field textarea */
-.pw-textarea-field {
-	.pw-textarea {
-		min-height: 2.5rem;
-		resize: vertical;
-	}
-}
-
-
-
-
-/* Add custom Panel tags */
-span.tag.screensize {
-	display: inline-block;
-	margin-bottom: .3rem;
-  padding-inline: var(--spacing-1);
-  font-size: var(--text-xs);
-	background: var(--color-yellow-300);
-  border-radius: var(--rounded);
-	color: light-dark(var(--color-yellow-800),var(--color-yellow-900));
-  outline: 1px solid light-dark(var(--color-yellow-500),var(--color-yellow-900));
-  outline-offset: -1px;
-}
-
-/* Extend Kirby field headline with class property */
-.k-headline-field.subheadline {
-	padding-top: 0;
-	h2.k-headline {
-		font-size: var(--text-lg);
-	}
-}
-/* Extend Kirby field line with class property */
-.k-line-field.small {
-	height: 2px;
-}
-
-/* Patch Kirby Background color for empty files field */
-.k-box.k-empty {
-	background-color: light-dark(var(--color-gray-250),var(--color-gray-950));
-}
-
-/* Patch Kirbyblock Multicolumn: 2 headline fields in drawer side-by-side */
-.k-headline-field.patch {
-	padding-top: 0;
-}
-
-/* Grid settings */
-.pwGrid {
-  display: block;
-	border-radius: var(--rounded) !important;
-
-	.pwGridItem {
-		display: block;
-
-		&[data-paddingtop="true"] {
-			padding-top: 1rem;
-		}
-		&[data-paddingright="true"] {
-			padding-right: 1rem;
-		}
-		&[data-paddingbottom="true"] {
-			padding-bottom: 1rem;
-		}
-		&[data-paddingleft="true"] {
-			padding-left: 1rem;
-		}
-	}
-}
-@media (min-width: 640px) {
-  .pwGrid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-		padding: 0;
-		gap: 1rem;
-
-		.pwGridItem {
-			/*padding: var(--spacing-3);*/
-			border-left: 1px dashed color-mix(in srgb, var(--pw-color-text) 40%, transparent);
-			border-right: 1px dashed color-mix(in srgb, var(--pw-color-text) 40%, transparent);
-			border-radius: var(--rounded) !important;
-			background-color: var(--pw-color-block-background, var(--block-color-back));
-			grid-column: var(--grid-start-sm) / span var(--grid-span-sm);
-		}
-	}
-}
-@media (min-width: 768px){.pwGrid .pwGridItem { grid-column: var(--grid-start-md) / span var(--grid-span-md);}}
-@media (min-width: 1024px){.pwGrid .pwGridItem { grid-column: var(--grid-start-lg) / span var(--grid-span-lg);}}
-@media (min-width: 1280px){.pwGrid .pwGridItem { grid-column: var(--grid-start-xl) / span var(--grid-span-xl);}}

@@ -28,7 +28,6 @@ export default {
 </script>
 <style scoped>
 .k-button-group {
-	margin: var(--spacing-4) 0 var(--spacing-2);
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--spacing-2);

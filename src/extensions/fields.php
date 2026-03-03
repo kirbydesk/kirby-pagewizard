@@ -32,14 +32,9 @@ return [
 			},
 			'level' => function (string $level = null) {
 				return $level;
-			}
-    ]
-	],
-	'pwtextarea' => [
-		'extends' => 'textarea',
-		'props' => [
-			'align' => function (string $align = null) {
-				return $align;
+			},
+			'size' => function (string $size = null) {
+				return $size;
 			}
 		]
 	],
@@ -48,6 +43,12 @@ return [
 		'props' => [
 			'value' => function (string $value = null) {
 				return $value;
+			},
+			'size' => function (string $size = null) {
+				return $size;
+			},
+			'fieldHelp' => function (string $fieldHelp = null) {
+				return $fieldHelp;
 			}
 		]
 	],

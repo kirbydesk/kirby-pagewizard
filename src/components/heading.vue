@@ -1,5 +1,5 @@
 <template>
-	<div class="pwHeading" :data-align="align" :data-lvl="level">
+	<div class="pwHeading" :data-align="align" :data-lvl="level" :data-size="size">
     <div v-if="text" v-html="text"></div>
     <div v-else class="placeholder">
       {{ $t('pw.field.heading.placeholder') }}
@@ -37,31 +37,46 @@ export default {
     align() {
       const { align = this.alignDefault } = this.parsedData;
       return align;
+    },
+    size() {
+      const { size = 'normal' } = this.parsedData;
+      return size;
     }
   }
 }
 </script>
 <style scoped>
 div.pwHeading {
-	margin-bottom: var(--spacing-2);
-	line-height: var(--text-line-height);
 	color: var(--pw-color-heading, inherit);
+	line-height: 1.3;
 
 	&[data-lvl="h1"]{
-		font-size: var(--text-2xl);
+		font-size: var(--text-xl);
 		font-weight: var(--font-normal);
+
+		&[data-size="large"]{ font-size: var(--text-2xl); }
+		&[data-size="xlarge"]{ font-size: var(--text-3xl); }
 	}
 	&[data-lvl="h2"]{
-		font-size: var(--text-xl);
+		font-size: var(--text-lg);
 		font-weight: var(--font-semi);
+
+		&[data-size="large"]{ font-size: var(--text-xl); }
+		&[data-size="xlarge"]{ font-size: var(--text-2xl); }
 	}
 	&[data-lvl="h3"]{
-		font-size: var(--text-lg);
-		font-weight: var(--font-bold);
-	}
-	&[data-lvl="h4"]{
 		font-size: var(--text-md);
 		font-weight: var(--font-bold);
+
+		&[data-size="large"]{ font-size: var(--text-lg); }
+		&[data-size="xlarge"]{ font-size: var(--text-xl); }
+	}
+	&[data-lvl="h4"]{
+		font-size: var(--text-sm);
+		font-weight: var(--font-bold);
+
+		&[data-size="large"]{ font-size: var(--text-md); }
+		&[data-size="xlarge"]{ font-size: var(--text-lg); }
 	}
 	&[data-align="left"] {
     text-align: left;

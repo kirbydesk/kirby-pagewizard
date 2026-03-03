@@ -7,10 +7,12 @@ $quote  = ($quoteRaw === null || $quoteRaw === '') ? [] : (json_decode($quoteRaw
 $author = ($authorRaw === null || $authorRaw === '') ? [] : (json_decode($authorRaw, true) ?? []);
 
 
-if (!empty($quote['text'])):
+$quoteText = $quote['textarea'] ?? '';
+
+if (!empty($quoteText)):
 
 	echo '<figure>' . "\n";
-	echo '<blockquote data-field="quote" data-align="'.$quote['align'].'">'.$quote['text'].'</blockquote>' . "\n";
+	echo '<blockquote data-field="quote" data-align="'.$quote['align'].'" data-size="'.($quote['size'] ?? 'normal').'">'.$quoteText.'</blockquote>' . "\n";
 
 	if (!empty($author['text'])):
 		echo '<figcaption><cite data-field="cite" data-align="'.$author['align'].'">'.$author['text'].'</cite></figcaption>' . "\n";

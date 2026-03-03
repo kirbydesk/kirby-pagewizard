@@ -5,16 +5,17 @@ $data  = json_decode($content->editor()->value(), true) ?? [];
 $mode  = $data['mode'] ?? 'textarea';  // active editor mode: textarea | writer | markdown
 $text  = $data[$mode] ?? '';           // text for the active mode
 $align = $data['align'] ?? 'left';    // shared alignment
+$size  = $data['size'] ?? 'normal';   // shared size
 
 if (!empty($text)):
 
 	// Markdown: render with kirbytext()
 	if ($mode === 'markdown'):
-		echo '<div data-field="markdown" data-align="'.$align.'">'.kirbytext($text).'</div>'."\n";
+		echo '<div data-field="markdown" data-align="'.$align.'" data-size="'.$size.'">'.kirbytext($text).'</div>'."\n";
 
 	// Textarea / Writer: output as-is
 	else:
-		echo '<div data-field="'.$mode.'" data-align="'.$align.'">'.$text.'</div>'."\n";
+		echo '<div data-field="'.$mode.'" data-align="'.$align.'" data-size="'.$size.'">'.$text.'</div>'."\n";
 
 	endif;
 

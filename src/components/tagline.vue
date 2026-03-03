@@ -40,9 +40,8 @@ export default {
 <style scoped>
 div.pwTagline {
   font-size: var(--text-sm);
-	line-height: var(--text-line-height);
+	line-height: 1.3;
 	text-transform: uppercase;
-	margin-bottom: var(--spacing-1);
 	color: var(--pw-color-tagline, inherit);
 
 	&[data-align="left"] {

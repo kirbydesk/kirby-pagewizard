@@ -1,5 +1,6 @@
 ---
 label: pw.field.quote
-type: pwtextarea
-help: pw.field.quote.help
+type: pweditor
+writerModes: [textarea]
+fieldHelp: pw.field.quote.help
 placeholder: pw.field.quote.placeholder

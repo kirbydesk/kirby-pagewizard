@@ -9,7 +9,7 @@
 	Global colors
 ------------------------------------------------------------------------------------------------*/
 body {
-	background-color: #FFFFFF;
+	background-color: #FFFFFF; /* #f0f6fc */
 }
 
 
@@ -17,7 +17,7 @@ body {
 	Default colors
 ------------------------------------------------------------------------------------------------*/
 section[data-block]{
-	background-color: #f0f6fc;
+	background-color: #FFFFFF;
 
 	/* -------------- Links --------------*/
 	a {

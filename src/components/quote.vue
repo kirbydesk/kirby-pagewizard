@@ -1,6 +1,6 @@
 <template>
   <div class="pwquote">
-    <div v-if="quoteText" class="quote" :data-align="quoteAlign" v-html="nl2br(quoteText)"></div>
+    <div v-if="quoteText" class="quote" :data-align="quoteAlign" :data-size="size" v-html="nl2br(quoteText)"></div>
     <div v-else class="quote placeholder" :data-align="quoteAlign">
       {{ $t('pw.field.quote.placeholder') }}
     </div>
@@ -27,9 +27,9 @@ export default {
       try {
         const d = typeof val === 'string' ? JSON.parse(val) : val;
         if (d.mode !== undefined) {
-          return { text: d.writer || d.textarea || d.markdown || '', align: d.align || this.alignQuoteDefault, html: d.mode === 'writer' };
+          return { text: d.writer || d.textarea || d.markdown || '', align: d.align || this.alignQuoteDefault, size: d.size || 'normal', html: d.mode === 'writer' };
         }
-        return { text: d.text || '', align: d.align || this.alignQuoteDefault, html: false };
+        return { text: d.text || '', align: d.align || this.alignQuoteDefault, size: 'normal', html: false };
       } catch(e) {
         return { text: val, align: this.alignQuoteDefault, html: false };
       }
@@ -51,6 +51,10 @@ export default {
     authorText() {
       const { text = '' } = this.parsedAuthorData;
       return text;
+    },
+    size() {
+      const { size = 'normal' } = this.parsedQuoteData;
+      return size;
     },
     quoteAlign() {
       if (this.alignQuote) return this.alignQuote;
@@ -87,13 +91,16 @@ div.pwquote {
 	}
 
 	div.quote {
-		font-size: var(--text-3xl);
-		line-height: var(--text-line-height);
+		font-size: var(--text-xl);
+		line-height: 1.3;
+		font-style: italic;
 		color: var(--pw-color-quote, inherit);
+
+		&[data-size="large"]{ font-size: var(--text-2xl); }
+		&[data-size="xlarge"]{ font-size: var(--text-3xl); }
 	}
 	div.author {
-		margin: var(--spacing-2) 0;
-		font-style: italic;
+		margin: var(--spacing-1) 0 0;
 		color: var(--pw-color-cite, inherit);
 	}
 }

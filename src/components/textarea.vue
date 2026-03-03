@@ -1,5 +1,5 @@
 <template>
-  <div class="pwtext" :data-align="align">
+  <div class="pwtext" :data-align="align" :data-size="size">
     <div v-if="text" v-html="nl2br(text)"></div>
     <div v-else class="placeholder">
       {{ $t('pw.field.text-textarea.placeholder') }}
@@ -10,7 +10,8 @@
 export default {
   props: {
     value: String,
-    align: { type: String, default: 'left' }
+    align: { type: String, default: 'left' },
+    size:  { type: String, default: null }
   },
   computed: {
     text() {
@@ -29,8 +30,10 @@ export default {
 div.pwtext {
   font-size: var(--text-sm);
 	line-height: var(--text-line-height);
-	margin-bottom: var(--spacing-2);
 	color: var(--pw-color-text, inherit);
+
+	&[data-size="large"]{ font-size: var(--text-md);line-height: 1.4; }
+	&[data-size="xlarge"]{ font-size: var(--text-lg);line-height: 1.3; }
 
 	&[data-align="left"] {
     text-align: left;

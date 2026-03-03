@@ -12,7 +12,6 @@ import pwButtons from "@/components/buttons.vue";
 // Fields
 import htmlheadline from "@/fields/htmlheadline.js";
 import pwtext      from "@/fields/pwtext.js";
-import pwtextarea  from "@/fields/pwtextarea.js";
 import pweditor    from "@/fields/pweditor.js";
 import pwalign     from "@/fields/pwalign.js";
 import pwicon      from "@/fields/pwicon.js";
@@ -31,7 +30,6 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 	fields: {
 		htmlheadline,
 		pwtext,
-		pwtextarea,
 		pweditor,
 		pwalign,
 		pwicon,
@@ -63,8 +61,14 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		"item":
 			'<path d="M4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM5 5V19H19V5H5ZM11.0026 16L6.75999 11.7574L8.17421 10.3431L11.0026 13.1716L16.6595 7.51472L18.0737 8.92893L11.0026 16Z"/>',
 		"align-left":
-			'<path transform="rotate(-90 12 12)"  d="M3 3H21V5H3V3ZM8 11V21H6V11H3L7 7L11 11H8ZM18 11V21H16V11H13L17 7L21 11H18Z"/>',
+			'<path transform="rotate(-90 12 12)" d="M3 3H21V5H3V3ZM8 11V21H6V11H3L7 7L11 11H8ZM18 11V21H16V11H13L17 7L21 11H18Z"/>',
 		"align-right":
-			'<path transform="rotate(90 12 12)"  d="M3 3H21V5H3V3ZM8 11V21H6V11H3L7 7L11 11H8ZM18 11V21H16V11H13L17 7L21 11H18Z"/>'
+			'<path transform="rotate(90 12 12)" d="M3 3H21V5H3V3ZM8 11V21H6V11H3L7 7L11 11H8ZM18 11V21H16V11H13L17 7L21 11H18Z"/>',
+		"textsize-normal":
+			'<path d="M10 6V21H8V6H2V4H16V6H10ZM18 14V21H16V14H13V12H21V14H18Z"/>',
+		"textsize-large":
+			'<path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"/>',
+		"textsize-xlarge":
+			'<path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"/>'
 		}
 });
