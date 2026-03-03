@@ -1,0 +1,13 @@
+---
+label: pw.field.overlay-type.label
+type: toggles
+translate: false
+options:
+  - value: solid
+    text:
+      *: pw.option.solid
+  - value: gradient
+    text:
+      *: pw.option.gradient
+help: pw.field.overlay-type.help
+width: 1/3

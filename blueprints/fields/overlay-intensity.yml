@@ -1,0 +1,11 @@
+---
+label: pw.field.overlay-intensity.label
+type: range
+default: 50
+min: 5
+max: 95
+step: 5
+after: "%"
+help: pw.field.overlay-intensity.help
+width: 2/3
+translate: false

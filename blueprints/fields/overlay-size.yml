@@ -1,24 +1,21 @@
 ---
-label: pw.field.fade-size
+label: pw.field.overlay-size.label
 type: toggles
 required: true
 default: "medium"
 options:
-  - value: xsmall
-    text:
-      *: "25%"
   - value: small
     text:
-      *: "33%"
+      *: "25%"
   - value: medium
     text:
       *: "50%"
   - value: large
     text:
       *: "75%"
-  - value: fullscreen
+  - value: xlarge
     text:
       *: "100%"
-help: pw.field.fade-size.help
-width: 3/4
+help: pw.field.overlay-size.help
+width: 1/2
 translate: false

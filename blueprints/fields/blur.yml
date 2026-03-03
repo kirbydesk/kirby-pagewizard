@@ -1,0 +1,10 @@
+---
+label: pw.field.blur.label
+type: range
+default: 0
+min: 0
+max: 20
+step: 2
+after: "px"
+help: pw.field.blur.help
+translate: false

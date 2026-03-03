@@ -1,8 +1,9 @@
 ---
-label: pw.field.fade-position.label
+label: pw.field.overlay-position.label
 type: toggles
 required: true
 default: "left"
+labels: false
 options:
   - value: left
     text:
@@ -20,5 +21,6 @@ options:
     text:
       *: pw.option.bottom
     icon: text-bottom
-help: pw.field.fade-position.help
+help: pw.field.overlay-position.help
+width: 1/2
 translate: false
