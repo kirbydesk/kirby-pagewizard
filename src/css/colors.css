@@ -48,24 +48,6 @@ section[data-block]{
 		color: #262626;
 	}
 
-	/* -------------- Buttons --------------*/
-	[data-field="buttons"] [data-field="button"] a {
-		color: #FFFFFF;
-		background-color: #1D548B;
-		border-color: transparent;
-
-		&:hover {
-			color: #FFFFFF;
-			background-color: #2A6FAE;
-			border-color: transparent;
-		}
-		&:active {
-			color: #FFFFFF;
-			background-color: #164073;
-			border-color: transparent;
-		}
-	}
-
 	/* -------------- Icon --------------*/
 	[data-field="icon"] svg {
 		fill: #6B7280;
@@ -152,24 +134,6 @@ section[data-block][data-style="variant"] {
 		color: #FFFFFF;
 	}
 
-	/* -------------- Buttons --------------*/
-	[data-field="buttons"] [data-field="button"] a {
-		color: #262626;
-		background-color: #FFFFFF;
-		border-color: transparent;
-
-		&:hover {
-			color: #262626;
-			background-color: #E6E6E6;
-			border-color: transparent;
-		}
-		&:active {
-			color: #262626;
-			background-color: #CCCCCC;
-			border-color: transparent;
-		}
-	}
-
 	/* -------------- Icon --------------*/
 	[data-field="icon"] svg {
 		fill: #B0C4DE;
@@ -213,10 +177,27 @@ section[data-block][data-style="variant"] {
 /*------------------------------------------------------------------------------------------------
 	Button color styles
 ------------------------------------------------------------------------------------------------*/
+section[data-block] [data-field="buttons"] [data-field="button"] a {
+	color: #FFFFFF;
+	background-color: #1D548B;
+	border-color: transparent;
+
+	&:hover {
+		color: #FFFFFF;
+		background-color: #2A6FAE;
+		border-color: transparent;
+	}
+	&:active {
+		color: #FFFFFF;
+		background-color: #164073;
+		border-color: transparent;
+	}
+}
+/*------------------------------------------------------------------------------------------------
+	Button variant color styles
+------------------------------------------------------------------------------------------------*/
 section[data-block][data-style="variant"],
 section[data-block][data-style="custom"][data-button-style="variant"] {
-
-	/* -------------- Buttons --------------*/
 	[data-field="buttons"] [data-field="button"] a {
 		color: #262626;
 		background-color: #FFFFFF;

@@ -53,7 +53,7 @@ export default {
       return text;
     },
     size() {
-      const { size = 'normal' } = this.parsedQuoteData;
+      const { size = '2xl' } = this.parsedQuoteData;
       return size;
     },
     quoteAlign() {
@@ -96,8 +96,13 @@ div.pwquote {
 		font-style: italic;
 		color: var(--pw-color-quote, inherit);
 
-		&[data-size="large"]{ font-size: var(--text-2xl); }
-		&[data-size="xlarge"]{ font-size: var(--text-3xl); }
+		&[data-size="xs"]  { font-size: var(--text-xs); }
+		&[data-size="sm"]  { font-size: var(--text-sm); }
+		&[data-size="md"]  { font-size: var(--text-md); }
+		&[data-size="lg"]  { font-size: var(--text-lg); }
+		&[data-size="xl"]  { font-size: var(--text-xl); }
+		&[data-size="2xl"] { font-size: var(--text-2xl); }
+		&[data-size="3xl"] { font-size: var(--text-3xl); }
 	}
 	div.author {
 		margin: var(--spacing-1) 0 0;

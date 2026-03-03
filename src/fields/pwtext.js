@@ -18,14 +18,14 @@ export default {
 		},
 		sizeOptions: {
 			type: Array,
-			default: () => ['normal', 'large', 'xlarge']
+			default: () => ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']
 		}
 	},
 	data() {
 		return {
 			currentAlign: this.parseValue().align || (this.align || 'left'),
 			currentLevel: this.parseValue().level || (this.level || 'h2'),
-			currentSize: this.parseValue().size || this.size || 'normal',
+			currentSize: this.parseValue().size || this.size || '2xl',
 			showAlignDropdown: false,
 			showLevelDropdown: false,
 			showSizeDropdown: false
@@ -104,8 +104,8 @@ export default {
 				this.closeDropdowns();
 			}
 		},
-		sizeIcon(size) {
-			return 'textsize-' + (size || 'normal');
+		sizeLabel(size) {
+			return (size || 'md').toUpperCase();
 		}
 	},
 	mounted() {
@@ -160,19 +160,15 @@ export default {
 					</span>
 					<span v-if="size" style="position:relative;">
 						<button
-							data-has-icon="true"
-							data-has-text="false"
+							data-has-icon="false"
+							data-has-text="true"
 							aria-label="Size"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
 							class="input-focus k-button"
 							@click.stop="toggleSizeDropdown"
-						><span class="k-button-icon">
-							<svg aria-hidden="true" class="k-icon">
-								<use :xlink:href="'#icon-' + sizeIcon(currentSize)"></use>
-							</svg>
-						</span></button>
+						><span class="k-button-text pw-size-label">{{ sizeLabel(currentSize) }}</span></button>
 						<dialog v-if="showSizeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
 							<div class="k-navigate">
 								<button
@@ -181,11 +177,10 @@ export default {
 									@click.stop="updateSize(option)"
 									type="button"
 									class="k-button k-dropdown-item"
-									data-has-icon="true"
+									data-has-text="true"
+									data-has-icon="false"
 								>
-									<span class="k-button-icon">
-										<svg class="k-icon"><use :xlink:href="'#icon-' + sizeIcon(option)"></use></svg>
-									</span>
+									<span class="k-button-text pw-size-label">{{ sizeLabel(option) }}</span>
 								</button>
 							</div>
 						</dialog>
