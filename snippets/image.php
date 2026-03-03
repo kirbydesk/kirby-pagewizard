@@ -45,7 +45,7 @@ if ($file):
 	echo '<div data-field="image" data-size="'.$size.'" data-align="'.$alignment.'">';
 	echo '<figure';
 	e($crop, ' data-crop="cover"');
-	e(!empty($ratio), ' data-ratio="'.$ratio.'"');
+	e(!empty($ratio) && $ratio !== 'auto', ' data-ratio="'.$ratio.'"');
 	e($zoom, ' data-zoom');
 	echo '>';
 	echo '<div>';

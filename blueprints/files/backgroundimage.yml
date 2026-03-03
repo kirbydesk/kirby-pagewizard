@@ -9,5 +9,4 @@ create:
   width: 1280
   format: webp
 tabs:
-  image: tabs/files/backgroundimage
   legal: tabs/files/legal

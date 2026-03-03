@@ -3,12 +3,13 @@
 		<div class="image">
 			<div class="pattern" :class="size">
 				<figure
-					class="k-frame k-image-frame k-image"
-					:class="{ 'zoom': computedZoom }"
-					:style="{
+					:class="computedRatio
+						? ['k-frame', 'k-image-frame', 'k-image', { zoom: computedZoom }]
+						: ['k-image', 'ratio-auto', { zoom: computedZoom }]"
+					:style="computedRatio ? {
 						'--fit': computedCrop ? 'cover' : 'contain',
 						'--ratio': computedRatio
-					}"
+					} : {}"
 				>
 					<img :src="src" :srcset="srcset" />
 					<div><k-icon type="search"></k-icon></div>
@@ -49,7 +50,9 @@ export default {
 			return this.imageContent?.imagecrop || false;
 		},
 		computedRatio() {
-			return this.imageContent?.imageratio || '1/1';
+			const ratio = this.imageContent?.imageratio;
+			if (!ratio || ratio === 'auto') return null;
+			return ratio;
 		},
 		computedZoom() {
 			return this.imageContent?.imagezoom || false;
@@ -145,11 +148,17 @@ div.image, div.controls {
 	.fullscreen { width: 100%;max-width: 100%;}
 }
 
+figure.ratio-auto {
+	width: 100%;
+
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+}
+
 </style>
-
-
-
-
 
 
 

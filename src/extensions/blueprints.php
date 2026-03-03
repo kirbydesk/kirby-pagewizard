@@ -16,7 +16,7 @@
 		}
 		return $data;
 	},
-	'tabs/files/backgroundimage' => __DIR__ . '/../../blueprints/tabs/files/backgroundimage.yml',
+
 	'tabs/files/image' => __DIR__ . '/../../blueprints/tabs/files/image.yml',
 	'tabs/files/legal' => __DIR__ . '/../../blueprints/tabs/files/legal.yml',
 	'tabs/files/video' => __DIR__ . '/../../blueprints/tabs/files/video.yml',

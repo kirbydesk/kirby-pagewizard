@@ -2,8 +2,9 @@
 label: pw.field.image-ratio
 type: select
 required: true
-default: 1/1
+default: auto
 options:
+  auto: 'Auto'
   1/1: '1:1'
   16/9: '16:9'
   10/8: '10:8'
