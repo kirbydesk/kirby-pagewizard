@@ -103,6 +103,9 @@ div.pwquote {
 		&[data-size="xl"]  { font-size: var(--text-xl); }
 		&[data-size="2xl"] { font-size: var(--text-2xl); }
 		&[data-size="3xl"] { font-size: var(--text-3xl); }
+
+		&::before { content: "\201E"; }
+		&::after  { content: "\201C"; }
 	}
 	div.author {
 		margin: var(--spacing-1) 0 0;

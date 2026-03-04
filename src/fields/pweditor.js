@@ -5,8 +5,9 @@ export default {
 		placeholder: String,
 		fieldHelp:   String,
 		align:          { type: String, default: 'left' },
+		alignOptions:   { type: Array,  default: () => ['left', 'center', 'right'] },
 		size:           { type: String, default: null },
-		sizeOptions:    { type: Array,  default: () => ['normal', 'large', 'xlarge'] },
+		sizeOptions:    { type: Array,  default: null },
 		defaultMode:    { type: String, default: null },
 		writerModes:    { type: Array,  default: () => ['textarea', 'writer', 'markdown'] },
 		writerMarks:    { type: Array,  default: () => ['bold', 'italic', 'underline', 'strike', 'link'] },
@@ -91,8 +92,8 @@ export default {
 			this.showSizeDropdown = false;
 			this.emit();
 		},
-		sizeIcon(size) {
-			return 'textsize-' + (size || 'normal');
+		sizeLabel(size) {
+			return this.$t('pw.option.' + size, size);
 		},
 		onTextInput(e) {
 			this.current = { ...this.current, [this.current.mode]: e.target.value };
@@ -162,31 +163,27 @@ export default {
 						</span><span v-else class="k-button-text">···</span></button>
 						<dialog v-if="showAlignDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
 							<div class="k-navigate">
-								<button v-for="opt in ['left','center','right']" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setAlign(opt)">
+								<button v-for="opt in alignOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setAlign(opt)">
 									<span class="k-button-icon"><svg class="k-icon"><use :xlink:href="'#icon-text-' + opt"></use></svg></span>
 								</button>
 							</div>
 						</dialog>
 					</span>
-					<span v-if="size" style="position:relative;">
+					<span v-if="size && sizeOptions" style="position:relative;">
 						<button
-							data-has-icon="true"
-							data-has-text="false"
+							data-has-icon="false"
+							data-has-text="true"
 							aria-label="Size"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
 							class="input-focus k-button"
 							@click.stop="toggleSizeDropdown"
-						><span class="k-button-icon">
-							<svg aria-hidden="true" class="k-icon">
-								<use :xlink:href="'#icon-' + sizeIcon(current.size)"></use>
-							</svg>
-						</span></button>
+						><span class="k-button-text pw-size-label">{{ sizeLabel(current.size) }}</span></button>
 						<dialog v-if="showSizeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
 							<div class="k-navigate">
-								<button v-for="opt in sizeOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setSize(opt)">
-									<span class="k-button-icon"><svg class="k-icon"><use :xlink:href="'#icon-' + sizeIcon(opt)"></use></svg></span>
+								<button v-for="opt in sizeOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-text="true" data-has-icon="false" @click.stop="setSize(opt)">
+									<span class="k-button-text pw-size-label">{{ sizeLabel(opt) }}</span>
 								</button>
 							</div>
 						</dialog>

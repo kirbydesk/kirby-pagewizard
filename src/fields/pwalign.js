@@ -2,6 +2,7 @@ export default {
 	props: {
 		value: String,
 		align: { type: String, default: 'left' },
+		alignOptions: { type: Array, default: () => ['left', 'center', 'right'] },
 		alwaysVisible: { type: Boolean, default: false }
 	},
 	data() {
@@ -111,7 +112,7 @@ export default {
 			const navEl = document.createElement('div');
 			navEl.className = 'k-navigate';
 
-			['left', 'center', 'right'].forEach((opt) => {
+			this.alignOptions.forEach((opt) => {
 				const btn = document.createElement('button');
 				btn.type = 'button';
 				btn.className = 'k-button k-dropdown-item';

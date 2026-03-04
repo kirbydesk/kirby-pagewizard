@@ -32,19 +32,24 @@ export default {
   line-height: var(--text-line-height);
 	color: var(--pw-color-text, inherit);
 
-	&[data-size="large"]{ font-size: var(--text-md);line-height: 1.4; }
-	&[data-size="xlarge"]{ font-size: var(--text-lg);line-height: 1.3; }
-
-	&[data-align="left"] { text-align: left; }
-	&[data-align="center"] { text-align: center; }
-	&[data-align="right"] { text-align: right; }
-
+	&[data-size="large"] {
+		font-size: var(--text-lg);
+		line-height: 1.3;
+	}
+	&[data-align="left"] {
+		text-align: left;
+	}
+	&[data-align="center"] {
+		text-align: center;
+	}
+	&[data-align="right"] {
+		text-align: right;
+	}
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: bold;
 		margin:  0 0 .7em 0;
 		line-height: 1.3;
 	}
-
 }
 
 

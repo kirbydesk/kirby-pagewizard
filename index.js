@@ -140,7 +140,7 @@
       },
       sizeOptions: {
         type: Array,
-        default: () => ["xs", "sm", "md", "lg", "xl", "2xl", "3xl"]
+        default: null
       }
     },
     data() {
@@ -227,7 +227,7 @@
         }
       },
       sizeLabel(size) {
-        return (size || "md").toUpperCase();
+        return this.$t("pw.option." + size, size);
       }
     },
     mounted() {
@@ -247,7 +247,7 @@
 					<span class="k-label-text">{{ label }}</span>
 				</label>
 				<span v-else style="flex:1;"></span>
-				<div v-if="align || level || size" class="k-button-group">
+				<div v-if="align || level || (size && sizeOptions)" class="k-button-group">
 					<span v-if="align" style="position:relative;">
 						<button
 							data-has-icon="true"
@@ -280,7 +280,7 @@
 							</div>
 						</dialog>
 					</span>
-					<span v-if="size" style="position:relative;">
+					<span v-if="size && sizeOptions" style="position:relative;">
 						<button
 							data-has-icon="false"
 							data-has-text="true"
@@ -365,8 +365,9 @@
       placeholder: String,
       fieldHelp: String,
       align: { type: String, default: "left" },
+      alignOptions: { type: Array, default: () => ["left", "center", "right"] },
       size: { type: String, default: null },
-      sizeOptions: { type: Array, default: () => ["normal", "large", "xlarge"] },
+      sizeOptions: { type: Array, default: null },
       defaultMode: { type: String, default: null },
       writerModes: { type: Array, default: () => ["textarea", "writer", "markdown"] },
       writerMarks: { type: Array, default: () => ["bold", "italic", "underline", "strike", "link"] },
@@ -452,8 +453,8 @@
         this.showSizeDropdown = false;
         this.emit();
       },
-      sizeIcon(size) {
-        return "textsize-" + (size || "normal");
+      sizeLabel(size) {
+        return this.$t("pw.option." + size, size);
       },
       onTextInput(e) {
         this.current = { ...this.current, [this.current.mode]: e.target.value };
@@ -532,31 +533,27 @@
 						</span><span v-else class="k-button-text">···</span></button>
 						<dialog v-if="showAlignDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
 							<div class="k-navigate">
-								<button v-for="opt in ['left','center','right']" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setAlign(opt)">
+								<button v-for="opt in alignOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setAlign(opt)">
 									<span class="k-button-icon"><svg class="k-icon"><use :xlink:href="'#icon-text-' + opt"></use></svg></span>
 								</button>
 							</div>
 						</dialog>
 					</span>
-					<span v-if="size" style="position:relative;">
+					<span v-if="size && sizeOptions" style="position:relative;">
 						<button
-							data-has-icon="true"
-							data-has-text="false"
+							data-has-icon="false"
+							data-has-text="true"
 							aria-label="Size"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
 							class="input-focus k-button"
 							@click.stop="toggleSizeDropdown"
-						><span class="k-button-icon">
-							<svg aria-hidden="true" class="k-icon">
-								<use :xlink:href="'#icon-' + sizeIcon(current.size)"></use>
-							</svg>
-						</span></button>
+						><span class="k-button-text pw-size-label">{{ sizeLabel(current.size) }}</span></button>
 						<dialog v-if="showSizeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
 							<div class="k-navigate">
-								<button v-for="opt in sizeOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setSize(opt)">
-									<span class="k-button-icon"><svg class="k-icon"><use :xlink:href="'#icon-' + sizeIcon(opt)"></use></svg></span>
+								<button v-for="opt in sizeOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-text="true" data-has-icon="false" @click.stop="setSize(opt)">
+									<span class="k-button-text pw-size-label">{{ sizeLabel(opt) }}</span>
 								</button>
 							</div>
 						</dialog>
@@ -623,6 +620,7 @@
     props: {
       value: String,
       align: { type: String, default: "left" },
+      alignOptions: { type: Array, default: () => ["left", "center", "right"] },
       alwaysVisible: { type: Boolean, default: false }
     },
     data() {
@@ -720,7 +718,7 @@
         this.dropdownEl.setAttribute("open", "");
         const navEl = document.createElement("div");
         navEl.className = "k-navigate";
-        ["left", "center", "right"].forEach((opt) => {
+        this.alignOptions.forEach((opt) => {
           const btn = document.createElement("button");
           btn.type = "button";
           btn.className = "k-button k-dropdown-item";

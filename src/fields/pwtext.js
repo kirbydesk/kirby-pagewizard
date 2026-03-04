@@ -18,7 +18,7 @@ export default {
 		},
 		sizeOptions: {
 			type: Array,
-			default: () => ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']
+			default: null
 		}
 	},
 	data() {
@@ -105,7 +105,7 @@ export default {
 			}
 		},
 		sizeLabel(size) {
-			return (size || 'md').toUpperCase();
+			return this.$t('pw.option.' + size, size);
 		}
 	},
 	mounted() {
@@ -125,7 +125,7 @@ export default {
 					<span class="k-label-text">{{ label }}</span>
 				</label>
 				<span v-else style="flex:1;"></span>
-				<div v-if="align || level || size" class="k-button-group">
+				<div v-if="align || level || (size && sizeOptions)" class="k-button-group">
 					<span v-if="align" style="position:relative;">
 						<button
 							data-has-icon="true"
@@ -158,7 +158,7 @@ export default {
 							</div>
 						</dialog>
 					</span>
-					<span v-if="size" style="position:relative;">
+					<span v-if="size && sizeOptions" style="position:relative;">
 						<button
 							data-has-icon="false"
 							data-has-text="true"

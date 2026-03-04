@@ -20,7 +20,7 @@ class pwConfig
 		$configDir = self::$configPaths[$blockType] ?? null;
 
 		if ($configDir === null) {
-			return ['content' => [], 'tabs' => [], 'defaults' => [], 'fields' => [], 'editor' => [], 'layout' => [], 'style' => [], 'settings' => []];
+			return ['content' => [], 'tabs' => [], 'defaults' => [], 'fields' => [], 'editor' => [], 'layout' => [], 'style' => [], 'effects' => [], 'settings' => [], 'field-options' => []];
 		}
 
 		/* -------------- Block Settings (feature toggles) --------------*/
@@ -33,11 +33,14 @@ class pwConfig
 
 		// fields: nested { content: {}, layout: {}, style: {}, settings: {} } or flat (legacy)
 		$fieldsRaw   = $settingsRaw['fields'] ?? [];
-		$isNested    = isset($fieldsRaw['content']) || isset($fieldsRaw['layout']) || isset($fieldsRaw['style']) || isset($fieldsRaw['settings']);
-		$settings    = $isNested ? ($fieldsRaw['content']  ?? []) : $fieldsRaw;
+		$isNested    = isset($fieldsRaw['content']) || isset($fieldsRaw['layout']) || isset($fieldsRaw['style']) || isset($fieldsRaw['settings']) || isset($fieldsRaw['effects']);
+		$rawContent  = $isNested ? ($fieldsRaw['content']  ?? []) : $fieldsRaw;
 		$layoutVis   = $isNested ? ($fieldsRaw['layout']   ?? []) : [];
 		$styleVis    = $isNested ? ($fieldsRaw['style']    ?? []) : [];
+		$effectsVis  = $isNested ? ($fieldsRaw['effects']  ?? []) : [];
 		$settingsVis = $isNested ? ($fieldsRaw['settings'] ?? []) : [];
+
+		[$settings, $fieldOptions] = self::parseContentSettings($rawContent);
 
 		/* -------------- Block Defaults (field values) --------------*/
 		$defaultsFile = $configDir . '/defaults.json';
@@ -45,7 +48,7 @@ class pwConfig
 			? json_decode(file_get_contents($defaultsFile), true)
 			: [];
 
-		$fields = $defaultsRaw['content'] ?? [];
+		$fields = self::flattenContentDefaults($defaultsRaw['content'] ?? []);
 		if (isset($defaultsRaw['block'])) {
 			$defaults = $defaultsRaw['block'];
 		} else {
@@ -74,9 +77,14 @@ class pwConfig
 		}
 		// fields: nested { content: {}, layout: {}, style: {}, settings: {} }
 		if (!empty($cfg['fields']) && is_array($cfg['fields'])) {
-			if (!empty($cfg['fields']['content']))  $settings    = array_merge($settings,    $cfg['fields']['content']);
+			if (!empty($cfg['fields']['content'])) {
+				[$cfgSettings, $cfgFieldOptions] = self::parseContentSettings($cfg['fields']['content']);
+				$settings     = array_merge($settings,     $cfgSettings);
+				$fieldOptions = array_merge($fieldOptions, $cfgFieldOptions);
+			}
 			if (!empty($cfg['fields']['layout']))   $layoutVis   = array_merge($layoutVis,   $cfg['fields']['layout']);
-			if (!empty($cfg['fields']['style']))    $styleVis    = array_merge($styleVis,     $cfg['fields']['style']);
+			if (!empty($cfg['fields']['style']))    $styleVis    = array_merge($styleVis,    $cfg['fields']['style']);
+			if (!empty($cfg['fields']['effects']))  $effectsVis  = array_merge($effectsVis,  $cfg['fields']['effects']);
 			if (!empty($cfg['fields']['settings'])) $settingsVis = array_merge($settingsVis, $cfg['fields']['settings']);
 		}
 		// defaults: nested { layout: {}, style: {}, grid: {}, settings: {}, effects: {} } or flat
@@ -93,7 +101,9 @@ class pwConfig
 					$cfg['defaults']['effects']  ?? []
 				);
 				$defaults = array_merge($defaults, $flatOverrides);
-				if (!empty($cfg['defaults']['content'])) $fields = array_merge($fields, $cfg['defaults']['content']);
+				if (!empty($cfg['defaults']['content'])) {
+					$fields = array_merge($fields, self::flattenContentDefaults($cfg['defaults']['content']));
+				}
 			} else {
 				$defaults = array_merge($defaults, $cfg['defaults']);
 			}
@@ -109,15 +119,62 @@ class pwConfig
 		}
 
 		return [
-			'content'     => $settings,
-			'tabs'        => $tabSettings,
-			'defaults'    => $defaults,
-			'fields'      => $fields,
-			'editor'      => $editor,
-			'layout'      => $layoutVis,
-			'style'       => $styleVis,
-			'settings'    => $settingsVis,
+			'content'      => $settings,
+			'tabs'         => $tabSettings,
+			'defaults'     => $defaults,
+			'fields'       => $fields,
+			'editor'       => $editor,
+			'layout'       => $layoutVis,
+			'style'        => $styleVis,
+			'effects'      => $effectsVis,
+			'settings'     => $settingsVis,
+			'field-options' => $fieldOptions,
 		];
+	}
+
+	/**
+	 * Flatten nested defaults.json content into a flat key map.
+	 * New format: { "heading": {"align":"left","size":"2xl"} } → { "align-heading":"left", "size-heading":"2xl" }
+	 * Old format: { "align-heading": "left" } → passed through unchanged.
+	 */
+	private static function flattenContentDefaults(array $raw): array
+	{
+		$fields = [];
+		foreach ($raw as $fieldKey => $fieldValue) {
+			if (is_array($fieldValue)) {
+				foreach ($fieldValue as $prop => $val) {
+					$fields["{$prop}-{$fieldKey}"] = $val;
+				}
+			} else {
+				$fields[$fieldKey] = $fieldValue;
+			}
+		}
+		return $fields;
+	}
+
+	/**
+	 * Parse settings.json fields.content into $settings (backward-compat) and $fieldOptions (new).
+	 * New format: { "heading": {"align":[...],"sizes":[...]} } → settings['heading']=true, fieldOptions['heading']={...}
+	 * Old format: { "heading": true, "editor": ["writer"] } → passed through, editor gets fieldOptions['editor']['mode']
+	 */
+	private static function parseContentSettings(array $raw): array
+	{
+		$settings     = [];
+		$fieldOptions = [];
+		foreach ($raw as $fieldKey => $fieldValue) {
+			if (is_array($fieldValue) && !array_is_list($fieldValue)) {
+				// New nested format (associative array)
+				$settings[$fieldKey]     = isset($fieldValue['mode']) ? $fieldValue['mode'] : true;
+				$fieldOptions[$fieldKey] = $fieldValue;
+			} else {
+				// Old format: bool, or indexed array (legacy editor modes)
+				$settings[$fieldKey] = $fieldValue;
+				if (is_array($fieldValue)) {
+					$fieldOptions[$fieldKey] = ['mode' => $fieldValue];
+				}
+			}
+		}
+		return [$settings, $fieldOptions];
 	}
 
 	/**

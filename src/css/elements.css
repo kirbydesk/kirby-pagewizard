@@ -13,28 +13,16 @@
 	font-style: normal;
 	margin: 0;
 	padding: 0;
-}
-[data-field="heading"]:is(h1), [data-field="writer"] h1, [data-field="markdown"] h1 {
-	font-size: 2.5rem;
-	&[data-size="large"] { font-size: 3.5rem; } /* Activated via panel button */
-	&[data-size="xlarge"] { font-size: 4.5rem; } /* Activated via panel button */
-}
-[data-field="heading"]:is(h2), [data-field="writer"] h2, [data-field="markdown"] h2 {
-	font-size: 2rem;
-	&[data-size="large"] { font-size: 3rem; } /* Activated via panel button */
-	&[data-size="xlarge"] { font-size: 4rem; } /* Activated via panel button */
-}
-[data-field="heading"]:is(h3), [data-field="writer"] h3, [data-field="markdown"] h3 {
-	font-size: 1.5rem;
-	&[data-size="large"] { font-size: 2.5rem; } /* Activated via panel button */
-	&[data-size="xlarge"] { font-size: 3.5rem; } /* Activated via panel button */
-}
-[data-field="heading"]:is(h4), [data-field="writer"] h4, [data-field="markdown"] h4 {
-	font-size: 1.25rem;
-	&[data-size="large"] { font-size: 2.25rem; } /* Activated via panel button */
-	&[data-size="xlarge"] { font-size: 3.25rem; } /* Activated via panel button */
-}
 
+	/* Activated via panel button */
+	&[data-size="xs"] { font-size: 1rem; }
+	&[data-size="sm"] { font-size: 1.25rem; }
+	&[data-size="md"] { font-size: 1.5rem; }
+	&[data-size="lg"] { font-size: 2rem; }
+	&[data-size="xl"] { font-size: 2.5rem; }
+	&[data-size="2xl"] { font-size: 3.5rem; }
+	&[data-size="3xl"] { font-size: 4.5rem; }
+}
 
 /* -------------- Tagline --------------*/
 [data-field="tagline"] {
@@ -52,7 +40,7 @@
 [data-field="textarea"],
 [data-field="writer"],
 [data-field="markdown"] {
-	font-size: 1rem;
+	font-size: 1rem; 	/* [data-size="normal"] */
 	font-weight: 400;
 	line-height: 1.4;
 	letter-spacing: normal;
@@ -62,7 +50,6 @@
 	padding: 0;
 
 	&[data-size="large"] { font-size: 1.125rem; } /* Activated via panel button */
-	&[data-size="xlarge"] { font-size: 1.25rem; } /* Activated via panel button */
 }
 [data-field="writer"],
 [data-field="markdown"] {
@@ -120,7 +107,6 @@
 
 /* -------------- Quote --------------*/
 [data-field="quote"] {
-	font-size: 1.25rem;
 	font-weight: 400;
 	line-height: 1.6;
 	letter-spacing: normal;
@@ -129,8 +115,14 @@
 	margin: 0;
 	padding: 0;
 
-	&[data-size="large"] { font-size: 2.25rem; } /* Activated via panel button */
-	&[data-size="xlarge"] { font-size: 3.25rem; } /* Activated via panel button */
+	/* Activated via panel button */
+	&[data-size="xs"] { font-size: 1rem; }
+	&[data-size="sm"] { font-size: 1.25rem; }
+	&[data-size="md"] { font-size: 1.5rem; }
+	&[data-size="lg"] { font-size: 2rem; }
+	&[data-size="xl"] { font-size: 2.5rem; }
+	&[data-size="2xl"] { font-size: 3.5rem; }
+	&[data-size="3xl"] { font-size: 4.5rem; }
 
 	&::before { content: "\201E"; }
 	&::after  { content: "\201C"; }
