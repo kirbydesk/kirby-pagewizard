@@ -71,21 +71,24 @@ class pwConfig
 		$raw = option("kirbydesk.pagewizard.kirbyblocks.{$blockType}", []);
 		$cfg = is_array($raw) ? $raw : [];
 
+		// Support both flat format ($cfg['tabs']) and wrapped format ($cfg['settings']['tabs'])
+		$cfgVis = (!empty($cfg['settings']) && is_array($cfg['settings'])) ? $cfg['settings'] : $cfg;
+
 		// tabs
-		if (!empty($cfg['tabs']) && is_array($cfg['tabs'])) {
-			$tabSettings = array_merge($tabSettings, $cfg['tabs']);
+		if (!empty($cfgVis['tabs']) && is_array($cfgVis['tabs'])) {
+			$tabSettings = array_merge($tabSettings, $cfgVis['tabs']);
 		}
 		// fields: nested { content: {}, layout: {}, style: {}, settings: {} }
-		if (!empty($cfg['fields']) && is_array($cfg['fields'])) {
-			if (!empty($cfg['fields']['content'])) {
-				[$cfgSettings, $cfgFieldOptions] = self::parseContentSettings($cfg['fields']['content']);
+		if (!empty($cfgVis['fields']) && is_array($cfgVis['fields'])) {
+			if (!empty($cfgVis['fields']['content'])) {
+				[$cfgSettings, $cfgFieldOptions] = self::parseContentSettings($cfgVis['fields']['content']);
 				$settings     = array_merge($settings,     $cfgSettings);
 				$fieldOptions = array_merge($fieldOptions, $cfgFieldOptions);
 			}
-			if (!empty($cfg['fields']['layout']))   $layoutVis   = array_merge($layoutVis,   $cfg['fields']['layout']);
-			if (!empty($cfg['fields']['style']))    $styleVis    = array_merge($styleVis,    $cfg['fields']['style']);
-			if (!empty($cfg['fields']['effects']))  $effectsVis  = array_merge($effectsVis,  $cfg['fields']['effects']);
-			if (!empty($cfg['fields']['settings'])) $settingsVis = array_merge($settingsVis, $cfg['fields']['settings']);
+			if (!empty($cfgVis['fields']['layout']))   $layoutVis   = array_merge($layoutVis,   $cfgVis['fields']['layout']);
+			if (!empty($cfgVis['fields']['style']))    $styleVis    = array_merge($styleVis,    $cfgVis['fields']['style']);
+			if (!empty($cfgVis['fields']['effects']))  $effectsVis  = array_merge($effectsVis,  $cfgVis['fields']['effects']);
+			if (!empty($cfgVis['fields']['settings'])) $settingsVis = array_merge($settingsVis, $cfgVis['fields']['settings']);
 		}
 		// defaults: nested { layout: {}, style: {}, grid: {}, settings: {}, effects: {} } or flat
 		if (!empty($cfg['defaults']) && is_array($cfg['defaults'])) {
