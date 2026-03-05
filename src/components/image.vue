@@ -98,6 +98,7 @@ div.image, div.controls {
 
 	div.pattern {
 		background: var(--pattern);
+		width: 100%;
 	}
 
 	figure {
@@ -155,6 +156,18 @@ figure.ratio-auto {
 		display: block;
 		width: 100%;
 		height: auto;
+	}
+}
+
+figure.k-frame {
+	width: 100%;
+	aspect-ratio: var(--ratio, 1/1);
+	overflow: hidden;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: var(--fit, cover);
 	}
 }
 

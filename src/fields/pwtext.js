@@ -9,12 +9,10 @@ export default {
 		level: String,
 		size: String,
 		alignOptions: {
-			type: Array,
-			default: () => ['left', 'center', 'right']
+			default: null
 		},
 		levelOptions: {
-			type: Array,
-			default: () => ['h1', 'h2', 'h3', 'h4']
+			default: null
 		},
 		sizeOptions: {
 			type: Array,
@@ -125,8 +123,8 @@ export default {
 					<span class="k-label-text">{{ label }}</span>
 				</label>
 				<span v-else style="flex:1;"></span>
-				<div v-if="align || level || (size && sizeOptions)" class="k-button-group">
-					<span v-if="align" style="position:relative;">
+				<div v-if="(align && alignOptions) || (level && levelOptions) || (size && sizeOptions)" class="k-button-group">
+					<span v-if="align && alignOptions" style="position:relative;">
 						<button
 							data-has-icon="true"
 							data-has-text="false"
@@ -185,7 +183,7 @@ export default {
 							</div>
 						</dialog>
 					</span>
-					<span v-if="level" style="position:relative;">
+					<span v-if="level && levelOptions" style="position:relative;">
 						<button
 							data-has-icon="true"
 							data-has-text="false"

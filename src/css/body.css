@@ -55,12 +55,6 @@ body {
 	}
 }
 
-/* -------------- Links --------------*/
-a {
-	text-decoration: underline;
-	text-underline-offset: 0.2em;
-}
-
 /* -------------- Alignments --------------*/
 [data-align="left"] {
 	text-align: left;

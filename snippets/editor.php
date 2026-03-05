@@ -11,11 +11,11 @@ if (!empty($text)):
 
 	// Markdown: render with kirbytext()
 	if ($mode === 'markdown'):
-		echo '<div data-field="markdown" data-align="'.$align.'" data-size="'.$size.'">'.kirbytext($text).'</div>'."\n";
+		echo '<div data-field="markdown" data-align="'.$align.'" data-editor-size="'.$size.'">'.kirbytext($text).'</div>'."\n";
 
 	// Textarea / Writer: output as-is
 	else:
-		echo '<div data-field="'.$mode.'" data-align="'.$align.'" data-size="'.$size.'">'.$text.'</div>'."\n";
+		echo '<div data-field="'.$mode.'" data-align="'.$align.'" data-editor-size="'.$size.'">'.$text.'</div>'."\n";
 
 	endif;
 

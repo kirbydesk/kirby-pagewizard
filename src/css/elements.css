@@ -13,15 +13,6 @@
 	font-style: normal;
 	margin: 0;
 	padding: 0;
-
-	/* Activated via panel button */
-	&[data-size="xs"] { font-size: 1rem; }
-	&[data-size="sm"] { font-size: 1.25rem; }
-	&[data-size="md"] { font-size: 1.5rem; }
-	&[data-size="lg"] { font-size: 2rem; }
-	&[data-size="xl"] { font-size: 2.5rem; }
-	&[data-size="2xl"] { font-size: 3.5rem; }
-	&[data-size="3xl"] { font-size: 4.5rem; }
 }
 
 /* -------------- Tagline --------------*/
@@ -42,14 +33,12 @@
 [data-field="markdown"] {
 	font-size: 1rem; 	/* [data-size="normal"] */
 	font-weight: 400;
-	line-height: 1.4;
+	line-height: 1.6;
 	letter-spacing: normal;
 	text-transform: none;
 	font-style: normal;
 	margin: 0;
 	padding: 0;
-
-	&[data-size="large"] { font-size: 1.125rem; } /* Activated via panel button */
 }
 [data-field="writer"],
 [data-field="markdown"] {
@@ -114,15 +103,6 @@
 	font-style: italic;
 	margin: 0;
 	padding: 0;
-
-	/* Activated via panel button */
-	&[data-size="xs"] { font-size: 1rem; }
-	&[data-size="sm"] { font-size: 1.25rem; }
-	&[data-size="md"] { font-size: 1.5rem; }
-	&[data-size="lg"] { font-size: 2rem; }
-	&[data-size="xl"] { font-size: 2.5rem; }
-	&[data-size="2xl"] { font-size: 3.5rem; }
-	&[data-size="3xl"] { font-size: 4.5rem; }
 
 	&::before { content: "\201E"; }
 	&::after  { content: "\201C"; }

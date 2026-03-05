@@ -32,10 +32,10 @@ div.pwtext {
 	line-height: var(--text-line-height);
 	color: var(--pw-color-text, inherit);
 
-	&[data-size="large"] {
-		font-size: var(--text-lg);
-		line-height: 1.3;
-	}
+	&[data-size="lg"]  { font-size: var(--text-lg);  line-height: 1.3; }
+	&[data-size="xl"]  { font-size: var(--text-xl);  line-height: 1.3; }
+	&[data-size="2xl"] { font-size: var(--text-2xl); line-height: 1.3; }
+	&[data-size="3xl"] { font-size: var(--text-3xl); line-height: 1.3; }
 	&[data-align="left"] {
     text-align: left;
   }
