@@ -64,7 +64,7 @@
 	&[data-align="center"] { justify-content: center; }
 	&[data-align="right"]  { justify-content: flex-end; }
 
-	[data-field="button"] a {
+	[data-field="button"] a, [data-field="button"] span {
 		font-size:  1rem;
 		font-weight: 600;
 		line-height: 1;
