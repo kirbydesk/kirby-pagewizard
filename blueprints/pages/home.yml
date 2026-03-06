@@ -20,5 +20,5 @@ status:
   unlisted:
     label: pw.status.locked
 tabs:
-  content: tabs/home
+  content: tabs/content
   properties: tabs/properties
