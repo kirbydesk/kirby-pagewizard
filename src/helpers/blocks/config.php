@@ -205,6 +205,166 @@ class pwConfig
 	}
 
 	/**
+	 * Called by projectbuilder-hook for plugin-specific CSS var injection and stub creation.
+	 * Reads navigation.json + navigation-colors.json, merges with project overrides,
+	 * appends :root { --nav-* } to $imports, and creates config/sprites stubs.
+	 */
+	public static function tailwindSetup(string $pluginDir, array &$imports): void
+	{
+		$patchConfigDir = kirby()->root('site') . '/patches/config';
+		if (!is_dir($patchConfigDir)) mkdir($patchConfigDir, 0777, true);
+
+		$jsonSets = [
+			['file' => 'navigation.json',        'prefix' => '--nav-'],
+			['file' => 'navigation-colors.json', 'prefix' => '--nav-'],
+		];
+
+		$rootLines = [];
+		foreach ($jsonSets as $set) {
+			$defaultFile  = $pluginDir . '/config/' . $set['file'];
+			$overrideFile = $patchConfigDir . '/' . $set['file'];
+			$stubFile     = $patchConfigDir . '/_' . $set['file'];
+
+			$defaults = file_exists($defaultFile)  ? (json_decode(file_get_contents($defaultFile),  true) ?? []) : [];
+			$override = file_exists($overrideFile) ? (json_decode(file_get_contents($overrideFile), true) ?? []) : [];
+			$merged   = array_merge($defaults, $override);
+
+			if (!file_exists($overrideFile) && !file_exists($stubFile) && file_exists($defaultFile)) {
+				file_put_contents($stubFile, file_get_contents($defaultFile));
+			}
+
+			foreach ($merged as $key => $value) {
+				if (!is_string($value) || $value === '') continue;
+				$rootLines[] = "\t" . $set['prefix'] . $key . ': ' . $value . ';';
+			}
+		}
+
+		if (!empty($rootLines)) {
+			$imports[] = ":root {\n" . implode("\n", $rootLines) . "\n}";
+		}
+
+		// Sprites stub
+		$spritesDir     = kirby()->root('site') . '/patches/sprites';
+		$spriteOverride = $spritesDir . '/symbols.txt';
+		$spriteStub     = $spritesDir . '/_symbols.txt';
+		$spriteDefault  = $pluginDir  . '/assets/sprites/symbols.txt';
+		if (!is_dir($spritesDir)) mkdir($spritesDir, 0777, true);
+		if (!file_exists($spriteOverride) && !file_exists($spriteStub) && file_exists($spriteDefault)) {
+			file_put_contents($spriteStub, file_get_contents($spriteDefault));
+		}
+	}
+
+
+	/**
+	 * Generates public/assets/css/panel-colors.css from the plugin's colors.css.
+	 * Called by projectbuilder-hook for the pagewizard/colors Panel API.
+	 */
+	public static function panelColorsSetup(string $pluginDir): void
+	{
+		$pluginCssDir = $pluginDir . '/src/css';
+		$patchColorFile  = kirby()->root('site') . '/patches/css/kirby-pagewizard/colors.css';
+		$srcColorFile    = $pluginCssDir . '/colors.css';
+		$sourceColorFile = file_exists($patchColorFile) ? $patchColorFile : (file_exists($srcColorFile) ? $srcColorFile : null);
+
+		if ($sourceColorFile) {
+				$colorsCss = file_get_contents($sourceColorFile);
+
+				$exBlock = function (string $pattern) use ($colorsCss): ?string {
+						if (!preg_match($pattern, $colorsCss, $m, PREG_OFFSET_CAPTURE)) return null;
+						$p = $m[0][1] + strlen($m[0][0]) - 1;
+						$d = 0; $i = $p; $l = strlen($colorsCss);
+						while ($i < $l) {
+								if ($colorsCss[$i] === '{') $d++;
+								elseif ($colorsCss[$i] === '}') { $d--; if ($d === 0) break; }
+								$i++;
+						}
+						return substr($colorsCss, $p + 1, $i - $p - 1);
+				};
+
+				$exValue = function (string $block, string $sel, string $prop): ?string {
+						if ($sel === 'a') {
+								if (!preg_match('/(?:^|[\n\r])\s*a\s*\{/', $block, $m, PREG_OFFSET_CAPTURE)) return null;
+								$p = $m[0][1] + strlen($m[0][0]) - 1;
+						} else {
+								$pos = strpos($block, $sel);
+								if ($pos === false) return null;
+								$p = strpos($block, '{', $pos);
+								if ($p === false) return null;
+						}
+						$d = 0; $i = $p; $l = strlen($block);
+						while ($i < $l) {
+								if ($block[$i] === '{') $d++;
+								elseif ($block[$i] === '}') { $d--; if ($d === 0) break; }
+								$i++;
+						}
+						$inner = substr($block, $p + 1, $i - $p - 1);
+						$d = 0; $top = '';
+						for ($j = 0; $j < strlen($inner); $j++) {
+								if ($inner[$j] === '{') $d++;
+								elseif ($inner[$j] === '}') $d--;
+								elseif ($d === 0) $top .= $inner[$j];
+						}
+						return preg_match('/' . preg_quote($prop, '/') . '\s*:\s*([^;]+);/', $top, $pm) ? trim($pm[1]) : null;
+				};
+
+				$parseColorBlock = function (string $blockPattern) use ($exBlock, $exValue): array {
+						$block = $exBlock($blockPattern);
+						if (!$block) return [];
+						$colors = [];
+						$d = 0; $top = '';
+						for ($i = 0; $i < strlen($block); $i++) {
+								if ($block[$i] === '{') $d++;
+								elseif ($block[$i] === '}') $d--;
+								elseif ($d === 0) $top .= $block[$i];
+						}
+						if (preg_match('/background-color\s*:\s*([^;]+);/', $top, $m)) {
+								$colors['pw-color-block-background'] = trim($m[1]);
+						}
+						$map = [
+								'a'                                              => ['color'            => 'pw-color-link'],
+								'[data-field="heading"]'                         => ['color'            => 'pw-color-heading'],
+								'[data-field="tagline"]'                         => ['color'            => 'pw-color-tagline'],
+								'[data-field="textarea"]'                        => ['color'            => 'pw-color-text'],
+								'[data-field="buttons"] [data-field="button"] a' => [
+										'color'            => 'pw-color-button-text',
+										'background-color' => 'pw-color-button-background',
+								],
+								'[data-field="icon"] svg'                        => ['fill'             => 'pw-color-icon'],
+								'[data-field="caption"]'                         => ['color'            => 'pw-color-caption'],
+								'[data-field="quote"]'                           => ['color'            => 'pw-color-quote'],
+								'[data-field="cite"]'                            => ['color'            => 'pw-color-cite'],
+								'[data-field="breadcrumb"]'                      => ['color'            => 'pw-color-breadcrumb'],
+						];
+						foreach ($map as $sel => $props) {
+								foreach ($props as $prop => $key) {
+										$val = $exValue($block, $sel, $prop);
+										if ($val !== null) $colors[$key] = $val;
+								}
+						}
+						return $colors;
+				};
+
+				$defaultColors = $parseColorBlock('/section\[data-block\]\s*\{/');
+				$variantColors = $parseColorBlock('/section\[data-block\]\[data-style="variant"\]\s*\{/');
+
+				$varLines = function (array $colors): string {
+						$lines = [];
+						foreach ($colors as $key => $value) {
+								$lines[] = "\t--" . $key . ': ' . $value . ';';
+						}
+						return implode("\n", $lines);
+				};
+
+				file_put_contents(
+						kirby()->root('index') . '/assets/css/panel-colors.css',
+						"/* This file is auto-generated by tailwind-hook from colors.css. Do not edit manually! */\n\n" .
+						":root {\n" . $varLines($defaultColors) . "\n}\n\n" .
+						"[data-style=\"variant\"] {\n" . $varLines($variantColors) . "\n}\n"
+				);
+		}
+	}
+
+	/**
 	 * Build common tabs (grid, spacing, theme) and add them to $tabs.
 	 */
 	public static function buildTabs(string $blockType, array $defaults, array $tabSettings, array &$tabs): void

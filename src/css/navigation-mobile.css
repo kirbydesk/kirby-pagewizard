@@ -1,0 +1,91 @@
+/*------------------------------------------------------------------------------------------------
+	Header Mobile
+------------------------------------------------------------------------------------------------*/
+header.mobile {
+	@apply bg-[var(--nav-mobile-bgcolor)] text-[var(--nav-mobile-textcolor)] fill-[var(--nav-mobile-textcolor)];
+
+	nav {
+		@apply hidden bg-[var(--nav-mobile-l1-bgcolor)];
+
+		a {
+			@apply no-underline text-[var(--nav-mobile-l1-textcolor)];
+		}
+
+		ul {
+			&.l1 {
+				li {
+					a, div.flex {
+						@apply border-t-[var(--nav-mobile-l1-bordercolor)];
+					}
+					div span svg {
+						@apply hidden w-4 h-4 fill-[var(--nav-mobile-iconcolor)];
+					}
+
+					div span svg.plus,
+					&.open div span svg.minus {
+						@apply block;
+					}
+
+					&.open div span svg.plus {
+						@apply hidden;
+					}
+				}
+			}
+
+			&.l2 {
+				@apply hidden bg-[var(--nav-mobile-l2-bgcolor)];
+
+				li {
+					@apply border-[var(--nav-mobile-l2-bordercolor)];
+
+					a {
+						@apply text-[var(--nav-mobile-l2-textcolor)] font-normal;
+					}
+
+					&.active a {
+						@apply font-bold;
+					}
+				}
+			}
+		}
+	}
+
+	div.language  {
+		@apply bg-[var(--nav-mobile-language-bgcolor)] text-[var(--nav-mobile-language-textcolor)] fill-[var(--nav-mobile-language-textcolor)] border-[var(--nav-mobile-language-bordercolor)];
+
+		svg.globe {
+			@apply mr-2 fill-[var(--nav-mobile-language-iconcolor)];
+		}
+	}
+
+	.burger {
+		@apply relative float-left h-[40px] w-[28px] cursor-pointer transition-[0.3s];
+
+		span {
+			@apply absolute h-[3px] w-[25px] bg-[var(--nav-mobile-burgercolor)] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-[0.3s];
+
+			&:before, &:after {
+				@apply content-[''] absolute bg-[var(--nav-mobile-burgercolor)] h-[3px] w-[25px] transition-[0.3s];
+			}
+			&:before {
+				@apply top-[-8px];
+			}
+			&:after {
+				@apply top-[8px];
+			}
+		}
+		&.open span {
+			@apply bg-transparent;
+
+			&:before {
+				@apply rotate-[45deg] top-0;
+			}
+			&:after {
+				@apply rotate-[-45deg] top-0;
+			}
+		}
+		+ a {
+			@apply inline-block text-[19px] leading-[50px];
+		}
+	}
+}

@@ -1,0 +1,36 @@
+{
+	"home-desktop": true,
+	"home-tablet":  false,
+	"home-mobile":  true,
+	"sticky":       true,
+
+	"desktop-height":              "100px",
+	"desktop-height-sticky":       "65px",
+	"desktop-items-align":         "center",
+	"desktop-items-padding":       "0px 0px 0px 0px",
+	"desktop-flyout-icon":         "arrow-down",
+	"desktop-flyout-flip-from":    "4",
+	"desktop-flyout-min-width":    "150px",
+	"desktop-logo-align":          "flex-end",
+	"desktop-logo-padding":        "0px 0px 10px 0px",
+	"desktop-logo-display-height": "30px",
+	"desktop-logo-src":            "img/logo.svg",
+	"desktop-logo-src-width":      "283",
+	"desktop-logo-src-height":     "39",
+
+	"tablet-height":               "80px",
+	"tablet-height-sticky":        "55px",
+	"tablet-items-align":          "center",
+	"tablet-items-padding":        "0px 0px 0px 0px",
+	"tablet-logo-align":           "center",
+	"tablet-logo-padding":         "0px 0px 0px 0px",
+	"tablet-logo-display-height":  "30px",
+	"tablet-logo-src":             "img/logo.svg",
+	"tablet-logo-src-width":       "283",
+	"tablet-logo-src-height":      "39",
+
+	"mobile-height":               "50px",
+	"mobile-logo-src":             "img/logo.svg",
+	"mobile-logo-src-width":       "283",
+	"mobile-logo-src-height":      "39"
+}

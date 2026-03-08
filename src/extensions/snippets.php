@@ -3,7 +3,10 @@
 	/* -------------- Global Snippets --------------*/
 	'footer' => __DIR__ . '/../../snippets/footer.php',
 	'header' => __DIR__ . '/../../snippets/header.php',
-	'navigation' => __DIR__ . '/../../snippets/navigation.php',
+	'language' => __DIR__ . '/../../snippets/language.php',
+	'logo' => __DIR__ . '/../../snippets/logo.php',
+	'navigation-desktop' => __DIR__ . '/../../snippets/navigation-desktop.php',
+	'navigation-mobile' => __DIR__ . '/../../snippets/navigation-mobile.php',
 
 	/* -------------- Field Snippets --------------*/
 	'buttons' => __DIR__ . '/../../snippets/buttons.php',

@@ -22,4 +22,36 @@
 		<title><?=$page->title()->value()?></title>
 	</head>
 <body class="<?php e($kirby->user(), 'debug-screens'); ?>">
-<?php snippet('navigation'); ?>
+<?php
+	// Config settings
+	$default = json_decode(file_get_contents(__DIR__ . '/../config/navigation.json'), true) ?? [];
+	$patch   = kirby()->root('site') . '/patches/config/navigation.json';
+	$config  = file_exists($patch) ? array_merge($default, json_decode(file_get_contents($patch), true) ?? []) : $default;
+	$sticky	 = (bool)($config['sticky'] ?? true);
+
+	// Define class for homepage item in desktop navigation
+	$desktop = (bool)($config['home-desktop'] ?? true);
+	$tablet  = (bool)($config['home-tablet'] ?? true);
+
+	if ($desktop && $tablet) $class = '';
+	elseif ($desktop && !$tablet) $class = 'hidden lg:block';
+	elseif (!$desktop && $tablet) $class = 'lg:hidden';
+	else $class = null;
+
+	// Items
+	$items = $pages->listed();
+	if ($items->isNotEmpty()) :
+		snippet('navigation-desktop', [
+			'items'          => $items,
+			'class'          => $class,
+			'sticky'         => $sticky,
+			'flyoutIcon'     => $config['desktop-flyout-icon'] ?? '',
+			'flyoutFlipFrom' => (int)($config['desktop-flyout-flip-from'] ?? 0),
+		]);
+		snippet('navigation-mobile', [
+			'items' => $items,
+			'config' => $config
+		]);
+	endif;
+
+?><div id="scroll-sentinel" aria-hidden="true"></div><?php

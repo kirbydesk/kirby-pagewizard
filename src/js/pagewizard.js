@@ -32,6 +32,7 @@ jQuery(document).ready(function () {
         // Enable keyboard control: open/close menu with Enter, Space, or close with Escape
         .on('keydown', 'div.navitem > .item, div.burger', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === ' ') e.preventDefault();
                 jQuery(this).trigger('click');
             }
             if (e.key === 'Escape' || e.key === 'Esc') {
@@ -68,10 +69,13 @@ jQuery(document).ready(function () {
             }
         });
 
-    // Header fixed on scroll
-    jQuery(window).on('scroll', function () {
-        jQuery('body').toggleClass('sticky', $(this).scrollTop() > 1);
-    });
+    // Desktop: Intersection Observer → body.scrolled (Header schrumpft)
+    const sentinel = document.getElementById('scroll-sentinel');
+    if (sentinel) {
+        new IntersectionObserver(([e]) => {
+            document.body.classList.toggle('scrolled', !e.isIntersecting);
+        }).observe(sentinel);
+    }
 
     // Language and language level switcher (mobile)
     jQuery(document).on('change', 'select#language, select#languagelevel', function () {
