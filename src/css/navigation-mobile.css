@@ -4,6 +4,11 @@
 header.mobile {
 	@apply bg-[var(--nav-mobile-bgcolor)] text-[var(--nav-mobile-textcolor)] fill-[var(--nav-mobile-textcolor)];
 
+	a img {
+		@apply block w-auto;
+		height: var(--nav-mobile-logo-display-height);
+	}
+
 	nav {
 		@apply hidden bg-[var(--nav-mobile-l1-bgcolor)];
 

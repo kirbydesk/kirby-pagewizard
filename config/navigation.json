@@ -30,6 +30,7 @@
 	"tablet-logo-src-height":      "39",
 
 	"mobile-height":               "50px",
+	"mobile-logo-display-height":  "25px",
 	"mobile-logo-src":             "img/logo.svg",
 	"mobile-logo-src-width":       "283",
 	"mobile-logo-src-height":      "39"
