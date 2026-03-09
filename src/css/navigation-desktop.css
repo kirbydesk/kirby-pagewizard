@@ -56,7 +56,7 @@ header.desktop {
 				}
 			}
 			div.flyout {
-				@apply hidden absolute -left-[15px] top-full z-30 text-base text-[var(--nav-flyout-textcolor)] bg-[var(--nav-flyout-bgcolor)] shadow-lg;
+				@apply hidden absolute -left-[15px] top-full z-30 text-base font-normal text-[var(--nav-flyout-textcolor)] bg-[var(--nav-flyout-bgcolor)] shadow-lg;
 				width: max-content;
 				min-width: var(--nav-desktop-flyout-min-width);
 
