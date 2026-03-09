@@ -94,6 +94,7 @@
 	'pagewizard/fields/meta-author' => __DIR__ . '/../../blueprints/fields/meta-author.yml',
 	'pagewizard/fields/meta-description' => __DIR__ . '/../../blueprints/fields/meta-description.yml',
 	'pagewizard/fields/meta-keywords' => __DIR__ . '/../../blueprints/fields/meta-keywords.yml',
+	'pagewizard/fields/meta-navigationtitle' => __DIR__ . '/../../blueprints/fields/meta-navigationtitle.yml',
 	'pagewizard/fields/meta-pagetitle' => __DIR__ . '/../../blueprints/fields/meta-pagetitle.yml',
 	'pagewizard/fields/meta-teaser' => __DIR__ . '/../../blueprints/fields/meta-teaser.yml',
 	'pagewizard/fields/overlay-intensity' => __DIR__ . '/../../blueprints/fields/overlay-intensity.yml',

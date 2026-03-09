@@ -376,6 +376,15 @@ div.pwPreview[data-v-f57ea2ba] {
 	padding: var(--spacing-3);
 }
 
+.pwButton[data-v-10e849d1] {
+	display: flex;
+&[data-align="left"][data-v-10e849d1]   { justify-content: flex-start;
+}
+&[data-align="center"][data-v-10e849d1] { justify-content: center;
+}
+&[data-align="right"][data-v-10e849d1]  { justify-content: flex-end;
+}
+}
 button[data-v-10e849d1] {
 	margin: var(--spacing-3);
 	padding: var(--spacing-4) var(--spacing-2);

@@ -1,0 +1,6 @@
+---
+label: pw.field.meta-navigationtitle
+type: text
+counter: true
+placeholder: pw.field.meta-navigationtitle.placeholder
+help: pw.field.meta-navigationtitle.help

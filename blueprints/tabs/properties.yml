@@ -13,6 +13,8 @@ columns:
             extends: pagewizard/fields/meta-pagetitle
           metaTeaser:
             extends: pagewizard/fields/meta-teaser
+          metaNavigationtitle:
+            extends: pagewizard/fields/meta-navigationtitle
           line:
             type: line
           metaDescription:

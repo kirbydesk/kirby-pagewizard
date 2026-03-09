@@ -19,7 +19,7 @@
 			file_exists($kirby->roots()->assets()."/img/apple-touch-icon.png") && print '<link rel="apple-touch-icon" href="'.$kirby->urls()->assets().'/img/apple-touch-icon.png">';
 
 		?>
-		<title><?=$page->title()->value()?></title>
+		<title><?=$page->metapagetitle()->or($page->title() . ' | ' . $site->title())?></title>
 	</head>
 <body class="<?php e($kirby->user(), 'debug-screens'); ?>">
 <?php

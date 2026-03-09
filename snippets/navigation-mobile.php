@@ -29,7 +29,7 @@
 				// Subnav available -> Show +/- Icons
 				if ($children->isNotEmpty()) : ?>
 					<div class="item flex items-center justify-between py-3 pl-4 pr-5 border-t hover:cursor-pointer" tabindex="<?=$tabindex?>" role="button" aria-haspopup="true" aria-expanded="false">
-						<span class="flex justify-start"><?= $item->navigationtitle()->html()->or($item->title()->html()); ?></span>
+						<span class="flex justify-start"><?= $item->metanavigationtitle()->html()->or($item->title()->html()); ?></span>
 						<span class="flex justify-end hover:cursor-pointer">
 							<svg class="plus"><use xlink:href="#fa-plus"></use></svg>
 							<svg class="minus"><use xlink:href="#fa-minus"></use></svg>

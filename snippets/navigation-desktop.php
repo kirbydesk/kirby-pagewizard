@@ -23,7 +23,7 @@
 				<div class="navitem<?= $flip ?>">
 					<?php if ($children->isNotEmpty()) : ?>
 						<div class="item" tabindex="<?=$tabindex?>" role="button" aria-haspopup="true" aria-expanded="false">
-							<?= $item->navigationtitle()->or($item->title()); ?>
+							<?= $item->metanavigationtitle()->or($item->title()); ?>
 							<?php if ($flyoutIcon) : ?><span>
 								<svg class="hidden w-4 h-4 fill-current lg:inline-block">
 									<use xlink:href="#<?= htmlspecialchars($flyoutIcon) ?>"></use>

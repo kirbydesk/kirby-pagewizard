@@ -51,13 +51,21 @@
   );
   __component__$3.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/blocks/footer/item.vue";
   const pwFooterItem = __component__$3.exports;
-  const _sfc_main$2 = {};
+  const _sfc_main$2 = {
+    props: {
+      content: { type: Object, default: () => ({}) },
+      alignDefault: { type: String, default: "left" }
+    },
+    computed: {
+      align() {
+        return this.content.buttonalignment || this.alignDefault;
+      }
+    }
+  };
   var _sfc_render$2 = function render() {
+    var _a;
     var _vm = this, _c = _vm._self._c;
-    _vm._self._setupProxy;
-    return _c("div", { on: { "dblclick": _vm.open } }, [_c("button", { staticClass: "k-button", attrs: { "data-has-text": "true", "data-responsive": "true", "data-size": "sm", "data-variant": "filled", "type": "button" } }, [_vm.content.linktext.length ? _c("span", { staticClass: "k-button-text", domProps: { "innerHTML": _vm._s(_vm.content.linktext) }, on: { "blur": function($event) {
-      return _vm.update({ linktext: $event.target.innerText });
-    } } }) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])])]);
+    return _c("div", { staticClass: "pwButton", attrs: { "data-align": _vm.align } }, [_c("button", { staticClass: "k-button", attrs: { "data-has-text": "true", "data-responsive": "true", "data-size": "sm", "data-variant": "filled", "type": "button" } }, [((_a = _vm.content.linktext) == null ? void 0 : _a.length) ? _c("span", { staticClass: "k-button-text", domProps: { "innerHTML": _vm._s(_vm.content.linktext) } }) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])])]);
   };
   var _sfc_staticRenderFns$2 = [];
   _sfc_render$2._withStripped = true;
