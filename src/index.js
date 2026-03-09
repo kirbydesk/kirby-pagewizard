@@ -4,7 +4,7 @@ import "./panel.css";
 // Blocks
 import pwFooter from "@/blocks/footer/index.vue";
 import pwFooterItem from "@/blocks/footer/item.vue";
-import pwShared from "@/blocks/pwshared.vue";
+import pwshared from "@/blocks/pwshared.vue";
 
 // Components
 import pwButton from "@/components/button.vue";
@@ -28,7 +28,7 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		pwButtons: pwButtons,
 		pwFooter: pwFooter,
 		pwFooterItem: pwFooterItem,
-		pwShared: pwShared
+		pwshared: pwshared
 	},
 	fields: {
 		htmlheadline,

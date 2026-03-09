@@ -32,7 +32,7 @@
 		$fieldsets['dynamic-blocks'] = [
 			'label'     => 'pw.fieldsets.dynamic-blocks',
 			'type'      => 'group',
-			'fieldsets' => ['pwShared'],
+			'fieldsets' => ['pwshared'],
 		];
 
 		$data['columns'][0]['sections']['content']['fields']['blocks']['fieldsets'] = $fieldsets;
@@ -81,7 +81,7 @@
 	'blocks/pwButton' => __DIR__ . '/../../blueprints/blocks/buttons/item.yml',
 	'blocks/pwFooter' => __DIR__ . '/../../blueprints/blocks/footer/index.yml',
 	'blocks/pwFooterItem' => __DIR__ . '/../../blueprints/blocks/footer/item.yml',
-	'blocks/pwShared'  => __DIR__ . '/../../blueprints/blocks/shared.yml',
+	'blocks/pwshared'  => __DIR__ . '/../../blueprints/blocks/shared.yml',
 
 	/* -------------- Fields --------------*/
 	'pagewizard/fields/address' => __DIR__ . '/../../blueprints/fields/address.yml',

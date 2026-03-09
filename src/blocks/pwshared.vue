@@ -4,6 +4,13 @@
 			:value="label"
 			icon="share"
 		/>
+		<div class="pwGrid">
+			<div class="pwGridItem">
+				<div class="contents">
+					<p class="pwshared-label">{{ label }}</p>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -17,7 +24,6 @@ export default {
 	},
 	computed: {
 		label() {
-			if (!this.content.sharedid) return '— No shared block selected —';
 			const item = this.sharedItems.find(i => i.value === this.content.sharedid);
 			if (!item) return this.content.sharedid;
 			return item.label + (item.type ? ' (' + item.type + ')' : '');
