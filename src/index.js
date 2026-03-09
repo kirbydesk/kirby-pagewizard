@@ -4,7 +4,7 @@ import "./panel.css";
 // Blocks
 import pwFooter from "@/blocks/footer/index.vue";
 import pwFooterItem from "@/blocks/footer/item.vue";
-import pwshared from "@/blocks/pwshared.vue";
+import pwshared from "@/blocks/shared/index.vue";
 
 // Components
 import pwButton from "@/components/button.vue";

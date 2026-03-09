@@ -81,7 +81,7 @@
 	'blocks/pwButton' => __DIR__ . '/../../blueprints/blocks/buttons/item.yml',
 	'blocks/pwFooter' => __DIR__ . '/../../blueprints/blocks/footer/index.yml',
 	'blocks/pwFooterItem' => __DIR__ . '/../../blueprints/blocks/footer/item.yml',
-	'blocks/pwshared'  => __DIR__ . '/../../blueprints/blocks/shared.yml',
+	'blocks/pwshared'  => __DIR__ . '/../../blueprints/blocks/shared/index.yml',
 
 	/* -------------- Fields --------------*/
 	'pagewizard/fields/address' => __DIR__ . '/../../blueprints/fields/address.yml',

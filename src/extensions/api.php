@@ -86,10 +86,23 @@ return [
 				$result = [];
 				foreach ($blocks as $block) {
 					$name = $block->sharedname()->value();
+					$type = $block->type();
+					$icon      = 'box';
+					$blockName = $type;
+					try {
+						$bpDef = kirby()->extension('blueprints', 'blocks/' . $type);
+						if (is_callable($bpDef)) $bp = $bpDef();
+						elseif (is_string($bpDef)) $bp = \Kirby\Data\Data::read($bpDef);
+						else $bp = [];
+						$icon      = $bp['icon'] ?? 'box';
+						$blockName = \Kirby\Toolkit\I18n::translate($bp['name'] ?? $type, $bp['name'] ?? $type);
+					} catch (\Throwable $e) {}
 					$result[] = [
 						'value' => $block->id(),
 						'label' => !empty($name) ? $name : $block->id(),
-						'type'  => $block->type(),
+						'type'  => $type,
+						'icon'  => $icon,
+						'name'  => $blockName,
 					];
 				}
 				return $result;
