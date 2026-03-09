@@ -1,0 +1,12 @@
+name: pw.block.shared
+icon: share
+fields:
+  sharedId:
+    type: select
+    label: pw.field.sharedid.label
+    empty: pw.field.sharedid.empty
+    options:
+      type: query
+      query: site.sharedblocks.toBlocks
+      text: "{{ item.sharedname }}"
+      value: "{{ item.id }}"

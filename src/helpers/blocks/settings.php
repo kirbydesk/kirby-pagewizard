@@ -48,6 +48,8 @@ class pwSettings
 			$fields = array_merge($fields, $extraFields);
 		}
 
+		$fields['sharedName'] = ['extends' => 'pagewizard/fields/shared-name'];
+
 		return [
 			'label'  => 'pw.tab.settings',
 			'fields' => $fields,

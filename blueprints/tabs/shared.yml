@@ -1,0 +1,11 @@
+---
+label: Shared Blocks
+icon: shared-block
+columns:
+  - width: 1/1
+    sections:
+      shared:
+        type: fields
+        fields:
+          sharedblocks:
+            type: blocks

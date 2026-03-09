@@ -11,8 +11,3 @@ columns:
             extends: pagewizard/headlines/content
           blocks:
             type: blocks
-            fieldsets:
-              static:
-                label: Kirbydesk Blocks
-                type: group
-                fieldsets:

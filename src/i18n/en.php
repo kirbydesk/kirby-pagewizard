@@ -472,4 +472,15 @@
 	'pw.headline.theme.help' => 'Select the visual appearance for this block to match your design needs.',
 	'pw.headline.video' => 'Video',
 	'pw.headline.video.help' => 'A detailed description helps users and search engines understand the content of the video.',
+
+	'pw.fieldsets.static-blocks'  => 'Static',
+	'pw.fieldsets.project-blocks' => 'Project related',
+	'pw.fieldsets.dynamic-blocks' => 'Dynamic',
+
+	'pw.field.sharedname.label' => 'Shared name',
+	'pw.field.sharedname.placeholder' => 'e.g. Hero – Homepage',
+	'pw.field.sharedname.help' => 'Optional. If set, this block can be referenced as a shared block on other pages.',
+	'pw.field.sharedid.label' => 'Shared Block',
+	'pw.field.sharedid.empty' => '— Select shared block —',
+	'pw.block.shared' => 'Shared Block',
 );

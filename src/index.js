@@ -4,17 +4,19 @@ import "./panel.css";
 // Blocks
 import pwFooter from "@/blocks/footer/index.vue";
 import pwFooterItem from "@/blocks/footer/item.vue";
+import pwShared from "@/blocks/pwshared.vue";
 
 // Components
 import pwButton from "@/components/button.vue";
 import pwButtons from "@/components/buttons.vue";
 
 // Fields
-import htmlheadline from "@/fields/htmlheadline.js";
-import pwtext      from "@/fields/pwtext.js";
-import pweditor    from "@/fields/pweditor.js";
-import pwalign     from "@/fields/pwalign.js";
-import pwicon      from "@/fields/pwicon.js";
+import htmlheadline  from "@/fields/htmlheadline.js";
+import pwtext        from "@/fields/pwtext.js";
+import pweditor      from "@/fields/pweditor.js";
+import pwalign       from "@/fields/pwalign.js";
+import pwicon        from "@/fields/pwicon.js";
+import pwsharedname  from "@/fields/pwsharedname.js";
 
 // Views
 import iconsView from "@/views/icons.vue";
@@ -25,7 +27,8 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		pwButton: pwButton,
 		pwButtons: pwButtons,
 		pwFooter: pwFooter,
-		pwFooterItem: pwFooterItem
+		pwFooterItem: pwFooterItem,
+		pwShared: pwShared
 	},
 	fields: {
 		htmlheadline,
@@ -33,6 +36,7 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		pweditor,
 		pwalign,
 		pwicon,
+		pwsharedname,
 	},
 	components: {
 		'pw-icons-view': iconsView,
@@ -69,6 +73,8 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		"textsize-large":
 			'<path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"/>',
 		"textsize-xlarge":
-			'<path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"/>'
+			'<path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"/>',
+		"shared-block":
+			'<path d="M12 2.58582L18.2071 8.79292L16.7929 10.2071L13 6.41424V16H11V6.41424L7.20711 10.2071L5.79289 8.79292L12 2.58582ZM3 18V14H5V18C5 18.5523 5.44772 19 6 19H18C18.5523 19 19 18.5523 19 18V14H21V18C21 19.6569 19.6569 21 18 21H6C4.34315 21 3 19.6569 3 18Z"/>'
 		}
 });

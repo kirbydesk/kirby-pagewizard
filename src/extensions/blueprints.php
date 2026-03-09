@@ -9,11 +9,33 @@
 
 	/* -------------- Tabs --------------*/
 	'tabs/content' => function() {
-		$data = \Kirby\Data\Data::read(__DIR__ . '/../../blueprints/tabs/content.yml');
-		$blocks = option('kirbydesk.pagewizard.blocks', []);
-		if (!empty($blocks)) {
-			$data['columns'][0]['sections']['content']['fields']['blocks']['fieldsets']['static']['fieldsets'] = $blocks;
+		$data          = \Kirby\Data\Data::read(__DIR__ . '/../../blueprints/tabs/content.yml');
+		$allBlocks     = option('kirbydesk.pagewizard.blocks', []);
+		$staticBlocks  = array_values(array_filter($allBlocks, fn($b) => str_starts_with($b, 'pw')));
+		$projectBlocks = array_values(array_filter($allBlocks, fn($b) => !str_starts_with($b, 'pw')));
+
+		$fieldsets = [];
+		if (!empty($staticBlocks)) {
+			$fieldsets['static-blocks'] = [
+				'label'     => 'pw.fieldsets.static-blocks',
+				'type'      => 'group',
+				'fieldsets' => $staticBlocks,
+			];
 		}
+		if (!empty($projectBlocks)) {
+			$fieldsets['project-blocks'] = [
+				'label'     => 'pw.fieldsets.project-blocks',
+				'type'      => 'group',
+				'fieldsets' => $projectBlocks,
+			];
+		}
+		$fieldsets['dynamic-blocks'] = [
+			'label'     => 'pw.fieldsets.dynamic-blocks',
+			'type'      => 'group',
+			'fieldsets' => ['pwShared'],
+		];
+
+		$data['columns'][0]['sections']['content']['fields']['blocks']['fieldsets'] = $fieldsets;
 		return $data;
 	},
 
@@ -24,6 +46,31 @@
 	'tabs/files/video-player' => __DIR__ . '/../../blueprints/tabs/files/video-player.yml',
 	'tabs/home' => __DIR__ . '/../../blueprints/tabs/home.yml',
 	'tabs/project' => __DIR__ . '/../../blueprints/tabs/project.yml',
+	'tabs/shared' => function() {
+		$data          = \Kirby\Data\Data::read(__DIR__ . '/../../blueprints/tabs/shared.yml');
+		$allBlocks     = option('kirbydesk.pagewizard.blocks', []);
+		$staticBlocks  = array_values(array_filter($allBlocks, fn($b) => str_starts_with($b, 'pw')));
+		$projectBlocks = array_values(array_filter($allBlocks, fn($b) => !str_starts_with($b, 'pw')));
+
+		$fieldsets = [];
+		if (!empty($staticBlocks)) {
+			$fieldsets['static-blocks'] = [
+				'label'     => 'pw.fieldsets.static-blocks',
+				'type'      => 'group',
+				'fieldsets' => $staticBlocks,
+			];
+		}
+		if (!empty($projectBlocks)) {
+			$fieldsets['project-blocks'] = [
+				'label'     => 'pw.fieldsets.project-blocks',
+				'type'      => 'group',
+				'fieldsets' => $projectBlocks,
+			];
+		}
+
+		$data['columns'][0]['sections']['shared']['fields']['sharedblocks']['fieldsets'] = $fieldsets;
+		return $data;
+	},
 	'tabs/properties' => __DIR__ . '/../../blueprints/tabs/properties.yml',
 	'tabs/settings' => __DIR__ . '/../../blueprints/tabs/settings.yml',
 	'tabs/site' => __DIR__ . '/../../blueprints/tabs/site.yml',
@@ -34,6 +81,7 @@
 	'blocks/pwButton' => __DIR__ . '/../../blueprints/blocks/buttons/item.yml',
 	'blocks/pwFooter' => __DIR__ . '/../../blueprints/blocks/footer/index.yml',
 	'blocks/pwFooterItem' => __DIR__ . '/../../blueprints/blocks/footer/item.yml',
+	'blocks/pwShared'  => __DIR__ . '/../../blueprints/blocks/shared.yml',
 
 	/* -------------- Fields --------------*/
 	'pagewizard/fields/address' => __DIR__ . '/../../blueprints/fields/address.yml',
@@ -106,6 +154,7 @@
 	'pagewizard/fields/quote' => __DIR__ . '/../../blueprints/fields/quote.yml',
 	'pagewizard/fields/seo-canonical' => __DIR__ . '/../../blueprints/fields/seo-canonical.yml',
 	'pagewizard/fields/seo-robots' => __DIR__ . '/../../blueprints/fields/seo-robots.yml',
+	'pagewizard/fields/shared-name' => __DIR__ . '/../../blueprints/fields/shared-name.yml',
 	'pagewizard/fields/style' => __DIR__ . '/../../blueprints/fields/style.yml',
 	'pagewizard/fields/tagline' => __DIR__ . '/../../blueprints/fields/tagline.yml',
 	'pagewizard/fields/text-color' => __DIR__ . '/../../blueprints/fields/text-color.yml',

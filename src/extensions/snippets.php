@@ -8,6 +8,9 @@
 	'navigation-desktop' => __DIR__ . '/../../snippets/navigation-desktop.php',
 	'navigation-mobile' => __DIR__ . '/../../snippets/navigation-mobile.php',
 
+	/* -------------- Block Snippets --------------*/
+	'shared' => __DIR__ . '/../../snippets/shared.php',
+
 	/* -------------- Field Snippets --------------*/
 	'buttons' => __DIR__ . '/../../snippets/buttons.php',
 	'customcss' => __DIR__ . '/../../snippets/custom-css.php',

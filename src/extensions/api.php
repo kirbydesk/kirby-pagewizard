@@ -80,6 +80,22 @@ return [
 			}
 		],
 		[
+			'pattern' => 'pagewizard/shared',
+			'action'  => function () {
+				$blocks = site()->sharedblocks()->toBlocks();
+				$result = [];
+				foreach ($blocks as $block) {
+					$name = $block->sharedname()->value();
+					$result[] = [
+						'value' => $block->id(),
+						'label' => !empty($name) ? $name : $block->id(),
+						'type'  => $block->type(),
+					];
+				}
+				return $result;
+			}
+		],
+		[
 			'pattern' => 'pagewizard/colors',
 			'action'  => function () {
 				$publicFile  = kirby()->root('index') . '/assets/css/panel-colors.css';

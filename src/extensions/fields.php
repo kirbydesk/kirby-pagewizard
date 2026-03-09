@@ -67,5 +67,13 @@ return [
 				return $value;
 			}
 		]
+	],
+	'pwsharedname' => [
+		'extends' => 'text',
+		'props' => [
+			'value' => function (string $value = null) {
+				return $value;
+			}
+		]
 	]
 ];
