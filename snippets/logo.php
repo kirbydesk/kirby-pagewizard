@@ -19,7 +19,8 @@ else:
 	$height = $logoCfg['desktop-logo-src-height'] ?? '';
 endif;
 
-$logoFile = kirby()->root('index') . '/' . ($mobile ?? false ? ($logoCfg['mobile-logo-src'] ?? '') : ($logoCfg['desktop-logo-src'] ?? ''));
+$logoSrc  = $mobile ?? false ? ($logoCfg['mobile-logo-src'] ?? '') : ($logoCfg['desktop-logo-src'] ?? '');
+$logoFile = kirby()->root('assets') . '/' . $logoSrc;
 $hasLogo  = !empty($src) && file_exists($logoFile);
 ?>
 <?php if ($mobile ?? false): ?>
