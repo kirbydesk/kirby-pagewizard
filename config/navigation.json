@@ -6,8 +6,8 @@
 
 	"desktop-height":              "100px",
 	"desktop-height-sticky":       "65px",
-	"desktop-items-align":         "center",
-	"desktop-items-padding":       "0px 0px 0px 0px",
+	"desktop-items-align":         "flex-end",
+	"desktop-items-padding":       "0px 0px 10px 0px",
 	"desktop-flyout-icon":         "arrow-down",
 	"desktop-flyout-flip-from":    "4",
 	"desktop-flyout-min-width":    "150px",

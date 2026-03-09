@@ -15,7 +15,8 @@
 				/* Homepage */
 				if ($config['home-mobile'] ?? true) : ?>
 				<li>
-					<a href="<?= $site->homePage()->url() ?>" tabindex="<?=$tabindex?>" class="block py-3 pl-4 pr-5 border-t"><?= $site->homePage()->title()->html() ?></a>
+					<?php $hp = $site->homePage() ?>
+				<a href="<?= $hp ? $hp->url() : $site->url() ?>" tabindex="<?=$tabindex?>" class="block py-3 pl-4 pr-5 border-t"><?= $hp ? $hp->title()->html() : $site->title()->html() ?></a>
 				</li>
 				<?php $tabindex++; endif;
 

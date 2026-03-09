@@ -8,7 +8,7 @@
 			<div class="flex justify-end md:space-x-5 lg:space-x-6 xl:space-x-8"><?php
 
 				/* Show Homepage link */
-				if ($class !== null) : ?><div class="navitem<?= $class ? ' ' . $class : '' ?>"><a class="item" href="<?=$site->homePage()->url() ?>" tabindex="1"><?=$site->homePage()->title()->value() ?></a></div><?php endif;
+				if ($class !== null) : $hp = $site->homePage(); ?><div class="navitem<?= $class ? ' ' . $class : '' ?>"><a class="item" href="<?= $hp ? $hp->url() : $site->url() ?>" tabindex="1"><?= $hp ? $hp->title()->value() : $site->title()->value() ?></a></div><?php endif;
 
 				$tabindex  = 2;
 				$itemIndex = 1;
