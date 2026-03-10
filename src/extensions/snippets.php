@@ -1,12 +1,15 @@
 <?php return [
 
 	/* -------------- Global Snippets --------------*/
+	'address' => __DIR__ . '/../../snippets/address.php',
 	'footer' => __DIR__ . '/../../snippets/footer.php',
 	'header' => __DIR__ . '/../../snippets/header.php',
 	'language' => __DIR__ . '/../../snippets/language.php',
+	'link' => __DIR__ . '/../../snippets/link.php',
 	'logo' => __DIR__ . '/../../snippets/logo.php',
 	'navigation-desktop' => __DIR__ . '/../../snippets/navigation-desktop.php',
 	'navigation-mobile' => __DIR__ . '/../../snippets/navigation-mobile.php',
+	'socialmedia' => __DIR__ . '/../../snippets/socialmedia.php',
 
 	/* -------------- Block Snippets --------------*/
 	'blocks/pwshared' => __DIR__ . '/../../snippets/shared.php',

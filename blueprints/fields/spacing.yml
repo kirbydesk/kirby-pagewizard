@@ -1,0 +1,11 @@
+---
+type: toggles
+width: 1/4
+options:
+  - value: "small"
+    text:
+      *: pw.option.small
+  - value: "large"
+    text:
+      *: pw.option.large
+translate: false

@@ -1,9 +1,10 @@
-name: pw.block.shared
-icon: share
+name: pw.block.shared.name
+icon: shared-block
 fields:
   sharedId:
     type: select
-    label: pw.field.sharedid.label
+    label: pw.block.shared.field.label
+    help: pw.block.shared.field.help
     required: true
     options:
       type: query

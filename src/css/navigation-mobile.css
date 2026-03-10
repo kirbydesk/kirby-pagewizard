@@ -2,7 +2,7 @@
 	Header Mobile
 ------------------------------------------------------------------------------------------------*/
 header.mobile {
-	@apply bg-[var(--nav-mobile-bgcolor)] text-[var(--nav-mobile-textcolor)] fill-[var(--nav-mobile-textcolor)];
+	@apply bg-(--nav-mobile-bgcolor) text-(--nav-mobile-textcolor) fill-(--nav-mobile-textcolor);
 
 	a img {
 		@apply block w-auto;
@@ -10,20 +10,20 @@ header.mobile {
 	}
 
 	nav {
-		@apply hidden bg-[var(--nav-mobile-l1-bgcolor)];
+		@apply hidden bg-(--nav-mobile-l1-bgcolor);
 
 		a {
-			@apply no-underline text-[var(--nav-mobile-l1-textcolor)];
+			@apply no-underline text-(--nav-mobile-l1-textcolor);
 		}
 
 		ul {
 			&.l1 {
 				li {
 					a, div.flex {
-						@apply border-t-[var(--nav-mobile-l1-bordercolor)];
+						@apply border-t-(--nav-mobile-l1-bordercolor);
 					}
 					div span svg {
-						@apply hidden w-4 h-4 fill-[var(--nav-mobile-iconcolor)];
+						@apply hidden w-4 h-4 fill-(--nav-mobile-iconcolor);
 					}
 
 					div span svg.plus,
@@ -38,13 +38,13 @@ header.mobile {
 			}
 
 			&.l2 {
-				@apply hidden bg-[var(--nav-mobile-l2-bgcolor)];
+				@apply hidden bg-(--nav-mobile-l2-bgcolor);
 
 				li {
-					@apply border-[var(--nav-mobile-l2-bordercolor)];
+					@apply border-(--nav-mobile-l2-bordercolor);
 
 					a {
-						@apply text-[var(--nav-mobile-l2-textcolor)] font-normal;
+						@apply text-(--nav-mobile-l2-textcolor) font-normal;
 					}
 
 					&.active a {
@@ -56,41 +56,41 @@ header.mobile {
 	}
 
 	div.language  {
-		@apply bg-[var(--nav-mobile-language-bgcolor)] text-[var(--nav-mobile-language-textcolor)] fill-[var(--nav-mobile-language-textcolor)] border-[var(--nav-mobile-language-bordercolor)];
+		@apply bg-(--nav-mobile-language-bgcolor) text-(--nav-mobile-language-textcolor) fill-(--nav-mobile-language-textcolor) border-(--nav-mobile-language-bordercolor);
 
 		svg.globe {
-			@apply mr-2 fill-[var(--nav-mobile-language-iconcolor)];
+			@apply mr-2 fill-(--nav-mobile-language-iconcolor);
 		}
 	}
 
 	.burger {
-		@apply relative float-left h-[40px] w-[28px] cursor-pointer transition-[0.3s];
+		@apply relative float-left h-10 w-7 cursor-pointer transition-[0.3s];
 
 		span {
-			@apply absolute h-[3px] w-[25px] bg-[var(--nav-mobile-burgercolor)] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-[0.3s];
+			@apply absolute h-0.75 w-6.25 bg-(--nav-mobile-burgercolor) top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-[0.3s];
 
 			&:before, &:after {
-				@apply content-[''] absolute bg-[var(--nav-mobile-burgercolor)] h-[3px] w-[25px] transition-[0.3s];
+				@apply content-[''] absolute bg-(--nav-mobile-burgercolor) h-0.75 w-6.25 transition-[0.3s];
 			}
 			&:before {
-				@apply top-[-8px];
+				@apply -top-2;
 			}
 			&:after {
-				@apply top-[8px];
+				@apply top-2;
 			}
 		}
 		&.open span {
 			@apply bg-transparent;
 
 			&:before {
-				@apply rotate-[45deg] top-0;
+				@apply rotate-45 top-0;
 			}
 			&:after {
-				@apply rotate-[-45deg] top-0;
+				@apply -rotate-45 top-0;
 			}
 		}
 		+ a {
-			@apply inline-block text-[19px] leading-[50px];
+			@apply inline-block text-[19px] leading-12.5;
 		}
 	}
 }

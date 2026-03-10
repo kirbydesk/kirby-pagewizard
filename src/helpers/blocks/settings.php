@@ -6,6 +6,7 @@ class pwSettings
 	{
 		$fields = [
 			'headlineProperties' => ['extends' => 'pagewizard/headlines/properties'],
+			'sharedName' => ['extends' => 'pagewizard/fields/shared-name'],
 			'fragment' => [
 				'extends' => 'pagewizard/fields/fragment'
 			],
@@ -47,8 +48,6 @@ class pwSettings
 		if (!empty($extraFields)) {
 			$fields = array_merge($fields, $extraFields);
 		}
-
-		$fields['sharedName'] = ['extends' => 'pagewizard/fields/shared-name'];
 
 		return [
 			'label'  => 'pw.tab.settings',

@@ -80,7 +80,7 @@
   };
   var _sfc_render$3 = function render() {
     var _vm = this, _c = _vm._self._c;
-    return _c("div", { staticClass: "pwPreview", attrs: { "data-kirbyblock": "shared" }, on: { "dblclick": _vm.open } }, [_c("div", { staticClass: "shared" }, [_c("div", { staticClass: "name" }, [_vm.icon ? _c("k-icon", { attrs: { "type": _vm.icon } }) : _vm._e(), _c("span", { staticClass: "blockname" }, [_vm._v(_vm._s(_vm.blockName) + ":")])], 1), _c("div", { staticClass: "sharedname" }, [_vm._v(_vm._s(_vm.label))])])]);
+    return _c("div", { staticClass: "pwPreview", attrs: { "data-kirbyblock": "shared" }, on: { "dblclick": _vm.open } }, [_c("div", { staticClass: "shared" }, [_c("div", { staticClass: "name" }, [_vm.icon ? _c("k-icon", { attrs: { "type": _vm.icon } }) : _vm._e(), _c("span", { staticClass: "blockname" }, [_vm._v(_vm._s(_vm.blockName))])], 1), _c("span", [_vm._v("|")]), _c("em", { staticClass: "sharedname" }, [_vm._v(_vm._s(_vm.label))])])]);
   };
   var _sfc_staticRenderFns$3 = [];
   _sfc_render$3._withStripped = true;
@@ -102,13 +102,16 @@
     computed: {
       align() {
         return this.content.buttonalignment || this.alignDefault;
+      },
+      isExternal() {
+        return this.content.linktype == true && this.content.linktarget == true;
       }
     }
   };
   var _sfc_render$2 = function render() {
     var _a;
     var _vm = this, _c = _vm._self._c;
-    return _c("div", { staticClass: "pwButton", attrs: { "data-align": _vm.align } }, [_c("button", { staticClass: "k-button", attrs: { "data-has-text": "true", "data-responsive": "true", "data-size": "sm", "data-variant": "filled", "type": "button" } }, [((_a = _vm.content.linktext) == null ? void 0 : _a.length) ? _c("span", { staticClass: "k-button-text", domProps: { "innerHTML": _vm._s(_vm.content.linktext) } }) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])])]);
+    return _c("div", { staticClass: "pwButton", attrs: { "data-align": _vm.align } }, [_c("button", { staticClass: "k-button", attrs: { "data-has-text": "true", "data-responsive": "true", "data-size": "sm", "data-variant": "filled", "type": "button" } }, [((_a = _vm.content.linktext) == null ? void 0 : _a.length) ? _c("span", { staticClass: "k-button-text", domProps: { "innerHTML": _vm._s(_vm.content.linktext) } }) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")]), _vm.isExternal ? _c("svg", { staticClass: "pw-external-icon", attrs: { "aria-hidden": "true", "viewBox": "0 0 24 24", "fill": "currentColor" } }, [_c("path", { attrs: { "d": "M10 6V8H5V19H16V14H18V20C18 20.5523 17.5523 21 17 21H4C3.44772 21 3 20.5523 3 20V7C3 6.44772 3.44772 6 4 6H10ZM21 3V11H19L18.9999 6.413L11.2071 14.2071L9.79289 12.7929L17.5849 5H13V3H21Z" } })]) : _vm._e()])]);
   };
   var _sfc_staticRenderFns$2 = [];
   _sfc_render$2._withStripped = true;
@@ -134,7 +137,7 @@
   var _sfc_render$1 = function render() {
     var _vm = this, _c = _vm._self._c;
     return _vm.value && _vm.value.length ? _c("div", { staticClass: "k-button-group", attrs: { "data-align": _vm.align } }, _vm._l(_vm.value, function(item) {
-      return _c("div", { key: item.id, class: { "ishidden": item.isHidden } }, [_c("button", { staticClass: "k-button", attrs: { "type": "button", "data-has-text": "true", "data-responsive": "true", "data-size": "md", "data-variant": "filled" } }, [item.content.linktext.length ? _c("span", { staticClass: "k-button-text" }, [_vm._v(" " + _vm._s(item.content.linktext) + " ")]) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")])])]);
+      return _c("div", { key: item.id, class: { "ishidden": item.isHidden } }, [_c("button", { staticClass: "k-button", attrs: { "type": "button", "data-has-text": "true", "data-responsive": "true", "data-size": "md", "data-variant": "filled" } }, [item.content.linktext.length ? _c("span", { staticClass: "k-button-text" }, [_vm._v(" " + _vm._s(item.content.linktext) + " ")]) : _c("span", { staticClass: "k-button-text placeholder" }, [_vm._v(" " + _vm._s(_vm.$t("pw.field.link-text.placeholder")) + " ")]), item.content.linktype == true && item.content.linktarget == true ? _c("svg", { staticClass: "pw-external-icon", attrs: { "aria-hidden": "true", "viewBox": "0 0 24 24", "fill": "currentColor" } }, [_c("path", { attrs: { "d": "M10 6V8H5V19H16V14H18V20C18 20.5523 17.5523 21 17 21H4C3.44772 21 3 20.5523 3 20V7C3 6.44772 3.44772 6 4 6H10ZM21 3V11H19L18.9999 6.413L11.2071 14.2071L9.79289 12.7929L17.5849 5H13V3H21Z" } })]) : _vm._e()])]);
     }), 0) : _vm._e();
   };
   var _sfc_staticRenderFns$1 = [];
@@ -905,18 +908,23 @@
     extends: "k-text-field",
     mounted() {
       this.$nextTick(() => {
-        var _a, _b, _c, _d;
+        var _a, _b;
         const endpoint = ((_a = this.endpoints) == null ? void 0 : _a.field) || "";
         const isSharedContext = endpoint.includes("/sharedblocks/");
         if (!isSharedContext) {
-          if (this.$el) this.$el.style.display = "none";
+          if (this.$el) {
+            this.$el.style.display = "none";
+            const col = this.$el.closest(".k-column");
+            if (col) col.style.display = "none";
+          }
           return;
         }
+        const myCol = (_b = this.$el) == null ? void 0 : _b.closest(".k-column");
+        const fragmentCol = myCol == null ? void 0 : myCol.nextElementSibling;
+        if (fragmentCol) fragmentCol.style.display = "none";
         const d = /* @__PURE__ */ new Date();
         const pad = (n) => String(n).padStart(2, "0");
-        const title = ((_d = (_c = (_b = this.$panel) == null ? void 0 : _b.drawer) == null ? void 0 : _c.props) == null ? void 0 : _d.title) || "";
-        const prefix = title ? title + " " : "";
-        const generated = `${prefix}${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        const generated = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
         if (!this.value) {
           this.$emit("input", generated);
           setTimeout(() => {
@@ -924,8 +932,10 @@
             const input = (_a2 = this.$el) == null ? void 0 : _a2.querySelector("input");
             if (!input) return;
             input.style.color = "var(--color-gray-500, #999)";
-            input.addEventListener("input", () => {
+            input.addEventListener("focus", () => {
               input.style.color = "";
+              input.value = "";
+              this.$emit("input", "");
             }, { once: true });
           }, 0);
         }

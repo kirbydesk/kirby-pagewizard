@@ -186,14 +186,20 @@ span.tag.screensize {
 	.pwGridItem {
 		display: block;
 
-		&[data-paddingtop="true"] {
+		&[data-paddingtop="small"] {
+			padding-top: .5rem;
+		}
+		&[data-paddingtop="large"] {
 			padding-top: 1rem;
+		}
+		&[data-paddingbottom="small"] {
+			padding-bottom: .5rem;
+		}
+		&[data-paddingbottom="large"] {
+			padding-bottom: 1rem;
 		}
 		&[data-paddingright="true"] {
 			padding-right: 1rem;
-		}
-		&[data-paddingbottom="true"] {
-			padding-bottom: 1rem;
 		}
 		&[data-paddingleft="true"] {
 			padding-left: 1rem;

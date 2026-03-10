@@ -3,9 +3,10 @@
 		<div class="shared">
 			<div class="name">
 				<k-icon v-if="icon" :type="icon" />
-				<span class="blockname">{{ blockName }}:</span>
+				<span class="blockname">{{ blockName }}</span>
 			</div>
-			<div class="sharedname">{{ label }}</div>
+			<span>|</span>
+			<em class="sharedname">{{ label }}</em>
 		</div>
 	</div>
 </template>
@@ -53,7 +54,9 @@ div.shared {
 		display: flex;
 		align-items: center;
 		gap: .15rem;
-		opacity: 0.7;
+	}
+	.sharedname {
+		opacity: .7;
 	}
 }
 </style>

@@ -1,5 +1,5 @@
 ---
-label: Shared Blocks
+label: pw.tab.sharedblocks
 icon: shared-block
 columns:
   - width: 1/1
@@ -9,3 +9,5 @@ columns:
         fields:
           sharedblocks:
             type: blocks
+            label: pw.field.blocks
+            empty: pw.field.blocks.empty

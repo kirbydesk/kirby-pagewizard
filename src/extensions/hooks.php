@@ -1,6 +1,32 @@
 <?php return [
 
 	/* -------------- Hooks --------------*/
+	'site.update:after' => function ($newSite, $oldSite) {
+		static $running = false;
+		if ($running) return;
+
+		$raw = $newSite->content()->sharedblocks()->value();
+		if (empty($raw)) return;
+
+		$blocks   = json_decode($raw, true);
+		$modified = false;
+
+		foreach ($blocks as &$block) {
+			$name = trim($block['content']['sharedname'] ?? '');
+			if (empty($name)) {
+				$type  = $block['type'] ?? 'block';
+				$block['content']['sharedname'] = date('Y-m-d H:i:s');
+				$modified = true;
+			}
+		}
+
+		if ($modified) {
+			$running = true;
+			$newSite->update(['sharedblocks' => json_encode($blocks)]);
+			$running = false;
+		}
+	},
+
 	'file.create:after' => function ($file) {
 		if ($file->type() === 'image' && !$file->content()->get('imageRatio')->isNotEmpty()) {
 			$width  = $file->width();

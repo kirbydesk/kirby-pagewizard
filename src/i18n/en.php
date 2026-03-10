@@ -34,6 +34,7 @@
 	'pw.tab.properties' => 'Properties',
 	'pw.tab.right' => 'Right',
 	'pw.tab.settings' => 'Settings',
+	'pw.tab.sharedblocks' => 'Shared blocks',
 	'pw.tab.site' => 'Site',
 	'pw.tab.spacing' => 'Spacing',
 	'pw.tab.structure' => 'Structure',
@@ -66,6 +67,8 @@
 	'pw.field.address-whatsapp.label' => 'Whatsapp',
 	'pw.field.address.empty' => 'No address defined',
 	'pw.field.address.help' => 'The address will appear in the footer of every page. All fields are optional.',
+	'pw.field.address.position' => 'Position',
+	'pw.field.address.position.help' => 'Defines the position of the address block in the footer.',
 	'pw.field.author' => 'Author',
 	'pw.field.author.placeholder' => 'Author ...',
 	'pw.field.author.help' => 'Define an optional author of this quote.',
@@ -252,6 +255,8 @@
 	'pw.field.seo-canonical.help' => 'The canonical tag can be used to mark websites with duplicate content accordingly. Search engines will then only index the specified URL.',
 	'pw.field.seo-robots' => 'Robots',
 	'pw.field.seo-robots.help' => 'Processing of this page by search engines {{page.url}}',
+	'pw.field.sharedname.label' => 'Shared name',
+	'pw.field.sharedname.help' => 'Define the name used to select the shared block in the content tabs (e.g., the company address).',
 	'pw.field.socialmedia' => 'Social media links',
 	'pw.field.socialmedia.empty' => 'No social media links defined',
 	'pw.field.socialmedia.help' => 'Social media icons appear in the footer of every page. All entries are optional.',
@@ -364,6 +369,7 @@
 	'pw.option.noarchive' => 'No archive',
 	'pw.option.nofollow' => 'No follow',
 	'pw.option.noindex' => 'No index',
+	'pw.option.none' => 'None',
 	'pw.option.noopener' => 'Tab protection',
 	'pw.option.noreferrer' => 'No referrer',
 	'pw.option.normal' => 'Normal',
@@ -477,10 +483,10 @@
 	'pw.fieldsets.project-blocks' => 'Project related',
 	'pw.fieldsets.dynamic-blocks' => 'Dynamic',
 
-	'pw.field.sharedname.label' => 'Shared name',
-	'pw.field.sharedname.placeholder' => 'e.g. Hero – Homepage',
-	'pw.field.sharedname.help' => 'Optional. If set, this block can be referenced as a shared block on other pages.',
-	'pw.field.sharedid.label' => 'Shared Block',
-	'pw.field.sharedid.empty' => '— Select shared block —',
-	'pw.block.shared' => 'Shared Block',
+	'pw.block.shared.name' => 'Shared block',
+	'pw.block.shared.field.label' => 'Block',
+	'pw.block.shared.field.help' => 'Create or modify shared blocks in the <a href="site?tab=shared">project settings</a>.',
+
+
+
 );

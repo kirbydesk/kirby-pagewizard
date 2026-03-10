@@ -2,10 +2,10 @@
 	Header Desktop
 ------------------------------------------------------------------------------------------------*/
 header.desktop {
-	@apply left-1/2 -translate-x-1/2 fixed top-0 bg-[var(--nav-desktop-bgcolor)];
+	@apply left-1/2 -translate-x-1/2 fixed top-0 bg-(--nav-desktop-bgcolor);
 
 	div#navigation {
-		@apply relative md:h-[var(--nav-tablet-height)] lg:h-[var(--nav-desktop-height)];
+		@apply relative md:h-(--nav-tablet-height) lg:h-(--nav-desktop-height);
 		transition: height 0.3s cubic-bezier(.4,0,.2,1);
 
 		a.logo {
@@ -34,7 +34,7 @@ header.desktop {
 		@apply font-semibold;
 
 		div.navitem {
-			@apply relative h-[var(--nav-tablet-height)] lg:h-[var(--nav-desktop-height)];
+			@apply relative h-(--nav-tablet-height) lg:h-(--nav-desktop-height);
 			transition: height 0.3s cubic-bezier(.4,0,.2,1);
 
 			.item {
@@ -56,33 +56,33 @@ header.desktop {
 				}
 			}
 			div.flyout {
-				@apply hidden absolute -left-[15px] top-full z-30 text-base font-normal text-[var(--nav-flyout-textcolor)] bg-[var(--nav-flyout-bgcolor)] shadow-lg;
+				@apply hidden absolute -left-3.75 top-full z-30 text-base font-normal text-(--nav-flyout-textcolor) bg-(--nav-flyout-bgcolor) shadow-lg;
 				width: max-content;
 				min-width: var(--nav-desktop-flyout-min-width);
 
 				.flip & {
-					@apply left-auto -right-[15px];
+					@apply left-auto -right-3.75;
 				}
 
 				a {
-					@apply block px-4 py-3 text-[var(--nav-flyout-textcolor)] border-t-[var(--nav-flyout-bordercolor)];
+					@apply block px-4 py-3 text-(--nav-flyout-textcolor) border-t-(--nav-flyout-bordercolor);
 				}
 			}
 			&.language {
 				svg.globe {
-					@apply w-[20px] h-[20px] lg:w-[24px] lg:h-[24px];
+					@apply w-5 h-5 lg:w-6 lg:h-6;
 				}
 				div.flyout {
-					@apply w-auto min-w-0 left-auto -right-[15px];
+					@apply w-auto min-w-0 left-auto -right-3.75;
 
 					a {
-						@apply relative block pr-[15px] pl-[32px];
+						@apply relative block pr-3.75 pl-8;
 
 						&:first-child {
 							@apply border-t-0;
 						}
 						svg {
-							@apply absolute top-[16px] left-[10px] w-4 h-4;
+							@apply absolute top-4 left-2.5 w-4 h-4;
 						}
 						span.active {
 							@apply font-bold;
@@ -97,12 +97,12 @@ header.desktop {
 /* Desktop: schrumpft beim Scrollen */
 body.scrolled header.desktop div#navigation,
 body.scrolled header.desktop nav div.navitem {
-	@apply md:h-[var(--nav-tablet-height-sticky)] lg:h-[var(--nav-desktop-height-sticky)];
+	@apply md:h-(--nav-tablet-height-sticky) lg:h-(--nav-desktop-height-sticky);
 }
 
 /*------------------------------------------------------------------------------------------------
 	Main
 ------------------------------------------------------------------------------------------------*/
 main {
-	@apply md:pt-[var(--nav-tablet-height)] lg:pt-[var(--nav-desktop-height)];
+	@apply md:pt-(--nav-tablet-height) lg:pt-(--nav-desktop-height);
 }

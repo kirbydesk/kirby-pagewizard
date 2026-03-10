@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------------------------------------
+	Footer Definitions
+
+	Override: Activate patch file site/patches/css/kirby-pagewizard/_footer.css
+------------------------------------------------------------------------------------------------*/
+
+
+:root {
+	--footer-textcolor: #ffffff;
+	--footer-bgcolor: #ff0000;
+}
+
+footer {
+	color: var(--footer-textcolor);
+	background-color: var(--footer-bgcolor);
+
+	[data-type="category"] {
+		font-weight: bold;
+	}
+}
+
+
+

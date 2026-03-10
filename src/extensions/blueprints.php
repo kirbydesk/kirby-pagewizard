@@ -155,6 +155,7 @@
 	'pagewizard/fields/seo-canonical' => __DIR__ . '/../../blueprints/fields/seo-canonical.yml',
 	'pagewizard/fields/seo-robots' => __DIR__ . '/../../blueprints/fields/seo-robots.yml',
 	'pagewizard/fields/shared-name' => __DIR__ . '/../../blueprints/fields/shared-name.yml',
+	'pagewizard/fields/spacing' => __DIR__ . '/../../blueprints/fields/spacing.yml',
 	'pagewizard/fields/style' => __DIR__ . '/../../blueprints/fields/style.yml',
 	'pagewizard/fields/tagline' => __DIR__ . '/../../blueprints/fields/tagline.yml',
 	'pagewizard/fields/text-color' => __DIR__ . '/../../blueprints/fields/text-color.yml',

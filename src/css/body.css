@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------------------------------
 	Element Definitions
 
-	Override: Activate patch file site/patches/css/kirby-pagewizard/_01-body.css
+	Override: Activate patch file site/patches/css/kirby-pagewizard/_body.css
 ------------------------------------------------------------------------------------------------*/
 
 
@@ -88,13 +88,19 @@ section[data-block] {
 		margin-left: auto;
 		margin-right: auto;
 	}
-	&[data-padding-top="true"] [data-layout="grid-item"]{
+	&[data-padding-top="small"] [data-layout="grid-item"]{
+		padding-top: .75rem;
+	}
+	&[data-padding-top="large"] [data-layout="grid-item"]{
 		padding-top: 1.5rem;
 	}
 	&[data-padding-right="true"] [data-layout="grid-item"]{
 		padding-right: 1.5rem;
 	}
-	&[data-padding-bottom="true"] [data-layout="grid-item"]{
+	&[data-padding-bottom="small"] [data-layout="grid-item"]{
+		padding-bottom: .75rem;
+	}
+	&[data-padding-bottom="large"] [data-layout="grid-item"]{
 		padding-bottom: 1.5rem;
 	}
 	&[data-padding-left="true"] [data-layout="grid-item"]{
@@ -118,4 +124,15 @@ section[data-block] {
 	&[data-radius-bottom-left="true"] {
 		border-bottom-left-radius: 1.5rem;
 	}
+}
+
+/* -------------- Links --------------*/
+a:has(svg.external) {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25em;
+}
+svg.external {
+	@apply h-4 w-4 opacity-70;
+	flex-shrink: 0;
 }

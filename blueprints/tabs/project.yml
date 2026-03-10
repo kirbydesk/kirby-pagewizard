@@ -35,6 +35,8 @@ columns:
                 extends: pagewizard/fields/address-name
               address:
                 extends: pagewizard/fields/address
+              addressCountry:
+                extends: pagewizard/fields/address-country
               addressPhone:
                 extends: pagewizard/fields/address-phone
               addressFax:
@@ -43,8 +45,21 @@ columns:
                 extends: pagewizard/fields/address-whatsapp
               addressEmail:
                 extends: pagewizard/fields/address-email
-              addressCountry:
-                extends: pagewizard/fields/address-country
+              addressPosition:
+                type: toggles
+                label: pw.field.address.position
+                required: true
+                default: "left"
+                options:
+                  - value: left
+                    text:
+                      *: pw.option.left
+                    icon: text-left
+                  - value: right
+                    text:
+                      *: pw.option.right
+                    icon: text-right
+                help: pw.field.address.position.help
           socialmedia:
             type: object
             label: pw.field.socialmedia

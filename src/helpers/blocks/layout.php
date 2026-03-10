@@ -7,13 +7,13 @@ class pwLayout
 		$fields = [
 			'headlineContentspacing' => ['extends' => 'pagewizard/headlines/contentspacing'],
 			'paddingTop' => [
-				'extends' => 'pagewizard/fields/toggle',
+				'extends' => 'pagewizard/fields/spacing',
 				'default' => $defaults['padding-top'],
 				'label' => 'pw.field.padding-top',
 				'help' => 'pw.field.padding-top.help'
 			],
 			'paddingBottom' => [
-				'extends' => 'pagewizard/fields/toggle',
+				'extends' => 'pagewizard/fields/spacing',
 				'default' => $defaults['padding-bottom'],
 				'label' => 'pw.field.padding-bottom',
 				'help' => 'pw.field.padding-bottom.help'
