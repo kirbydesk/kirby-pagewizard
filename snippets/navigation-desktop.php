@@ -2,7 +2,7 @@
 	<div class="flex max-w-7xl mx-auto md:px-4 lg:px-6 xl:px-8" id="navigation"><?php
 
 		/* Logo */ ?>
-		<?php snippet('logo', ['mobile' => false]) ?>
+		<?php snippet('logo', ['type' => 'desktop', 'tabindex' => 1]) ?>
 
 		<nav class="flex-1 pl-8 lg:pl-6 xl:pl-8">
 			<div class="flex justify-end md:space-x-5 lg:space-x-6 xl:space-x-8"><?php

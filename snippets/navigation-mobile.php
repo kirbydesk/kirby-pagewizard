@@ -2,7 +2,7 @@
 	<div class="flex items-center justify-between w-full pl-2 pr-3.5 h-(--nav-mobile-height)"><?php
 
 		/* Logo */ ?>
-		<?php snippet('logo', ['mobile' => true]); ?><?php
+		<?php snippet('logo', ['type' => 'mobile', 'tabindex' => 1]) ?><?php
 
 		/* Burger */ ?>
 		<div class="flex justify-end burger" tabindex="2" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Navigation öffnen"><span></span></div>

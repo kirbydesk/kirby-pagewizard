@@ -1,16 +1,16 @@
 <footer>
-	<div class="flex gap-8 p-3 mx-auto md:p-4 lg:p-6 xl:p-8 max-w-7xl">
+	<div>
 
 		<?php if ($site->address()->toObject()->addressposition()->value() === 'left') snippet('address') ?>
 
-		<div class="flex flex-1 gap-8">
+		<div data-type="items">
 			<?php foreach ($site->footer()->toBlocks() as $footer) : ?>
 				<div class="flex-1">
 					<div class="<?= $site->address()->toObject()->addressposition()->value() === 'left' ? 'w-fit ml-auto' : '' ?>">
 						<div data-type="category"><?= $footer->name() ?></div><?php
 
 							foreach ($footer->blocks()->toBlocks() as $item) :
-							?><div class="mb-1.25">
+							?><div data-type="item">
 								<?php snippet('link', [
 									'linkType'        => $item->linktype()->isTrue(),
 									'linkInternal'    => $item->content()->get('link-internal')->value(),

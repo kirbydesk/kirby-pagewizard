@@ -187,16 +187,16 @@ span.tag.screensize {
 		display: block;
 
 		&[data-paddingtop="small"] {
-			padding-top: .5rem;
-		}
-		&[data-paddingtop="large"] {
 			padding-top: 1rem;
 		}
+		&[data-paddingtop="large"] {
+			padding-top: 2rem;
+		}
 		&[data-paddingbottom="small"] {
-			padding-bottom: .5rem;
+			padding-bottom: 1rem;
 		}
 		&[data-paddingbottom="large"] {
-			padding-bottom: 1rem;
+			padding-bottom: 2rem;
 		}
 		&[data-paddingright="true"] {
 			padding-right: 1rem;

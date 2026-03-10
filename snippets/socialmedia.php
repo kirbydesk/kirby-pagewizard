@@ -19,7 +19,7 @@ foreach ($links as $field => $_) {
 }
 if (!$hasAny) return;
 ?>
-<div class="w-full flex justify-center gap-4 p-3 md:p-4">
+<div class="w-full flex justify-center">
 	<?php foreach ($links as $field => $icon) : ?>
 		<?php if ($sm->$field()->isNotEmpty()) : ?>
 			<a href="<?= $sm->$field() ?>" class="inline-block text-white" rel="nofollow noopener noreferrer" target="_blank">

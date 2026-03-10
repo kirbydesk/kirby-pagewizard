@@ -33,5 +33,10 @@
 	"mobile-logo-display-height":  "25px",
 	"mobile-logo-src":             "img/logo.svg",
 	"mobile-logo-src-width":       "283",
-	"mobile-logo-src-height":      "39"
+	"mobile-logo-src-height":      "39",
+
+  "footer-logo-display-height":  "22px",
+	"footer-logo-src":        		 "img/logo-inverted.svg",
+  "footer-logo-src-width":  		 "200",
+  "footer-logo-src-height": 		 "28"
 }
