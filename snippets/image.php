@@ -97,8 +97,6 @@ if ($file):
 	if ($zoom):
 		static $lightboxLoaded = false;
 		if (!$lightboxLoaded):
-			echo '<link rel="stylesheet" href="'.$kirby->urls()->index().'/assets/css/glightbox.min.css">';
-			echo '<script src="'.$kirby->urls()->index().'/assets/js/glightbox.min.js" defer></script>';
 			echo '<script defer>document.addEventListener("DOMContentLoaded",function(){GLightbox({selector:".glightbox",touchNavigation:false,loop:false,draggable:false,closeOnOutsideClick:true,zoomable:false,openEffect:"fade",closeEffect:"fade"})});</script>';
 			$lightboxLoaded = true;
 		endif;
