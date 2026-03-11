@@ -38,7 +38,7 @@
 	endif;
 
 	// Copyright
-	e($site->copyright()->isNotEmpty(), '<div data-type="copyright"><p>© ' . date('Y') . ' ' . $site->copyright()->html() . '</p></div>');
+	e($site->copyright()->isNotEmpty(), '<div data-type="copyright"><p>© ' . date('Y') . ' ' . $site->copyright()->value() . '</p></div>');
 
 ?></footer><?php
 
