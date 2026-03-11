@@ -1,15 +1,12 @@
 <template>
 	<div class="wrap" v-if="src.length" :data-align="alignment">
 		<div class="image">
-			<div class="pattern" :class="size">
+			<div class="pattern" :class="size" :style="radiusStyle">
 				<figure
 					:class="computedRatio
 						? ['k-frame', 'k-image-frame', 'k-image', { zoom: computedZoom }]
 						: ['k-image', 'ratio-auto', { zoom: computedZoom }]"
-					:style="computedRatio ? {
-						'--fit': computedCrop ? 'cover' : 'contain',
-						'--ratio': computedRatio
-					} : {}"
+					:style="{ ...(computedRatio ? { '--fit': computedCrop ? 'cover' : 'contain', '--ratio': computedRatio } : {}), ...radiusStyle }"
 				>
 					<img :src="src" :srcset="srcset" />
 					<div><k-icon type="search"></k-icon></div>
@@ -30,6 +27,11 @@ export default {
 		src: String,
 		srcset: String,
 		size: String,
+		radius: String,
+		radiustopleft: [Boolean, String],
+		radiustopright: [Boolean, String],
+		radiusbottomleft: [Boolean, String],
+		radiusbottomright: [Boolean, String],
 		alignment: {
 			type: String,
 			default: 'left'
@@ -39,7 +41,7 @@ export default {
 			type: Number,
 			default: 0
 		}
-  },
+	},
 	data() {
 		return {
 			imageContent: null
@@ -50,12 +52,29 @@ export default {
 			return this.imageContent?.imagecrop || false;
 		},
 		computedRatio() {
+			if (this.radius === 'round') return '1/1'
 			const ratio = this.imageContent?.imageratio;
 			if (!ratio || ratio === 'auto') return null;
 			return ratio;
 		},
 		computedZoom() {
 			return this.imageContent?.imagezoom || false;
+		},
+		radiusStyle() {
+			if (this.radius === 'round') {
+				return { borderRadius: '9999px', overflow: 'hidden' }
+			}
+			if (this.radius === 'custom') {
+				const isTrue = v => v === true || v === 'true'
+				return {
+					borderTopLeftRadius:     isTrue(this.radiustopleft)     ? '15px' : '0',
+					borderTopRightRadius:    isTrue(this.radiustopright)    ? '15px' : '0',
+					borderBottomRightRadius: isTrue(this.radiusbottomright) ? '15px' : '0',
+					borderBottomLeftRadius:  isTrue(this.radiusbottomleft)  ? '15px' : '0',
+					overflow: 'hidden'
+				}
+			}
+			return {}
 		}
 	},
 	async mounted() {

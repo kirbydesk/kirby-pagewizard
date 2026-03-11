@@ -1,6 +1,13 @@
 /*------------------------------------------------------------------------------------------------
-	Crop & Ratio
+	Crop, Ratio & Radius
 ------------------------------------------------------------------------------------------------*/
+:root {
+	--media-radius-top-left: 2rem;
+	--media-radius-top-right: 2rem;
+	--media-radius-bottom-left: 2rem;
+	--media-radius-bottom-right: 2rem;
+}
+
 figure[data-ratio] > div {
 	overflow: hidden;
 

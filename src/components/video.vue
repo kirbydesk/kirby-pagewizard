@@ -1,10 +1,10 @@
 <template>
 	<div class="video" v-if="url || videoUrl" :data-align="alignment">
-		<div class="pattern" :class="size" >
+		<div class="pattern" :class="size" :style="radiusStyle">
 			<k-frame v-if="source == 'internal'" :ratio="computedRatio">
 				<video :src="videoUrl" controls />
 			</k-frame>
-			<k-frame v-else-if="source == 'external'" ratio="16/9" class="external">
+			<k-frame v-else-if="source == 'external'" :ratio="computedRatio" class="external">
 				<iframe
 					:src="getEmbedUrl(url)"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -22,12 +22,17 @@ export default {
 		url: String,
 		source: String,
 		size: String,
+		radius: String,
+		radiustopleft: [Boolean, String],
+		radiustopright: [Boolean, String],
+		radiusbottomleft: [Boolean, String],
+		radiusbottomright: [Boolean, String],
 		alignment: {
 			type: String,
 			default: 'left'
 		},
 		video: Object
-  },
+	},
 	data() {
 		return {
 			videoContent: null
@@ -35,10 +40,27 @@ export default {
 	},
 	computed: {
 		computedRatio() {
+			if (this.radius === 'round') return '1/1'
 			return this.videoContent?.videoratio || '16/9';
 		},
 		videoUrl() {
 			return this.video?.url || this.video;
+		},
+		radiusStyle() {
+			if (this.radius === 'round') {
+				return { borderRadius: '9999px', overflow: 'hidden' }
+			}
+			if (this.radius === 'custom') {
+				const isTrue = v => v === true || v === 'true'
+				return {
+					borderTopLeftRadius:     isTrue(this.radiustopleft)     ? '15px' : '0',
+					borderTopRightRadius:    isTrue(this.radiustopright)    ? '15px' : '0',
+					borderBottomRightRadius: isTrue(this.radiusbottomright) ? '15px' : '0',
+					borderBottomLeftRadius:  isTrue(this.radiusbottomleft)  ? '15px' : '0',
+					overflow: 'hidden'
+				}
+			}
+			return {}
 		}
 	},
 	async mounted() {

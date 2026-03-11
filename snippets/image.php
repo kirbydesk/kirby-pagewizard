@@ -41,12 +41,29 @@ if ($file):
 	// Zoom
 	$zoom = $file->imageZoom()->toBool();
 
+	// Radius
+	$radiusStyle = '';
+	$radiusValue = $radius ?? '';
+	if ($radiusValue === 'round') {
+		$ratio = '1/1';
+		$crop  = true;
+		$radiusStyle = 'border-radius:9999px;overflow:hidden;';
+	} elseif ($radiusValue === 'custom') {
+		$isTrue = fn($v) => $v === true || $v === 'true' || $v === 1;
+		$tl = $isTrue($radiusTopLeft     ?? false) ? 'var(--media-radius-top-left)'     : '0';
+		$tr = $isTrue($radiusTopRight    ?? false) ? 'var(--media-radius-top-right)'    : '0';
+		$br = $isTrue($radiusBottomRight ?? false) ? 'var(--media-radius-bottom-right)' : '0';
+		$bl = $isTrue($radiusBottomLeft  ?? false) ? 'var(--media-radius-bottom-left)'  : '0';
+		$radiusStyle = "border-radius:{$tl} {$tr} {$br} {$bl};overflow:hidden;";
+	}
+
 	// Output
 	echo '<div data-field="image" data-size="'.$size.'" data-align="'.$alignment.'">';
 	echo '<figure';
 	e($crop, ' data-crop="cover"');
 	e(!empty($ratio) && $ratio !== 'auto', ' data-ratio="'.$ratio.'"');
 	e($zoom, ' data-zoom');
+	e(!empty($radiusStyle), ' style="'.$radiusStyle.'"');
 	echo '>';
 	echo '<div>';
 	if ($zoom):

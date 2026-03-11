@@ -1,0 +1,15 @@
+---
+label: pw.field.media-radius
+type: toggles
+options:
+  - value: round
+    text:
+      *: "pw.option.round"
+    icon: circle
+  - value: custom
+    text:
+      *: "pw.option.custom"
+    icon: customradius
+help: pw.field.media-radius.help
+width: 1/2
+translate: false

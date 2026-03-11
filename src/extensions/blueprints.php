@@ -136,6 +136,7 @@
 	'pagewizard/fields/media-credit' => __DIR__ . '/../../blueprints/fields/media-credit.yml',
 	'pagewizard/fields/media-license' => __DIR__ . '/../../blueprints/fields/media-license.yml',
 	'pagewizard/fields/media-position' => __DIR__ . '/../../blueprints/fields/media-position.yml',
+	'pagewizard/fields/media-radius' => __DIR__ . '/../../blueprints/fields/media-radius.yml',
 	'pagewizard/fields/media-size' => __DIR__ . '/../../blueprints/fields/media-size.yml',
 	'pagewizard/fields/media-source' => __DIR__ . '/../../blueprints/fields/media-source.yml',
 	'pagewizard/fields/media-type' => __DIR__ . '/../../blueprints/fields/media-type.yml',

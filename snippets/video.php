@@ -1,5 +1,19 @@
 <?php
 
+// Radius
+$radiusValue = $radius ?? '';
+$radiusStyle = '';
+if ($radiusValue === 'round') {
+	$radiusStyle = 'border-radius:9999px;overflow:hidden;';
+} elseif ($radiusValue === 'custom') {
+	$isTrue = fn($v) => $v === true || $v === 'true' || $v === 1;
+	$tl = $isTrue($radiusTopLeft     ?? false) ? 'var(--media-radius-top-left)'     : '0';
+	$tr = $isTrue($radiusTopRight    ?? false) ? 'var(--media-radius-top-right)'    : '0';
+	$br = $isTrue($radiusBottomRight ?? false) ? 'var(--media-radius-bottom-right)' : '0';
+	$bl = $isTrue($radiusBottomLeft  ?? false) ? 'var(--media-radius-bottom-left)'  : '0';
+	$radiusStyle = "border-radius:{$tl} {$tr} {$br} {$bl};overflow:hidden;";
+}
+
 // Internal Video
 if ($source === 'internal'):
 
@@ -43,10 +57,14 @@ if ($source === 'internal'):
 		// Language
 		$lang = kirby()->language()?->code() ?? 'en';
 
+		// Ratio (round overrides file ratio)
+		if ($radiusValue === 'round') $ratio = '1/1';
+
 		// Output
 		echo '<div data-field="video" data-size="'.$size.'" data-align="'.$alignment.'">';
 		echo '<figure';
 		e(!empty($ratio), ' data-ratio="'.$ratio.'"');
+		e(!empty($radiusStyle), ' style="'.$radiusStyle.'"');
 		echo '>';
 		echo '<div>';
 		echo '<video';
@@ -88,8 +106,11 @@ elseif ($source === 'external' && !empty($url)):
 	}
 
 	if ($embedUrl):
+		$externalRatio = $radiusValue === 'round' ? '1/1' : '16/9';
 		echo '<div data-field="video" data-size="'.$size.'" data-align="'.$alignment.'">';
-		echo '<figure data-ratio="16/9">';
+		echo '<figure data-ratio="'.$externalRatio.'"';
+		e(!empty($radiusStyle), ' style="'.$radiusStyle.'"');
+		echo '>';
 		echo '<div>';
 		echo '<iframe';
 		echo ' src="'.esc($embedUrl).'"';
