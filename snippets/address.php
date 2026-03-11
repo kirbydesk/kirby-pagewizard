@@ -20,27 +20,32 @@
 			echo '<div data-type="phonenumbers">';
 
 			if ($address->addressphone()->isNotEmpty()) : ?>
-				<a href="tel:<?= cleanTel($address->addressphone()) ?>" class="inline-block mb-1 no-underline text-white">
-					<svg class="fill-white inline mb-0.5 mr-2 h-4 w-4"><use xlink:href="#phone"></use></svg>
-					<span class="border-b border-white border-dotted"><?= $address->addressphone() ?></span>
+				<a href="tel:<?= cleanTel($address->addressphone()) ?>" class="inline-block mb-1 no-underline">
+					<svg class="inline mb-0.5 mr-2 h-4 w-4"><use xlink:href="#phone"></use></svg>
+					<span class="border-b border-dotted"><?= $address->addressphone() ?></span>
 				</a>
 			<?php endif;
 
 			if ($address->addresswhatsapp()->isNotEmpty()) : ?>
-				<a href="mailto:<?= $address->addresswhatsapp() ?>" class="inline-block no-underline text-white">
-					<svg class="fill-white inline mb-0.5 mr-2 h-4 w-4"><use xlink:href="#whatsapp"></use></svg>
-					<span class="border-b border-white border-dotted"><?= $address->addresswhatsapp() ?></span>
+				<a href="mailto:<?= $address->addresswhatsapp() ?>" class="inline-block no-underline">
+					<svg class="inline mb-0.5 mr-2 h-4 w-4"><use xlink:href="#whatsapp"></use></svg>
+					<span class="border-b border-dotted"><?= $address->addresswhatsapp() ?></span>
 				</a>
 			<?php endif;
 
 			if ($address->addressemail()->isNotEmpty()) : ?>
-				<a href="mailto:<?= $address->addressemail() ?>" class="inline-block no-underline text-white">
-					<svg class="fill-white inline mb-0.5 mr-2 h-4 w-4"><use xlink:href="#mailto"></use></svg>
-					<span class="border-b border-white border-dotted"><?= $address->addressemail() ?></span>
+				<a href="mailto:<?= $address->addressemail() ?>" class="inline-block no-underline">
+					<svg class="inline mb-0.5 mr-2 h-4 w-4"><use xlink:href="#mailto"></use></svg>
+					<span class="border-b border-dotted"><?= $address->addressemail() ?></span>
 				</a>
 			<?php endif;
 
 			echo '</div>';
-		endif; ?>
+		endif;
+
+		// Social media
+		if ($site->socialmedia()->toObject()->socialmediaposition()->value() === 'addressblock') : ?>
+			<div data-type="socialmedia" class="mt-4 flex gap-2"><?php snippet('socialmedia', ['size' => 'small']); ?></div>
+		<?php endif; ?>
 	</div>
 </div>

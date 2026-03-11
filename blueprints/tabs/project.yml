@@ -111,3 +111,16 @@ columns:
                 type: url
                 placehhttps://youtube.com/@older: https://youtube.com/@{{ site.title }}
                 help: https://youtube.com/
+              socialmediaPosition:
+                type: toggles
+                label: pw.field.socialmedia.position
+                required: true
+                default: "addressblock"
+                options:
+                  - value: addressblock
+                    text:
+                      *: pw.option.addressblock
+                  - value: footerbottom
+                    text:
+                      *: pw.option.footerbottom
+                help: pw.field.socialmedia.position.help

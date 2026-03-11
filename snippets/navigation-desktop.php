@@ -1,5 +1,5 @@
 <header class="desktop hidden mx-auto w-full md:block z-50 shadow-sm"<?= $sticky ? ' id="sticky"' : '' ?> role="banner">
-	<div class="flex max-w-7xl mx-auto md:px-4 lg:px-6 xl:px-8" id="navigation"><?php
+	<div class="flex max-w-7xl mx-auto" id="navigation"><?php
 
 		/* Logo */ ?>
 		<?php snippet('logo', ['type' => 'desktop', 'tabindex' => 1]) ?>

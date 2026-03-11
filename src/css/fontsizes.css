@@ -15,8 +15,11 @@
 [data-heading-size="xl"] { font-size: 2rem; }
 [data-heading-size="2xl"] { font-size: 2.5rem; }
 [data-heading-size="3xl"] { font-size: 3rem; }
-/* sm */ @media (min-width: 640px) {}
-/* md */ @media (min-width: 768px) {}
+
+/* sm @media (min-width: 640px) {} */
+
+/* md @media (min-width: 768px) {} */
+
 /* lg */ @media (min-width: 1024px) {
 [data-heading-size="xs"] { font-size: 1rem; }
 [data-heading-size="sm"] { font-size: 1.25rem; }
@@ -26,6 +29,7 @@
 [data-heading-size="2xl"] { font-size: 3.0rem; }
 [data-heading-size="3xl"] { font-size: 4.0rem; }
 }
+
 /* xl */ @media (min-width: 1280px) {
 [data-heading-size="xs"] { font-size: 1rem; }
 [data-heading-size="sm"] { font-size: 1.25rem; }
@@ -44,14 +48,18 @@
 [data-editor-size="xl"] { font-size: 1.25rem; }
 [data-editor-size="2xl"] { font-size: 1.5rem; }
 [data-editor-size="3xl"] { font-size: 2rem; }
-/* sm */ @media (min-width: 640px) {}
-/* md */ @media (min-width: 768px) {}
+
+/* sm @media (min-width: 640px) {} */
+
+/* md @media (min-width: 768px) {} */
+
 /* lg */ @media (min-width: 1024px) {
 [data-editor-size="lg"] { font-size: 1.25rem; }
 [data-editor-size="xl"] { font-size: 1.5rem; }
 [data-editor-size="2xl"] { font-size: 1.75rem; }
 [data-editor-size="3xl"] { font-size: 2.25rem; }
 }
+
 /* xl */ @media (min-width: 1280px) {
 [data-editor-size="lg"] { font-size: 1.25rem; }
 [data-editor-size="xl"] { font-size: 1.5rem; }
@@ -70,8 +78,11 @@
 [data-quote-size="xl"] { font-size: 2rem; }
 [data-quote-size="2xl"] { font-size: 2.5rem; }
 [data-quote-size="3xl"] { font-size: 3rem; }
-/* sm */ @media (min-width: 640px) {}
-/* md */ @media (min-width: 768px) {}
+
+/* sm @media (min-width: 640px) {} */
+
+/* md @media (min-width: 768px) {} */
+
 /* lg */ @media (min-width: 1024px) {
 [data-quote-size="xs"] { font-size: 1rem; }
 [data-quote-size="sm"] { font-size: 1.25rem; }
@@ -81,6 +92,7 @@
 [data-quote-size="2xl"] { font-size: 3.0rem; }
 [data-quote-size="3xl"] { font-size: 4.0rem; }
 }
+
 /* xl */ @media (min-width: 1280px) {
 [data-quote-size="xs"] { font-size: 1rem; }
 [data-quote-size="sm"] { font-size: 1.25rem; }

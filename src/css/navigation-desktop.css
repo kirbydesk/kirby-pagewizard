@@ -7,6 +7,8 @@ header.desktop {
 	div#navigation {
 		@apply relative md:h-(--nav-tablet-height) lg:h-(--nav-desktop-height);
 		transition: height 0.3s cubic-bezier(.4,0,.2,1);
+		padding-left: var(--global-padding-left);
+		padding-right: var(--global-padding-right);
 
 		a.logo {
 			align-self: var(--nav-tablet-logo-align);

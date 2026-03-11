@@ -4,214 +4,277 @@
 	Override: Activate patch file site/patches/css/kirby-pagewizard/_colors.css
 ------------------------------------------------------------------------------------------------*/
 
+/* -------------- Body --------------*/
+:root {
+	--body-background: #FFFFFF; /* #f0f6fc */
+	--footer-text: #ffffff;
+	--footer-background: #1D548B;
+	--footer-link: #ffffff;
+	--footer-link-hover: #ffffff;
+	--footer-link-active: #ffffff;
+	--footer-socialmedia: color-mix(in srgb, #FFFFFF 80%, transparent);;
+	--footer-socialmedia-hover: #ffffff;
+	--footer-socialmedia-active: #ffffff;
+}
 
-/*------------------------------------------------------------------------------------------------
-	Global colors
-------------------------------------------------------------------------------------------------*/
-body {
-	background-color: #FFFFFF; /* #f0f6fc */
+/* -------------- Blocks --------------*/
+:root {
+	--block-background: #ffffff;
+	--block-link: #1D548B;
+	--block-link-hover: #1A4E7A;
+	--block-link-active: #163F5C;
+
+	--block-background-variant: #1D548B;
+	--block-link-variant: #8CBAE7;
+	--block-link-hover-variant: #7AA9D0;
+	--block-link-active-variant: #6680A8;
+}
+
+/* -------------- Elements --------------*/
+:root {
+	--element-tagline-text: #1D548B;
+	--element-heading-text: #262626;
+	--element-editor-text: #262626;
+	--element-caption-text: #6B7280;
+	--element-quote-text: #262626;
+	--element-cite-text: #6B7280;
+	--element-breadcrumb-text: #6B7280;
+	--element-icon-fill: #6B7280;
+	--element-media-background: #262626;
+	--element-image-zoom: #FFFFFF;
+	--element-image-zoom-background: rgba(0, 0, 0, 0.7);
+	--element-slideshow-bullet: color-mix(in srgb, #262626 30%, transparent);
+	--element-slideshow-bullet-active: #262626;
+	--element-button-text: #FFFFFF;
+	--element-button-background: #1D548B;
+	--element-button-border: transparent;
+	--element-button-text-hover: #FFFFFF;
+	--element-button-backround-hover: #2A6FAE;
+	--element-button-border-hover: transparent;
+	--element-button-text-active: #FFFFFF;
+	--element-button-backround-active: #164073;
+	--element-button-border-active: transparent;
+
+	--element-tagline-text-variant: #8CBAE7;
+	--element-heading-text-variant: #FFFFFF;
+	--element-editor-text-variant: #FFFFFF;
+	--element-caption-text-variant: #B0C4DE;
+	--element-quote-text-variant: #FFFFFF;
+	--element-cite-text-variant: #B0C4DE;
+	--element-breadcrumb-text-variant: #B0C4DE;
+	--element-icon-fill-variant: #B0C4DE;
+	--element-media-background-variant: #262626;
+	--element-image-zoom-variant: #FFFFFF;
+	--element-image-zoom-background-variant: rgba(0, 0, 0, 0.7);
+	--element-slideshow-bullet-variant: color-mix(in srgb, #FFFFFF 30%, transparent);
+	--element-slideshow-bullet-active-variant: #FFFFFF;
+	--element-button-text-variant: #262626;
+	--element-button-background-variant: #FFFFFF;
+	--element-button-border-variant: transparent;
+	--element-button-text-hover-variant: #262626;
+	--element-button-background-hover-variant: #E6E6E6;
+	--element-button-border-hover-variant: transparent;
+	--element-button-text-active-variant: #262626;
+	--element-button-background-active-variant: #CCCCCC;
+	--element-button-border-active-variant: transparent;
 }
 
 
 /*------------------------------------------------------------------------------------------------
-	Default colors
+	Default colors definitions
 ------------------------------------------------------------------------------------------------*/
 section[data-block]{
-	background-color: #FFFFFF;
+	background-color: var(--block-background);
 
 	/* -------------- Links --------------*/
 	a {
-		color: #1D548B;
+		color: var(--block-link);
 
 		&:hover {
-			color: #1A4E7A;
+			color: var(--block-link-hover);
 		}
 		&:active {
-			color: #163F5C;
+			color: var(--block-link-active);
 		}
 	}
 
 	/* -------------- Heading --------------*/
 	[data-field="heading"] {
-		color: #262626;
+		color: var(--element-heading-text);
 	}
 
 	/* -------------- Tagline --------------*/
 	[data-field="tagline"] {
-		color: #1D548B;
+		color: var(--element-tagline-text);
 	}
 
 	/* -------------- Editor --------------*/
 	[data-field="textarea"],
 	[data-field="writer"],
-	[data-field="markdown"] {
-		color: #262626;
+	[data-field="markdown"],
+	[data-field="text"] {
+		color: var(--element-editor-text);
 	}
 
 	/* -------------- Icon --------------*/
 	[data-field="icon"] svg {
-		fill: #6B7280;
+		fill: var(--element-icon-fill);
 	}
 
 	/* -------------- Caption --------------*/
 	[data-field="caption"] {
-		color: #6B7280;
+		color: var(--element-caption-text);
 	}
 
 	/* -------------- Quote --------------*/
 	[data-field="quote"] {
-		color: #262626;
+		color: var(--element-quote-text);
 	}
 
 	/* -------------- Cite --------------*/
 	[data-field="cite"] {
-		color: #6B7280;
+		color: var(--element-cite-text);
 	}
 
 	/* -------------- Breadcrumb --------------*/
 	[data-field="breadcrumb"] {
-		color: #6B7280;
-	}
-
-	/* -------------- Dimmed text --------------*/
-	[data-opacity="dimmed"] {
-		color: color-mix(in srgb, #262626 80%, transparent);
+		color: var(--element-breadcrumb-text);
 	}
 
 	/* -------------- Media --------------*/
 	figure[data-ratio] > div {
-		background: #262626
+		background: var(--element-media-background);
 	}
 	figure[data-zoom] > div .zoom-icon {
-		color: #FFFFFF;
-		background-color: rgba(0, 0, 0, 0.7);
+		color: var(--element-image-zoom);
+		background-color: var(--element-image-zoom-background);
 	}
 	[data-field="slideshow"] {
 		.swiper-pagination-bullet {
-			opacity: 0.3;
-			background: #262626;
+			background: var(--element-slideshow-bullet);
 		}
 		.swiper-pagination-bullet-active {
-			opacity: 1;
-			background: #262626;
+			background: var(--element-slideshow-bullet-active);
+		}
+	}
+
+	/* -------------- Button --------------*/
+	[data-field="button"] a {
+		color: var(--element-button-text);
+		background-color: var(--element-button-background);
+		border-color: var(--element-button-border);
+
+		&:hover {
+			color: var(--element-button-text-hover);
+			background-color: var(--element-button-background-hover);
+			border-color: var(--element-button-border-hover);
+		}
+		&:active {
+			color: var(--element-button-text-active);
+			background-color: var(--element-button-background-active);
+			border-color: var(--element-button-border-active);
 		}
 	}
 }
 
 
 /*------------------------------------------------------------------------------------------------
-	Variant colors (overwrites default colors when variant style is active)
+	Variant color definitions (overwrites default colors when variant style is active)
 ------------------------------------------------------------------------------------------------*/
 section[data-block][data-style="variant"] {
-	background-color: #1D548B;
+	background-color: var(--block-background-variant);
 
 	/* -------------- Links --------------*/
 	a {
-		color: #8CBAE7;
+		color: var(--block-link-variant);
 
 		&:hover {
-			color: #7AA9D0;
+			color: var(--block-link-hover-variant);
 		}
 		&:active {
-			color: #6680A8;
+			color: var(--block-link-active-variant);
 		}
 	}
 
 	/* -------------- Heading --------------*/
 	[data-field="heading"] {
-		color: #FFFFFF;
+		color: var(--element-heading-text-variant);
 	}
 
 	/* -------------- Tagline --------------*/
 	[data-field="tagline"] {
-		color: #8CBAE7;
+		color: var(--element-tagline-text-variant);
 	}
 
 	/* -------------- Editor --------------*/
 	[data-field="textarea"],
 	[data-field="writer"],
-	[data-field="markdown"] {
-		color: #FFFFFF;
+	[data-field="markdown"],
+	[data-field="text"] {
+		color: var(--element-editor-text-variant);
 	}
 
 	/* -------------- Icon --------------*/
 	[data-field="icon"] svg {
-		fill: #B0C4DE;
+		fill: var(--element-icon-fill-variant);
 	}
 
 	/* -------------- Caption --------------*/
 	[data-field="caption"] {
-		color: #B0C4DE;
+		color: var(--element-caption-text-variant);
 	}
 
 	/* -------------- Quote --------------*/
 	[data-field="quote"] {
-		color: #FFFFFF;
+		color: var(--element-quote-text-variant);
 	}
 
 	/* -------------- Cite --------------*/
 	[data-field="cite"] {
-		color: #B0C4DE;
+		color: var(--element-cite-text-variant);
 	}
 
 	/* -------------- Breadcrumb --------------*/
 	[data-field="breadcrumb"] {
-		color: #B0C4DE;
-	}
-
-	/* -------------- Dimmed text --------------*/
-	[data-opacity="dimmed"] {
-		color: color-mix(in srgb, #FFFFFF 80%, transparent);
+		color: var(--element-breadcrumb-text-variant);
 	}
 
 	/* -------------- Media --------------*/
+	figure[data-ratio] > div {
+		background: var(--element-media-background-variant);
+	}
+	figure[data-zoom] > div .zoom-icon {
+		color: var(--element-image-zoom-variant);
+		background-color: var(--element-image-zoom-background-variant);
+	}
 	[data-field="slideshow"] {
-		.swiper-pagination-bullet,
+		.swiper-pagination-bullet {
+			background: var(--element-slideshow-bullet-variant);
+		}
 		.swiper-pagination-bullet-active {
-			background: #FFFFFF;
+			background: var(--element-slideshow-bullet-active-variant);
 		}
 	}
 }
 
-
-/*------------------------------------------------------------------------------------------------
-	Button color styles
-------------------------------------------------------------------------------------------------*/
-section[data-block] [data-field="button"] a {
-	color: #FFFFFF;
-	background-color: #1D548B;
-	border-color: transparent;
-
-	&:hover {
-		color: #FFFFFF;
-		background-color: #2A6FAE;
-		border-color: transparent;
-	}
-	&:active {
-		color: #FFFFFF;
-		background-color: #164073;
-		border-color: transparent;
-	}
-}
-/*------------------------------------------------------------------------------------------------
-	Button variant color styles
-------------------------------------------------------------------------------------------------*/
+/* -------------- Button --------------*/
 section[data-block][data-style="variant"],
 section[data-block][data-style="custom"][data-button-style="variant"] {
+
 	[data-field="button"] a {
-		color: #262626;
-		background-color: #FFFFFF;
-		border-color: transparent;
+		color: var(--element-button-text-variant);
+		background-color: var(--element-button-background-variant);
+		border-color: var(--element-button-border-variant);
 
 		&:hover {
-			color: #262626;
-			background-color: #E6E6E6;
-			border-color: transparent;
+			color: var(--element-button-text-hover-variant);
+			background-color: var(--element-button-background-hover-variant);
+			border-color: var(--element-button-border-hover-variant);
 		}
 		&:active {
-			color: #262626;
-			background-color: #CCCCCC;
-			border-color: transparent;
+			color: var(--element-button-text-active-variant);
+			background-color: var(--element-button-background-active-variant);
+			border-color: var(--element-button-border-active-variant);
 		}
 	}
 }

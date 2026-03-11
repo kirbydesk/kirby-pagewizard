@@ -1,5 +1,5 @@
 <header class="mobile md:hidden">
-	<div class="flex items-center justify-between w-full pl-2 pr-3.5 h-(--nav-mobile-height)"><?php
+	<div class="flex items-center justify-between w-full h-(--nav-mobile-height)"><?php
 
 		/* Logo */ ?>
 		<?php snippet('logo', ['type' => 'mobile', 'tabindex' => 1]) ?><?php

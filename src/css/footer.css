@@ -4,24 +4,51 @@
 	Override: Activate patch file site/patches/css/kirby-pagewizard/_footer.css
 ------------------------------------------------------------------------------------------------*/
 
-
-:root {
-	--footer-textcolor: #ffffff;
-	--footer-bgcolor: #1D548B;
-}
-
 footer {
-	color: var(--footer-textcolor);
-	background-color: var(--footer-bgcolor);
-	padding: 1rem 0;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+	color: var(--footer-text);
+	background-color: var(--footer-background);
+	padding-top: var(--footer-padding-top);
+	padding-bottom: var(--footer-padding-bottom);
+	border-top-left-radius: var(--global-top-left-radius);
+	border-top-right-radius: var(--global-top-right-radius);
 
-	 > div {
-		@apply flex gap-8 px-3 mx-auto md:px-4 lg:px-6 xl:px-8 max-w-7xl;
+	[data-type="socialmedia"] {
+		a {
+			color: var(--footer-socialmedia);
+		}
+		a:hover {
+			color: var(--footer-socialmedia-hover);
+		}
+		a:active {
+			color: var(--footer-socialmedia-active);
+		}
+	}
+
+	[data-type="copyright"] {
+		padding-left: var(--global-padding-left);
+		padding-right: var(--global-padding-right);
+
+		p {
+			@apply w-full text-xs italic;
+
+			@media (min-width: 768px) {
+				text-align: center;
+			}
+		}
+	}
+
+	> div {
+		@apply flex flex-col gap-8 mx-auto md:flex-row max-w-7xl;
+		padding-left: var(--global-padding-left);
+		padding-right: var(--global-padding-right);
 
 		[data-type="address"] {
-			@apply text-sm shrink-0 flex flex-col items-start gap-3;
+			@apply text-sm flex flex-col items-start gap-3 md:shrink-0;
+			order: 1;
+
+			@media (min-width: 768px) {
+				order: unset;
+			}
 
 			a.logo img {
 				width: auto;
@@ -38,18 +65,58 @@ footer {
 				flex-direction: column;
 				gap: .1em;
 				margin-top: 1em;
+
+				a {
+					color: var(--footer-text);
+				}
+
+				span.border-b {
+					border-color: var(--footer-text);
+				}
+				svg {
+					fill: var(--footer-text);
+				}
 			}
 		}
 
 		[data-type="items"] {
-			@apply flex flex-1 gap-8;
+			@apply flex-1;
+			display: grid;
+			gap: 2rem;
+			grid-template-columns: repeat(1,1fr);
+
+			@media (min-width: 768px) {
+				grid-template-columns: repeat(2,1fr);
+			}
+			@media (min-width: 1024px) {
+				grid-template-columns: repeat(4,1fr);
+			}
 
 			[data-type="category"] {
 				font-weight: bold;
 			}
-			[data-type="item"]{
+			[data-type="item"] {
 				@apply mt-1;
+
+				a {
+					color: var(--footer-link);
+
+					&:hover {
+						color: var(--footer-link-hover);
+					}
+					&:active {
+						color: var(--footer-link-active);
+					}
+				}
 			}
 		}
+	}
+
+	> [data-type="socialmedia"] {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		padding-top: 1.5rem;
+		padding-bottom: 1rem;
 	}
 }

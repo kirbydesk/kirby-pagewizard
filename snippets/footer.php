@@ -6,7 +6,7 @@
 		<div data-type="items">
 			<?php foreach ($site->footer()->toBlocks() as $footer) : ?>
 				<div class="flex-1">
-					<div class="<?= $site->address()->toObject()->addressposition()->value() === 'left' ? 'w-fit ml-auto' : '' ?>">
+					<div class="<?= $site->address()->toObject()->addressposition()->value() === 'left' ? 'md:w-fit md:ml-auto' : '' ?>">
 						<div data-type="category"><?= $footer->name() ?></div><?php
 
 							foreach ($footer->blocks()->toBlocks() as $item) :
@@ -29,13 +29,16 @@
 		</div>
 		<?php if ($site->address()->toObject()->addressposition()->value() === 'right') snippet('address') ?>
 	</div><?php
-//									'class' => 'inline-block no-underline text-sm leading-4.5 text-white opacity-80',
 
 	// Social media
-	snippet('socialmedia');
+	if ($site->socialmedia()->toObject()->socialmediaposition()->value() === 'footerbottom') :
+		echo '<div data-type="socialmedia">';
+		snippet('socialmedia', ['size' => 'large']);
+		echo '</div>';
+	endif;
 
 	// Copyright
-	e($site->copyright()->isNotEmpty(), '<p class="pt-10 text-xs italic lg:text-center">© ' . date('Y') . ' ' . $site->copyright()->html() . '</p>');
+	e($site->copyright()->isNotEmpty(), '<div data-type="copyright"><p>© ' . date('Y') . ' ' . $site->copyright()->html() . '</p></div>');
 
 ?></footer><?php
 

@@ -4,6 +4,24 @@
 	Override: Activate patch file site/patches/css/kirby-pagewizard/_body.css
 ------------------------------------------------------------------------------------------------*/
 
+/* -------------- Global Vars --------------*/
+:root {
+	--global-padding-top-small: .75rem;
+	--global-padding-top-large: 1.5rem;
+	--global-padding-bottom-small: .75rem;
+	--global-padding-bottom-large: 1.5rem;
+	--global-padding-left: 1.5rem;
+	--global-padding-right: 1.5rem;
+	--global-margin-top: 1.5rem;
+	--global-margin-bottom: 1.5rem;
+	--global-top-left-radius: 1.5rem;
+	--global-top-right-radius: 1.5rem;
+	--global-bottom-left-radius: 1.5rem;
+	--global-bottom-right-radius: 1.5rem;
+
+	--footer-padding-top: 1.5rem;
+	--footer-padding-bottom: 1.5rem;
+}
 
 /*------------------------------------------------------------------------------------------------
 	Font Face - Inter (Variable Font)
@@ -38,6 +56,7 @@
 	font-display: swap;
 }
 
+
 /* -------------- Body --------------*/
 body {
 	font-family: 'Inter', system-ui, sans-serif;
@@ -48,6 +67,7 @@ body {
 	text-transform: none;
 	font-style: normal;
 	flex-direction: column;
+	background-color: var(--body-background);
 
 	main {
 		display: flex;
@@ -89,40 +109,40 @@ section[data-block] {
 		margin-right: auto;
 	}
 	&[data-padding-top="small"] [data-layout="grid-item"]{
-		padding-top: .75rem;
+		padding-top: var(--global-padding-top-small);
 	}
 	&[data-padding-top="large"] [data-layout="grid-item"]{
-		padding-top: 1.5rem;
-	}
-	&[data-padding-right="true"] [data-layout="grid-item"]{
-		padding-right: 1.5rem;
+		padding-top: var(--global-padding-top-large);
 	}
 	&[data-padding-bottom="small"] [data-layout="grid-item"]{
-		padding-bottom: .75rem;
+		padding-bottom: var(--global-padding-bottom-small);
 	}
 	&[data-padding-bottom="large"] [data-layout="grid-item"]{
-		padding-bottom: 1.5rem;
+		padding-bottom: var(--global-padding-bottom-large);
 	}
 	&[data-padding-left="true"] [data-layout="grid-item"]{
-		padding-left: 1.5rem;
+		padding-left: var(--global-padding-left);
+	}
+	&[data-padding-right="true"] [data-layout="grid-item"]{
+		padding-right: var(--global-padding-right);
 	}
 	&[data-margin-top="true"] {
-		margin-top: 1.5rem;
+		margin-top: var(--global-margin-top);
 	}
 	&[data-margin-bottom="true"] {
-		margin-bottom: 1.5rem;
+		margin-bottom: var(--global-margin-bottom);
 	}
 	&[data-radius-top-left="true"] {
-		border-top-left-radius: 1.5rem;
+		border-top-left-radius: var(--global-top-left-radius);
 	}
 	&[data-radius-top-right="true"] {
-		border-top-right-radius: 1.5rem;
+		border-top-right-radius: var(--global-top-right-radius);
 	}
 	&[data-radius-bottom-right="true"] {
-		border-bottom-right-radius: 1.5rem;
+		border-bottom-right-radius: var(--global-bottom-left-radius);
 	}
 	&[data-radius-bottom-left="true"] {
-		border-bottom-left-radius: 1.5rem;
+		border-bottom-left-radius: var(--global-bottom-right-radius);
 	}
 }
 
