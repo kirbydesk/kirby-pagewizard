@@ -3,6 +3,7 @@ title: pw.site
 options:
   changeTitle:	true
   update:	true
+buttons: false
 tabs:
   site: tabs/site
   project: tabs/project

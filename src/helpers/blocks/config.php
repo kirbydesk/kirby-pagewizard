@@ -269,6 +269,26 @@ class pwConfig
 		if ($sourceColorFile) {
 				$colorsCss = file_get_contents($sourceColorFile);
 
+				// Extract all :root CSS variable definitions → used to resolve var() references
+				$rootVars = [];
+				preg_match_all('/:root\s*\{([^}]*)\}/s', $colorsCss, $rootMatches);
+				foreach ($rootMatches[1] as $rootBlock) {
+						preg_match_all('/--([a-zA-Z0-9_-]+)\s*:\s*([^;]+);/', $rootBlock, $varMatches, PREG_SET_ORDER);
+						foreach ($varMatches as $vm) {
+								$rootVars['--' . trim($vm[1])] = trim($vm[2]);
+						}
+				}
+
+				// Resolve var(--something) to actual value (one level deep)
+				$resolveVars = function (array $colors) use ($rootVars): array {
+						foreach ($colors as $key => $value) {
+								if (preg_match('/^var\((--[a-zA-Z0-9_-]+)\)$/', $value, $m)) {
+										$colors[$key] = $rootVars[$m[1]] ?? $value;
+								}
+						}
+						return $colors;
+				};
+
 				$exBlock = function (string $pattern) use ($colorsCss): ?string {
 						if (!preg_match($pattern, $colorsCss, $m, PREG_OFFSET_CAPTURE)) return null;
 						$p = $m[0][1] + strlen($m[0][0]) - 1;
@@ -344,8 +364,8 @@ class pwConfig
 						return $colors;
 				};
 
-				$defaultColors = $parseColorBlock('/section\[data-block\]\s*\{/');
-				$variantColors = $parseColorBlock('/section\[data-block\]\[data-style="variant"\]\s*\{/');
+				$defaultColors = $resolveVars($parseColorBlock('/section\[data-block\]\s*\{/'));
+				$variantColors = $resolveVars($parseColorBlock('/section\[data-block\]\[data-style="variant"\]\s*\{/'));
 
 				$varLines = function (array $colors): string {
 						$lines = [];

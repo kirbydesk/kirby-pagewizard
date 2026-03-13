@@ -50,10 +50,10 @@
 	--element-button-background: #1D548B;
 	--element-button-border: transparent;
 	--element-button-text-hover: #FFFFFF;
-	--element-button-backround-hover: #2A6FAE;
+	--element-button-background-hover: #2A6FAE;
 	--element-button-border-hover: transparent;
 	--element-button-text-active: #FFFFFF;
-	--element-button-backround-active: #164073;
+	--element-button-background-active: #164073;
 	--element-button-border-active: transparent;
 
 	--element-tagline-text-variant: #8CBAE7;

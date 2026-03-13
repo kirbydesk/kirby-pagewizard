@@ -28,7 +28,7 @@ class pwStyle
 			],
 		];
 
-		if (!empty($settings['buttons'])) {
+		if (!empty($settings['buttons']) || !empty($settings['button'])) {
 			$fields['buttonstyle'] = [
 				'extends' => 'pagewizard/fields/button-style',
 				'when' => [
