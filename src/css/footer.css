@@ -1,3 +1,4 @@
+/* DO NOT MODIFY THIS FILE - Override in site/patches/css/kirby-pagewizard/_footer.css */
 /*------------------------------------------------------------------------------------------------
 	Footer Definitions
 
@@ -39,7 +40,7 @@ footer {
 	}
 
 	> div {
-		@apply flex flex-col gap-8 mx-auto md:flex-row max-w-7xl;
+		@apply flex flex-col gap-20 mx-auto md:flex-row max-w-7xl;
 		padding-left: var(--global-padding-left);
 		padding-right: var(--global-padding-right);
 		padding-bottom: 2rem;

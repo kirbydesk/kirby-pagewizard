@@ -1,7 +1,8 @@
 <?php
 
 // Parse JSON value from pweditor field
-$data  = json_decode($content->editor()->value(), true) ?? [];
+$editorRaw = $content->editor()->value();
+$data  = ($editorRaw === null || $editorRaw === '') ? [] : (json_decode($editorRaw, true) ?? []);
 $mode  = $data['mode'] ?? 'textarea';  // active editor mode: textarea | writer | markdown
 $text  = $data[$mode] ?? '';           // text for the active mode
 $align = $data['align'] ?? 'left';    // shared alignment

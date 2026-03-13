@@ -4,7 +4,7 @@
 		/* Logo */ ?>
 		<?php snippet('logo', ['type' => 'desktop', 'tabindex' => 1]) ?>
 
-		<nav class="flex-1 pl-8 lg:pl-6 xl:pl-8">
+		<nav class="flex-1 pl-8 lg:pl-6 xl:pl-8" x-data="desktopNav()">
 			<div class="flex justify-end md:space-x-5 lg:space-x-6 xl:space-x-8"><?php
 
 				/* Show Homepage link */
@@ -17,19 +17,34 @@
 
 				$children = $item->children()->listed();
 				$flip     = $flyoutFlipFrom > 0 && $itemIndex >= $flyoutFlipFrom ? ' flip' : '';
+				$currentIndex = $itemIndex;
 				$itemIndex++;
 
 				/* Navigation items */ ?>
 				<div class="navitem<?= $flip ?>">
 					<?php if ($children->isNotEmpty()) : ?>
-						<div class="item" tabindex="<?=$tabindex?>" role="button" aria-haspopup="true" aria-expanded="false">
+						<div
+							class="item"
+							tabindex="<?=$tabindex?>"
+							role="button"
+							aria-haspopup="true"
+							:aria-expanded="String(isOpen(<?= $currentIndex ?>))"
+							:class="{ 'open': isOpen(<?= $currentIndex ?>) }"
+							@mouseenter="open(<?= $currentIndex ?>)"
+							@mouseleave="close()"
+							@click.stop="toggle(<?= $currentIndex ?>)"
+							@keydown.enter.prevent="toggle(<?= $currentIndex ?>)"
+							@keydown.space.prevent="toggle(<?= $currentIndex ?>)"
+							@keydown.escape.prevent="close()"
+							@click.outside="close()"
+						>
 							<?= $item->metanavigationtitle()->or($item->title()); ?>
 							<?php if ($flyoutIcon) : ?><span>
 								<svg class="hidden w-4 h-4 fill-current lg:inline-block">
 									<use xlink:href="#<?= htmlspecialchars($flyoutIcon) ?>"></use>
 								</svg>
 							</span><?php endif; ?>
-							<div class="flyout">
+							<div class="flyout" x-show="isOpen(<?= $currentIndex ?>)" x-transition.opacity.duration.200ms x-cloak>
 								<a href="<?= $item->url() ?>" tabindex="<?=$tabindex?>"><?= $item->title() ?></a>
 									<?php foreach ($children as $child) : ?>
 									<a href="<?= $child->url() ?>" class="border-t" tabindex="<?=$tabindex?>"><?= $child->title() ?></a>

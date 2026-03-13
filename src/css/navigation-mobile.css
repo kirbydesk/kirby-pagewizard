@@ -1,6 +1,9 @@
+/* DO NOT MODIFY THIS FILE - Override in site/patches/css/kirby-pagewizard/_navigation-mobile.css */
 /*------------------------------------------------------------------------------------------------
 	Header Mobile
 ------------------------------------------------------------------------------------------------*/
+[x-cloak] { display: none !important;}
+
 header.mobile {
 	@apply bg-(--nav-mobile-bgcolor) text-(--nav-mobile-textcolor) fill-(--nav-mobile-textcolor);
 
@@ -14,7 +17,7 @@ header.mobile {
 	}
 
 	nav {
-		@apply hidden bg-(--nav-mobile-l1-bgcolor);
+		@apply bg-(--nav-mobile-l1-bgcolor);
 
 		a {
 			@apply no-underline text-(--nav-mobile-l1-textcolor);
@@ -42,7 +45,7 @@ header.mobile {
 			}
 
 			&.l2 {
-				@apply hidden bg-(--nav-mobile-l2-bgcolor);
+				@apply bg-(--nav-mobile-l2-bgcolor);
 
 				li {
 					@apply border-(--nav-mobile-l2-bordercolor);

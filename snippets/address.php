@@ -15,7 +15,7 @@
 		endif;
 
 		// Phonenumbers
-		if ($address->addressphone()->isNotEmpty() || $address->addresswhatsapp()->isNotEmpty() || $address->addressemail()->isNotEmpty()):
+		if ($address->addressphone()->isNotEmpty() || $address->addressfax()->isNotEmpty() || $address->addresswhatsapp()->isNotEmpty() || $address->addressemail()->isNotEmpty()):
 
 			echo '<div data-type="phonenumbers">';
 
@@ -24,6 +24,13 @@
 					<svg class="inline mb-0.5 mr-2 h-4 w-4"><use xlink:href="#phone"></use></svg>
 					<span class="border-b border-dotted"><?= $address->addressphone() ?></span>
 				</a>
+			<?php endif;
+
+			if ($address->addressfax()->isNotEmpty()) : ?>
+				<span class="inline-block mb-1 no-underline">
+					<svg class="inline mb-0.5 mr-2 h-4 w-4"><use xlink:href="#fax"></use></svg>
+					<?= $address->addressfax() ?>
+				</span>
 			<?php endif;
 
 			if ($address->addresswhatsapp()->isNotEmpty()) : ?>

@@ -4,7 +4,7 @@ return [
 	'headline' => [
 		'extends' => 'headline',
 		'props' => [
-			'class' => function (string $class = null) {
+			'class' => function (?string $class = null) {
 				return $class;
 			}
 		]
@@ -19,7 +19,7 @@ return [
 	'line' => [
 		'extends' => 'line',
 		'props' => [
-			'class' => function (string $class = null) {
+			'class' => function (?string $class = null) {
 				return $class;
 			}
 		]
@@ -27,13 +27,13 @@ return [
 	'pwtext' => [
 		'extends' => 'text',
 		'props' => [
-			'align' => function (string $align = null) {
+			'align' => function (?string $align = null) {
 				return $align;
 			},
-			'level' => function (string $level = null) {
+			'level' => function (?string $level = null) {
 				return $level;
 			},
-			'size' => function (string $size = null) {
+			'size' => function (?string $size = null) {
 				return $size;
 			}
 		]
@@ -41,13 +41,13 @@ return [
 	'pweditor' => [
 		'extends' => 'text',
 		'props' => [
-			'value' => function (string $value = null) {
+			'value' => function (?string $value = null) {
 				return $value;
 			},
-			'size' => function (string $size = null) {
+			'size' => function (?string $size = null) {
 				return $size;
 			},
-			'fieldHelp' => function (string $fieldHelp = null) {
+			'fieldHelp' => function (?string $fieldHelp = null) {
 				return $fieldHelp;
 			}
 		]
@@ -63,7 +63,7 @@ return [
 	'pwicon' => [
 		'extends' => 'text',
 		'props' => [
-			'value' => function (string $value = null) {
+			'value' => function (?string $value = null) {
 				return $value;
 			}
 		]
@@ -71,7 +71,7 @@ return [
 	'pwsharedname' => [
 		'extends' => 'text',
 		'props' => [
-			'value' => function (string $value = null) {
+			'value' => function (?string $value = null) {
 				return $value;
 			}
 		]

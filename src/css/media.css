@@ -1,3 +1,4 @@
+/* DO NOT MODIFY THIS FILE - Override in site/patches/css/kirby-pagewizard/_media.css */
 /*------------------------------------------------------------------------------------------------
 	Crop, Ratio & Radius
 ------------------------------------------------------------------------------------------------*/
@@ -20,6 +21,10 @@ figure[data-ratio] > div {
 		width: 100%;
 		height: 100%;
 		border: 0;
+	}
+	.swiper, .swiper-wrapper, .swiper-slide {
+		height: 100%;
+		width: 100%;
 	}
 }
 

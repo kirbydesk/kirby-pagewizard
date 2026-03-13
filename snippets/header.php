@@ -11,20 +11,20 @@
 			file_exists($kirby->roots()->assets()."/css/site.min.css") && print '<link rel="stylesheet" href="'.$kirby->urls()->assets().'/css/site.min.css?'.filemtime($kirby->roots()->assets().'/css/site.min.css').'" />';
 
 			/* JS */
-			file_exists($kirby->roots()->assets()."/js/site.min.js") && print '<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script><script src="'.$kirby->urls()->assets().'/js/site.min.js?'.filemtime($kirby->roots()->assets().'/js/site.min.js').'" defer></script>';
+			file_exists($kirby->roots()->assets()."/js/site.min.js") && print '<script src="'.$kirby->urls()->assets().'/js/site.min.js?'.filemtime($kirby->roots()->assets().'/js/site.min.js').'" defer></script>';
 
 			/* Favicon */
 			file_exists($kirby->roots()->index()."/favicon.ico") && print '<link rel="icon" href="'.$kirby->urls()->index().'/favicon.ico" sizes="32x32">';
 			file_exists($kirby->roots()->assets()."/img/favicon.svg") && print '<link rel="icon" type="image/svg+xml" href="'.$kirby->urls()->assets().'/img/favicon.svg">';
 			file_exists($kirby->roots()->assets()."/img/apple-touch-icon.png") && print '<link rel="apple-touch-icon" href="'.$kirby->urls()->assets().'/img/apple-touch-icon.png">';
 
-		?>
-		<title><?=$page->metapagetitle()->or($page->title() . ' | ' . $site->title())?></title>
+		
+		?><title><?=$page->title()->value()?></title>
 	</head>
 <body class="<?php e($kirby->user(), 'debug-screens'); ?>">
 <?php
 	// Config settings
-	$default = json_decode(file_get_contents(__DIR__ . '/../config/navigation.json'), true) ?? [];
+	$default = json_decode(file_get_contents(kirby()->plugin('kirbydesk/kirby-pagewizard')->root() . '/config/navigation.json'), true) ?? [];
 	$patch   = kirby()->root('site') . '/patches/config/navigation.json';
 	$config  = file_exists($patch) ? array_merge($default, json_decode(file_get_contents($patch), true) ?? []) : $default;
 	$sticky	 = (bool)($config['sticky'] ?? true);

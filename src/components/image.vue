@@ -49,6 +49,7 @@ export default {
 	},
 	computed: {
 		computedCrop() {
+			if (this.radius === 'round') return true;
 			return this.imageContent?.imagecrop || false;
 		},
 		computedRatio() {

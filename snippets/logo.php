@@ -1,7 +1,7 @@
 <?php
 
 // Config
-$logoDefault = json_decode(file_get_contents(__DIR__ . '/../config/navigation.json'), true) ?? [];
+$logoDefault = json_decode(file_get_contents(kirby()->plugin('kirbydesk/kirby-pagewizard')->root() . '/config/navigation.json'), true) ?? [];
 $logoPatch   = kirby()->root('site') . '/patches/config/navigation.json';
 $logoCfg     = file_exists($logoPatch)
 	? array_merge($logoDefault, json_decode(file_get_contents($logoPatch), true) ?? [])

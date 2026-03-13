@@ -6,7 +6,7 @@
 		<div data-type="items">
 			<?php foreach ($site->footer()->toBlocks() as $footer) : ?>
 				<div class="flex-1">
-					<div class="<?= $site->address()->toObject()->addressposition()->value() === 'left' ? 'md:w-fit md:ml-auto' : '' ?>">
+					
 						<div data-type="category"><?= $footer->name() ?></div><?php
 
 							foreach ($footer->blocks()->toBlocks() as $item) :
@@ -23,7 +23,7 @@
 								]) ?>
 							</div>
 						<?php endforeach ?>
-					</div>
+					
 				</div>
 			<?php endforeach ?>
 		</div>
@@ -46,7 +46,7 @@
 // SVG sprite — project patch overrides plugin default
 $navSprite = file_exists($kirby->roots()->index() . '/site/patches/sprites/symbols.txt')
 	? $kirby->roots()->index() . '/site/patches/sprites/symbols.txt'
-	: __DIR__ . '/../assets/sprites/symbols.txt';
+	: kirby()->plugin('kirbydesk/kirby-pagewizard')->root() . '/assets/sprites/symbols.txt';
 echo '<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display:none">' . "\n";
 echo file_get_contents($navSprite) . "\n";
 echo '</svg>' . "\n";
