@@ -33,8 +33,8 @@ export default {
 button {
 	margin: var(--spacing-3);
 	padding: var(--spacing-4) var(--spacing-2);
-	background-color: var(--color-gray-600);
-	color: white;
+	background-color: var(--pw-color-button-background, var(--color-gray-600));
+	color: var(--pw-color-button-text, white);
 
 	.k-button-text.placeholder {
 		opacity: 0.5;

@@ -9,6 +9,9 @@ options:
   - value: variant
     text:
       *: pw.option.variant
+  - value: variant2
+    text:
+      *: pw.option.variant2
   - value: custom
     text:
       *: pw.option.custom

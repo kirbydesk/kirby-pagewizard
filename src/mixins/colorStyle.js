@@ -34,17 +34,18 @@ export default {
 				if (this.content.backgroundcolor) {
 					vars['--pw-color-block-background'] = this.content.backgroundcolor;
 				}
-				// Button style: use default or variant button colors
+				// Button style: use themed button colors
 				const btnStyle = this.content.buttonstyle || 'default';
-				if (btnStyle === 'variant' && this.colors.variant) {
-					const btnKeys = Object.keys(this.colors.variant).filter(k => k.startsWith('pw-color-button'));
+				if (btnStyle !== 'default' && this.colors[btnStyle]) {
+					const btnKeys = Object.keys(this.colors[btnStyle]).filter(k => k.startsWith('pw-color-button'));
 					for (const key of btnKeys) {
-						vars['--' + key] = this.colors.variant[key];
+						vars['--' + key] = this.colors[btnStyle][key];
 					}
 				}
 			} else {
-				const palette = style === 'variant'
-					? { ...this.colors.default, ...this.colors.variant }
+				const themePalette = this.colors[style];
+				const palette = themePalette
+					? { ...this.colors.default, ...themePalette }
 					: this.colors.default;
 				for (const [key, value] of Object.entries(palette)) {
 					vars['--' + key] = value;

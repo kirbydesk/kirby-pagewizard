@@ -46,7 +46,7 @@ if ($images && $images->count() > 0):
 		// Thumb
 		$thumbOptions = ['width' => 1280, 'quality' => 90, 'format' => 'webp'];
 		$srcset = $image->srcset([480, 720, 960, 1280]);
-		$sizes = match($size) {
+		$sizes = $sizes ?? match($size) {
 			'xsmall' => '25vw',
 			'small'  => '33vw',
 			'medium' => '50vw',

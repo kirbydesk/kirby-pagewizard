@@ -14,7 +14,7 @@
 			'file'      => $content->image(),
 			'size'      => $content->mediasize()->value(),
 			'alignment' => $content->mediaalignment()->value(),
-		], $radiusParams));
+		], $radiusParams, isset($sizes) ? ['sizes' => $sizes] : []));
 
 	// Images
 	elseif ($content->mediatype()->value() === 'slideshow'):
@@ -22,7 +22,7 @@
 			'files'     => $content->slideshow(),
 			'size'      => $content->mediasize()->value(),
 			'alignment' => $content->mediaalignment()->value(),
-		], $radiusParams));
+		], $radiusParams, isset($sizes) ? ['sizes' => $sizes] : []));
 
 	// Video
 	elseif ($content->mediatype()->value() === 'video'):

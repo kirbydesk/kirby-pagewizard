@@ -78,6 +78,34 @@
 	--element-button-text-active-variant: #262626;
 	--element-button-background-active-variant: #CCCCCC;
 	--element-button-border-active-variant: transparent;
+
+	--block-background-variant2: #2C3E50;
+	--block-link-variant2: #E8B84B;
+	--block-link-hover-variant2: #F5C842;
+	--block-link-active-variant2: #C9952A;
+
+	--element-tagline-text-variant2: #E8B84B;
+	--element-heading-text-variant2: #FFFFFF;
+	--element-editor-text-variant2: #BDC3C7;
+	--element-caption-text-variant2: #7F8C8D;
+	--element-quote-text-variant2: #FFFFFF;
+	--element-cite-text-variant2: #7F8C8D;
+	--element-breadcrumb-text-variant2: #7F8C8D;
+	--element-icon-fill-variant2: #7F8C8D;
+	--element-media-background-variant2: #1A2530;
+	--element-image-zoom-variant2: #FFFFFF;
+	--element-image-zoom-background-variant2: rgba(0, 0, 0, 0.7);
+	--element-slideshow-bullet-variant2: color-mix(in srgb, #FFFFFF 30%, transparent);
+	--element-slideshow-bullet-active-variant2: #E8B84B;
+	--element-button-text-variant2: #2C3E50;
+	--element-button-background-variant2: #E8B84B;
+	--element-button-border-variant2: transparent;
+	--element-button-text-hover-variant2: #2C3E50;
+	--element-button-background-hover-variant2: #F5C842;
+	--element-button-border-hover-variant2: transparent;
+	--element-button-text-active-variant2: #FFFFFF;
+	--element-button-background-active-variant2: #C9952A;
+	--element-button-border-active-variant2: transparent;
 }
 
 
@@ -276,6 +304,108 @@ section[data-block][data-style="custom"][data-button-style="variant"] {
 			color: var(--element-button-text-active-variant);
 			background-color: var(--element-button-background-active-variant);
 			border-color: var(--element-button-border-active-variant);
+		}
+	}
+}
+
+
+/*------------------------------------------------------------------------------------------------
+	Variant 2 color definitions
+------------------------------------------------------------------------------------------------*/
+section[data-block][data-style="variant2"] {
+	background-color: var(--block-background-variant2);
+
+	/* -------------- Links --------------*/
+	a {
+		color: var(--block-link-variant2);
+
+		&:hover {
+			color: var(--block-link-hover-variant2);
+		}
+		&:active {
+			color: var(--block-link-active-variant2);
+		}
+	}
+
+	/* -------------- Heading --------------*/
+	[data-field="heading"] {
+		color: var(--element-heading-text-variant2);
+	}
+
+	/* -------------- Tagline --------------*/
+	[data-field="tagline"] {
+		color: var(--element-tagline-text-variant2);
+	}
+
+	/* -------------- Editor --------------*/
+	[data-field="textarea"],
+	[data-field="writer"],
+	[data-field="markdown"],
+	[data-field="text"] {
+		color: var(--element-editor-text-variant2);
+	}
+
+	/* -------------- Icon --------------*/
+	[data-field="icon"] svg {
+		fill: var(--element-icon-fill-variant2);
+	}
+
+	/* -------------- Caption --------------*/
+	[data-field="caption"] {
+		color: var(--element-caption-text-variant2);
+	}
+
+	/* -------------- Quote --------------*/
+	[data-field="quote"] {
+		color: var(--element-quote-text-variant2);
+	}
+
+	/* -------------- Cite --------------*/
+	[data-field="cite"] {
+		color: var(--element-cite-text-variant2);
+	}
+
+	/* -------------- Breadcrumb --------------*/
+	[data-field="breadcrumb"] {
+		color: var(--element-breadcrumb-text-variant2);
+	}
+
+	/* -------------- Media --------------*/
+	figure[data-ratio] > div {
+		background: var(--element-media-background-variant2);
+	}
+	figure[data-zoom] > div .zoom-icon {
+		color: var(--element-image-zoom-variant2);
+		background-color: var(--element-image-zoom-background-variant2);
+	}
+	[data-field="slideshow"] {
+		.swiper-pagination-bullet {
+			background: var(--element-slideshow-bullet-variant2);
+		}
+		.swiper-pagination-bullet-active {
+			background: var(--element-slideshow-bullet-active-variant2);
+		}
+	}
+}
+
+/* -------------- Button (Variant 2) --------------*/
+section[data-block][data-style="variant2"],
+section[data-block][data-style="custom"][data-button-style="variant2"] {
+
+	[data-field="button"] a {
+		color: var(--element-button-text-variant2);
+		background-color: var(--element-button-background-variant2);
+		border-color: var(--element-button-border-variant2);
+
+		&:hover {
+			color: var(--element-button-text-hover-variant2);
+			background-color: var(--element-button-background-hover-variant2);
+			border-color: var(--element-button-border-hover-variant2);
+		}
+		&:active {
+			color: var(--element-button-text-active-variant2);
+			background-color: var(--element-button-background-active-variant2);
+			border-color: var(--element-button-border-active-variant2);
 		}
 	}
 }
