@@ -1,6 +1,6 @@
 {
 	"name": "kirbydesk/kirby-pagewizard",
-	"version": "1.5.7",
+	"version": "1.5.8",
 	"description": "Pagewizard for Kirby CMS",
 	"type": "kirby-plugin",
 	"keywords": [
@@ -12,8 +12,8 @@
 	"authors": [
 		{
 			"name": "Christian Fickinger",
-			"email": "kirby@christianfickinger.de",
-			"homepage": "https://christianfickinger.de"
+			"email": "hello@kirbydesk.com",
+      		"homepage": "https://kirbydesk.com"
 		}
 	],
 	"extra": {

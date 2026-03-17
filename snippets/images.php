@@ -101,12 +101,14 @@ if ($images && $images->count() > 0):
 	endif;
 
 	// Init Swiper
-	echo '<script>';
+	echo '<script defer>';
+	echo 'document.addEventListener("DOMContentLoaded",function(){';
 	echo 'new Swiper("#'.$slideshowId.'",{';
 	echo 'spaceBetween:0,';
 	echo 'centeredSlides:true,';
 	echo 'autoplay:{delay:4000,disableOnInteraction:false},';
 	echo 'pagination:{el:"#'.$slideshowId.'-pagination",clickable:true}';
+	echo '});';
 	echo '});';
 	echo '</script>';
 
