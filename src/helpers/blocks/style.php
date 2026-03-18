@@ -21,9 +21,10 @@ class pwStyle
 		];
 
 		$themeConfig = $fieldVisibility['theme'] ?? true;
-		if (is_array($themeConfig)) {
+		$themeOptions = is_array($themeConfig) ? ($themeConfig['options'] ?? $themeConfig) : null;
+		if (is_array($themeOptions)) {
 			$themeField['options'] = array_values(
-				array_intersect_key(self::$allThemeOptions, array_flip($themeConfig))
+				array_intersect_key(self::$allThemeOptions, array_flip($themeOptions))
 			);
 		}
 
@@ -44,14 +45,14 @@ class pwStyle
 			],
 		];
 
-		$customAllowed = !is_array($themeConfig) || in_array('custom', $themeConfig, true);
+		$customAllowed = !is_array($themeOptions) || in_array('custom', $themeOptions, true);
 		if ($customAllowed && (!empty($settings['buttons']) || !empty($settings['button']))) {
 			$buttonStyleField = [
 				'extends' => 'pagewizard/fields/button-style',
 				'when' => ['theme' => 'custom']
 			];
-			if (is_array($themeConfig)) {
-				$buttonThemes = array_values(array_filter($themeConfig, fn($t) => $t !== 'custom'));
+			if (is_array($themeOptions)) {
+				$buttonThemes = array_values(array_filter($themeOptions, fn($t) => $t !== 'custom'));
 				$buttonStyleField['options'] = array_values(
 					array_intersect_key(self::$allThemeOptions, array_flip($buttonThemes))
 				);
@@ -59,7 +60,7 @@ class pwStyle
 			$fields['buttonstyle'] = $buttonStyleField;
 		}
 
-		if (isset($fieldVisibility['theme']) && $fieldVisibility['theme'] === false) {
+		if (isset($fieldVisibility['theme']) && ($fieldVisibility['theme'] === false || $fieldVisibility['theme'] === 'disabled')) {
 			unset($fields['headlineStyle']);
 			$fields['theme'] = ['type' => 'hidden', 'default' => $defaults['theme']];
 			if (isset($fields['textcolor']))       unset($fields['textcolor']);

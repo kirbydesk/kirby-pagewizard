@@ -13,7 +13,8 @@ class pwConfig
 	}
 
 	/**
-	 * Load settings and defaults from JSON files, merged with config.php overrides.
+	 * Load settings and defaults from settings.json, merged with config.php overrides.
+	 * Defaults are extracted from the object format in settings.json (no separate defaults.json).
 	 */
 	public static function load(string $blockType): array
 	{
@@ -23,7 +24,7 @@ class pwConfig
 			return ['content' => [], 'tabs' => [], 'defaults' => [], 'fields' => [], 'editor' => [], 'layout' => [], 'style' => [], 'effects' => [], 'settings' => [], 'field-options' => []];
 		}
 
-		/* -------------- Block Settings (feature toggles) --------------*/
+		/* -------------- Block Settings (merged source for toggles + defaults) --------------*/
 		$settingsFile = $configDir . '/settings.json';
 		$settingsRaw = file_exists($settingsFile)
 			? json_decode(file_get_contents($settingsFile), true)
@@ -31,35 +32,23 @@ class pwConfig
 
 		$tabSettings = $settingsRaw['tabs'] ?? [];
 
-		// fields: nested { content: {}, layout: {}, style: {}, settings: {} } or flat (legacy)
 		$fieldsRaw   = $settingsRaw['fields'] ?? [];
-		$isNested    = isset($fieldsRaw['content']) || isset($fieldsRaw['layout']) || isset($fieldsRaw['style']) || isset($fieldsRaw['settings']) || isset($fieldsRaw['effects']);
-		$rawContent  = $isNested ? ($fieldsRaw['content']  ?? []) : $fieldsRaw;
-		$layoutVis   = $isNested ? ($fieldsRaw['layout']   ?? []) : [];
-		$styleVis    = $isNested ? ($fieldsRaw['style']    ?? []) : [];
-		$effectsVis  = $isNested ? ($fieldsRaw['effects']  ?? []) : [];
-		$settingsVis = $isNested ? ($fieldsRaw['settings'] ?? []) : [];
+		$rawContent  = $fieldsRaw['content']  ?? [];
+		$layoutVis   = $fieldsRaw['layout']   ?? [];
+		$styleVis    = $fieldsRaw['style']    ?? [];
+		$effectsVis  = $fieldsRaw['effects']  ?? [];
+		$settingsVis = $fieldsRaw['settings'] ?? [];
 
 		[$settings, $fieldOptions] = self::parseContentSettings($rawContent);
+		$fields = self::extractContentDefaults($rawContent);
 
-		/* -------------- Block Defaults (field values) --------------*/
-		$defaultsFile = $configDir . '/defaults.json';
-		$defaultsRaw = file_exists($defaultsFile)
-			? json_decode(file_get_contents($defaultsFile), true)
-			: [];
-
-		$fields = self::flattenContentDefaults($defaultsRaw['content'] ?? []);
-		if (isset($defaultsRaw['block'])) {
-			$defaults = $defaultsRaw['block'];
-		} else {
-			$defaults = array_merge(
-				$defaultsRaw['layout']   ?? [],
-				$defaultsRaw['style']    ?? [],
-				$defaultsRaw['grid']     ?? [],
-				$defaultsRaw['settings'] ?? [],
-				$defaultsRaw['effects']  ?? []
-			);
-		}
+		$defaults = array_merge(
+			self::extractCategoryDefaults($layoutVis),
+			self::extractCategoryDefaults($styleVis),
+			self::extractCategoryDefaults($fieldsRaw['grid'] ?? []),
+			self::extractCategoryDefaults($settingsVis),
+			self::extractCategoryDefaults($effectsVis)
+		);
 
 		/* -------------- Editor config --------------*/
 		$editorFile = $configDir . '/editor.json';
@@ -84,13 +73,14 @@ class pwConfig
 				[$cfgSettings, $cfgFieldOptions] = self::parseContentSettings($cfgVis['fields']['content']);
 				$settings     = array_merge($settings,     $cfgSettings);
 				$fieldOptions = array_merge($fieldOptions, $cfgFieldOptions);
+				$fields       = array_merge($fields, self::extractContentDefaults($cfgVis['fields']['content']));
 			}
 			if (!empty($cfgVis['fields']['layout']))   $layoutVis   = array_merge($layoutVis,   $cfgVis['fields']['layout']);
 			if (!empty($cfgVis['fields']['style']))    $styleVis    = array_merge($styleVis,    $cfgVis['fields']['style']);
 			if (!empty($cfgVis['fields']['effects']))  $effectsVis  = array_merge($effectsVis,  $cfgVis['fields']['effects']);
 			if (!empty($cfgVis['fields']['settings'])) $settingsVis = array_merge($settingsVis, $cfgVis['fields']['settings']);
 		}
-		// defaults: nested { layout: {}, style: {}, grid: {}, settings: {}, effects: {} } or flat
+		// defaults overrides (legacy format from existing stored overrides)
 		if (!empty($cfg['defaults']) && is_array($cfg['defaults'])) {
 			$isNested = isset($cfg['defaults']['layout']) || isset($cfg['defaults']['style'])
 				|| isset($cfg['defaults']['grid']) || isset($cfg['defaults']['settings'])
@@ -136,9 +126,130 @@ class pwConfig
 	}
 
 	/**
-	 * Flatten nested defaults.json content into a flat key map.
-	 * New format: { "heading": {"align":"left","size":"2xl"} } → { "align-heading":"left", "size-heading":"2xl" }
-	 * Old format: { "align-heading": "left" } → passed through unchanged.
+	 * Extract default values from content field objects in settings.json.
+	 * Nested: { "heading": { "align": { "options": [...], "default": "left" } } } → { "align-heading": "left" }
+	 * Simple: { "item-radius-top-left": { "default": false } } → { "item-radius-top-left": false }
+	 * Maps "sizes" → "size" for backward compatibility.
+	 */
+	private static function extractContentDefaults(array $rawContent): array
+	{
+		$fields = [];
+		foreach ($rawContent as $fieldKey => $fieldValue) {
+			if (!is_array($fieldValue) || array_is_list($fieldValue)) continue;
+
+			// Check if field has nested property objects
+			$hasNestedProps = false;
+			foreach ($fieldValue as $propValue) {
+				if (is_array($propValue) && (isset($propValue['default']) || isset($propValue['options']))) {
+					$hasNestedProps = true;
+					break;
+				}
+			}
+
+			if ($hasNestedProps) {
+				// Nested: extract default from each property
+				foreach ($fieldValue as $prop => $propValue) {
+					if (is_array($propValue) && isset($propValue['default'])) {
+						$flatProp = ($prop === 'sizes') ? 'size' : $prop;
+						$fields["{$flatProp}-{$fieldKey}"] = $propValue['default'];
+					}
+				}
+			} elseif (isset($fieldValue['default'])) {
+				// Simple field with just a default value
+				$fields[$fieldKey] = $fieldValue['default'];
+			}
+		}
+		return $fields;
+	}
+
+	/**
+	 * Extract default values from category field definitions (layout, style, grid, settings, effects).
+	 * { "padding-top": { "default": "large" }, "theme": { "options": [...], "default": "default" } }
+	 * → { "padding-top": "large", "theme": "default" }
+	 * Skips "enabled" strings and plain booleans (visibility toggles, no defaults).
+	 */
+	private static function extractCategoryDefaults(array $categoryFields): array
+	{
+		$defaults = [];
+		foreach ($categoryFields as $key => $value) {
+			if (is_array($value) && isset($value['default'])) {
+				$defaults[$key] = $value['default'];
+			}
+		}
+		return $defaults;
+	}
+
+	/**
+	 * Parse settings.json fields.content into $settings (content toggles) and $fieldOptions (available options).
+	 * "enabled" → settings[field]=true
+	 * { "align": { "options": [...] }, "mode": { "options": [...] } } → settings[field]=mode_options, fieldOptions[field]={...}
+	 * { "default": ... } → skipped (default-only field, handled by extractContentDefaults)
+	 * Plain array → settings[field]=array (special cases like column-blocks)
+	 */
+	private static function parseContentSettings(array $raw): array
+	{
+		$settings     = [];
+		$fieldOptions = [];
+		foreach ($raw as $fieldKey => $fieldValue) {
+			if ($fieldValue === 'enabled') {
+				$settings[$fieldKey] = true;
+			} elseif (is_array($fieldValue) && !array_is_list($fieldValue)) {
+				// Check if this is a default-only field (no configurable properties)
+				$hasNestedProps = false;
+				foreach ($fieldValue as $propValue) {
+					if (is_array($propValue) && (isset($propValue['options']) || isset($propValue['default']))) {
+						$hasNestedProps = true;
+						break;
+					}
+					if ($propValue === false) {
+						$hasNestedProps = true;
+						break;
+					}
+				}
+
+				if (!$hasNestedProps && isset($fieldValue['default'])) {
+					// Default-only field — don't add to settings
+					continue;
+				}
+
+				// Field with configurable properties
+				$opts = [];
+				$mode = true;
+
+				foreach ($fieldValue as $prop => $propValue) {
+					if (is_array($propValue) && isset($propValue['options'])) {
+						$opts[$prop] = $propValue['options'];
+						if ($prop === 'mode') {
+							$mode = $propValue['options'];
+						}
+					} elseif (is_array($propValue) && array_is_list($propValue)) {
+						$opts[$prop] = $propValue;
+						if ($prop === 'mode') {
+							$mode = $propValue;
+						}
+					} elseif ($propValue === false) {
+						$opts[$prop] = false;
+					}
+				}
+
+				$settings[$fieldKey] = $mode;
+				if (!empty($opts)) {
+					$fieldOptions[$fieldKey] = $opts;
+				}
+			} else {
+				// Plain array (e.g., column-blocks) or boolean
+				$settings[$fieldKey] = $fieldValue;
+				if (is_array($fieldValue)) {
+					$fieldOptions[$fieldKey] = ['mode' => $fieldValue];
+				}
+			}
+		}
+		return [$settings, $fieldOptions];
+	}
+
+	/**
+	 * Flatten nested content defaults (legacy format for config.php overrides).
+	 * { "heading": {"align":"left","size":"2xl"} } → { "align-heading":"left", "size-heading":"2xl" }
 	 */
 	private static function flattenContentDefaults(array $raw): array
 	{
@@ -153,31 +264,6 @@ class pwConfig
 			}
 		}
 		return $fields;
-	}
-
-	/**
-	 * Parse settings.json fields.content into $settings (backward-compat) and $fieldOptions (new).
-	 * New format: { "heading": {"align":[...],"sizes":[...]} } → settings['heading']=true, fieldOptions['heading']={...}
-	 * Old format: { "heading": true, "editor": ["writer"] } → passed through, editor gets fieldOptions['editor']['mode']
-	 */
-	private static function parseContentSettings(array $raw): array
-	{
-		$settings     = [];
-		$fieldOptions = [];
-		foreach ($raw as $fieldKey => $fieldValue) {
-			if (is_array($fieldValue) && !array_is_list($fieldValue)) {
-				// New nested format (associative array)
-				$settings[$fieldKey]     = isset($fieldValue['mode']) ? $fieldValue['mode'] : true;
-				$fieldOptions[$fieldKey] = $fieldValue;
-			} else {
-				// Old format: bool, or indexed array (legacy editor modes)
-				$settings[$fieldKey] = $fieldValue;
-				if (is_array($fieldValue)) {
-					$fieldOptions[$fieldKey] = ['mode' => $fieldValue];
-				}
-			}
-		}
-		return [$settings, $fieldOptions];
 	}
 
 	/**
