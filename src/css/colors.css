@@ -1,112 +1,9 @@
-/* DO NOT MODIFY THIS FILE - Override in site/patches/css/kirby-pagewizard/_colors.css */
 /*------------------------------------------------------------------------------------------------
-	Pagewizard Color Variables - Plugin Defaults
+	Pagewizard Color Definitions
 
-	Override: Activate patch file site/patches/css/kirby-pagewizard/_colors.css
+	Color VALUES (CSS variables) are defined in config/colors.json and injected
+	via projectbuilder.php. This file only contains the CSS RULES that use those variables.
 ------------------------------------------------------------------------------------------------*/
-
-/* -------------- Body --------------*/
-:root {
-	--body-background: #FFFFFF; /* #f0f6fc */
-	--footer-text: #ffffff;
-	--footer-background: #1D548B;
-	--footer-link: #ffffff;
-	--footer-link-hover: #ffffff;
-	--footer-link-active: #ffffff;
-	--footer-socialmedia: color-mix(in srgb, #FFFFFF 80%, transparent);;
-	--footer-socialmedia-hover: #ffffff;
-	--footer-socialmedia-active: #ffffff;
-}
-
-/* -------------- Blocks --------------*/
-:root {
-	--block-background: #ffffff;
-	--block-link: #1D548B;
-	--block-link-hover: #1A4E7A;
-	--block-link-active: #163F5C;
-
-	--block-background-variant: #1D548B;
-	--block-link-variant: #8CBAE7;
-	--block-link-hover-variant: #7AA9D0;
-	--block-link-active-variant: #6680A8;
-}
-
-/* -------------- Elements --------------*/
-:root {
-	--element-tagline-text: #1D548B;
-	--element-heading-text: #262626;
-	--element-editor-text: #262626;
-	--element-caption-text: #6B7280;
-	--element-quote-text: #262626;
-	--element-cite-text: #6B7280;
-	--element-breadcrumb-text: #6B7280;
-	--element-icon-fill: #6B7280;
-	--element-media-background: #262626;
-	--element-image-zoom: #FFFFFF;
-	--element-image-zoom-background: rgba(0, 0, 0, 0.7);
-	--element-slideshow-bullet: color-mix(in srgb, #262626 30%, transparent);
-	--element-slideshow-bullet-active: #262626;
-	--element-button-text: #FFFFFF;
-	--element-button-background: #1D548B;
-	--element-button-border: transparent;
-	--element-button-text-hover: #FFFFFF;
-	--element-button-background-hover: #2A6FAE;
-	--element-button-border-hover: transparent;
-	--element-button-text-active: #FFFFFF;
-	--element-button-background-active: #164073;
-	--element-button-border-active: transparent;
-
-	--element-tagline-text-variant: #8CBAE7;
-	--element-heading-text-variant: #FFFFFF;
-	--element-editor-text-variant: #FFFFFF;
-	--element-caption-text-variant: #B0C4DE;
-	--element-quote-text-variant: #FFFFFF;
-	--element-cite-text-variant: #B0C4DE;
-	--element-breadcrumb-text-variant: #B0C4DE;
-	--element-icon-fill-variant: #B0C4DE;
-	--element-media-background-variant: #262626;
-	--element-image-zoom-variant: #FFFFFF;
-	--element-image-zoom-background-variant: rgba(0, 0, 0, 0.7);
-	--element-slideshow-bullet-variant: color-mix(in srgb, #FFFFFF 30%, transparent);
-	--element-slideshow-bullet-active-variant: #FFFFFF;
-	--element-button-text-variant: #262626;
-	--element-button-background-variant: #FFFFFF;
-	--element-button-border-variant: transparent;
-	--element-button-text-hover-variant: #262626;
-	--element-button-background-hover-variant: #E6E6E6;
-	--element-button-border-hover-variant: transparent;
-	--element-button-text-active-variant: #262626;
-	--element-button-background-active-variant: #CCCCCC;
-	--element-button-border-active-variant: transparent;
-
-	--block-background-variant2: #2C3E50;
-	--block-link-variant2: #E8B84B;
-	--block-link-hover-variant2: #F5C842;
-	--block-link-active-variant2: #C9952A;
-
-	--element-tagline-text-variant2: #E8B84B;
-	--element-heading-text-variant2: #FFFFFF;
-	--element-editor-text-variant2: #BDC3C7;
-	--element-caption-text-variant2: #7F8C8D;
-	--element-quote-text-variant2: #FFFFFF;
-	--element-cite-text-variant2: #7F8C8D;
-	--element-breadcrumb-text-variant2: #7F8C8D;
-	--element-icon-fill-variant2: #7F8C8D;
-	--element-media-background-variant2: #1A2530;
-	--element-image-zoom-variant2: #FFFFFF;
-	--element-image-zoom-background-variant2: rgba(0, 0, 0, 0.7);
-	--element-slideshow-bullet-variant2: color-mix(in srgb, #FFFFFF 30%, transparent);
-	--element-slideshow-bullet-active-variant2: #E8B84B;
-	--element-button-text-variant2: #2C3E50;
-	--element-button-background-variant2: #E8B84B;
-	--element-button-border-variant2: transparent;
-	--element-button-text-hover-variant2: #2C3E50;
-	--element-button-background-hover-variant2: #F5C842;
-	--element-button-border-hover-variant2: transparent;
-	--element-button-text-active-variant2: #FFFFFF;
-	--element-button-background-active-variant2: #C9952A;
-	--element-button-border-active-variant2: transparent;
-}
 
 
 /*------------------------------------------------------------------------------------------------
@@ -168,6 +65,13 @@ section[data-block]{
 	/* -------------- Breadcrumb --------------*/
 	[data-field="breadcrumb"] {
 		color: var(--element-breadcrumb-text);
+
+		a:hover {
+			color: var(--element-breadcrumb-text-hover);
+		}
+		a:active {
+			color: var(--element-breadcrumb-text-active);
+		}
 	}
 
 	/* -------------- Media --------------*/
@@ -266,6 +170,13 @@ section[data-block][data-style="variant"] {
 	/* -------------- Breadcrumb --------------*/
 	[data-field="breadcrumb"] {
 		color: var(--element-breadcrumb-text-variant);
+
+		a:hover {
+			color: var(--element-breadcrumb-text-hover-variant);
+		}
+		a:active {
+			color: var(--element-breadcrumb-text-active-variant);
+		}
 	}
 
 	/* -------------- Media --------------*/
@@ -368,6 +279,13 @@ section[data-block][data-style="variant2"] {
 	/* -------------- Breadcrumb --------------*/
 	[data-field="breadcrumb"] {
 		color: var(--element-breadcrumb-text-variant2);
+
+		a:hover {
+			color: var(--element-breadcrumb-text-hover-variant2);
+		}
+		a:active {
+			color: var(--element-breadcrumb-text-active-variant2);
+		}
 	}
 
 	/* -------------- Media --------------*/

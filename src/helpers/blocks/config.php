@@ -292,8 +292,8 @@ class pwConfig
 
 	/**
 	 * Called by projectbuilder-hook for plugin-specific CSS var injection and stub creation.
-	 * Reads navigation.json + navigation-colors.json, merges with project overrides,
-	 * appends :root { --nav-* } to $imports, and creates config/sprites stubs.
+	 * Reads navigation.json, navigation-colors.json, colors.json, merges with project overrides,
+	 * appends :root { ... } to $imports, and creates config/sprites stubs.
 	 */
 	public static function tailwindSetup(string $pluginDir, array &$imports): void
 	{
@@ -322,6 +322,36 @@ class pwConfig
 			foreach ($merged as $key => $value) {
 				if (!is_string($value) || $value === '') continue;
 				$rootLines[] = "\t" . $set['prefix'] . $key . ': ' . $value . ';';
+			}
+		}
+
+		// Colors: read config/colors.json (nested format), merge with projectwizard overrides
+		$colorsDefault = $pluginDir . '/config/colors.json';
+		$colorsOverride = kirby()->root('site') . '/config/projectwizard/colors.json';
+		$colors = file_exists($colorsDefault) ? (json_decode(file_get_contents($colorsDefault), true) ?? []) : [];
+		$colorOverrides = [];
+		if (file_exists($colorsOverride)) {
+			$colorOverrides = json_decode(file_get_contents($colorsOverride), true) ?? [];
+		}
+
+		// Iterate groups, extract CSS variables
+		foreach ($colors as $groupKey => $group) {
+			if (!is_array($group) || !isset($group['vars'])) continue;
+			$isSingle = ($group['type'] ?? null) === 'single';
+
+			foreach ($group['vars'] as $varName => $value) {
+				if ($isSingle) {
+					// Single value (body/footer): value is a string
+					$override = ($colorOverrides['global']['body'][$varName] ?? null);
+					$rootLines[] = "\t--" . $varName . ': ' . ($override ?? $value) . ';';
+				} else {
+					// Multi-theme: value is { default, variant, variant2 }
+					foreach ($value as $theme => $themeValue) {
+						$override = ($colorOverrides['global'][$theme][$varName] ?? null);
+						$suffix = $theme === 'default' ? '' : '-' . $theme;
+						$rootLines[] = "\t--" . $varName . $suffix . ': ' . ($override ?? $themeValue) . ';';
+					}
+				}
 			}
 		}
 

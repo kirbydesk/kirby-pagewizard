@@ -1,0 +1,69 @@
+{
+	"body": {
+		"type": "single",
+		"vars": {
+			"body-background": "#FFFFFF"
+		}
+	},
+	"footer": {
+		"type": "single",
+		"vars": {
+			"footer-text": "#ffffff",
+			"footer-background": "#1D548B",
+			"footer-link": "#ffffff",
+			"footer-link-hover": "#ffffff",
+			"footer-link-active": "#ffffff",
+			"footer-socialmedia": "color-mix(in srgb, #FFFFFF 80%, transparent)",
+			"footer-socialmedia-hover": "#ffffff",
+			"footer-socialmedia-active": "#ffffff"
+		}
+	},
+	"text": {
+		"vars": {
+			"element-heading-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#FFFFFF" },
+			"element-tagline-text": { "default": "#1D548B", "variant": "#8CBAE7", "variant2": "#E8B84B" },
+			"element-editor-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#BDC3C7" },
+			"element-quote-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#FFFFFF" },
+			"element-cite-text": { "default": "#6B7280", "variant": "#B0C4DE", "variant2": "#7F8C8D" },
+			"element-caption-text": { "default": "#6B7280", "variant": "#B0C4DE", "variant2": "#7F8C8D" }
+		}
+	},
+	"links": {
+		"vars": {
+			"block-link": { "default": "#1D548B", "variant": "#8CBAE7", "variant2": "#E8B84B" },
+			"block-link-hover": { "default": "#1A4E7A", "variant": "#7AA9D0", "variant2": "#F5C842" },
+			"block-link-active": { "default": "#163F5C", "variant": "#6680A8", "variant2": "#C9952A" },
+			"element-breadcrumb-text": { "default": "#6B7280", "variant": "#B0C4DE", "variant2": "#7F8C8D" },
+			"element-breadcrumb-text-hover": { "default": "#1D548B", "variant": "#FFFFFF", "variant2": "#E8B84B" },
+			"element-breadcrumb-text-active": { "default": "#163F5C", "variant": "#FFFFFF", "variant2": "#C9952A" }
+		}
+	},
+	"button": {
+		"vars": {
+			"element-button-text": { "default": "#FFFFFF", "variant": "#262626", "variant2": "#2C3E50" },
+			"element-button-text-hover": { "default": "#FFFFFF", "variant": "#262626", "variant2": "#2C3E50" },
+			"element-button-text-active": { "default": "#FFFFFF", "variant": "#262626", "variant2": "#FFFFFF" },
+			"element-button-background": { "default": "#1D548B", "variant": "#FFFFFF", "variant2": "#E8B84B" },
+			"element-button-background-hover": { "default": "#2A6FAE", "variant": "#E6E6E6", "variant2": "#F5C842" },
+			"element-button-background-active": { "default": "#164073", "variant": "#CCCCCC", "variant2": "#C9952A" },
+			"element-button-border": { "default": "transparent", "variant": "transparent", "variant2": "transparent" },
+			"element-button-border-hover": { "default": "transparent", "variant": "transparent", "variant2": "transparent" },
+			"element-button-border-active": { "default": "transparent", "variant": "transparent", "variant2": "transparent" }
+		}
+	},
+	"block": {
+		"vars": {
+			"block-background": { "default": "#ffffff", "variant": "#1D548B", "variant2": "#2C3E50" }
+		}
+	},
+	"media": {
+		"vars": {
+			"element-media-background": { "default": "#262626", "variant": "#262626", "variant2": "#1A2530" },
+			"element-slideshow-bullet": { "default": "color-mix(in srgb, #262626 30%, transparent)", "variant": "color-mix(in srgb, #FFFFFF 30%, transparent)", "variant2": "color-mix(in srgb, #FFFFFF 30%, transparent)" },
+			"element-slideshow-bullet-active": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#E8B84B" },
+			"element-icon-fill": { "default": "#6B7280", "variant": "#B0C4DE", "variant2": "#7F8C8D" },
+			"element-image-zoom": { "default": "#FFFFFF", "variant": "#FFFFFF", "variant2": "#FFFFFF" },
+			"element-image-zoom-background": { "default": "rgba(0, 0, 0, 0.7)", "variant": "rgba(0, 0, 0, 0.7)", "variant2": "rgba(0, 0, 0, 0.7)" }
+		}
+	}
+}
