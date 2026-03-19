@@ -29,9 +29,6 @@ class pwSettings
 			]
 		];
 
-		if (isset($fieldVisibility['fragment']) && $fieldVisibility['fragment'] === false) {
-			unset($fields['headlineProperties'], $fields['fragment']);
-		}
 		if (isset($fieldVisibility['block-size']) && $fieldVisibility['block-size'] === false) {
 			$fields['blockSize'] = ['type' => 'hidden', 'default' => $defaults['block-size']];
 		}
