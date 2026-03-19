@@ -395,6 +395,28 @@ class pwConfig
 			}
 		}
 
+		// Elements: read config/elements.json, merge with projectwizard overrides
+		$elementsDefault = $pluginDir . '/config/elements.json';
+		$elementsOverride = kirby()->root('site') . '/config/projectwizard/elements.json';
+		$elements = file_exists($elementsDefault) ? (json_decode(file_get_contents($elementsDefault), true) ?? []) : [];
+		$elementOverrides = [];
+		if (file_exists($elementsOverride)) {
+			$elementOverrides = json_decode(file_get_contents($elementsOverride), true) ?? [];
+		}
+
+		$elementLines = [];
+		foreach ($elements as $groupKey => $group) {
+			if (!is_array($group) || !isset($group['vars'])) continue;
+			foreach ($group['vars'] as $varName => $def) {
+				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
+				$override = ($elementOverrides['global'][$varName] ?? null);
+				$elementLines[] = "\t--" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+			}
+		}
+		if (!empty($elementLines)) {
+			$imports[] = ":root {\n" . implode("\n", $elementLines) . "\n}";
+		}
+
 		// Sprites stub
 		$spritesDir     = kirby()->root('site') . '/patches/sprites';
 		$spriteOverride = $spritesDir . '/symbols.txt';

@@ -1,29 +1,29 @@
-/* DO NOT MODIFY THIS FILE - Override in site/patches/css/kirby-pagewizard/_elements.css */
 /*------------------------------------------------------------------------------------------------
 	Element Definitions
 
-	Override: Activate patch file site/patches/css/kirby-pagewizard/_elements.css
+	Element VALUES are defined in config/elements.json and injected
+	via projectbuilder.php. This file only contains the CSS RULES that use those variables.
 ------------------------------------------------------------------------------------------------*/
 
 /* -------------- Heading --------------*/
 [data-field="heading"] {
-	font-weight: 700;
-	line-height: 1.2;
-	letter-spacing: -0.02em;
-	text-transform: none;
-	font-style: normal;
+	font-weight: var(--heading-font-weight);
+	line-height: var(--heading-line-height);
+	letter-spacing: var(--heading-letter-spacing);
+	text-transform: var(--heading-text-transform);
+	font-style: var(--heading-font-style);
 	margin: 0;
 	padding: 0;
 }
 
 /* -------------- Tagline --------------*/
 [data-field="tagline"] {
-	font-size: 0.875rem;
-	font-weight: 500;
-	line-height: 1.4;
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
-	font-style: normal;
+	font-size: var(--tagline-font-size);
+	font-weight: var(--tagline-font-weight);
+	line-height: var(--tagline-line-height);
+	letter-spacing: var(--tagline-letter-spacing);
+	text-transform: var(--tagline-text-transform);
+	font-style: var(--tagline-font-style);
 	margin: 0;
 	padding: 0;
 }
@@ -32,19 +32,19 @@
 [data-field="textarea"],
 [data-field="writer"],
 [data-field="markdown"] {
-	font-size: 1rem; 	/* [data-size="normal"] */
-	font-weight: 400;
-	line-height: 1.6;
-	letter-spacing: normal;
-	text-transform: none;
-	font-style: normal;
+	font-size: var(--editor-font-size);
+	font-weight: var(--editor-font-weight);
+	line-height: var(--editor-line-height);
+	letter-spacing: var(--editor-letter-spacing);
+	text-transform: var(--editor-text-transform);
+	font-style: var(--editor-font-style);
 	margin: 0;
 	padding: 0;
 }
 [data-field="writer"],
 [data-field="markdown"] {
 	& > * + * {
-		margin-top: 0.875rem;
+		margin-top: var(--editor-paragraph-spacing);
 	}
 	& ul {
 		list-style: disc;
@@ -60,77 +60,77 @@
 [data-field="buttons"] {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.875rem; /* Spacing between consecutive elements (p + p, p + ul, etc.) */
+	gap: var(--button-gap);
 
 	&[data-align="center"] { justify-content: center; }
 	&[data-align="right"]  { justify-content: flex-end; }
 }
 [data-field="button"] a, [data-field="button"] span {
-	font-size:  1rem;
-	font-weight: 600;
-	line-height: 1;
-	letter-spacing: 0.02em;
-	text-transform: none;
-	font-style: normal;
+	font-size: var(--button-font-size);
+	font-weight: var(--button-font-weight);
+	line-height: var(--button-line-height);
+	letter-spacing: var(--button-letter-spacing);
+	text-transform: var(--button-text-transform);
+	font-style: var(--button-font-style);
 	margin: 0;
-	padding: 0.75rem 1rem;
+	padding: var(--button-padding);
 	display: inline-block;
 	text-decoration: none;
 	color: var(--element-button-text);
 	background-color: var(--element-button-background);
 	border: 1px solid var(--element-button-border);
-	border-radius: 0.25rem;
+	border-radius: var(--button-border-radius);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 	transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 /* -------------- Caption --------------*/
 [data-field="caption"] {
-	font-size: 0.875rem;
-	font-weight: 400;
-	line-height: 1.4;
-	letter-spacing: normal;
-	text-transform: none;
-	font-style: normal;
+	font-size: var(--caption-font-size);
+	font-weight: var(--caption-font-weight);
+	line-height: var(--caption-line-height);
+	letter-spacing: var(--caption-letter-spacing);
+	text-transform: var(--caption-text-transform);
+	font-style: var(--caption-font-style);
 	margin: 0;
 	padding: 0;
 }
 
 /* -------------- Quote --------------*/
 [data-field="quote"] {
-	font-weight: 400;
-	line-height: 1.6;
-	letter-spacing: normal;
-	text-transform: none;
-	font-style: italic;
+	font-weight: var(--quote-font-weight);
+	line-height: var(--quote-line-height);
+	letter-spacing: var(--quote-letter-spacing);
+	text-transform: var(--quote-text-transform);
+	font-style: var(--quote-font-style);
 	margin: 0;
 	padding: 0;
 
-	&::before { content: "\201E"; }
-	&::after  { content: "\201C"; }
+	&::before { content: var(--quote-open); }
+	&::after  { content: var(--quote-close); }
 }
 
 /* -------------- Cite --------------*/
 [data-field="cite"] {
 	display: block;
-	font-size: 0.875rem;
-	font-weight: 400;
-	line-height: 1.4;
-	letter-spacing: normal;
-	text-transform: none;
-	font-style: normal;
+	font-size: var(--cite-font-size);
+	font-weight: var(--cite-font-weight);
+	line-height: var(--cite-line-height);
+	letter-spacing: var(--cite-letter-spacing);
+	text-transform: var(--cite-text-transform);
+	font-style: var(--cite-font-style);
 	margin: 0;
 	padding: 0;
 }
 
 /* -------------- Breadcrumb --------------*/
 [data-field="breadcrumb"] {
-	font-size: 0.875rem;
-	font-weight: 400;
-	line-height: 1.4;
-	letter-spacing: normal;
-	text-transform: none;
-	font-style: normal;
+	font-size: var(--breadcrumb-font-size);
+	font-weight: var(--breadcrumb-font-weight);
+	line-height: var(--breadcrumb-line-height);
+	letter-spacing: var(--breadcrumb-letter-spacing);
+	text-transform: var(--breadcrumb-text-transform);
+	font-style: var(--breadcrumb-font-style);
 	margin: 0;
 	padding: 0;
 }
