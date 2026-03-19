@@ -5,19 +5,6 @@
 			"body-background": "#FFFFFF"
 		}
 	},
-	"footer": {
-		"type": "single",
-		"vars": {
-			"footer-text": "#ffffff",
-			"footer-background": "#1D548B",
-			"footer-link": "#ffffff",
-			"footer-link-hover": "#ffffff",
-			"footer-link-active": "#ffffff",
-			"footer-socialmedia": "color-mix(in srgb, #FFFFFF 80%, transparent)",
-			"footer-socialmedia-hover": "#ffffff",
-			"footer-socialmedia-active": "#ffffff"
-		}
-	},
 	"text": {
 		"vars": {
 			"element-heading-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#FFFFFF" },

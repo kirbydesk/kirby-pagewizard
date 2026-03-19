@@ -1,42 +1,68 @@
 {
-	"home-desktop": true,
-	"home-tablet":  false,
-	"home-mobile":  true,
-	"sticky":       true,
-
-	"desktop-height":              "100px",
-	"desktop-height-sticky":       "65px",
-	"desktop-items-align":         "flex-end",
-	"desktop-items-padding":       "0px 0px 10px 0px",
-	"desktop-flyout-icon":         "arrow-down",
-	"desktop-flyout-flip-from":    "4",
-	"desktop-flyout-min-width":    "150px",
-	"desktop-logo-align":          "flex-end",
-	"desktop-logo-padding":        "0px 0px 10px 0px",
-	"desktop-logo-display-height": "30px",
-	"desktop-logo-src":            "img/logo.svg",
-	"desktop-logo-src-width":      "283",
-	"desktop-logo-src-height":     "39",
-
-	"tablet-height":               "80px",
-	"tablet-height-sticky":        "55px",
-	"tablet-items-align":          "center",
-	"tablet-items-padding":        "0px 0px 0px 0px",
-	"tablet-logo-align":           "center",
-	"tablet-logo-padding":         "0px 0px 0px 0px",
-	"tablet-logo-display-height":  "30px",
-	"tablet-logo-src":             "img/logo.svg",
-	"tablet-logo-src-width":       "283",
-	"tablet-logo-src-height":      "39",
-
-	"mobile-height":               "50px",
-	"mobile-logo-display-height":  "25px",
-	"mobile-logo-src":             "img/logo.svg",
-	"mobile-logo-src-width":       "283",
-	"mobile-logo-src-height":      "39",
-
-  "footer-logo-display-height":  "22px",
-	"footer-logo-src":        		 "img/logo-inverted.svg",
-  "footer-logo-src-width":  		 "200",
-  "footer-logo-src-height": 		 "28"
+	"general": {
+		"vars": {
+			"home-desktop": { "value": "true", "options": ["true", "false"] },
+			"home-tablet": { "value": "false", "options": ["true", "false"] },
+			"home-mobile": { "value": "true", "options": ["true", "false"] },
+			"sticky": { "value": "true", "options": ["true", "false"] }
+		}
+	},
+	"desktop": {
+		"vars": {
+			"desktop-height": { "value": "100px" },
+			"desktop-height-sticky": { "value": "65px" },
+			"desktop-items-align": { "value": "flex-end", "options": ["flex-start", "center", "flex-end"] },
+			"desktop-items-padding": { "value": "0px 0px 10px 0px" },
+			"desktop-flyout-icon": { "value": "arrow-down" },
+			"desktop-flyout-flip-from": { "value": "4" },
+			"desktop-flyout-min-width": { "value": "150px" },
+			"desktop-logo-align": { "value": "flex-end", "options": ["flex-start", "center", "flex-end"] },
+			"desktop-logo-padding": { "value": "0px 0px 10px 0px" },
+			"desktop-logo-display-height": { "value": "30px" },
+			"desktop-logo-src": { "value": "img/logo.svg" },
+			"desktop-logo-src-width": { "value": "283" },
+			"desktop-logo-src-height": { "value": "39" },
+			"desktop-textcolor": { "value": "#101828", "type": "color" },
+			"desktop-bgcolor": { "value": "white", "type": "color" }
+		}
+	},
+	"tablet": {
+		"vars": {
+			"tablet-height": { "value": "80px" },
+			"tablet-height-sticky": { "value": "55px" },
+			"tablet-items-align": { "value": "center", "options": ["flex-start", "center", "flex-end"] },
+			"tablet-items-padding": { "value": "0px 0px 0px 0px" },
+			"tablet-logo-align": { "value": "center", "options": ["flex-start", "center", "flex-end"] },
+			"tablet-logo-padding": { "value": "0px 0px 0px 0px" },
+			"tablet-logo-display-height": { "value": "30px" },
+			"tablet-logo-src": { "value": "img/logo.svg" },
+			"tablet-logo-src-width": { "value": "283" },
+			"tablet-logo-src-height": { "value": "39" }
+		}
+	},
+	"mobile": {
+		"vars": {
+			"mobile-height": { "value": "50px" },
+			"mobile-logo-display-height": { "value": "25px" },
+			"mobile-logo-src": { "value": "img/logo.svg" },
+			"mobile-logo-src-width": { "value": "283" },
+			"mobile-logo-src-height": { "value": "39" },
+			"mobile-textcolor": { "value": "#101828", "type": "color" },
+			"mobile-bgcolor": { "value": "white", "type": "color" },
+			"mobile-l1-textcolor": { "value": "#101828", "type": "color" },
+			"mobile-l1-bgcolor": { "value": "#ECECEC", "type": "color" },
+			"mobile-l1-bordercolor": { "value": "#00000025", "type": "color" },
+			"mobile-l2-textcolor": { "value": "#101828", "type": "color" },
+			"mobile-l2-bgcolor": { "value": "white", "type": "color" },
+			"mobile-l2-bordercolor": { "value": "#00000015", "type": "color" },
+			"mobile-l2-active-textcolor": { "value": "white", "type": "color" },
+			"mobile-l2-active-bgcolor": { "value": "#00BBFF", "type": "color" },
+			"mobile-language-textcolor": { "value": "#101828", "type": "color" },
+			"mobile-language-bgcolor": { "value": "#000", "type": "color" },
+			"mobile-language-bordercolor": { "value": "white", "type": "color" },
+			"mobile-language-iconcolor": { "value": "white", "type": "color" },
+			"mobile-iconcolor": { "value": "#101828", "type": "color" },
+			"mobile-burgercolor": { "value": "#101828", "type": "color" }
+		}
+	}
 }

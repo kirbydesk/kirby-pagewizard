@@ -300,28 +300,22 @@ class pwConfig
 		$patchConfigDir = kirby()->root('site') . '/patches/config';
 		if (!is_dir($patchConfigDir)) mkdir($patchConfigDir, 0777, true);
 
-		$jsonSets = [
-			['file' => 'navigation.json',        'prefix' => '--nav-'],
-			['file' => 'navigation-colors.json', 'prefix' => '--nav-'],
-		];
+		// Navigation: read config/navigation.json (nested format), merge with projectwizard overrides
+		$navDefault = $pluginDir . '/config/navigation.json';
+		$navOverride = kirby()->root('site') . '/config/projectwizard/navigation.json';
+		$nav = file_exists($navDefault) ? (json_decode(file_get_contents($navDefault), true) ?? []) : [];
+		$navOverrides = [];
+		if (file_exists($navOverride)) {
+			$navOverrides = json_decode(file_get_contents($navOverride), true) ?? [];
+		}
 
 		$rootLines = [];
-		foreach ($jsonSets as $set) {
-			$defaultFile  = $pluginDir . '/config/' . $set['file'];
-			$overrideFile = $patchConfigDir . '/' . $set['file'];
-			$stubFile     = $patchConfigDir . '/_' . $set['file'];
-
-			$defaults = file_exists($defaultFile)  ? (json_decode(file_get_contents($defaultFile),  true) ?? []) : [];
-			$override = file_exists($overrideFile) ? (json_decode(file_get_contents($overrideFile), true) ?? []) : [];
-			$merged   = array_merge($defaults, $override);
-
-			if (!file_exists($overrideFile) && !file_exists($stubFile) && file_exists($defaultFile)) {
-				file_put_contents($stubFile, file_get_contents($defaultFile));
-			}
-
-			foreach ($merged as $key => $value) {
-				if (!is_string($value) || $value === '') continue;
-				$rootLines[] = "\t" . $set['prefix'] . $key . ': ' . $value . ';';
+		foreach ($nav as $groupKey => $group) {
+			if (!is_array($group) || !isset($group['vars'])) continue;
+			foreach ($group['vars'] as $varName => $def) {
+				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
+				$override = ($navOverrides['global'][$varName] ?? null);
+				$rootLines[] = "\t--nav-" . $varName . ': ' . ($override ?? $defaultVal) . ';';
 			}
 		}
 
@@ -415,6 +409,28 @@ class pwConfig
 		}
 		if (!empty($elementLines)) {
 			$imports[] = ":root {\n" . implode("\n", $elementLines) . "\n}";
+		}
+
+		// Footer: read config/footer.json, merge with projectwizard overrides
+		$footerDefault = $pluginDir . '/config/footer.json';
+		$footerOverride = kirby()->root('site') . '/config/projectwizard/footer.json';
+		$footer = file_exists($footerDefault) ? (json_decode(file_get_contents($footerDefault), true) ?? []) : [];
+		$footerOverrides = [];
+		if (file_exists($footerOverride)) {
+			$footerOverrides = json_decode(file_get_contents($footerOverride), true) ?? [];
+		}
+
+		$footerLines = [];
+		foreach ($footer as $groupKey => $group) {
+			if (!is_array($group) || !isset($group['vars'])) continue;
+			foreach ($group['vars'] as $varName => $def) {
+				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
+				$override = ($footerOverrides['global'][$varName] ?? null);
+				$footerLines[] = "\t--" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+			}
+		}
+		if (!empty($footerLines)) {
+			$imports[] = ":root {\n" . implode("\n", $footerLines) . "\n}";
 		}
 
 		// Sprites stub

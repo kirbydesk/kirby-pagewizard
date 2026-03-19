@@ -1,0 +1,28 @@
+{
+	"colors": {
+		"vars": {
+			"footer-text": { "value": "#ffffff", "type": "color" },
+			"footer-background": { "value": "#1D548B", "type": "color" },
+			"footer-link": { "value": "#ffffff", "type": "color" },
+			"footer-link-hover": { "value": "#ffffff", "type": "color" },
+			"footer-link-active": { "value": "#ffffff", "type": "color" },
+			"footer-socialmedia": { "value": "color-mix(in srgb, #FFFFFF 80%, transparent)" },
+			"footer-socialmedia-hover": { "value": "#ffffff", "type": "color" },
+			"footer-socialmedia-active": { "value": "#ffffff", "type": "color" }
+		}
+	},
+	"layout": {
+		"vars": {
+			"footer-padding-top": { "value": "1.5rem", "unit": "rem", "step": 0.1 },
+			"footer-padding-bottom": { "value": "1.5rem", "unit": "rem", "step": 0.1 }
+		}
+	},
+	"logo": {
+		"vars": {
+			"footer-logo-display-height": { "value": "22px" },
+			"footer-logo-src": { "value": "img/logo-inverted.svg" },
+			"footer-logo-src-width": { "value": "200" },
+			"footer-logo-src-height": { "value": "28" }
+		}
+	}
+}
