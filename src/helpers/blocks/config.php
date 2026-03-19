@@ -359,6 +359,42 @@ class pwConfig
 			$imports[] = ":root {\n" . implode("\n", $rootLines) . "\n}";
 		}
 
+		// Font sizes: read config/fontsizes.json, merge with projectwizard overrides
+		$fontsDefault = $pluginDir . '/config/fontsizes.json';
+		$fontsOverride = kirby()->root('site') . '/config/projectwizard/fontsizes.json';
+		$fonts = file_exists($fontsDefault) ? (json_decode(file_get_contents($fontsDefault), true) ?? []) : [];
+		$fontOverrides = [];
+		if (file_exists($fontsOverride)) {
+			$fontOverrides = json_decode(file_get_contents($fontsOverride), true) ?? [];
+		}
+
+		$breakpoints = [
+			'default' => null,
+			'lg' => '(min-width: 1024px)',
+			'xl' => '(min-width: 1280px)',
+		];
+
+		foreach ($breakpoints as $bp => $mediaQuery) {
+			$bpLines = [];
+			foreach ($fonts as $groupKey => $group) {
+				if (!is_array($group) || !isset($group['vars'])) continue;
+				foreach ($group['vars'] as $varName => $value) {
+					$defaultVal = $value[$bp] ?? null;
+					if ($defaultVal === null) continue;
+					$override = ($fontOverrides['global'][$bp][$varName] ?? null);
+					$bpLines[] = "\t--" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+				}
+			}
+			if (!empty($bpLines)) {
+				$rootBlock = ":root {\n" . implode("\n", $bpLines) . "\n}";
+				if ($mediaQuery) {
+					$imports[] = "@media " . $mediaQuery . " {\n" . $rootBlock . "\n}";
+				} else {
+					$imports[] = $rootBlock;
+				}
+			}
+		}
+
 		// Sprites stub
 		$spritesDir     = kirby()->root('site') . '/patches/sprites';
 		$spriteOverride = $spritesDir . '/symbols.txt';

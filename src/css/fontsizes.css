@@ -1,105 +1,39 @@
-/* DO NOT MODIFY THIS FILE - Override in site/patches/css/kirby-pagewizard/_fontsizes.css */
 /*------------------------------------------------------------------------------------------------
-	Font size definitions (activated via panel button)
+	Font size definitions
 
-	Override: Activate patch file site/patches/css/kirby-pagewizard/_fontsizes.css
+	Font size VALUES are defined in config/fontsizes.json and injected
+	via projectbuilder.php. This file only contains the CSS RULES that use those variables.
 ------------------------------------------------------------------------------------------------*/
 
 
 /*------------------------------------------------------------------------------------------------
 	Heading
 ------------------------------------------------------------------------------------------------*/
-[data-heading-size="xs"] { font-size: 1rem; }
-[data-heading-size="sm"] { font-size: 1.125rem; }
-[data-heading-size="md"] { font-size: 1.25rem; }
-[data-heading-size="lg"] { font-size: 1.5rem; }
-[data-heading-size="xl"] { font-size: 2rem; }
-[data-heading-size="2xl"] { font-size: 2.5rem; }
-[data-heading-size="3xl"] { font-size: 3rem; }
-
-/* sm @media (min-width: 640px) {} */
-
-/* md @media (min-width: 768px) {} */
-
-/* lg */ @media (min-width: 1024px) {
-[data-heading-size="xs"] { font-size: 1rem; }
-[data-heading-size="sm"] { font-size: 1.25rem; }
-[data-heading-size="md"] { font-size: 1.5rem; }
-[data-heading-size="lg"] { font-size: 1.75rem; }
-[data-heading-size="xl"] { font-size: 2.0rem; }
-[data-heading-size="2xl"] { font-size: 3.0rem; }
-[data-heading-size="3xl"] { font-size: 4.0rem; }
-}
-
-/* xl */ @media (min-width: 1280px) {
-[data-heading-size="xs"] { font-size: 1rem; }
-[data-heading-size="sm"] { font-size: 1.25rem; }
-[data-heading-size="md"] { font-size: 1.5rem; }
-[data-heading-size="lg"] { font-size: 2rem; }
-[data-heading-size="xl"] { font-size: 2.5rem; }
-[data-heading-size="2xl"] { font-size: 3.5rem; }
-[data-heading-size="3xl"] { font-size: 4.5rem; }
-}
+[data-heading-size="xs"] { font-size: var(--heading-size-xs); }
+[data-heading-size="sm"] { font-size: var(--heading-size-sm); }
+[data-heading-size="md"] { font-size: var(--heading-size-md); }
+[data-heading-size="lg"] { font-size: var(--heading-size-lg); }
+[data-heading-size="xl"] { font-size: var(--heading-size-xl); }
+[data-heading-size="2xl"] { font-size: var(--heading-size-2xl); }
+[data-heading-size="3xl"] { font-size: var(--heading-size-3xl); }
 
 
 /*------------------------------------------------------------------------------------------------
 	Text (Editor)
 ------------------------------------------------------------------------------------------------*/
-[data-editor-size="lg"] { font-size: 1.125rem; }
-[data-editor-size="xl"] { font-size: 1.25rem; }
-[data-editor-size="2xl"] { font-size: 1.5rem; }
-[data-editor-size="3xl"] { font-size: 2rem; }
-
-/* sm @media (min-width: 640px) {} */
-
-/* md @media (min-width: 768px) {} */
-
-/* lg */ @media (min-width: 1024px) {
-[data-editor-size="lg"] { font-size: 1.25rem; }
-[data-editor-size="xl"] { font-size: 1.5rem; }
-[data-editor-size="2xl"] { font-size: 1.75rem; }
-[data-editor-size="3xl"] { font-size: 2.25rem; }
-}
-
-/* xl */ @media (min-width: 1280px) {
-[data-editor-size="lg"] { font-size: 1.25rem; }
-[data-editor-size="xl"] { font-size: 1.5rem; }
-[data-editor-size="2xl"] { font-size: 2rem; }
-[data-editor-size="3xl"] { font-size: 2.5rem; }
-}
+[data-editor-size="lg"] { font-size: var(--editor-size-lg); }
+[data-editor-size="xl"] { font-size: var(--editor-size-xl); }
+[data-editor-size="2xl"] { font-size: var(--editor-size-2xl); }
+[data-editor-size="3xl"] { font-size: var(--editor-size-3xl); }
 
 
 /*------------------------------------------------------------------------------------------------
 	Quote
 ------------------------------------------------------------------------------------------------*/
-[data-quote-size="xs"] { font-size: 1rem; }
-[data-quote-size="sm"] { font-size: 1.125rem; }
-[data-quote-size="md"] { font-size: 1.25rem; }
-[data-quote-size="lg"] { font-size: 1.5rem; }
-[data-quote-size="xl"] { font-size: 2rem; }
-[data-quote-size="2xl"] { font-size: 2.5rem; }
-[data-quote-size="3xl"] { font-size: 3rem; }
-
-/* sm @media (min-width: 640px) {} */
-
-/* md @media (min-width: 768px) {} */
-
-/* lg */ @media (min-width: 1024px) {
-[data-quote-size="xs"] { font-size: 1rem; }
-[data-quote-size="sm"] { font-size: 1.25rem; }
-[data-quote-size="md"] { font-size: 1.5rem; }
-[data-quote-size="lg"] { font-size: 1.75rem; }
-[data-quote-size="xl"] { font-size: 2.0rem; }
-[data-quote-size="2xl"] { font-size: 3.0rem; }
-[data-quote-size="3xl"] { font-size: 4.0rem; }
-}
-
-/* xl */ @media (min-width: 1280px) {
-[data-quote-size="xs"] { font-size: 1rem; }
-[data-quote-size="sm"] { font-size: 1.25rem; }
-[data-quote-size="md"] { font-size: 1.5rem; }
-[data-quote-size="lg"] { font-size: 2rem; }
-[data-quote-size="xl"] { font-size: 2.5rem; }
-[data-quote-size="2xl"] { font-size: 3.5rem; }
-[data-quote-size="3xl"] { font-size: 4.5rem; }
-}
+[data-quote-size="xs"] { font-size: var(--quote-size-xs); }
+[data-quote-size="sm"] { font-size: var(--quote-size-sm); }
+[data-quote-size="md"] { font-size: var(--quote-size-md); }
+[data-quote-size="lg"] { font-size: var(--quote-size-lg); }
+[data-quote-size="xl"] { font-size: var(--quote-size-xl); }
+[data-quote-size="2xl"] { font-size: var(--quote-size-2xl); }
+[data-quote-size="3xl"] { font-size: var(--quote-size-3xl); }
