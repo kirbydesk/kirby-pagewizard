@@ -1,4 +1,9 @@
 {
+	"font": {
+		"vars": {
+			"font-family-default": { "value": "Inter", "type": "font-family" }
+		}
+	},
 	"background": {
 		"vars": {
 			"body-background": { "value": "#FFFFFF", "type": "color" }

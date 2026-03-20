@@ -69,6 +69,10 @@ header.desktop {
 
 				a {
 					@apply block px-4 py-3 text-(--nav-flyout-textcolor) border-t-(--nav-flyout-bordercolor);
+
+					&:hover {
+						@apply text-(--nav-flyout-textcolor-hover) bg-(--nav-flyout-bgcolor-hover);
+					}
 				}
 			}
 			&.language {

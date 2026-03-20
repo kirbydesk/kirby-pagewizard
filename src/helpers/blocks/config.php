@@ -300,6 +300,14 @@ class pwConfig
 		$patchConfigDir = kirby()->root('site') . '/patches/config';
 		if (!is_dir($patchConfigDir)) mkdir($patchConfigDir, 0777, true);
 
+		// Fonts: load early so all sections can reference them for font-family lookups
+		$fontsDefault = $pluginDir . '/config/fonts.json';
+		$fontsProjectFile = kirby()->root('site') . '/config/projectwizard/fonts.json';
+		$builtinFonts = file_exists($fontsDefault) ? (json_decode(file_get_contents($fontsDefault), true) ?? []) : [];
+		$projectFonts = file_exists($fontsProjectFile) ? (json_decode(file_get_contents($fontsProjectFile), true) ?? []) : [];
+		unset($projectFonts['_default']);
+		$allFonts = array_merge($builtinFonts, $projectFonts);
+
 		// Navigation: read config/navigation.json (nested format), merge with projectwizard overrides
 		$navDefault = $pluginDir . '/config/navigation.json';
 		$navOverride = kirby()->root('site') . '/config/projectwizard/navigation.json';
@@ -315,7 +323,28 @@ class pwConfig
 			foreach ($group['vars'] as $varName => $def) {
 				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
 				$override = ($navOverrides['global'][$varName] ?? null);
-				$rootLines[] = "\t--nav-" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+				if (($def['type'] ?? null) === 'font-family') {
+					$fontVal = $override ?? $defaultVal;
+					$fontCategory = 'sans-serif';
+					foreach ($allFonts as $f) {
+						if ($f['family'] === $fontVal) {
+							$fontCategory = $f['category'] ?? 'sans-serif';
+							break;
+						}
+					}
+					$rootLines[] = "\t--nav-" . $varName . ": '" . $fontVal . "', " . $fontCategory . ';';
+				} elseif (($def['type'] ?? null) === 'color-pair' && isset($def['fields'])) {
+					foreach ($def['fields'] as $fieldName => $fieldDef) {
+						$fieldDefault = $fieldDef['value'] ?? '';
+						$fieldOverride = ($navOverrides['global'][$fieldName] ?? null);
+						$rootLines[] = "\t--nav-" . $fieldName . ': ' . ($fieldOverride ?? $fieldDefault) . ';';
+					}
+				} elseif (is_array($defaultVal)) {
+					$vals = is_array($override) ? $override : $defaultVal;
+					$rootLines[] = "\t--nav-" . $varName . ': ' . implode(' ', $vals) . ';';
+				} else {
+					$rootLines[] = "\t--nav-" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+				}
 			}
 		}
 
@@ -346,6 +375,17 @@ class pwConfig
 						$override = ($globalOverrides['global'][$varName] ?? null);
 						$vals = is_array($override) ? $override : $defaultVal;
 						$globalLines[] = "\t--" . $varName . ': ' . implode(' ', $vals) . ';';
+					} elseif (($def['type'] ?? null) === 'font-family') {
+						$override = ($globalOverrides['global'][$varName] ?? null);
+						$fontVal = $override ?? $defaultVal;
+						$fontCategory = 'sans-serif';
+						foreach ($allFonts as $f) {
+							if ($f['family'] === $fontVal) {
+								$fontCategory = $f['category'] ?? 'sans-serif';
+								break;
+							}
+						}
+						$globalLines[] = "\t--" . $varName . ": '" . $fontVal . "', " . $fontCategory . ';';
 					} else {
 						$override = ($globalOverrides['global'][$varName] ?? null);
 						$globalLines[] = "\t--" . $varName . ': ' . ($override ?? $defaultVal) . ';';
@@ -434,19 +474,14 @@ class pwConfig
 					} elseif (($def['type'] ?? null) === 'font-family') {
 						$override = ($elementOverrides['global'][$varName] ?? null);
 						$fontVal = $override ?? $defaultVal;
-						if ($fontVal === 'inherit') {
-							$elementLines[] = "\t--" . $varName . ': inherit;';
-						} else {
-							// Look up font category for CSS fallback
-							$fontCategory = 'sans-serif';
-							foreach ($allFonts as $f) {
-								if ($f['family'] === $fontVal) {
-									$fontCategory = $f['category'] ?? 'sans-serif';
-									break;
-								}
+						$fontCategory = 'sans-serif';
+						foreach ($allFonts as $f) {
+							if ($f['family'] === $fontVal) {
+								$fontCategory = $f['category'] ?? 'sans-serif';
+								break;
 							}
-							$elementLines[] = "\t--" . $varName . ": '" . $fontVal . "', " . $fontCategory . ';';
 						}
+						$elementLines[] = "\t--" . $varName . ": '" . $fontVal . "', " . $fontCategory . ';';
 					} elseif (($def['type'] ?? null) === 'toggle-pair' && isset($def['generates'])) {
 						// Toggle that generates multiple CSS variables
 						$override = ($elementOverrides['global'][$varName] ?? null);
@@ -490,21 +525,26 @@ class pwConfig
 			foreach ($group['vars'] as $varName => $def) {
 				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
 				$override = ($footerOverrides['global'][$varName] ?? null);
-				$footerLines[] = "\t--" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+				if (($def['type'] ?? null) === 'font-family') {
+					$fontVal = $override ?? $defaultVal;
+					$fontCategory = 'sans-serif';
+					foreach ($allFonts as $f) {
+						if ($f['family'] === $fontVal) {
+							$fontCategory = $f['category'] ?? 'sans-serif';
+							break;
+						}
+					}
+					$footerLines[] = "\t--" . $varName . ": '" . $fontVal . "', " . $fontCategory . ';';
+				} else {
+					$footerLines[] = "\t--" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+				}
 			}
 		}
 		if (!empty($footerLines)) {
 			$imports[] = ":root {\n" . implode("\n", $footerLines) . "\n}";
 		}
 
-		// Fonts: read config/fonts.json + project fonts, generate @font-face rules, copy files
-		$fontsDefault = $pluginDir . '/config/fonts.json';
-		$fontsProjectFile = kirby()->root('site') . '/config/projectwizard/fonts.json';
-		$builtinFonts = file_exists($fontsDefault) ? (json_decode(file_get_contents($fontsDefault), true) ?? []) : [];
-		$projectFonts = file_exists($fontsProjectFile) ? (json_decode(file_get_contents($fontsProjectFile), true) ?? []) : [];
-		unset($projectFonts['_default']);
-		$allFonts = array_merge($builtinFonts, $projectFonts);
-
+		// Fonts: generate @font-face rules, copy files
 		$fontsDir = kirby()->root('index') . '/assets/fonts';
 		if (!is_dir($fontsDir)) mkdir($fontsDir, 0777, true);
 
@@ -537,18 +577,6 @@ class pwConfig
 				}
 			}
 		}
-
-		// Default font family variable
-		$fontOverrides = file_exists($fontsProjectFile) ? (json_decode(file_get_contents($fontsProjectFile), true) ?? []) : [];
-		$defaultFont = $fontOverrides['_default'] ?? 'Inter';
-		$defaultCategory = 'sans-serif';
-		foreach ($allFonts as $font) {
-			if ($font['family'] === $defaultFont) {
-				$defaultCategory = $font['category'] ?? 'sans-serif';
-				break;
-			}
-		}
-		$imports[] = ":root {\n\t--font-family-default: '" . $defaultFont . "', " . $defaultCategory . ";\n}";
 
 		// Sprites stub
 		$spritesDir     = kirby()->root('site') . '/patches/sprites';

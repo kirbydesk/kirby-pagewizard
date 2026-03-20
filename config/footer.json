@@ -1,4 +1,9 @@
 {
+	"font": {
+		"vars": {
+			"footer-font-family": { "value": "Inter", "type": "font-family" }
+		}
+	},
 	"colors": {
 		"vars": {
 			"footer-text": { "value": "#ffffff", "type": "color" },
@@ -19,10 +24,8 @@
 	},
 	"logo": {
 		"vars": {
-			"footer-logo-display-height": { "value": "22px" },
-			"footer-logo-src": { "value": "img/logo-inverted.svg" },
-			"footer-logo-src-width": { "value": "200" },
-			"footer-logo-src-height": { "value": "28" }
+			"footer-logo-display-height": { "value": "1.375rem", "unit": "rem", "step": 0.1 },
+			"footer-logo-src": { "value": "", "type": "svg" }
 		}
 	}
 }
