@@ -106,8 +106,8 @@
 	margin: 0;
 	padding: 0;
 
-	&::before { content: var(--quote-open); }
-	&::after  { content: var(--quote-close); }
+	&::before { content: var(--quote-marks-open); }
+	&::after  { content: var(--quote-marks-close); }
 }
 
 /* -------------- Cite --------------*/

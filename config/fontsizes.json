@@ -1,6 +1,6 @@
 {
 	"heading": {
-		"vars": {
+		"step": 0.1, "vars": {
 			"heading-size-xs": { "default": "1rem", "lg": "1rem", "xl": "1rem" },
 			"heading-size-sm": { "default": "1.125rem", "lg": "1.25rem", "xl": "1.25rem" },
 			"heading-size-md": { "default": "1.25rem", "lg": "1.5rem", "xl": "1.5rem" },
@@ -11,7 +11,7 @@
 		}
 	},
 	"editor": {
-		"vars": {
+		"step": 0.1, "vars": {
 			"editor-size-lg": { "default": "1.125rem", "lg": "1.25rem", "xl": "1.25rem" },
 			"editor-size-xl": { "default": "1.25rem", "lg": "1.5rem", "xl": "1.5rem" },
 			"editor-size-2xl": { "default": "1.5rem", "lg": "1.75rem", "xl": "2rem" },
@@ -19,7 +19,7 @@
 		}
 	},
 	"quote": {
-		"vars": {
+		"step": 0.1, "vars": {
 			"quote-size-xs": { "default": "1rem", "lg": "1rem", "xl": "1rem" },
 			"quote-size-sm": { "default": "1.125rem", "lg": "1.25rem", "xl": "1.25rem" },
 			"quote-size-md": { "default": "1.25rem", "lg": "1.5rem", "xl": "1.5rem" },

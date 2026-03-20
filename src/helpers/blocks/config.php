@@ -319,38 +319,52 @@ class pwConfig
 			}
 		}
 
-		// Colors: read config/colors.json (nested format), merge with projectwizard overrides
-		$colorsDefault = $pluginDir . '/config/colors.json';
-		$colorsOverride = kirby()->root('site') . '/config/projectwizard/colors.json';
-		$colors = file_exists($colorsDefault) ? (json_decode(file_get_contents($colorsDefault), true) ?? []) : [];
-		$colorOverrides = [];
-		if (file_exists($colorsOverride)) {
-			$colorOverrides = json_decode(file_get_contents($colorsOverride), true) ?? [];
+		// Global: read config/global.json (layout + background colors), merge with projectwizard overrides
+		$globalDefault = $pluginDir . '/config/global.json';
+		$globalOverride = kirby()->root('site') . '/config/projectwizard/global.json';
+		$global = file_exists($globalDefault) ? (json_decode(file_get_contents($globalDefault), true) ?? []) : [];
+		$globalOverrides = [];
+		if (file_exists($globalOverride)) {
+			$globalOverrides = json_decode(file_get_contents($globalOverride), true) ?? [];
 		}
 
-		// Iterate groups, extract CSS variables
-		foreach ($colors as $groupKey => $group) {
-			if (!is_array($group) || !isset($group['vars'])) continue;
-			$isSingle = ($group['type'] ?? null) === 'single';
-
-			foreach ($group['vars'] as $varName => $value) {
-				if ($isSingle) {
-					// Single value (body/footer): value is a string
-					$override = ($colorOverrides['global']['body'][$varName] ?? null);
-					$rootLines[] = "\t--" . $varName . ': ' . ($override ?? $value) . ';';
-				} else {
-					// Multi-theme: value is { default, variant, variant2 }
+		$globalLines = [];
+		foreach ($global as $groupKey => $group) {
+			if (!is_array($group)) continue;
+			// Style vars (single values)
+			if (isset($group['vars'])) {
+				foreach ($group['vars'] as $varName => $def) {
+					$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
+					// Array with suffixes: generate separate variables per value
+					if (is_array($defaultVal) && isset($def['suffixes'])) {
+						$override = ($globalOverrides['global'][$varName] ?? null);
+						$vals = is_array($override) ? $override : $defaultVal;
+						foreach ($def['suffixes'] as $i => $suffix) {
+							$globalLines[] = "\t--" . $varName . $suffix . ': ' . ($vals[$i] ?? '') . ';';
+						}
+					} elseif (is_array($defaultVal)) {
+						$override = ($globalOverrides['global'][$varName] ?? null);
+						$vals = is_array($override) ? $override : $defaultVal;
+						$globalLines[] = "\t--" . $varName . ': ' . implode(' ', $vals) . ';';
+					} else {
+						$override = ($globalOverrides['global'][$varName] ?? null);
+						$globalLines[] = "\t--" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+					}
+				}
+			}
+			// Color vars (multi-theme)
+			if (isset($group['colors'])) {
+				foreach ($group['colors'] as $varName => $value) {
 					foreach ($value as $theme => $themeValue) {
-						$override = ($colorOverrides['global'][$theme][$varName] ?? null);
+						$override = ($globalOverrides['global'][$theme][$varName] ?? null);
 						$suffix = $theme === 'default' ? '' : '-' . $theme;
-						$rootLines[] = "\t--" . $varName . $suffix . ': ' . ($override ?? $themeValue) . ';';
+						$globalLines[] = "\t--" . $varName . $suffix . ': ' . ($override ?? $themeValue) . ';';
 					}
 				}
 			}
 		}
-
-		if (!empty($rootLines)) {
-			$imports[] = ":root {\n" . implode("\n", $rootLines) . "\n}";
+		if (!empty($globalLines)) {
+			$imports[] = ":root {\n" . implode("\n", $globalLines) . "\n}";
 		}
 
 		// Font sizes: read config/fontsizes.json, merge with projectwizard overrides
@@ -400,11 +414,45 @@ class pwConfig
 
 		$elementLines = [];
 		foreach ($elements as $groupKey => $group) {
-			if (!is_array($group) || !isset($group['vars'])) continue;
-			foreach ($group['vars'] as $varName => $def) {
-				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
-				$override = ($elementOverrides['global'][$varName] ?? null);
-				$elementLines[] = "\t--" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+			if (!is_array($group)) continue;
+			// Style vars (single values)
+			if (isset($group['vars'])) {
+				foreach ($group['vars'] as $varName => $def) {
+					$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
+					// Array with suffixes: generate separate variables per value
+					if (is_array($defaultVal) && isset($def['suffixes'])) {
+						$override = ($elementOverrides['global'][$varName] ?? null);
+						$vals = is_array($override) ? $override : $defaultVal;
+						foreach ($def['suffixes'] as $i => $suffix) {
+							$elementLines[] = "\t--" . $varName . $suffix . ': ' . ($vals[$i] ?? '') . ';';
+						}
+					// Quad values: array of 4 values → join as shorthand
+					} elseif (is_array($defaultVal)) {
+						$override = ($elementOverrides['global'][$varName] ?? null);
+						$vals = is_array($override) ? $override : $defaultVal;
+						$elementLines[] = "\t--" . $varName . ': ' . implode(' ', $vals) . ';';
+					} elseif (($def['type'] ?? null) === 'toggle-pair' && isset($def['generates'])) {
+						// Toggle that generates multiple CSS variables
+						$override = ($elementOverrides['global'][$varName] ?? null);
+						$state = $override ?? $defaultVal;
+						foreach ($def['generates'] as $genVar => $mapping) {
+							$elementLines[] = "\t--" . $genVar . ': ' . ($mapping[$state] ?? '') . ';';
+						}
+					} else {
+						$override = ($elementOverrides['global'][$varName] ?? null);
+						$elementLines[] = "\t--" . $varName . ': ' . ($override ?? $defaultVal) . ';';
+					}
+				}
+			}
+			// Color vars (multi-theme: default, variant, variant2)
+			if (isset($group['colors'])) {
+				foreach ($group['colors'] as $varName => $value) {
+					foreach ($value as $theme => $themeValue) {
+						$override = ($elementOverrides['global'][$theme][$varName] ?? null);
+						$suffix = $theme === 'default' ? '' : '-' . $theme;
+						$elementLines[] = "\t--" . $varName . $suffix . ': ' . ($override ?? $themeValue) . ';';
+					}
+				}
 			}
 		}
 		if (!empty($elementLines)) {

@@ -1,25 +1,9 @@
-/* DO NOT MODIFY THIS FILE - Override in site/patches/css/kirby-pagewizard/_body.css */
 /*------------------------------------------------------------------------------------------------
-	Element Definitions
+	Body & Block Definitions
 
-	Override: Activate patch file site/patches/css/kirby-pagewizard/_body.css
+	Global layout VALUES are defined in config/global.json and injected
+	via projectbuilder.php. This file only contains the CSS RULES that use those variables.
 ------------------------------------------------------------------------------------------------*/
-
-/* -------------- Global Vars --------------*/
-:root {
-	--global-padding-top-small: .75rem;
-	--global-padding-top-large: 1.5rem;
-	--global-padding-bottom-small: .75rem;
-	--global-padding-bottom-large: 1.5rem;
-	--global-padding-left: 1.5rem;
-	--global-padding-right: 1.5rem;
-	--global-margin-top: 1.5rem;
-	--global-margin-bottom: 1.5rem;
-	--global-top-left-radius: 1.5rem;
-	--global-top-right-radius: 1.5rem;
-	--global-bottom-left-radius: 1.5rem;
-	--global-bottom-right-radius: 1.5rem;
-}
 
 /*------------------------------------------------------------------------------------------------
 	Font Face - Inter (Variable Font)

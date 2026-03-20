@@ -1,13 +1,9 @@
-/* DO NOT MODIFY THIS FILE - Override in site/patches/css/kirby-pagewizard/_media.css */
 /*------------------------------------------------------------------------------------------------
 	Crop, Ratio & Radius
+
+	Media radius VALUES are defined in config/elements.json and injected
+	via projectbuilder.php. This file only contains the CSS RULES that use those variables.
 ------------------------------------------------------------------------------------------------*/
-:root {
-	--media-radius-top-left: 2rem;
-	--media-radius-top-right: 2rem;
-	--media-radius-bottom-left: 2rem;
-	--media-radius-bottom-right: 2rem;
-}
 
 figure[data-ratio] > div {
 	overflow: hidden;
