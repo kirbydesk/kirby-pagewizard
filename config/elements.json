@@ -4,6 +4,7 @@
 			"element-heading-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#FFFFFF" }
 		},
 		"vars": {
+			"heading-font-family": { "value": "inherit", "type": "font-family" },
 			"heading-font-weight": { "value": "700", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"heading-line-height": { "value": "1.2", "unit": "", "step": 0.1 },
 			"heading-letter-spacing": { "value": "-0.02em", "unit": "em", "step": 0.01 },
@@ -16,6 +17,7 @@
 			"element-tagline-text": { "default": "#1D548B", "variant": "#8CBAE7", "variant2": "#E8B84B" }
 		},
 		"vars": {
+			"tagline-font-family": { "value": "inherit", "type": "font-family" },
 			"tagline-font-size": { "value": "0.875rem", "unit": "rem", "step": 0.1 },
 			"tagline-font-weight": { "value": "500", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"tagline-line-height": { "value": "1.4", "unit": "", "step": 0.1 },
@@ -29,6 +31,7 @@
 			"element-editor-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#BDC3C7" }
 		},
 		"vars": {
+			"editor-font-family": { "value": "inherit", "type": "font-family" },
 			"editor-font-size": { "value": "1rem", "unit": "rem", "step": 0.1 },
 			"editor-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"editor-line-height": { "value": "1.6", "unit": "", "step": 0.1 },
@@ -43,6 +46,7 @@
 			"element-quote-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#FFFFFF" }
 		},
 		"vars": {
+			"quote-font-family": { "value": "inherit", "type": "font-family" },
 			"quote-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"quote-line-height": { "value": "1.6", "unit": "", "step": 0.1 },
 			"quote-letter-spacing": { "value": "0em", "unit": "em", "step": 0.01 },
@@ -67,6 +71,7 @@
 			"element-button-border-active": { "default": "transparent", "variant": "transparent", "variant2": "transparent" }
 		},
 		"vars": {
+			"button-font-family": { "value": "inherit", "type": "font-family" },
 			"button-font-size": { "value": "1rem", "unit": "rem", "step": 0.1 },
 			"button-font-weight": { "value": "600", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"button-line-height": { "value": "1", "unit": "", "step": 0.1 },
@@ -89,6 +94,7 @@
 			"element-caption-text": { "default": "#6B7280", "variant": "#B0C4DE", "variant2": "#7F8C8D" }
 		},
 		"vars": {
+			"caption-font-family": { "value": "inherit", "type": "font-family" },
 			"caption-font-size": { "value": "0.875rem", "unit": "rem", "step": 0.1 },
 			"caption-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"caption-line-height": { "value": "1.4", "unit": "", "step": 0.1 },
@@ -104,6 +110,7 @@
 			"element-breadcrumb-text-active": { "default": "#163F5C", "variant": "#FFFFFF", "variant2": "#C9952A" }
 		},
 		"vars": {
+			"breadcrumb-font-family": { "value": "inherit", "type": "font-family" },
 			"breadcrumb-font-size": { "value": "0.875rem", "unit": "rem", "step": 0.1 },
 			"breadcrumb-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"breadcrumb-line-height": { "value": "1.4", "unit": "", "step": 0.1 },
@@ -133,6 +140,7 @@
 			"element-cite-text": { "default": "#6B7280", "variant": "#B0C4DE", "variant2": "#7F8C8D" }
 		},
 		"vars": {
+			"cite-font-family": { "value": "inherit", "type": "font-family" },
 			"cite-font-size": { "value": "0.875rem", "unit": "rem", "step": 0.1 },
 			"cite-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"cite-line-height": { "value": "1.4", "unit": "", "step": 0.1 },

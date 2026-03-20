@@ -431,6 +431,22 @@ class pwConfig
 						$override = ($elementOverrides['global'][$varName] ?? null);
 						$vals = is_array($override) ? $override : $defaultVal;
 						$elementLines[] = "\t--" . $varName . ': ' . implode(' ', $vals) . ';';
+					} elseif (($def['type'] ?? null) === 'font-family') {
+						$override = ($elementOverrides['global'][$varName] ?? null);
+						$fontVal = $override ?? $defaultVal;
+						if ($fontVal === 'inherit') {
+							$elementLines[] = "\t--" . $varName . ': inherit;';
+						} else {
+							// Look up font category for CSS fallback
+							$fontCategory = 'sans-serif';
+							foreach ($allFonts as $f) {
+								if ($f['family'] === $fontVal) {
+									$fontCategory = $f['category'] ?? 'sans-serif';
+									break;
+								}
+							}
+							$elementLines[] = "\t--" . $varName . ": '" . $fontVal . "', " . $fontCategory . ';';
+						}
 					} elseif (($def['type'] ?? null) === 'toggle-pair' && isset($def['generates'])) {
 						// Toggle that generates multiple CSS variables
 						$override = ($elementOverrides['global'][$varName] ?? null);
@@ -480,6 +496,59 @@ class pwConfig
 		if (!empty($footerLines)) {
 			$imports[] = ":root {\n" . implode("\n", $footerLines) . "\n}";
 		}
+
+		// Fonts: read config/fonts.json + project fonts, generate @font-face rules, copy files
+		$fontsDefault = $pluginDir . '/config/fonts.json';
+		$fontsProjectFile = kirby()->root('site') . '/config/projectwizard/fonts.json';
+		$builtinFonts = file_exists($fontsDefault) ? (json_decode(file_get_contents($fontsDefault), true) ?? []) : [];
+		$projectFonts = file_exists($fontsProjectFile) ? (json_decode(file_get_contents($fontsProjectFile), true) ?? []) : [];
+		unset($projectFonts['_default']);
+		$allFonts = array_merge($builtinFonts, $projectFonts);
+
+		$fontsDir = kirby()->root('index') . '/assets/fonts';
+		if (!is_dir($fontsDir)) mkdir($fontsDir, 0777, true);
+
+		// Copy builtin font files to public/assets/fonts/
+		foreach ($builtinFonts as $font) {
+			if (!($font['builtin'] ?? false)) continue;
+			foreach ($font['files'] ?? [] as $file) {
+				$src = $pluginDir . '/assets/fonts/' . $file['src'];
+				$dst = $fontsDir . '/' . $file['src'];
+				if (file_exists($src) && !file_exists($dst)) {
+					copy($src, $dst);
+				}
+			}
+		}
+
+		// Generate @font-face rules
+		foreach ($allFonts as $font) {
+			$autoItalic = !empty($font['italic']);
+			foreach ($font['files'] ?? [] as $file) {
+				$styles = $autoItalic ? ['normal', 'italic'] : [$file['style'] ?? 'normal'];
+				foreach ($styles as $style) {
+					$fontFace = "@font-face {\n";
+					$fontFace .= "\tfont-display: swap;\n";
+					$fontFace .= "\tfont-family: '" . $font['family'] . "';\n";
+					$fontFace .= "\tfont-style: " . $style . ";\n";
+					$fontFace .= "\tfont-weight: " . ($file['weight'] ?? '400') . ";\n";
+					$fontFace .= "\tsrc: url('/assets/fonts/" . $file['src'] . "') format('woff2');\n";
+					$fontFace .= "}";
+					$imports[] = $fontFace;
+				}
+			}
+		}
+
+		// Default font family variable
+		$fontOverrides = file_exists($fontsProjectFile) ? (json_decode(file_get_contents($fontsProjectFile), true) ?? []) : [];
+		$defaultFont = $fontOverrides['_default'] ?? 'Inter';
+		$defaultCategory = 'sans-serif';
+		foreach ($allFonts as $font) {
+			if ($font['family'] === $defaultFont) {
+				$defaultCategory = $font['category'] ?? 'sans-serif';
+				break;
+			}
+		}
+		$imports[] = ":root {\n\t--font-family-default: '" . $defaultFont . "', " . $defaultCategory . ";\n}";
 
 		// Sprites stub
 		$spritesDir     = kirby()->root('site') . '/patches/sprites';

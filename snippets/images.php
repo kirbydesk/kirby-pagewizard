@@ -35,7 +35,6 @@ if ($images && $images->count() > 0):
 	e(!empty($ratio), ' data-ratio="'.$ratio.'"');
 	e(!empty($radiusStyle), ' style="'.$radiusStyle.'"');
 	echo '>';
-	echo '<div>';
 
 	// Swiper
 	echo '<div class="swiper" id="'.$slideshowId.'">';
@@ -88,7 +87,6 @@ if ($images && $images->count() > 0):
 	echo '</div>'; // swiper-wrapper
 	echo '</div>'; // swiper
 
-	echo '</div>'; // figure > div
 	echo '</figure>';
 	echo '<div class="swiper-pagination" id="'.$slideshowId.'-pagination"></div>';
 	echo '</div>'; // data-field="slideshow"
@@ -101,13 +99,11 @@ if ($images && $images->count() > 0):
 	endif;
 
 	// Init Swiper
-	echo '<script defer>';
-	echo 'document.addEventListener("DOMContentLoaded",function(){';
-	echo 'new Swiper("#'.$slideshowId.'",{';
-	echo 'spaceBetween:0,';
-	echo 'centeredSlides:true,';
-	echo 'autoplay:{delay:4000,disableOnInteraction:false},';
-	echo 'pagination:{el:"#'.$slideshowId.'-pagination",clickable:true}';
+	echo '<script>';
+	echo 'window.addEventListener("load",function(){';
+	echo 'requestAnimationFrame(function(){';
+	echo 'var s=new Swiper("#'.$slideshowId.'",{spaceBetween:0,resizeObserver:false,autoplay:{delay:4000,disableOnInteraction:false},pagination:{el:"#'.$slideshowId.'-pagination",clickable:true}});';
+	echo 'var t;window.addEventListener("resize",function(){clearTimeout(t);t=setTimeout(function(){requestAnimationFrame(function(){s.update();});},150);});';
 	echo '});';
 	echo '});';
 	echo '</script>';

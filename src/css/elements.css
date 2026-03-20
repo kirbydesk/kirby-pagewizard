@@ -7,6 +7,7 @@
 
 /* -------------- Heading --------------*/
 [data-field="heading"] {
+	font-family: var(--heading-font-family);
 	font-weight: var(--heading-font-weight);
 	line-height: var(--heading-line-height);
 	letter-spacing: var(--heading-letter-spacing);
@@ -18,6 +19,7 @@
 
 /* -------------- Tagline --------------*/
 [data-field="tagline"] {
+	font-family: var(--tagline-font-family);
 	font-size: var(--tagline-font-size);
 	font-weight: var(--tagline-font-weight);
 	line-height: var(--tagline-line-height);
@@ -32,6 +34,7 @@
 [data-field="textarea"],
 [data-field="writer"],
 [data-field="markdown"] {
+	font-family: var(--editor-font-family);
 	font-size: var(--editor-font-size);
 	font-weight: var(--editor-font-weight);
 	line-height: var(--editor-line-height);
@@ -66,6 +69,7 @@
 	&[data-align="right"]  { justify-content: flex-end; }
 }
 [data-field="button"] a, [data-field="button"] span {
+	font-family: var(--button-font-family);
 	font-size: var(--button-font-size);
 	font-weight: var(--button-font-weight);
 	line-height: var(--button-line-height);
@@ -86,6 +90,7 @@
 
 /* -------------- Caption --------------*/
 [data-field="caption"] {
+	font-family: var(--caption-font-family);
 	font-size: var(--caption-font-size);
 	font-weight: var(--caption-font-weight);
 	line-height: var(--caption-line-height);
@@ -98,6 +103,7 @@
 
 /* -------------- Quote --------------*/
 [data-field="quote"] {
+	font-family: var(--quote-font-family);
 	font-weight: var(--quote-font-weight);
 	line-height: var(--quote-line-height);
 	letter-spacing: var(--quote-letter-spacing);
@@ -113,6 +119,7 @@
 /* -------------- Cite --------------*/
 [data-field="cite"] {
 	display: block;
+	font-family: var(--cite-font-family);
 	font-size: var(--cite-font-size);
 	font-weight: var(--cite-font-weight);
 	line-height: var(--cite-line-height);
@@ -125,6 +132,7 @@
 
 /* -------------- Breadcrumb --------------*/
 [data-field="breadcrumb"] {
+	font-family: var(--breadcrumb-font-family);
 	font-size: var(--breadcrumb-font-size);
 	font-weight: var(--breadcrumb-font-weight);
 	line-height: var(--breadcrumb-line-height);

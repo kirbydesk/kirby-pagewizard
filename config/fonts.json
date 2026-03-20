@@ -1,0 +1,12 @@
+{
+	"inter": {
+		"family": "Inter",
+		"category": "sans-serif",
+		"italic": true,
+		"builtin": true,
+		"files": [
+			{ "src": "InterVariable.woff2", "weight": "100 900", "style": "normal" },
+			{ "src": "InterVariable-Italic.woff2", "weight": "100 900", "style": "italic" }
+		]
+	}
+}
