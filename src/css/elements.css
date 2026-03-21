@@ -8,6 +8,7 @@
 /* -------------- Heading --------------*/
 [data-field="heading"] {
 	font-family: var(--heading-font-family);
+	font-size: var(--heading-font-size);
 	font-weight: var(--heading-font-weight);
 	line-height: var(--heading-line-height);
 	letter-spacing: var(--heading-letter-spacing);
@@ -104,6 +105,7 @@
 /* -------------- Quote --------------*/
 [data-field="quote"] {
 	font-family: var(--quote-font-family);
+	font-size: var(--quote-font-size);
 	font-weight: var(--quote-font-weight);
 	line-height: var(--quote-line-height);
 	letter-spacing: var(--quote-letter-spacing);

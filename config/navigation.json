@@ -2,10 +2,10 @@
 	"general": {
 		"vars": {
 			"font-family": { "value": "Inter", "type": "font-family" },
-			"font-size": { "value": "1rem", "unit": "rem", "step": 0.1 },
 			"font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"line-height": { "value": "1.4", "unit": "", "step": 0.1 },
-			"letter-spacing": { "value": "0em", "unit": "em", "step": 0.01 },
+			"font-size": { "default": "1rem", "lg": "1rem", "xl": "1rem", "unit": "rem", "step": 0.1 },
+			"line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1 },
+			"letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01 },
 			"text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"sticky": { "value": "true", "options": ["enabled", "disabled"] },
 			"desktop-height-sticky": { "value": "4rem", "unit": "rem", "step": 0.25 },
@@ -52,7 +52,6 @@
 	"tablet": {
 		"vars": {
 			"home-tablet": { "value": "false", "type": "visibility" },
-			"tablet-font-size": { "value": "0.875rem", "unit": "rem", "step": 0.1 },
 			"tablet-height": { "value": "5rem", "unit": "rem", "step": 0.25 },
 			"tablet-items-align": { "value": "center", "options": ["flex-start", "center", "flex-end"] },
 			"tablet-items-padding": { "value": ["0rem", "0rem", "0rem", "0rem"], "unit": "rem", "step": 0.1, "type": "dual-pair", "rows": [

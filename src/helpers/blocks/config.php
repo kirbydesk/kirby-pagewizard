@@ -318,9 +318,20 @@ class pwConfig
 		}
 
 		$rootLines = [];
+		$navLinesLg = [];
+		$navLinesXl = [];
 		foreach ($nav as $groupKey => $group) {
 			if (!is_array($group) || !isset($group['vars'])) continue;
 			foreach ($group['vars'] as $varName => $def) {
+				// Responsive font-size (default/lg/xl)
+				if (is_array($def) && isset($def['default']) && isset($def['lg']) && !isset($def['variant'])) {
+					foreach (['default' => &$rootLines, 'lg' => &$navLinesLg, 'xl' => &$navLinesXl] as $bp => &$lines) {
+						$override = ($navOverrides['global'][$bp][$varName] ?? null);
+						$lines[] = "\t--nav-" . $varName . ': ' . ($override ?? $def[$bp]) . ';';
+					}
+					unset($lines);
+					continue;
+				}
 				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
 				$override = ($navOverrides['global'][$varName] ?? null);
 				if (($def['type'] ?? null) === 'font-family') {
@@ -346,6 +357,15 @@ class pwConfig
 					$rootLines[] = "\t--nav-" . $varName . ': ' . ($override ?? $defaultVal) . ';';
 				}
 			}
+		}
+		if (!empty($rootLines)) {
+			$imports[] = ":root {\n" . implode("\n", $rootLines) . "\n}";
+		}
+		if (!empty($navLinesLg)) {
+			$imports[] = "@media (min-width: 1024px) {\n:root {\n" . implode("\n", $navLinesLg) . "\n}\n}";
+		}
+		if (!empty($navLinesXl)) {
+			$imports[] = "@media (min-width: 1280px) {\n:root {\n" . implode("\n", $navLinesXl) . "\n}\n}";
 		}
 
 		// Global: read config/global.json (layout + background colors), merge with projectwizard overrides
@@ -453,11 +473,22 @@ class pwConfig
 		}
 
 		$elementLines = [];
+		$elementLinesLg = [];
+		$elementLinesXl = [];
 		foreach ($elements as $groupKey => $group) {
 			if (!is_array($group)) continue;
 			// Style vars (single values)
 			if (isset($group['vars'])) {
 				foreach ($group['vars'] as $varName => $def) {
+					// Responsive font-size (default/lg/xl)
+					if (is_array($def) && isset($def['default']) && isset($def['lg']) && !isset($def['variant'])) {
+						foreach (['default' => &$elementLines, 'lg' => &$elementLinesLg, 'xl' => &$elementLinesXl] as $bp => &$lines) {
+							$override = ($elementOverrides['global'][$bp][$varName] ?? null);
+							$lines[] = "\t--" . $varName . ': ' . ($override ?? $def[$bp]) . ';';
+						}
+						unset($lines);
+						continue;
+					}
 					$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
 					// Array with suffixes: generate separate variables per value
 					if (is_array($defaultVal) && isset($def['suffixes'])) {
@@ -508,6 +539,12 @@ class pwConfig
 		}
 		if (!empty($elementLines)) {
 			$imports[] = ":root {\n" . implode("\n", $elementLines) . "\n}";
+		}
+		if (!empty($elementLinesLg)) {
+			$imports[] = "@media (min-width: 1024px) {\n:root {\n" . implode("\n", $elementLinesLg) . "\n}\n}";
+		}
+		if (!empty($elementLinesXl)) {
+			$imports[] = "@media (min-width: 1280px) {\n:root {\n" . implode("\n", $elementLinesXl) . "\n}\n}";
 		}
 
 		// Footer: read config/footer.json, merge with projectwizard overrides
