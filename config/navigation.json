@@ -1,15 +1,15 @@
 {
 	"general": {
 		"vars": {
-			"font-family": { "value": "Inter", "type": "font-family" },
+			"font-family": { "value": "default", "type": "font-family" },
 			"font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"font-size": { "default": "1rem", "lg": "1rem", "xl": "1rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
 			"line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
 			"letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 },
 			"text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
-			"sticky": { "value": "true", "options": ["enabled", "disabled"], "type": "config" },
-			"desktop-height-sticky": { "value": "4rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20 },
-			"tablet-height-sticky": { "value": "3.5rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20 }
+			"sticky": { "value": "disabled", "options": ["enabled", "disabled"], "type": "config" },
+			"desktop-height-sticky": { "value": "4rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20, "requires": "sticky:enabled" },
+			"tablet-height-sticky": { "value": "3.5rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20, "requires": "sticky:enabled" }
 		}
 	},
 	"desktop": {
@@ -60,32 +60,32 @@
 			"mobile-height": { "value": "3.125rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20 },
 			"mobile-logo-src": { "value": "", "type": "svg", "label": "Logo" },
 			"mobile-logo-display-height": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20, "requires": "mobile-logo-src" },
-			"mobile-color": { "type": "color-group", "labels": ["Text", "Background"], "fields": {
-				"mobile-textcolor": { "value": "#101828" },
-				"mobile-bgcolor": { "value": "white" }
+			"mobile-title-color": { "type": "color-group", "labels": ["Text", "Background"], "fields": {
+				"mobile-title-textcolor": { "value": "#101828" },
+				"mobile-title-bgcolor": { "value": "white" }
 			}},
-			"mobile-l1-color": { "type": "color-group", "labels": ["Text", "Background", "Border"], "fields": {
+			"mobile-language-color": { "type": "color-group", "labels": ["Text", "Background"], "fields": {
+				"mobile-language-textcolor": { "value": "#101828" },
+				"mobile-language-bgcolor": { "value": "#000" }
+			}},
+			"mobile-l1-color": { "type": "color-group", "labels": ["Text", "Background"], "fields": {
 				"mobile-l1-textcolor": { "value": "#101828" },
-				"mobile-l1-bgcolor": { "value": "#ECECEC" },
-				"mobile-l1-bordercolor": { "value": "#00000025" }
+				"mobile-l1-bgcolor": { "value": "#ECECEC" }
 			}},
-			"mobile-l2-color": { "type": "color-group", "labels": ["Text", "Background", "Border"], "fields": {
+			"mobile-l1-active-color": { "type": "color-group", "labels": ["Text", "Background"], "fields": {
+				"mobile-l1-active-textcolor": { "value": "#101828" },
+				"mobile-l1-active-bgcolor": { "value": "#ECECEC" }
+			}},
+			"mobile-l2-color": { "type": "color-group", "labels": ["Text", "Background"], "fields": {
 				"mobile-l2-textcolor": { "value": "#101828" },
-				"mobile-l2-bgcolor": { "value": "white" },
-				"mobile-l2-bordercolor": { "value": "#00000015" }
+				"mobile-l2-bgcolor": { "value": "white" }
 			}},
 			"mobile-l2-active-color": { "type": "color-group", "labels": ["Text", "Background"], "fields": {
-				"mobile-l2-active-textcolor": { "value": "white" },
+				"mobile-l2-active-textcolor": { "value": "#101828" },
 				"mobile-l2-active-bgcolor": { "value": "#00BBFF" }
 			}},
-			"mobile-language-color": { "type": "color-group", "labels": ["Text", "Background", "Border", "Icon"], "fields": {
-				"mobile-language-textcolor": { "value": "#101828" },
-				"mobile-language-bgcolor": { "value": "#000" },
-				"mobile-language-bordercolor": { "value": "white" },
-				"mobile-language-iconcolor": { "value": "white" }
-			}},
-			"mobile-iconcolor": { "value": "#101828", "type": "color" },
-			"mobile-burgercolor": { "value": "#101828", "type": "color" }
+			"mobile-l1-bordercolor": { "value": "#00000025", "type": "color", "label": "Divider L1" },
+			"mobile-l2-bordercolor": { "value": "#00000015", "type": "color", "label": "Divider L2" }
 		}
 	}
 }

@@ -5,7 +5,8 @@
 [x-cloak] { display: none !important;}
 
 header.mobile {
-	@apply bg-(--nav-mobile-bgcolor) text-(--nav-mobile-textcolor) fill-(--nav-mobile-textcolor);
+	font-family: var(--nav-font-family);
+	@apply bg-(--nav-mobile-title-bgcolor) text-(--nav-mobile-title-textcolor) fill-(--nav-mobile-title-textcolor);
 
 	> div.flex {
 		padding-left: var(--global-padding-left);
@@ -30,7 +31,7 @@ header.mobile {
 						@apply border-t-(--nav-mobile-l1-bordercolor);
 					}
 					div span svg {
-						@apply hidden w-4 h-4 fill-(--nav-mobile-iconcolor);
+						@apply hidden w-4 h-4 fill-(--nav-mobile-l1-textcolor);
 					}
 
 					div span svg.plus,
@@ -40,6 +41,14 @@ header.mobile {
 
 					&.open div span svg.plus {
 						@apply hidden;
+					}
+
+					&.active {
+						@apply bg-(--nav-mobile-l1-active-bgcolor);
+
+						a, div.flex {
+							@apply text-(--nav-mobile-l1-active-textcolor);
+						}
 					}
 				}
 			}
@@ -54,8 +63,12 @@ header.mobile {
 						@apply text-(--nav-mobile-l2-textcolor) font-normal;
 					}
 
-					&.active a {
-						@apply font-bold;
+					&.active {
+						@apply bg-(--nav-mobile-l2-active-bgcolor);
+
+						a {
+							@apply text-(--nav-mobile-l2-active-textcolor) font-bold;
+						}
 					}
 				}
 			}
@@ -63,10 +76,10 @@ header.mobile {
 	}
 
 	div.language  {
-		@apply bg-(--nav-mobile-language-bgcolor) text-(--nav-mobile-language-textcolor) fill-(--nav-mobile-language-textcolor) border-(--nav-mobile-language-bordercolor);
+		@apply bg-(--nav-mobile-language-bgcolor) text-(--nav-mobile-language-textcolor) fill-(--nav-mobile-language-textcolor);
 
 		svg.globe {
-			@apply mr-2 fill-(--nav-mobile-language-iconcolor);
+			@apply mr-2 fill-(--nav-mobile-language-textcolor);
 		}
 	}
 
@@ -74,10 +87,10 @@ header.mobile {
 		@apply relative float-left h-10 w-7 cursor-pointer transition-[0.3s];
 
 		span {
-			@apply absolute h-0.75 w-6.25 bg-(--nav-mobile-burgercolor) top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-[0.3s];
+			@apply absolute h-0.75 w-6.25 bg-(--nav-mobile-title-textcolor) top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] transition-[0.3s];
 
 			&:before, &:after {
-				@apply content-[''] absolute bg-(--nav-mobile-burgercolor) h-0.75 w-6.25 transition-[0.3s];
+				@apply content-[''] absolute bg-(--nav-mobile-title-textcolor) h-0.75 w-6.25 transition-[0.3s];
 			}
 			&:before {
 				@apply -top-2;

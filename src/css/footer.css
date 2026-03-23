@@ -6,6 +6,7 @@
 ------------------------------------------------------------------------------------------------*/
 
 footer {
+	font-family: var(--footer-font-family);
 	color: var(--footer-text);
 	background-color: var(--footer-background);
 	padding-top: var(--footer-padding-top);

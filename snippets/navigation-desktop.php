@@ -2,6 +2,7 @@
 	<div class="flex max-w-7xl mx-auto" id="navigation"><?php
 
 		/* Logo */ ?>
+		<?php snippet('logo', ['type' => 'tablet', 'tabindex' => 1]) ?>
 		<?php snippet('logo', ['type' => 'desktop', 'tabindex' => 1]) ?>
 
 		<nav class="flex-1 pl-8 lg:pl-6 xl:pl-8" x-data="desktopNav()">

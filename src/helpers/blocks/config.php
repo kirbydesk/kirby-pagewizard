@@ -4,6 +4,7 @@ class pwConfig
 {
 	private static array $configPaths = [];
 	private static ?array $projectConfig = null;
+	/** @deprecated — font generation now checks $imports directly */
 	private static bool $fontsGenerated = false;
 	private static bool $panelColorsGenerated = false;
 
@@ -150,7 +151,14 @@ class pwConfig
 			if (!empty($cfgVis['fields']['content'])) {
 				[$cfgSettings, $cfgFieldOptions] = self::parseContentSettings($cfgVis['fields']['content']);
 				$settings     = array_merge($settings,     $cfgSettings);
-				$fieldOptions = array_merge($fieldOptions, $cfgFieldOptions);
+				// Deep merge fieldOptions so individual properties are overridden, not entire field entries
+				foreach ($cfgFieldOptions as $fk => $fv) {
+					if (isset($fieldOptions[$fk]) && is_array($fieldOptions[$fk]) && is_array($fv)) {
+						$fieldOptions[$fk] = array_merge($fieldOptions[$fk], $fv);
+					} else {
+						$fieldOptions[$fk] = $fv;
+					}
+				}
 				$fields       = array_merge($fields, self::extractContentDefaults($cfgVis['fields']['content']));
 			}
 			if (!empty($cfgVis['fields']['layout']))   $layoutVis   = array_merge($layoutVis,   $cfgVis['fields']['layout']);
@@ -395,6 +403,16 @@ class pwConfig
 		unset($projectFonts['_default']);
 		$allFonts = array_merge($builtinFonts, $projectFonts);
 
+		// Resolve body default font (used as fallback when font-family value is "default")
+		$pwDir = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
+		$globalDefault = $pwDir . '/config/global.json';
+		$globalOverride = kirby()->root('site') . '/config/projectwizard/global.json';
+		$globalData = file_exists($globalDefault) ? (json_decode(file_get_contents($globalDefault), true) ?? []) : [];
+		$globalOv = file_exists($globalOverride) ? (json_decode(file_get_contents($globalOverride), true) ?? []) : [];
+		$bodyDefaultFont = $globalOv['global']['font-family-default']
+			?? $globalData['body']['vars']['font-family-default']['value']
+			?? 'Inter';
+
 		// Navigation: read config/navigation.json (nested format), merge with projectwizard overrides
 		$navDefault = $pluginDir . '/config/navigation.json';
 		$navOverride = kirby()->root('site') . '/config/projectwizard/navigation.json';
@@ -429,6 +447,7 @@ class pwConfig
 				$override = ($navOverrides['global'][$varName] ?? null);
 				if (($def['type'] ?? null) === 'font-family') {
 					$fontVal = $override ?? $defaultVal;
+					if ($fontVal === 'default') $fontVal = $bodyDefaultFont;
 					$fontCategory = 'sans-serif';
 					foreach ($allFonts as $f) {
 						if ($f['family'] === $fontVal) {
@@ -461,14 +480,9 @@ class pwConfig
 			$imports[] = "@media (min-width: 1280px) {\n:root {\n" . implode("\n", $navLinesXl) . "\n}\n}";
 		}
 
-		// Global: read config/global.json (layout + background colors), merge with projectwizard overrides
-		$globalDefault = $pluginDir . '/config/global.json';
-		$globalOverride = kirby()->root('site') . '/config/projectwizard/global.json';
-		$global = file_exists($globalDefault) ? (json_decode(file_get_contents($globalDefault), true) ?? []) : [];
-		$globalOverrides = [];
-		if (file_exists($globalOverride)) {
-			$globalOverrides = json_decode(file_get_contents($globalOverride), true) ?? [];
-		}
+		// Global: reuse already-loaded global.json data
+		$global = $globalData;
+		$globalOverrides = $globalOv;
 
 		$globalLines = [];
 		foreach ($global as $groupKey => $group) {
@@ -491,6 +505,7 @@ class pwConfig
 					} elseif (($def['type'] ?? null) === 'font-family') {
 						$override = ($globalOverrides['global'][$varName] ?? null);
 						$fontVal = $override ?? $defaultVal;
+						if ($fontVal === 'default') $fontVal = $bodyDefaultFont;
 						$fontCategory = 'sans-serif';
 						foreach ($allFonts as $f) {
 							if ($f['family'] === $fontVal) {
@@ -598,6 +613,7 @@ class pwConfig
 					} elseif (($def['type'] ?? null) === 'font-family') {
 						$override = ($elementOverrides['global'][$varName] ?? null);
 						$fontVal = $override ?? $defaultVal;
+						if ($fontVal === 'default') $fontVal = $bodyDefaultFont;
 						$fontCategory = 'sans-serif';
 						foreach ($allFonts as $f) {
 							if ($f['family'] === $fontVal) {
@@ -657,6 +673,7 @@ class pwConfig
 				$override = ($footerOverrides['global'][$varName] ?? null);
 				if (($def['type'] ?? null) === 'font-family') {
 					$fontVal = $override ?? $defaultVal;
+					if ($fontVal === 'default') $fontVal = $bodyDefaultFont;
 					$fontCategory = 'sans-serif';
 					foreach ($allFonts as $f) {
 						if ($f['family'] === $fontVal) {
@@ -691,8 +708,11 @@ class pwConfig
 		}
 
 		// Generate @font-face rules (only once, not per plugin call)
-		if (!self::$fontsGenerated) {
-			self::$fontsGenerated = true;
+		$hasExistingFontFace = false;
+		foreach ($imports as $entry) {
+			if (str_contains($entry, '@font-face')) { $hasExistingFontFace = true; break; }
+		}
+		if (!$hasExistingFontFace) {
 			foreach ($allFonts as $font) {
 				$autoItalic = !empty($font['italic']) && count($font['files'] ?? []) === 1;
 				foreach ($font['files'] ?? [] as $file) {

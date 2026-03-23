@@ -3,7 +3,12 @@
 	Header Desktop
 ------------------------------------------------------------------------------------------------*/
 header.desktop {
-	@apply left-1/2 -translate-x-1/2 fixed top-0 bg-(--nav-desktop-bgcolor);
+	font-family: var(--nav-font-family);
+	@apply left-1/2 -translate-x-1/2 relative bg-(--nav-desktop-bgcolor);
+
+	&[id="sticky"] {
+		@apply fixed top-0;
+	}
 
 	div#navigation {
 		@apply relative md:h-(--nav-tablet-height) lg:h-(--nav-desktop-height);
@@ -11,23 +16,33 @@ header.desktop {
 		padding-left: var(--global-padding-left);
 		padding-right: var(--global-padding-right);
 
-		a.logo {
+		a.logo-tablet {
+			@apply flex-none flex items-center z-30;
 			align-self: var(--nav-tablet-logo-align);
 			padding: var(--nav-tablet-logo-padding);
-			@apply flex-none flex items-center z-30;
 
 			@media (min-width: 1024px) {
-				align-self: var(--nav-desktop-logo-align);
-				padding: var(--nav-desktop-logo-padding);
+				display: none;
 			}
 
 			svg {
 				@apply block w-auto;
 				height: var(--nav-tablet-logo-display-height);
+			}
+		}
 
-				@media (min-width: 1024px) {
-					height: var(--nav-desktop-logo-display-height);
-				}
+		a.logo-desktop {
+			@apply hidden flex-none items-center z-30;
+			align-self: var(--nav-desktop-logo-align);
+			padding: var(--nav-desktop-logo-padding);
+
+			@media (min-width: 1024px) {
+				display: flex;
+			}
+
+			svg {
+				@apply block w-auto;
+				height: var(--nav-desktop-logo-display-height);
 			}
 		}
 	}
@@ -106,13 +121,14 @@ body.scrolled header.desktop nav div.navitem {
 	@apply md:h-(--nav-tablet-height-sticky) lg:h-(--nav-desktop-height-sticky);
 }
 
-body.scrolled header.desktop a.logo svg {
+body.scrolled header.desktop a.logo-tablet svg,
+body.scrolled header.desktop a.logo-desktop svg {
 	transition: height 0.4s cubic-bezier(.4,0,.2,1);
 }
 
 /*------------------------------------------------------------------------------------------------
 	Main
 ------------------------------------------------------------------------------------------------*/
-main {
+body:has(#sticky) main {
 	@apply md:pt-(--nav-tablet-height) lg:pt-(--nav-desktop-height);
 }

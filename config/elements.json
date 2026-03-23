@@ -4,7 +4,7 @@
 			"element-heading-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#FFFFFF" }
 		},
 		"vars": {
-			"heading-font-family": { "value": "Inter", "type": "font-family" },
+			"heading-font-family": { "value": "default", "type": "font-family" },
 			"heading-font-weight": { "value": "700", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"heading-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"heading-font-style": { "value": "normal", "options": ["normal", "italic"] },
@@ -18,7 +18,7 @@
 			"element-tagline-text": { "default": "#1D548B", "variant": "#8CBAE7", "variant2": "#E8B84B" }
 		},
 		"vars": {
-			"tagline-font-family": { "value": "Inter", "type": "font-family" },
+			"tagline-font-family": { "value": "default", "type": "font-family" },
 			"tagline-font-weight": { "value": "500", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"tagline-text-transform": { "value": "uppercase", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"tagline-font-style": { "value": "normal", "options": ["normal", "italic"] },
@@ -32,7 +32,7 @@
 			"element-editor-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#BDC3C7" }
 		},
 		"vars": {
-			"editor-font-family": { "value": "Inter", "type": "font-family" },
+			"editor-font-family": { "value": "default", "type": "font-family" },
 			"editor-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"editor-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"editor-font-style": { "value": "normal", "options": ["normal", "italic"] },
@@ -47,7 +47,7 @@
 			"element-quote-text": { "default": "#262626", "variant": "#FFFFFF", "variant2": "#FFFFFF" }
 		},
 		"vars": {
-			"quote-font-family": { "value": "Inter", "type": "font-family" },
+			"quote-font-family": { "value": "default", "type": "font-family" },
 			"quote-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"quote-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"quote-font-style": { "value": "italic", "options": ["normal", "italic"] },
@@ -73,7 +73,7 @@
 			"element-button-border-active": { "default": "transparent", "variant": "transparent", "variant2": "transparent" }
 		},
 		"vars": {
-			"button-font-family": { "value": "Inter", "type": "font-family" },
+			"button-font-family": { "value": "default", "type": "font-family" },
 			"button-font-weight": { "value": "600", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"button-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"button-font-style": { "value": "normal", "options": ["normal", "italic"] },
@@ -90,7 +90,7 @@
 			"element-caption-text": { "default": "#6B7280", "variant": "#B0C4DE", "variant2": "#7F8C8D" }
 		},
 		"vars": {
-			"caption-font-family": { "value": "Inter", "type": "font-family" },
+			"caption-font-family": { "value": "default", "type": "font-family" },
 			"caption-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"caption-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"caption-font-style": { "value": "normal", "options": ["normal", "italic"] },
@@ -106,7 +106,7 @@
 			"element-breadcrumb-text-active": { "default": "#163F5C", "variant": "#FFFFFF", "variant2": "#C9952A" }
 		},
 		"vars": {
-			"breadcrumb-font-family": { "value": "Inter", "type": "font-family" },
+			"breadcrumb-font-family": { "value": "default", "type": "font-family" },
 			"breadcrumb-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"breadcrumb-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"breadcrumb-font-style": { "value": "normal", "options": ["normal", "italic"] },
@@ -133,7 +133,7 @@
 			"element-cite-text": { "default": "#6B7280", "variant": "#B0C4DE", "variant2": "#7F8C8D" }
 		},
 		"vars": {
-			"cite-font-family": { "value": "Inter", "type": "font-family" },
+			"cite-font-family": { "value": "default", "type": "font-family" },
 			"cite-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
 			"cite-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"cite-font-style": { "value": "normal", "options": ["normal", "italic"] },

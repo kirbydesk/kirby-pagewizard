@@ -14,7 +14,7 @@ $logoSrc = $logoCfg[$type . '-logo-src'] ?? '';
 $hasLogo = !empty($logoSrc) && str_contains($logoSrc, '<svg');
 
 if ($hasLogo) : ?>
-<a href="<?= $href ?>" aria-label="<?= $alt ?>" class="logo"<?= isset($tabindex) ? ' tabindex="' . $tabindex . '"' : '' ?>>
+<a href="<?= $href ?>" aria-label="<?= $alt ?>" class="logo logo-<?= $type ?>"<?= isset($tabindex) ? ' tabindex="' . $tabindex . '"' : '' ?>>
 	<?= $logoSrc ?>
 </a>
 <?php endif;

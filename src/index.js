@@ -23,6 +23,13 @@ import iconsView from "@/views/icons.vue";
 
 // Render
 panel.plugin("kirbydesk/kirby-pagewizard", {
+  created() {
+    if (!("BroadcastChannel" in window)) return;
+    const bc = new BroadcastChannel(panel.urls.site);
+    panel.events.on("model.update", () => {
+      bc.postMessage("content/saved");
+    });
+  },
   blocks: {
 		pwButton: pwButton,
 		pwButtons: pwButtons,

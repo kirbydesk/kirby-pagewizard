@@ -1,5 +1,20 @@
 <?php return [
 
+	/* -------------- Reload on Save --------------*/
+	'page.render:after' => function (string $contentType, string $html): string {
+		if ($contentType !== 'html') return $html;
+		if (option('kirbydesk.pagewizard.reloadOnSave') !== true) return $html;
+
+		$siteUrl = kirby()->url();
+		$script = <<<SCRIPT
+<script data-reload-on-save>
+(function(){if(!("BroadcastChannel" in window))return;var bc=new BroadcastChannel("{$siteUrl}");bc.onmessage=function(e){if(e.data==="content/saved")window.location.reload()};})();
+</script>
+SCRIPT;
+
+		return str_replace('</head>', $script . '</head>', $html);
+	},
+
 	/* -------------- Hooks --------------*/
 	'site.update:after' => function ($newSite, $oldSite) {
 		static $running = false;

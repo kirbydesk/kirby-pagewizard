@@ -9,6 +9,10 @@ require_once __DIR__ . '/src/helpers/blocks/settings.php';
 require_once __DIR__ . '/src/helpers/blocks/editor.php';
 
 Kirby::plugin('kirbydesk/kirby-pagewizard', [
+	/* -------------- Options --------------*/
+	'options' => [
+		'reloadOnSave' => false,
+	],
 	/* -------------- Extensions --------------*/
 	'api'						=> require_once 'src/extensions/api.php',
 	'routes'				=> require_once 'src/extensions/routes.php',

@@ -1,7 +1,7 @@
 {
 	"font": {
 		"vars": {
-			"footer-font-family": { "value": "Inter", "type": "font-family" }
+			"footer-font-family": { "value": "default", "type": "font-family" }
 		}
 	},
 	"colors": {

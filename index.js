@@ -1021,6 +1021,13 @@
   __component__.options.__file = "/Users/christian/Projects/kirbydesk/site/plugins/kirby-pagewizard/src/views/icons.vue";
   const iconsView = __component__.exports;
   panel.plugin("kirbydesk/kirby-pagewizard", {
+    created() {
+      if (!("BroadcastChannel" in window)) return;
+      const bc = new BroadcastChannel(panel.urls.site);
+      panel.events.on("model.update", () => {
+        bc.postMessage("content/saved");
+      });
+    },
     blocks: {
       pwButton,
       pwButtons,

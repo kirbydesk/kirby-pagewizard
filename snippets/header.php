@@ -20,16 +20,18 @@
 
 		
 		?><title><?=$page->title()->value()?></title>
+		<style>body{opacity:0}body.ready{opacity:1}</style>
 	</head>
 <body class="<?php e($kirby->user(), 'debug-screens'); ?>">
+<script>document.body.classList.add('ready');</script>
 <?php
 	// Config settings
 	$config = pwConfig::navConfig();
-	$sticky	 = (bool)($config['sticky'] ?? true);
+	$sticky	 = ($config['sticky'] ?? 'enabled') === 'enabled';
 
 	// Define class for homepage item in desktop navigation
-	$desktop = (bool)($config['home-desktop'] ?? true);
-	$tablet  = (bool)($config['home-tablet'] ?? true);
+	$desktop = !in_array($config['home-desktop'] ?? 'true', ['disabled', 'false', false, ''], true);
+	$tablet  = !in_array($config['home-tablet'] ?? 'true', ['disabled', 'false', false, ''], true);
 
 	if ($desktop && $tablet) $class = '';
 	elseif ($desktop && !$tablet) $class = 'hidden lg:block';
@@ -52,4 +54,4 @@
 		]);
 	endif;
 
-?><div id="scroll-sentinel" aria-hidden="true"></div><?php
+	if ($sticky) : ?><div id="scroll-sentinel" aria-hidden="true"></div><?php endif;
