@@ -6,11 +6,11 @@
 		"vars": {
 			"heading-font-family": { "value": "Inter", "type": "font-family" },
 			"heading-font-weight": { "value": "700", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"heading-font-size": { "default": "1.5rem", "lg": "1.75rem", "xl": "2rem", "unit": "rem", "step": 0.1 },
-			"heading-line-height": { "default": "1.2", "lg": "1.2", "xl": "1.1", "unit": "", "step": 0.1 },
-			"heading-letter-spacing": { "default": "-0.02em", "lg": "-0.02em", "xl": "-0.02em", "unit": "em", "step": 0.01 },
 			"heading-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
-			"heading-font-style": { "value": "normal", "options": ["normal", "italic"] }
+			"heading-font-style": { "value": "normal", "options": ["normal", "italic"] },
+			"heading-font-size": { "default": "1.5rem", "lg": "1.75rem", "xl": "2rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
+			"heading-line-height": { "default": "1.2", "lg": "1.2", "xl": "1.1", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
+			"heading-letter-spacing": { "default": "-0.02em", "lg": "-0.02em", "xl": "-0.02em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 }
 		}
 	},
 	"tagline": {
@@ -20,11 +20,11 @@
 		"vars": {
 			"tagline-font-family": { "value": "Inter", "type": "font-family" },
 			"tagline-font-weight": { "value": "500", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"tagline-font-size": { "default": "0.875rem", "lg": "0.875rem", "xl": "0.875rem", "unit": "rem", "step": 0.1 },
-			"tagline-line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1 },
-			"tagline-letter-spacing": { "default": "0.05em", "lg": "0.05em", "xl": "0.05em", "unit": "em", "step": 0.01 },
 			"tagline-text-transform": { "value": "uppercase", "options": ["none", "uppercase", "lowercase", "capitalize"] },
-			"tagline-font-style": { "value": "normal", "options": ["normal", "italic"] }
+			"tagline-font-style": { "value": "normal", "options": ["normal", "italic"] },
+			"tagline-font-size": { "default": "0.875rem", "lg": "0.875rem", "xl": "0.875rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
+			"tagline-line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
+			"tagline-letter-spacing": { "default": "0.05em", "lg": "0.05em", "xl": "0.05em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 }
 		}
 	},
 	"editor": {
@@ -34,12 +34,12 @@
 		"vars": {
 			"editor-font-family": { "value": "Inter", "type": "font-family" },
 			"editor-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"editor-font-size": { "default": "1rem", "lg": "1rem", "xl": "1rem", "unit": "rem", "step": 0.1 },
-			"editor-line-height": { "default": "1.6", "lg": "1.6", "xl": "1.6", "unit": "", "step": 0.1 },
-			"editor-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01 },
 			"editor-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"editor-font-style": { "value": "normal", "options": ["normal", "italic"] },
-			"editor-paragraph-spacing": { "value": "0.875rem", "unit": "rem", "step": 0.1 }
+			"editor-paragraph-spacing": { "value": "0.875rem", "unit": "rem", "step": 0.1, "min": 0, "max": 10 },
+			"editor-font-size": { "default": "1rem", "lg": "1rem", "xl": "1rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
+			"editor-line-height": { "default": "1.6", "lg": "1.6", "xl": "1.6", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
+			"editor-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 }
 		}
 	},
 	"quote": {
@@ -49,15 +49,15 @@
 		"vars": {
 			"quote-font-family": { "value": "Inter", "type": "font-family" },
 			"quote-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"quote-font-size": { "default": "1.5rem", "lg": "1.75rem", "xl": "2rem", "unit": "rem", "step": 0.1 },
-			"quote-line-height": { "default": "1.6", "lg": "1.6", "xl": "1.5", "unit": "", "step": 0.1 },
-			"quote-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01 },
 			"quote-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"quote-font-style": { "value": "italic", "options": ["normal", "italic"] },
 			"quote-marks": { "value": "enabled", "options": ["enabled", "disabled"], "type": "toggle-pair", "generates": {
 				"quote-marks-open": { "enabled": "\"\\201E\"", "disabled": "none" },
 				"quote-marks-close": { "enabled": "\"\\201C\"", "disabled": "none" }
-			}}
+			}},
+			"quote-font-size": { "default": "1.5rem", "lg": "1.75rem", "xl": "2rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
+			"quote-line-height": { "default": "1.6", "lg": "1.6", "xl": "1.5", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
+			"quote-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 }
 		}
 	},
 	"button": {
@@ -75,20 +75,14 @@
 		"vars": {
 			"button-font-family": { "value": "Inter", "type": "font-family" },
 			"button-font-weight": { "value": "600", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"button-font-size": { "default": "1rem", "lg": "1rem", "xl": "1rem", "unit": "rem", "step": 0.1 },
-			"button-line-height": { "default": "1", "lg": "1", "xl": "1", "unit": "", "step": 0.1 },
-			"button-letter-spacing": { "default": "0.02em", "lg": "0.02em", "xl": "0.02em", "unit": "em", "step": 0.01 },
 			"button-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
 			"button-font-style": { "value": "normal", "options": ["normal", "italic"] },
-			"button-padding": { "value": ["0.75rem", "1rem", "0.75rem", "1rem"], "unit": "rem", "step": 0.1, "type": "dual-pair", "rows": [
-				{ "label": "Horizontal", "indices": [3, 1], "labels": ["Left", "Right"] },
-				{ "label": "Vertical", "indices": [0, 2], "labels": ["Top", "Bottom"] }
-			]},
-			"button-border-radius": { "value": ["0.25rem", "0.25rem", "0.25rem", "0.25rem"], "unit": "rem", "step": 0.1, "type": "dual-pair", "rows": [
-				{ "label": "Top", "indices": [0, 1], "labels": ["Left", "Right"] },
-				{ "label": "Bottom", "indices": [3, 2], "labels": ["Left", "Right"] }
-			]},
-			"button-gap": { "value": "0.875rem", "unit": "rem", "step": 0.1 }
+			"button-gap": { "value": "0.875rem", "unit": "rem", "step": 0.1, "min": 0, "max": 10 },
+			"button-font-size": { "default": "1rem", "lg": "1rem", "xl": "1rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
+			"button-line-height": { "default": "1", "lg": "1", "xl": "1", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
+			"button-letter-spacing": { "default": "0.02em", "lg": "0.02em", "xl": "0.02em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 },
+			"button-padding": { "value": ["0.75rem", "1rem", "0.75rem", "1rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "labels": ["Top", "Right", "Bottom", "Left"] },
+			"button-border-radius": { "value": ["0.25rem", "0.25rem", "0.25rem", "0.25rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "labels": ["Top Left", "Top Right", "Bottom Left", "Bottom Right"] }
 		}
 	},
 	"caption": {
@@ -98,11 +92,11 @@
 		"vars": {
 			"caption-font-family": { "value": "Inter", "type": "font-family" },
 			"caption-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"caption-font-size": { "default": "0.875rem", "lg": "0.875rem", "xl": "0.875rem", "unit": "rem", "step": 0.1 },
-			"caption-line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1 },
-			"caption-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01 },
 			"caption-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
-			"caption-font-style": { "value": "normal", "options": ["normal", "italic"] }
+			"caption-font-style": { "value": "normal", "options": ["normal", "italic"] },
+			"caption-font-size": { "default": "0.875rem", "lg": "0.875rem", "xl": "0.875rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
+			"caption-line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
+			"caption-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 }
 		}
 	},
 	"breadcrumb": {
@@ -114,19 +108,16 @@
 		"vars": {
 			"breadcrumb-font-family": { "value": "Inter", "type": "font-family" },
 			"breadcrumb-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"breadcrumb-font-size": { "default": "0.875rem", "lg": "0.875rem", "xl": "0.875rem", "unit": "rem", "step": 0.1 },
-			"breadcrumb-line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1 },
-			"breadcrumb-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01 },
 			"breadcrumb-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
-			"breadcrumb-font-style": { "value": "normal", "options": ["normal", "italic"] }
+			"breadcrumb-font-style": { "value": "normal", "options": ["normal", "italic"] },
+			"breadcrumb-font-size": { "default": "0.875rem", "lg": "0.875rem", "xl": "0.875rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
+			"breadcrumb-line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
+			"breadcrumb-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 }
 		}
 	},
 	"media": {
 		"vars": {
-			"media-radius": { "value": ["2rem", "2rem", "2rem", "2rem"], "unit": "rem", "step": 0.1, "type": "dual-pair", "suffixes": ["-top-left", "-top-right", "-bottom-left", "-bottom-right"], "rows": [
-				{ "label": "Radius Top", "indices": [0, 1], "labels": ["Left", "Right"] },
-				{ "label": "Radius Bottom", "indices": [2, 3], "labels": ["Left", "Right"] }
-			]}
+			"media-radius": { "value": ["2rem", "2rem", "2rem", "2rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["-top-left", "-top-right", "-bottom-left", "-bottom-right"], "labels": ["Top Left", "Top Right", "Bottom Left", "Bottom Right"] }
 		},
 		"colors": {
 			"element-media-background": { "default": "#262626", "variant": "#262626", "variant2": "#1A2530" },
@@ -144,11 +135,11 @@
 		"vars": {
 			"cite-font-family": { "value": "Inter", "type": "font-family" },
 			"cite-font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"cite-font-size": { "default": "0.875rem", "lg": "0.875rem", "xl": "0.875rem", "unit": "rem", "step": 0.1 },
-			"cite-line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1 },
-			"cite-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01 },
 			"cite-text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
-			"cite-font-style": { "value": "normal", "options": ["normal", "italic"] }
+			"cite-font-style": { "value": "normal", "options": ["normal", "italic"] },
+			"cite-font-size": { "default": "0.875rem", "lg": "0.875rem", "xl": "0.875rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
+			"cite-line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
+			"cite-letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 }
 		}
 	}
 }

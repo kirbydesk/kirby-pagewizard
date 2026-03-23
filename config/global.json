@@ -1,48 +1,25 @@
 {
-	"font": {
+	"body": {
 		"vars": {
-			"font-family-default": { "value": "Inter", "type": "font-family" }
+			"font-family-default": { "value": "Inter", "type": "font-family" },
+			"body-background": { "value": "#FFFFFF", "type": "color" }
 		}
 	},
-	"background": {
+	"blocks": {
 		"vars": {
-			"body-background": { "value": "#FFFFFF", "type": "color" }
+			"global-margin-top": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"global-margin-bottom": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"global-padding-left": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"global-padding-right": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"global-padding-top": { "value": [".75rem", "1.5rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["-small", "-large"], "labels": ["Small", "Large"] },
+			"global-padding-bottom": { "value": [".75rem", "1.5rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["-small", "-large"], "labels": ["Small", "Large"] },
+			"global-": { "value": ["1.5rem", "1.5rem", "1.5rem", "1.5rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["top-left-radius", "top-right-radius", "bottom-left-radius", "bottom-right-radius"], "labels": ["Top Left", "Top Right", "Bottom Left", "Bottom Right"] }
 		},
 		"colors": {
-			"block-background": { "default": "#ffffff", "variant": "#1D548B", "variant2": "#2C3E50" }
-		}
-	},
-	"padding": {
-		"vars": {
-			"global-padding-top": { "value": [".75rem", "1.5rem"], "unit": "rem", "step": 0.1, "type": "dual-pair", "suffixes": ["-small", "-large"], "rows": [
-				{ "label": "Top", "indices": [0, 1], "labels": ["Small", "Large"] }
-			]},
-			"global-padding-bottom": { "value": [".75rem", "1.5rem"], "unit": "rem", "step": 0.1, "type": "dual-pair", "suffixes": ["-small", "-large"], "rows": [
-				{ "label": "Bottom", "indices": [0, 1], "labels": ["Small", "Large"] }
-			]},
-			"global-padding-left": { "value": "1.5rem", "unit": "rem", "step": 0.1 },
-			"global-padding-right": { "value": "1.5rem", "unit": "rem", "step": 0.1 }
-		}
-	},
-	"margin": {
-		"vars": {
-			"global-margin-top": { "value": "1.5rem", "unit": "rem", "step": 0.1 },
-			"global-margin-bottom": { "value": "1.5rem", "unit": "rem", "step": 0.1 }
-		}
-	},
-	"links": {
-		"colors": {
+			"block-background": { "default": "#ffffff", "variant": "#1D548B", "variant2": "#2C3E50" },
 			"block-link": { "default": "#1D548B", "variant": "#8CBAE7", "variant2": "#E8B84B" },
 			"block-link-hover": { "default": "#1A4E7A", "variant": "#7AA9D0", "variant2": "#F5C842" },
 			"block-link-active": { "default": "#163F5C", "variant": "#6680A8", "variant2": "#C9952A" }
-		}
-	},
-	"radius": {
-		"vars": {
-			"global-": { "value": ["1.5rem", "1.5rem", "1.5rem", "1.5rem"], "unit": "rem", "step": 0.1, "type": "dual-pair", "suffixes": ["top-left-radius", "top-right-radius", "bottom-left-radius", "bottom-right-radius"], "rows": [
-				{ "label": "Top", "indices": [0, 1], "labels": ["Left", "Right"] },
-				{ "label": "Bottom", "indices": [2, 3], "labels": ["Left", "Right"] }
-			]}
 		}
 	}
 }

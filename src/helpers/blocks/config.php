@@ -344,7 +344,7 @@ class pwConfig
 						}
 					}
 					$rootLines[] = "\t--nav-" . $varName . ": '" . $fontVal . "', " . $fontCategory . ';';
-				} elseif (($def['type'] ?? null) === 'color-pair' && isset($def['fields'])) {
+				} elseif (in_array($def['type'] ?? null, ['color-pair', 'color-group']) && isset($def['fields'])) {
 					foreach ($def['fields'] as $fieldName => $fieldDef) {
 						$fieldDefault = $fieldDef['value'] ?? '';
 						$fieldOverride = ($navOverrides['global'][$fieldName] ?? null);
