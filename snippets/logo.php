@@ -13,11 +13,8 @@ $alt      = $homePage ? $homePage->title()->value() : $site->title()->value();
 $logoSrc = $logoCfg[$type . '-logo-src'] ?? '';
 $hasLogo = !empty($logoSrc) && str_contains($logoSrc, '<svg');
 
-?>
+if ($hasLogo) : ?>
 <a href="<?= $href ?>" aria-label="<?= $alt ?>" class="logo"<?= isset($tabindex) ? ' tabindex="' . $tabindex . '"' : '' ?>>
-	<?php if ($hasLogo) : ?>
-		<?= $logoSrc ?>
-	<?php else : ?>
-		<em>Logo</em>
-	<?php endif ?>
+	<?= $logoSrc ?>
 </a>
+<?php endif;

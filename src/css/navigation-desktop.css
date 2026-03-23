@@ -24,7 +24,6 @@ header.desktop {
 			svg {
 				@apply block w-auto;
 				height: var(--nav-tablet-logo-display-height);
-				transition: height 0.4s cubic-bezier(.4,0,.2,1);
 
 				@media (min-width: 1024px) {
 					height: var(--nav-desktop-logo-display-height);
@@ -105,6 +104,10 @@ header.desktop {
 body.scrolled header.desktop div#navigation,
 body.scrolled header.desktop nav div.navitem {
 	@apply md:h-(--nav-tablet-height-sticky) lg:h-(--nav-desktop-height-sticky);
+}
+
+body.scrolled header.desktop a.logo svg {
+	transition: height 0.4s cubic-bezier(.4,0,.2,1);
 }
 
 /*------------------------------------------------------------------------------------------------

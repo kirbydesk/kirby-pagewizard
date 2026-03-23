@@ -5,6 +5,7 @@ class pwConfig
 	private static array $configPaths = [];
 	private static ?array $projectConfig = null;
 	private static bool $fontsGenerated = false;
+	private static bool $panelColorsGenerated = false;
 
 	/**
 	 * Read projectwizard config directly from JSON files.
@@ -268,6 +269,15 @@ class pwConfig
 		$settings     = [];
 		$fieldOptions = [];
 		foreach ($raw as $fieldKey => $fieldValue) {
+			// Disabled field
+			if (is_array($fieldValue) && !empty($fieldValue['_disabled'])) {
+				$settings[$fieldKey] = false;
+				continue;
+			}
+			if ($fieldValue === false) {
+				$settings[$fieldKey] = false;
+				continue;
+			}
 			if ($fieldValue === 'enabled') {
 				$settings[$fieldKey] = true;
 			} elseif (is_array($fieldValue) && !array_is_list($fieldValue)) {
@@ -719,143 +729,82 @@ class pwConfig
 	 */
 	public static function panelColorsSetup(string $pluginDir): void
 	{
-		$pluginCssDir = $pluginDir . '/src/css';
-		$patchColorFile  = kirby()->root('site') . '/patches/css/kirby-pagewizard/colors.css';
-		$srcColorFile    = $pluginCssDir . '/colors.css';
-		$sourceColorFile = file_exists($patchColorFile) ? $patchColorFile : (file_exists($srcColorFile) ? $srcColorFile : null);
+		if (self::$panelColorsGenerated) return;
+		self::$panelColorsGenerated = true;
 
-		if ($sourceColorFile) {
-				$colorsCss = file_get_contents($sourceColorFile);
+		// Read color values directly from JSON configs (always from pagewizard plugin)
+		$pwDir = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
+		$elementsDefault = $pwDir . '/config/elements.json';
+		$globalDefault   = $pwDir . '/config/global.json';
+		$elements = file_exists($elementsDefault) ? (json_decode(file_get_contents($elementsDefault), true) ?? []) : [];
+		$global   = file_exists($globalDefault) ? (json_decode(file_get_contents($globalDefault), true) ?? []) : [];
 
-				// Extract all :root CSS variable definitions → used to resolve var() references
-				$rootVars = [];
-				preg_match_all('/:root\s*\{([^}]*)\}/s', $colorsCss, $rootMatches);
-				foreach ($rootMatches[1] as $rootBlock) {
-						preg_match_all('/--([a-zA-Z0-9_-]+)\s*:\s*([^;]+);/', $rootBlock, $varMatches, PREG_SET_ORDER);
-						foreach ($varMatches as $vm) {
-								$rootVars['--' . trim($vm[1])] = trim($vm[2]);
-						}
+		// Merge with projectwizard overrides
+		$overrideDir = kirby()->root('site') . '/config/projectwizard';
+		$elementsOverrides = file_exists($overrideDir . '/elements.json')
+			? (json_decode(file_get_contents($overrideDir . '/elements.json'), true)['global'] ?? []) : [];
+		$globalOverrides = file_exists($overrideDir . '/global.json')
+			? (json_decode(file_get_contents($overrideDir . '/global.json'), true)['global'] ?? []) : [];
+
+		// Collect all color definitions from JSON (elements + global)
+		$allColors = [];
+		foreach ([$elements, $global] as $source) {
+			foreach ($source as $group) {
+				if (!isset($group['colors'])) continue;
+				foreach ($group['colors'] as $varName => $colorDef) {
+					$allColors[$varName] = $colorDef;
 				}
-
-				// Resolve var(--something) to actual value (one level deep)
-				$resolveVars = function (array $colors) use ($rootVars): array {
-						foreach ($colors as $key => $value) {
-								if (preg_match('/^var\((--[a-zA-Z0-9_-]+)\)$/', $value, $m)) {
-										$colors[$key] = $rootVars[$m[1]] ?? $value;
-								}
-						}
-						return $colors;
-				};
-
-				$exBlock = function (string $pattern) use ($colorsCss): ?string {
-						if (!preg_match($pattern, $colorsCss, $m, PREG_OFFSET_CAPTURE)) return null;
-						$p = $m[0][1] + strlen($m[0][0]) - 1;
-						$d = 0; $i = $p; $l = strlen($colorsCss);
-						while ($i < $l) {
-								if ($colorsCss[$i] === '{') $d++;
-								elseif ($colorsCss[$i] === '}') { $d--; if ($d === 0) break; }
-								$i++;
-						}
-						return substr($colorsCss, $p + 1, $i - $p - 1);
-				};
-
-				$exValue = function (string $block, string $sel, string $prop): ?string {
-						if ($sel === 'a') {
-								if (!preg_match('/(?:^|[\n\r])\s*a\s*\{/', $block, $m, PREG_OFFSET_CAPTURE)) return null;
-								$p = $m[0][1] + strlen($m[0][0]) - 1;
-						} else {
-								$pos = strpos($block, $sel);
-								if ($pos === false) return null;
-								$p = strpos($block, '{', $pos);
-								if ($p === false) return null;
-						}
-						$d = 0; $i = $p; $l = strlen($block);
-						while ($i < $l) {
-								if ($block[$i] === '{') $d++;
-								elseif ($block[$i] === '}') { $d--; if ($d === 0) break; }
-								$i++;
-						}
-						$inner = substr($block, $p + 1, $i - $p - 1);
-						$d = 0; $top = '';
-						for ($j = 0; $j < strlen($inner); $j++) {
-								if ($inner[$j] === '{') $d++;
-								elseif ($inner[$j] === '}') $d--;
-								elseif ($d === 0) $top .= $inner[$j];
-						}
-						return preg_match('/' . preg_quote($prop, '/') . '\s*:\s*([^;]+);/', $top, $pm) ? trim($pm[1]) : null;
-				};
-
-				$parseColorBlock = function (string $blockPattern) use ($exBlock, $exValue): array {
-						$block = $exBlock($blockPattern);
-						if (!$block) return [];
-						$colors = [];
-						$d = 0; $top = '';
-						for ($i = 0; $i < strlen($block); $i++) {
-								if ($block[$i] === '{') $d++;
-								elseif ($block[$i] === '}') $d--;
-								elseif ($d === 0) $top .= $block[$i];
-						}
-						if (preg_match('/background-color\s*:\s*([^;]+);/', $top, $m)) {
-								$colors['pw-color-block-background'] = trim($m[1]);
-						}
-						$map = [
-								'a'                                              => ['color'            => 'pw-color-link'],
-								'[data-field="heading"]'                         => ['color'            => 'pw-color-heading'],
-								'[data-field="tagline"]'                         => ['color'            => 'pw-color-tagline'],
-								'[data-field="textarea"]'                        => ['color'            => 'pw-color-text'],
-								'[data-field="button"] a'                        => [
-										'color'            => 'pw-color-button-text',
-										'background-color' => 'pw-color-button-background',
-								],
-								'[data-field="icon"] svg'                        => ['fill'             => 'pw-color-icon'],
-								'[data-field="caption"]'                         => ['color'            => 'pw-color-caption'],
-								'[data-field="quote"]'                           => ['color'            => 'pw-color-quote'],
-								'[data-field="cite"]'                            => ['color'            => 'pw-color-cite'],
-								'[data-field="breadcrumb"]'                      => ['color'            => 'pw-color-breadcrumb'],
-						];
-						foreach ($map as $sel => $props) {
-								foreach ($props as $prop => $key) {
-										$val = $exValue($block, $sel, $prop);
-										if ($val !== null) $colors[$key] = $val;
-								}
-						}
-						return $colors;
-				};
-
-				$defaultColors  = $resolveVars($parseColorBlock('/section\[data-block\]\s*\{/'));
-				$variantColors  = $resolveVars($parseColorBlock('/section\[data-block\]\[data-style="variant"\]\s*\{/'));
-				$variant2Colors = $resolveVars($parseColorBlock('/section\[data-block\]\[data-style="variant2"\]\s*\{/'));
-
-				// Button colors come from separate combined selectors — read directly from :root variables
-				$buttonMap = [
-					'default'  => ['text' => '--element-button-text',          'bg' => '--element-button-background'],
-					'variant'  => ['text' => '--element-button-text-variant',  'bg' => '--element-button-background-variant'],
-					'variant2' => ['text' => '--element-button-text-variant2', 'bg' => '--element-button-background-variant2'],
-				];
-				foreach ($buttonMap as $theme => $keys) {
-					$colors = &${$theme . 'Colors'};
-					if (!isset($colors['pw-color-button-text']) && isset($rootVars[$keys['text']])) {
-						$colors['pw-color-button-text']       = $rootVars[$keys['text']];
-						$colors['pw-color-button-background'] = $rootVars[$keys['bg']] ?? '';
-					}
-				}
-
-				$varLines = function (array $colors): string {
-						$lines = [];
-						foreach ($colors as $key => $value) {
-								$lines[] = "\t--" . $key . ': ' . $value . ';';
-						}
-						return implode("\n", $lines);
-				};
-
-				$css = "/* This file is auto-generated by tailwind-hook from colors.css. Do not edit manually! */\n\n" .
-					":root {\n" . $varLines($defaultColors) . "\n}\n\n" .
-					"[data-style=\"variant\"] {\n" . $varLines($variantColors) . "\n}\n";
-				if (!empty($variant2Colors)) {
-					$css .= "\n[data-style=\"variant2\"] {\n" . $varLines($variant2Colors) . "\n}\n";
-				}
-				file_put_contents(kirby()->root('index') . '/assets/css/panel-colors.css', $css);
+			}
 		}
+
+		// Map JSON variable names → panel color names
+		$colorMap = [
+			'block-background'          => 'pw-color-block-background',
+			'block-link'                => 'pw-color-link',
+			'element-heading-text'      => 'pw-color-heading',
+			'element-tagline-text'      => 'pw-color-tagline',
+			'element-editor-text'       => 'pw-color-text',
+			'element-button-text'       => 'pw-color-button-text',
+			'element-button-background' => 'pw-color-button-background',
+			'element-icon-fill'         => 'pw-color-icon',
+			'element-caption-text'      => 'pw-color-caption',
+			'element-quote-text'        => 'pw-color-quote',
+			'element-cite-text'         => 'pw-color-cite',
+			'element-breadcrumb-text'   => 'pw-color-breadcrumb',
+		];
+
+		// Build theme palettes (default, variant, variant2)
+		$themes = ['default', 'variant', 'variant2'];
+		$palettes = [];
+		foreach ($themes as $theme) {
+			$palette = [];
+			foreach ($colorMap as $jsonVar => $panelVar) {
+				if (!isset($allColors[$jsonVar][$theme])) continue;
+				// Override from projectwizard (stored under global.{theme}.{varName})
+				$value = $elementsOverrides[$theme][$jsonVar]
+					?? $globalOverrides[$theme][$jsonVar]
+					?? $allColors[$jsonVar][$theme];
+				$palette[$panelVar] = $value;
+			}
+			$palettes[$theme] = $palette;
+		}
+
+		// Generate panel-colors.css
+		$varLines = function (array $colors): string {
+			$lines = [];
+			foreach ($colors as $key => $value) {
+				$lines[] = "\t--" . $key . ': ' . $value . ';';
+			}
+			return implode("\n", $lines);
+		};
+
+		$css = "/* This file is auto-generated from JSON configs. Do not edit manually! */\n\n" .
+			":root {\n" . $varLines($palettes['default']) . "\n}\n\n" .
+			"[data-style=\"variant\"] {\n" . $varLines($palettes['variant']) . "\n}\n";
+		if (!empty($palettes['variant2'])) {
+			$css .= "\n[data-style=\"variant2\"] {\n" . $varLines($palettes['variant2']) . "\n}\n";
+		}
+		file_put_contents(kirby()->root('index') . '/assets/css/panel-colors.css', $css);
 	}
 
 	/**

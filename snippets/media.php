@@ -2,10 +2,10 @@
 
 	$radiusParams = [
 		'radius'            => $content->mediaradius()->value(),
-		'radiusTopLeft'     => $content->radiustopleft()->value(),
-		'radiusTopRight'    => $content->radiustopright()->value(),
-		'radiusBottomLeft'  => $content->radiusbottomleft()->value(),
-		'radiusBottomRight' => $content->radiusbottomright()->value(),
+		'radiusTopLeft'     => $content->radiustopleft()->toBool(),
+		'radiusTopRight'    => $content->radiustopright()->toBool(),
+		'radiusBottomLeft'  => $content->radiusbottomleft()->toBool(),
+		'radiusBottomRight' => $content->radiusbottomright()->toBool(),
 	];
 
 	// Image
