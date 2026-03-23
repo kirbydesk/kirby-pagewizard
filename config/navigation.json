@@ -7,7 +7,7 @@
 			"line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
 			"letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 },
 			"text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
-			"sticky": { "value": "true", "options": ["enabled", "disabled"] },
+			"sticky": { "value": "true", "options": ["enabled", "disabled"], "type": "config" },
 			"desktop-height-sticky": { "value": "4rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20 },
 			"tablet-height-sticky": { "value": "3.5rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20 }
 		}
@@ -25,7 +25,7 @@
 			}},
 			"_label_flyout": { "type": "label" },
 			"desktop-flyout-icon": { "value": "arrow-down", "type": "icon-select", "options": ["arrow-down", "chevron-down", "caret-down", "plus-minus"] },
-			"desktop-flyout-flip-from": { "value": "4" },
+			"desktop-flyout-flip-from": { "value": "4", "type": "config" },
 			"desktop-flyout-min-width": { "value": "10rem", "unit": "rem", "step": 0.5, "min": 0, "max": 40 },
 			"flyout-color": { "type": "color-group", "labels": ["Text", "Background", "Border"], "fields": {
 				"flyout-textcolor": { "value": "#101828" },

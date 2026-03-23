@@ -10,7 +10,7 @@
 	/* -------------- Tabs --------------*/
 	'tabs/content' => function() {
 		$data          = \Kirby\Data\Data::read(__DIR__ . '/../../blueprints/tabs/content.yml');
-		$allBlocks     = option('kirbydesk.pagewizard.blocks', []);
+		$allBlocks     = pwConfig::projectConfig('blocks');
 		$staticBlocks  = array_values(array_filter($allBlocks, fn($b) => str_starts_with($b, 'pw')));
 		$projectBlocks = array_values(array_filter($allBlocks, fn($b) => !str_starts_with($b, 'pw')));
 
@@ -29,11 +29,16 @@
 				'fieldsets' => $projectBlocks,
 			];
 		}
-		$fieldsets['dynamic-blocks'] = [
-			'label'     => 'pw.fieldsets.dynamic-blocks',
-			'type'      => 'group',
-			'fieldsets' => ['pwshared'],
-		];
+		if (!empty($allBlocks)) {
+			$hasShared = site()->sharedblocks()->isNotEmpty();
+			if ($hasShared) {
+				$fieldsets['dynamic-blocks'] = [
+					'label'     => 'pw.fieldsets.dynamic-blocks',
+					'type'      => 'group',
+					'fieldsets' => ['pwshared'],
+				];
+			}
+		}
 
 		$data['columns'][0]['sections']['content']['fields']['blocks']['fieldsets'] = $fieldsets;
 		return $data;
@@ -48,7 +53,7 @@
 	'tabs/project' => __DIR__ . '/../../blueprints/tabs/project.yml',
 	'tabs/shared' => function() {
 		$data          = \Kirby\Data\Data::read(__DIR__ . '/../../blueprints/tabs/shared.yml');
-		$allBlocks     = option('kirbydesk.pagewizard.blocks', []);
+		$allBlocks     = pwConfig::projectConfig('blocks');
 		$staticBlocks  = array_values(array_filter($allBlocks, fn($b) => str_starts_with($b, 'pw')));
 		$projectBlocks = array_values(array_filter($allBlocks, fn($b) => !str_starts_with($b, 'pw')));
 
@@ -81,7 +86,17 @@
 	'blocks/pwButton' => __DIR__ . '/../../blueprints/blocks/buttons/item.yml',
 	'blocks/pwFooter' => __DIR__ . '/../../blueprints/blocks/footer/index.yml',
 	'blocks/pwFooterItem' => __DIR__ . '/../../blueprints/blocks/footer/item.yml',
-	'blocks/pwshared'  => __DIR__ . '/../../blueprints/blocks/shared/index.yml',
+	'blocks/pwshared'  => function() {
+		$data = \Kirby\Data\Data::read(__DIR__ . '/../../blueprints/blocks/shared/index.yml');
+		$sharedBlocks = site()->sharedblocks()->toBlocks();
+		if ($sharedBlocks->count() === 1) {
+			$data['fields']['sharedId'] = [
+				'type'     => 'hidden',
+				'default'  => $sharedBlocks->first()->id(),
+			];
+		}
+		return $data;
+	},
 
 	/* -------------- Fields --------------*/
 	'pagewizard/fields/address' => __DIR__ . '/../../blueprints/fields/address.yml',

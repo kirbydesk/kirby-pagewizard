@@ -70,9 +70,7 @@ return [
 		[
 			'pattern' => 'pagewizard/config',
 			'action'  => function () {
-				$defaults = json_decode(file_get_contents(__DIR__ . '/../../config/defaults.json'), true);
-				$project  = kirby()->option('kirbydesk.pagewizard', []);
-				$config   = array_merge($defaults, $project);
+				$config = json_decode(file_get_contents(__DIR__ . '/../../config/defaults.json'), true);
 				return [
 					'icon-set'      => $config['icon-set'],
 					'icon-set-name' => $config['icon-set-name'] ?? $config['icon-set'],

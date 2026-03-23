@@ -11,7 +11,7 @@ header.mobile {
 		padding-left: var(--global-padding-left);
 		padding-right: var(--global-padding-right);
 	}
-	a img {
+	a svg {
 		@apply block w-auto;
 		height: var(--nav-mobile-logo-display-height);
 	}

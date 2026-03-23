@@ -3,6 +3,83 @@
 class pwConfig
 {
 	private static array $configPaths = [];
+	private static ?array $projectConfig = null;
+	private static bool $fontsGenerated = false;
+
+	/**
+	 * Read projectwizard config directly from JSON files.
+	 * Replaces the old option('kirbydesk.pagewizard') approach.
+	 */
+	public static function projectConfig(?string $key = null)
+	{
+		if (self::$projectConfig === null) {
+			$dir = kirby()->root('site') . '/config/projectwizard';
+			self::$projectConfig = [];
+
+			// Active blocks
+			$blocksFile = $dir . '/blocks.json';
+			self::$projectConfig['blocks'] = file_exists($blocksFile)
+				? (json_decode(file_get_contents($blocksFile), true)['blocks'] ?? []) : [];
+
+			// Block overrides
+			$overridesFile = $dir . '/overrides.json';
+			self::$projectConfig['kirbyblocks'] = file_exists($overridesFile)
+				? (json_decode(file_get_contents($overridesFile), true) ?? []) : [];
+		}
+
+		if ($key === null) return self::$projectConfig;
+
+		// Support dot notation: 'kirbyblocks.pwhero'
+		$parts = explode('.', $key);
+		$val = self::$projectConfig;
+		foreach ($parts as $part) {
+			if (!is_array($val) || !array_key_exists($part, $val)) return [];
+			$val = $val[$part];
+		}
+		return $val;
+	}
+
+	/**
+	 * Flatten navigation.json into a simple key→value array, merged with projectwizard overrides.
+	 * Used by snippets (header.php, logo.php) to read nav config values.
+	 */
+	public static function navConfig(): array
+	{
+		static $cache = null;
+		if ($cache !== null) return $cache;
+
+		$pluginDir = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
+		$navFile = $pluginDir . '/config/navigation.json';
+		$nav = file_exists($navFile) ? (json_decode(file_get_contents($navFile), true) ?? []) : [];
+
+		$overrideFile = kirby()->root('site') . '/config/projectwizard/navigation.json';
+		$overrides = file_exists($overrideFile) ? (json_decode(file_get_contents($overrideFile), true)['global'] ?? []) : [];
+
+		$flat = [];
+		foreach ($nav as $group) {
+			if (!is_array($group) || !isset($group['vars'])) continue;
+			foreach ($group['vars'] as $varName => $def) {
+				if (($def['type'] ?? null) === 'label') continue;
+				// Color-group: extract sub-fields
+				if (in_array($def['type'] ?? null, ['color-pair', 'color-group']) && isset($def['fields'])) {
+					foreach ($def['fields'] as $fieldName => $fieldDef) {
+						$flat[$fieldName] = $overrides[$fieldName] ?? $fieldDef['value'] ?? '';
+					}
+					continue;
+				}
+				// Responsive (default/lg/xl): use default breakpoint
+				if (is_array($def) && isset($def['default']) && isset($def['lg']) && !isset($def['variant'])) {
+					$flat[$varName] = $overrides['default'][$varName] ?? $def['default'];
+					continue;
+				}
+				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
+				$flat[$varName] = $overrides[$varName] ?? $defaultVal;
+			}
+		}
+
+		$cache = $flat;
+		return $flat;
+	}
 
 	/**
 	 * Register a block type's config directory (call from plugin index.php).
@@ -57,7 +134,7 @@ class pwConfig
 			: [];
 
 		/* -------------- Config overrides from config.php --------------*/
-		$raw = option("kirbydesk.pagewizard.kirbyblocks.{$blockType}", []);
+		$raw = self::projectConfig("kirbyblocks.{$blockType}");
 		$cfg = is_array($raw) ? $raw : [];
 
 		// Support both flat format ($cfg['tabs']) and wrapped format ($cfg['settings']['tabs'])
@@ -323,6 +400,12 @@ class pwConfig
 		foreach ($nav as $groupKey => $group) {
 			if (!is_array($group) || !isset($group['vars'])) continue;
 			foreach ($group['vars'] as $varName => $def) {
+				// Skip non-CSS types (rendered in PHP snippets, not via CSS variables)
+				$type = $def['type'] ?? null;
+				if (in_array($type, ['label', 'svg', 'visibility', 'icon-select', 'config'])) continue;
+				// Skip SVG dimension fields
+				if (str_ends_with($varName, '-src-width') || str_ends_with($varName, '-src-height')) continue;
+
 				// Responsive font-size (default/lg/xl)
 				if (is_array($def) && isset($def['default']) && isset($def['lg']) && !isset($def['variant'])) {
 					foreach (['default' => &$rootLines, 'lg' => &$navLinesLg, 'xl' => &$navLinesXl] as $bp => &$lines) {
@@ -597,20 +680,23 @@ class pwConfig
 			}
 		}
 
-		// Generate @font-face rules
-		foreach ($allFonts as $font) {
-			$autoItalic = !empty($font['italic']);
-			foreach ($font['files'] ?? [] as $file) {
-				$styles = $autoItalic ? ['normal', 'italic'] : [$file['style'] ?? 'normal'];
-				foreach ($styles as $style) {
-					$fontFace = "@font-face {\n";
-					$fontFace .= "\tfont-display: swap;\n";
-					$fontFace .= "\tfont-family: '" . $font['family'] . "';\n";
-					$fontFace .= "\tfont-style: " . $style . ";\n";
-					$fontFace .= "\tfont-weight: " . ($file['weight'] ?? '400') . ";\n";
-					$fontFace .= "\tsrc: url('/assets/fonts/" . $file['src'] . "') format('woff2');\n";
-					$fontFace .= "}";
-					$imports[] = $fontFace;
+		// Generate @font-face rules (only once, not per plugin call)
+		if (!self::$fontsGenerated) {
+			self::$fontsGenerated = true;
+			foreach ($allFonts as $font) {
+				$autoItalic = !empty($font['italic']) && count($font['files'] ?? []) === 1;
+				foreach ($font['files'] ?? [] as $file) {
+					$styles = $autoItalic ? ['normal', 'italic'] : [$file['style'] ?? 'normal'];
+					foreach ($styles as $style) {
+						$fontFace = "@font-face {\n";
+						$fontFace .= "\tfont-display: swap;\n";
+						$fontFace .= "\tfont-family: '" . $font['family'] . "';\n";
+						$fontFace .= "\tfont-style: " . $style . ";\n";
+						$fontFace .= "\tfont-weight: " . ($file['weight'] ?? '400') . ";\n";
+						$fontFace .= "\tsrc: url('/assets/fonts/" . $file['src'] . "') format('woff2');\n";
+						$fontFace .= "}";
+						$imports[] = $fontFace;
+					}
 				}
 			}
 		}

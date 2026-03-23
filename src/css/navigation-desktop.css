@@ -21,7 +21,7 @@ header.desktop {
 				padding: var(--nav-desktop-logo-padding);
 			}
 
-			img {
+			svg {
 				@apply block w-auto;
 				height: var(--nav-tablet-logo-display-height);
 				transition: height 0.4s cubic-bezier(.4,0,.2,1);

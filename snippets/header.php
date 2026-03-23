@@ -24,9 +24,7 @@
 <body class="<?php e($kirby->user(), 'debug-screens'); ?>">
 <?php
 	// Config settings
-	$default = json_decode(file_get_contents(kirby()->plugin('kirbydesk/kirby-pagewizard')->root() . '/config/navigation.json'), true) ?? [];
-	$patch   = kirby()->root('site') . '/patches/config/navigation.json';
-	$config  = file_exists($patch) ? array_merge($default, json_decode(file_get_contents($patch), true) ?? []) : $default;
+	$config = pwConfig::navConfig();
 	$sticky	 = (bool)($config['sticky'] ?? true);
 
 	// Define class for homepage item in desktop navigation
