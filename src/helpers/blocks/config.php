@@ -671,7 +671,15 @@ class pwConfig
 			foreach ($group['vars'] as $varName => $def) {
 				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
 				$override = ($footerOverrides['global'][$varName] ?? null);
-				if (($def['type'] ?? null) === 'font-family') {
+				if (is_array($defaultVal) && isset($def['suffixes'])) {
+					$vals = is_array($override) ? $override : $defaultVal;
+					foreach ($def['suffixes'] as $i => $suffix) {
+						$footerLines[] = "\t--" . $varName . $suffix . ': ' . ($vals[$i] ?? '') . ';';
+					}
+				} elseif (is_array($defaultVal)) {
+					$vals = is_array($override) ? $override : $defaultVal;
+					$footerLines[] = "\t--" . $varName . ': ' . implode(' ', $vals) . ';';
+				} elseif (($def['type'] ?? null) === 'font-family') {
 					$fontVal = $override ?? $defaultVal;
 					if ($fontVal === 'default') $fontVal = $bodyDefaultFont;
 					$fontCategory = 'sans-serif';

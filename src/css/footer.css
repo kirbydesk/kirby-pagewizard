@@ -11,8 +11,10 @@ footer {
 	background-color: var(--footer-background);
 	padding-top: var(--footer-padding-top);
 	padding-bottom: var(--footer-padding-bottom);
-	border-top-left-radius: var(--global-top-left-radius);
-	border-top-right-radius: var(--global-top-right-radius);
+	border-top-left-radius: var(--footer-radius-top-left);
+	border-top-right-radius: var(--footer-radius-top-right);
+	border-bottom-left-radius: var(--footer-radius-bottom-left);
+	border-bottom-right-radius: var(--footer-radius-bottom-right);
 
 	[data-type="socialmedia"] {
 		a {

@@ -5,7 +5,8 @@
 			"footer-padding-top": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
 			"footer-padding-bottom": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
 			"footer-logo-src": { "value": "", "type": "svg" },
-			"footer-logo-display-height": { "value": "1.375rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20, "requires": "footer-logo-src" }
+			"footer-logo-display-height": { "value": "1.375rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20, "requires": "footer-logo-src" },
+			"footer-radius": { "value": ["0rem", "0rem", "0rem", "0rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["-top-left", "-top-right", "-bottom-left", "-bottom-right"], "labels": ["pw.option.top-left", "pw.option.top-right", "pw.option.bottom-left", "pw.option.bottom-right"] }
 		}
 	},
 	"colors": {
