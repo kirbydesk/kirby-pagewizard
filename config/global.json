@@ -16,10 +16,10 @@
 			"global-": { "value": ["1.5rem", "1.5rem", "1.5rem", "1.5rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["top-left-radius", "top-right-radius", "bottom-left-radius", "bottom-right-radius"], "labels": ["Top Left", "Top Right", "Bottom Left", "Bottom Right"] }
 		},
 		"colors": {
-			"block-background": { "default": "#ffffff", "variant": "#1D548B", "variant2": "#2C3E50" },
-			"block-link": { "default": "#1D548B", "variant": "#8CBAE7", "variant2": "#E8B84B" },
-			"block-link-hover": { "default": "#1A4E7A", "variant": "#7AA9D0", "variant2": "#F5C842" },
-			"block-link-active": { "default": "#163F5C", "variant": "#6680A8", "variant2": "#C9952A" }
+			"block-background": { "default": "#ffffff", "variant": "#F5F5F5", "variant2": "#1D548B" },
+			"block-link": { "default": "#1D548B", "variant": "#1D548B", "variant2": "#8CBAE7" },
+			"block-link-hover": { "default": "#1A4E7A", "variant": "#1A4E7A", "variant2": "#7AA9D0" },
+			"block-link-active": { "default": "#163F5C", "variant": "#163F5C", "variant2": "#6680A8" }
 		}
 	}
 }
