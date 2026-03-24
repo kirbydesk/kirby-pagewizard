@@ -2,18 +2,18 @@
 	"body": {
 		"vars": {
 			"font-family-default": { "value": "Inter", "type": "font-family" },
-			"body-background": { "value": "#FFFFFF", "type": "color" }
+			"body-background": { "value": "#E8E8E8", "type": "color" }
 		}
 	},
 	"blocks": {
 		"vars": {
-			"global-margin-top": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
-			"global-margin-bottom": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
-			"global-padding-left": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
-			"global-padding-right": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
-			"global-padding-top": { "value": [".75rem", "1.5rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["-small", "-large"], "labels": ["Small", "Large"] },
-			"global-padding-bottom": { "value": [".75rem", "1.5rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["-small", "-large"], "labels": ["Small", "Large"] },
-			"global-": { "value": ["1.5rem", "1.5rem", "1.5rem", "1.5rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["top-left-radius", "top-right-radius", "bottom-left-radius", "bottom-right-radius"], "labels": ["Top Left", "Top Right", "Bottom Left", "Bottom Right"] }
+			"global-margin-top": { "value": "3rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"global-margin-bottom": { "value": "3rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"global-padding-left": { "value": "3rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"global-padding-right": { "value": "3rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"global-padding-top": { "value": ["1.5rem", "3rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["-small", "-large"], "labels": ["pw.option.small", "pw.option.large"] },
+			"global-padding-bottom": { "value": ["1.5rem", "3rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["-small", "-large"], "labels": ["pw.option.small", "pw.option.large"] },
+			"global-": { "value": ["1.5rem", "1.5rem", "1.5rem", "1.5rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "suffixes": ["top-left-radius", "top-right-radius", "bottom-left-radius", "bottom-right-radius"], "labels": ["pw.option.top-left", "pw.option.top-right", "pw.option.bottom-left", "pw.option.bottom-right"] }
 		},
 		"colors": {
 			"block-background": { "default": "#ffffff", "variant": "#F5F5F5", "variant2": "#1D548B" },

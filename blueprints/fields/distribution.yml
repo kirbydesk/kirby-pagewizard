@@ -3,14 +3,18 @@ label: pw.field.distribution.label
 type: toggles
 options:
   - value: "dist-1-5"
-    text: "1 | 5"
+    text:
+      *: pw.option.dist-1-5
   - value: "dist-2-4"
-    text: "2 | 4"
+    text:
+      *: pw.option.dist-2-4
   - value: "dist-3-3"
-    text: "3 | 3"
+    text:
+      *: pw.option.dist-3-3
   - value: "dist-4-2"
-    text: "4 | 2"
+    text:
+      *: pw.option.dist-4-2
   - value: "dist-5-1"
-    text: "5 | 1"
+    text:
+      *: pw.option.dist-5-1
 help: pw.field.distribution.help
-translate: false

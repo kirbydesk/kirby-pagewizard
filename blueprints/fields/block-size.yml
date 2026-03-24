@@ -6,7 +6,7 @@ width: 1/2
 options:
   - value: content
     text:
-      *: pw.option.pagecontent
+      *: pw.option.content
   - value: fullscreen
     text:
       *: pw.option.fullscreen

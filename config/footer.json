@@ -1,7 +1,11 @@
 {
-	"font": {
+	"general": {
 		"vars": {
-			"footer-font-family": { "value": "default", "type": "font-family" }
+			"footer-font-family": { "value": "default", "type": "font-family" },
+			"footer-padding-top": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"footer-padding-bottom": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20 },
+			"footer-logo-src": { "value": "", "type": "svg" },
+			"footer-logo-display-height": { "value": "1.375rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20, "requires": "footer-logo-src" }
 		}
 	},
 	"colors": {
@@ -11,21 +15,9 @@
 			"footer-link": { "value": "#ffffff", "type": "color" },
 			"footer-link-hover": { "value": "#ffffff", "type": "color" },
 			"footer-link-active": { "value": "#ffffff", "type": "color" },
-			"footer-socialmedia": { "value": "color-mix(in srgb, #FFFFFF 80%, transparent)" },
+			"footer-socialmedia": { "value": "#FFFFFFCC", "type": "color" },
 			"footer-socialmedia-hover": { "value": "#ffffff", "type": "color" },
 			"footer-socialmedia-active": { "value": "#ffffff", "type": "color" }
-		}
-	},
-	"layout": {
-		"vars": {
-			"footer-padding-top": { "value": "1.5rem", "unit": "rem", "step": 0.1 },
-			"footer-padding-bottom": { "value": "1.5rem", "unit": "rem", "step": 0.1 }
-		}
-	},
-	"logo": {
-		"vars": {
-			"footer-logo-display-height": { "value": "1.375rem", "unit": "rem", "step": 0.1 },
-			"footer-logo-src": { "value": "", "type": "svg" }
 		}
 	}
 }
