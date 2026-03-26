@@ -3,10 +3,8 @@
 		"vars": {
 			"font-family": { "value": "default", "type": "font-family" },
 			"font-weight": { "value": "400", "options": ["100", "200", "300", "400", "500", "600", "700", "800", "900"] },
-			"font-size": { "default": "1rem", "lg": "1rem", "xl": "1rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20 },
-			"line-height": { "default": "1.4", "lg": "1.4", "xl": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5 },
-			"letter-spacing": { "default": "0em", "lg": "0em", "xl": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1 },
 			"text-transform": { "value": "none", "options": ["none", "uppercase", "lowercase", "capitalize"] },
+			"font-style": { "value": "normal", "options": ["normal", "italic"] },
 			"sticky": { "value": "disabled", "options": ["enabled", "disabled"], "type": "config" },
 			"desktop-height-sticky": { "value": "4rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20, "requires": "sticky:enabled" },
 			"tablet-height-sticky": { "value": "3.5rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20, "requires": "sticky:enabled" }
@@ -14,32 +12,31 @@
 	},
 	"desktop": {
 		"vars": {
-			"_label_navigation": { "type": "label" },
 			"home-desktop": { "value": "true", "type": "visibility" },
 			"desktop-height": { "value": "6.25rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20 },
 			"desktop-items-align": { "value": "flex-end", "options": ["flex-start", "center", "flex-end"] },
 			"desktop-items-padding": { "value": ["0rem", "0rem", "0.625rem", "0rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "labels": ["pw.option.top", "pw.option.right", "pw.option.bottom", "pw.option.left"] },
-			"desktop-color": { "type": "color-group", "labels": ["pw.option.text", "pw.option.background"], "fields": {
-				"desktop-textcolor": { "value": "#101828" },
-				"desktop-bgcolor": { "value": "#FFFFFF" }
-			}},
-			"_label_flyout": { "type": "label" },
+			"desktop-font-size": { "value": "1rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20, "breakpoint": "xl" },
+			"desktop-line-height": { "value": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5, "breakpoint": "xl" },
+			"desktop-letter-spacing": { "value": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1, "breakpoint": "xl" },
 			"desktop-flyout-icon": { "value": "arrow-down", "type": "icon-select", "options": ["arrow-down", "chevron-down", "caret-down", "plus-minus"] },
 			"desktop-flyout-flip-from": { "value": "4", "type": "config" },
 			"desktop-flyout-min-width": { "value": "10rem", "unit": "rem", "step": 0.5, "min": 0, "max": 40 },
-			"flyout-color": { "type": "color-group", "labels": ["pw.option.text", "pw.option.background", "pw.option.border"], "fields": {
-				"flyout-textcolor": { "value": "#101828" },
-				"flyout-bgcolor": { "value": "#ffffff" },
-				"flyout-bordercolor": { "value": "#00000025" }
-			}},
-			"flyout-hover-color": { "type": "color-group", "labels": ["pw.option.text", "pw.option.background"], "fields": {
-				"flyout-textcolor-hover": { "value": "#ffffff" },
-				"flyout-bgcolor-hover": { "value": "#1D548B" }
-			}},
 			"desktop-logo-src": { "value": "", "type": "svg" },
 			"desktop-logo-display-height": { "value": "2rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20, "requires": "desktop-logo-src" },
 			"desktop-logo-align": { "value": "flex-end", "options": ["flex-start", "center", "flex-end"], "requires": "desktop-logo-src" },
-			"desktop-logo-padding": { "value": ["0rem", "0rem", "0.625rem", "0rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "labels": ["pw.option.top", "pw.option.right", "pw.option.bottom", "pw.option.left"], "requires": "desktop-logo-src" }
+			"desktop-logo-padding": { "value": ["0rem", "0rem", "0.625rem", "0rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "labels": ["pw.option.top", "pw.option.right", "pw.option.bottom", "pw.option.left"], "requires": "desktop-logo-src" },
+			"desktop-background": { "value": "#FFFFFF", "type": "color" },
+			"desktop-textcolor": { "value": "#101828", "type": "color" },
+			"desktop-textcolor-hover": { "value": "#101828", "type": "color" },
+			"desktop-textcolor-active": { "value": "#101828", "type": "color" },
+			"flyout-bordercolor": { "value": "#00000025", "type": "color" },
+			"flyout-bgcolor": { "value": "#ffffff", "type": "color" },
+			"flyout-bgcolor-hover": { "value": "#1D548B", "type": "color" },
+			"flyout-bgcolor-active": { "value": "#164073", "type": "color" },
+			"flyout-textcolor": { "value": "#101828", "type": "color" },
+			"flyout-textcolor-hover": { "value": "#ffffff", "type": "color" },
+			"flyout-textcolor-active": { "value": "#ffffff", "type": "color" }
 		}
 	},
 	"tablet": {
@@ -48,6 +45,9 @@
 			"tablet-height": { "value": "5rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20 },
 			"tablet-items-align": { "value": "center", "options": ["flex-start", "center", "flex-end"] },
 			"tablet-items-padding": { "value": ["0rem", "0rem", "0rem", "0rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "labels": ["pw.option.top", "pw.option.right", "pw.option.bottom", "pw.option.left"] },
+			"tablet-font-size": { "value": "1rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20, "breakpoint": "lg" },
+			"tablet-line-height": { "value": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5, "breakpoint": "lg" },
+			"tablet-letter-spacing": { "value": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1, "breakpoint": "lg" },
 			"tablet-logo-src": { "value": "", "type": "svg" },
 			"tablet-logo-display-height": { "value": "2rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20, "requires": "tablet-logo-src" },
 			"tablet-logo-align": { "value": "center", "options": ["flex-start", "center", "flex-end"], "requires": "tablet-logo-src" },
@@ -60,6 +60,9 @@
 			"mobile-height": { "value": "3.125rem", "unit": "rem", "step": 0.25, "min": 0, "max": 20 },
 			"mobile-logo-src": { "value": "", "type": "svg" },
 			"mobile-logo-display-height": { "value": "1.5rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20, "requires": "mobile-logo-src" },
+			"mobile-font-size": { "value": "1rem", "unit": "rem", "step": 0.1, "min": 0.1, "max": 20, "breakpoint": "default" },
+			"mobile-line-height": { "value": "1.4", "unit": "", "step": 0.1, "min": 0.5, "max": 5, "breakpoint": "default" },
+			"mobile-letter-spacing": { "value": "0em", "unit": "em", "step": 0.01, "min": -0.5, "max": 1, "breakpoint": "default" },
 			"mobile-title-color": { "type": "color-group", "labels": ["pw.option.text", "pw.option.background"], "fields": {
 				"mobile-title-textcolor": { "value": "#101828" },
 				"mobile-title-bgcolor": { "value": "#FFFFFF" }

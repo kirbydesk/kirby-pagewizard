@@ -434,13 +434,25 @@ class pwConfig
 				// Skip SVG dimension fields
 				if (str_ends_with($varName, '-src-width') || str_ends_with($varName, '-src-height')) continue;
 
-				// Responsive font-size (default/lg/xl)
-				if (is_array($def) && isset($def['default']) && isset($def['lg']) && !isset($def['variant'])) {
+				// Responsive font-size (default/lg/xl) — legacy format
+				if (is_array($def) && isset($def['default']) && isset($def['lg']) && !isset($def['variant']) && !isset($def['breakpoint'])) {
 					foreach (['default' => &$rootLines, 'lg' => &$navLinesLg, 'xl' => &$navLinesXl] as $bp => &$lines) {
 						$override = ($navOverrides['global'][$bp][$varName] ?? null);
 						$lines[] = "\t--nav-" . $varName . ': ' . ($override ?? $def[$bp]) . ';';
 					}
 					unset($lines);
+					continue;
+				}
+				// Breakpoint-specific field (e.g. desktop-font-size → --nav-font-size at xl)
+				if (isset($def['breakpoint'])) {
+					$bp = $def['breakpoint'];
+					$cssName = preg_replace('/^(desktop|tablet|mobile)-/', '', $varName);
+					$override = ($navOverrides['global'][$varName] ?? null);
+					$val = $override ?? ($def['value'] ?? '');
+					$target = $bp === 'lg' ? $navLinesLg : ($bp === 'xl' ? $navLinesXl : $rootLines);
+					if ($bp === 'lg') { $navLinesLg[] = "\t--nav-" . $cssName . ': ' . $val . ';'; }
+					elseif ($bp === 'xl') { $navLinesXl[] = "\t--nav-" . $cssName . ': ' . $val . ';'; }
+					else { $rootLines[] = "\t--nav-" . $cssName . ': ' . $val . ';'; }
 					continue;
 				}
 				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
