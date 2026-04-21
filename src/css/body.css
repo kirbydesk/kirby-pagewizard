@@ -94,6 +94,16 @@ section[data-block] {
 	}
 }
 
+/* -------------- Text Background --------------*/
+[data-textbackground] {
+	color: var(--element-heading-marked-text);
+	background-color: var(--element-heading-marked-background);
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
+	padding: 0.1em 0.3em;
+	border-radius: 0.15em;
+}
+
 /* -------------- Links --------------*/
 a:has(svg.external) {
 	display: inline-flex;

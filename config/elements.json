@@ -1,7 +1,9 @@
 {
 	"heading": {
 		"colors": {
-			"element-heading-text": { "default": "#262626", "variant": "#262626", "variant2": "#FFFFFF" }
+			"element-heading-text": { "default": "#262626", "variant": "#262626", "variant2": "#FFFFFF" },
+			"element-heading-marked-text": { "default": "#262626", "variant": "#262626", "variant2": "#FFFFFF" },
+			"element-heading-marked-background": { "default": "#FFFF0040", "variant": "#FFFF0040", "variant2": "#FFFFFF40" }
 		},
 		"vars": {
 			"heading-font-family": { "value": "default", "type": "font-family" },

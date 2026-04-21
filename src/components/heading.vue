@@ -1,6 +1,9 @@
 <template>
 	<div class="pwHeading" :data-align="align" :data-size="size">
-    <div v-if="text" v-html="text"></div>
+    <div v-if="text">
+      <span v-if="textbackground === 'enabled'" data-textbackground v-html="text"></span>
+      <span v-else v-html="text"></span>
+    </div>
     <div v-else class="placeholder">
       {{ $t('pw.field.heading.placeholder') }}
     </div>
@@ -14,8 +17,9 @@ export default {
       type: Object,
       default: () => ({})
     },
-    alignDefault: { type: String, default: null },
-    sizeDefault:  { type: String, default: null }
+    alignDefault:          { type: String, default: null },
+    sizeDefault:           { type: String, default: null },
+    textbackgroundDefault: { type: String, default: null }
   },
   computed: {
     parsedData() {
@@ -38,6 +42,10 @@ export default {
     size() {
       const { size = this.sizeDefault } = this.parsedData;
       return size;
+    },
+    textbackground() {
+      const { textbackground = this.textbackgroundDefault } = this.parsedData;
+      return textbackground;
     }
   }
 }
@@ -46,6 +54,15 @@ export default {
 div.pwHeading {
 	color: var(--pw-color-heading, inherit);
 	line-height: 1.3;
+
+	[data-textbackground] {
+		color: var(--pw-color-heading-marked-text);
+		background-color: var(--pw-color-heading-marked-background);
+		box-decoration-break: clone;
+		-webkit-box-decoration-break: clone;
+		padding: 0.1em 0.3em;
+		border-radius: 0.15em;
+	}
 
 	&[data-size="xs"]  { font-size: var(--text-md); font-weight: var(--font-bold)}
 	&[data-size="sm"]  { font-size: var(--text-lg); font-weight: var(--font-bold); }

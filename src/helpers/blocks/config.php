@@ -799,18 +799,20 @@ class pwConfig
 
 		// Map JSON variable names → panel color names
 		$colorMap = [
-			'block-background'          => 'pw-color-block-background',
-			'block-link'                => 'pw-color-link',
-			'element-heading-text'      => 'pw-color-heading',
-			'element-tagline-text'      => 'pw-color-tagline',
-			'element-editor-text'       => 'pw-color-text',
-			'element-button-text'       => 'pw-color-button-text',
-			'element-button-background' => 'pw-color-button-background',
-			'element-icon-fill'         => 'pw-color-icon',
-			'element-caption-text'      => 'pw-color-caption',
-			'element-quote-text'        => 'pw-color-quote',
-			'element-cite-text'         => 'pw-color-cite',
-			'element-breadcrumb-text'   => 'pw-color-breadcrumb',
+			'block-background'                  => 'pw-color-block-background',
+			'block-link'                        => 'pw-color-link',
+			'element-heading-text'              => 'pw-color-heading',
+			'element-heading-marked-text'       => 'pw-color-heading-marked-text',
+			'element-heading-marked-background' => 'pw-color-heading-marked-background',
+			'element-tagline-text'              => 'pw-color-tagline',
+			'element-editor-text'               => 'pw-color-text',
+			'element-button-text'               => 'pw-color-button-text',
+			'element-button-background'         => 'pw-color-button-background',
+			'element-icon-fill'                 => 'pw-color-icon',
+			'element-caption-text'              => 'pw-color-caption',
+			'element-quote-text'                => 'pw-color-quote',
+			'element-cite-text'                 => 'pw-color-cite',
+			'element-breadcrumb-text'           => 'pw-color-breadcrumb',
 		];
 
 		// Build theme palettes (default, variant, variant2)

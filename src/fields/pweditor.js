@@ -109,22 +109,28 @@ export default {
 			el.style.height = el.scrollHeight + 'px';
 		},
 		toggleModeDropdown() {
-			this.showModeDropdown = !this.showModeDropdown;
-			if (this.showModeDropdown) { this.showAlignDropdown = false; this.showSizeDropdown = false; }
+			const was = this.showModeDropdown;
+			this.closeAllDropdowns();
+			this.showModeDropdown = !was;
 		},
 		toggleAlignDropdown() {
-			this.showAlignDropdown = !this.showAlignDropdown;
-			if (this.showAlignDropdown) { this.showModeDropdown = false; this.showSizeDropdown = false; }
+			const was = this.showAlignDropdown;
+			this.closeAllDropdowns();
+			this.showAlignDropdown = !was;
 		},
 		toggleSizeDropdown() {
-			this.showSizeDropdown = !this.showSizeDropdown;
-			if (this.showSizeDropdown) { this.showAlignDropdown = false; this.showModeDropdown = false; }
+			const was = this.showSizeDropdown;
+			this.closeAllDropdowns();
+			this.showSizeDropdown = !was;
+		},
+		closeAllDropdowns() {
+			this.showModeDropdown = false;
+			this.showAlignDropdown = false;
+			this.showSizeDropdown = false;
 		},
 		handleClose(e) {
 			if (!this.$el.contains(e.target)) {
-				this.showModeDropdown = false;
-				this.showAlignDropdown = false;
-				this.showSizeDropdown = false;
+				this.closeAllDropdowns();
 			}
 		}
 	},
