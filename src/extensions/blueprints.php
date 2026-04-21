@@ -3,7 +3,9 @@
 	/* -------------- Pages --------------*/
 	'site' => __DIR__ . '/../../blueprints/site.yml',
 	'pages/article' => __DIR__ . '/../../blueprints/pages/article.yml',
+	'pages/subarticle' => __DIR__ . '/../../blueprints/pages/subarticle.yml',
 	'pages/category' => __DIR__ . '/../../blueprints/pages/category.yml',
+	'pages/subcategory' => __DIR__ . '/../../blueprints/pages/subcategory.yml',
 	'pages/error' => __DIR__ . '/../../blueprints/pages/error.yml',
 	'pages/home' => __DIR__ . '/../../blueprints/pages/home.yml',
 
@@ -80,6 +82,7 @@
 	'tabs/settings' => __DIR__ . '/../../blueprints/tabs/settings.yml',
 	'tabs/site' => __DIR__ . '/../../blueprints/tabs/site.yml',
 	'tabs/structure' => __DIR__ . '/../../blueprints/tabs/structure.yml',
+	'tabs/substructure' => __DIR__ . '/../../blueprints/tabs/substructure.yml',
 
 	/* -------------- Blocks --------------*/
 	'blocks/pwButtons' => __DIR__ . '/../../blueprints/blocks/buttons/index.yml',

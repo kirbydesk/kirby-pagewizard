@@ -8,7 +8,7 @@ columns:
         label: pw.section.listed
         type: pages
         status: listed
-        templates: ["article"]
+        templates: ["subarticle","subcategory"]
         layout: cardlets
         image: icon
         text: '{{ page.title }}'
@@ -18,7 +18,7 @@ columns:
         label: pw.section.unlisted
         type: pages
         status: unlisted
-        templates: ["article"]
+        templates: ["subarticle","subcategory"]
         flip: true
         image: icon
         text: '{{ page.title }}'
@@ -27,5 +27,5 @@ columns:
         type: pages
         icon : file
         status: draft
-        templates: ["article"]
+        templates: ["subarticle","subcategory"]
         text: '{{ page.title }}'
