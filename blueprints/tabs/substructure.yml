@@ -8,7 +8,7 @@ columns:
         label: pw.section.unlisted
         type: pages
         status: unlisted
-        templates: ["article"]
+        templates: ["subarticle"]
         layout: cardlets
         image: icon
         text: '{{ page.title }}'
