@@ -26,7 +26,7 @@
 			"desktop-logo-display-height": { "value": "2rem", "unit": "rem", "step": 0.1, "min": 0, "max": 20, "requires": "desktop-logo-src" },
 			"desktop-logo-align": { "value": "flex-end", "options": ["flex-start", "center", "flex-end"], "requires": "desktop-logo-src" },
 			"desktop-logo-padding": { "value": ["0rem", "0rem", "0.625rem", "0rem"], "unit": "rem", "step": 0.1, "min": 0, "max": 20, "labels": ["pw.option.top", "pw.option.right", "pw.option.bottom", "pw.option.left"], "requires": "desktop-logo-src" },
-			"desktop-background": { "value": "#FFFFFF", "type": "color" },
+			"desktop-bgcolor": { "value": "#FFFFFF", "type": "color" },
 			"desktop-textcolor": { "value": "#101828", "type": "color" },
 			"desktop-textcolor-hover": { "value": "#101828", "type": "color" },
 			"desktop-textcolor-active": { "value": "#101828", "type": "color" },
