@@ -3,7 +3,6 @@
 	/* -------------- Pages --------------*/
 	'site' => __DIR__ . '/../../blueprints/site.yml',
 	'pages/article' => __DIR__ . '/../../blueprints/pages/article.yml',
-	'pages/subarticle' => __DIR__ . '/../../blueprints/pages/subarticle.yml',
 	'pages/category' => __DIR__ . '/../../blueprints/pages/category.yml',
 	'pages/subcategory' => __DIR__ . '/../../blueprints/pages/subcategory.yml',
 	'pages/error' => __DIR__ . '/../../blueprints/pages/error.yml',

@@ -4,6 +4,7 @@
 
 	'pw.page.article' => 'Article',
 	'pw.page.category' => 'Category',
+	'pw.page.subcategory' => 'Subcategory',
 	'pw.page.error' => 'Error',
 	'pw.page.home' => 'Home',
 
