@@ -92,6 +92,16 @@ class pwConfig
 	}
 
 	/**
+	 * Return all registered block types as [blockType => configDir].
+	 * Lets the projectwizard discover blocks regardless of their plugin
+	 * folder name (kirbyblock-*, site-*, custom-*, …).
+	 */
+	public static function registered(): array
+	{
+		return self::$configPaths;
+	}
+
+	/**
 	 * Load settings and defaults from settings.json, merged with config.php overrides.
 	 * Defaults are extracted from the object format in settings.json (no separate defaults.json).
 	 */
