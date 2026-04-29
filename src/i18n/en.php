@@ -522,8 +522,8 @@
 	'pw.headline.video' => 'Video',
 	'pw.headline.video.help' => 'A detailed description helps users and search engines understand the content of the video.',
 
-	'pw.fieldsets.static-blocks'  => 'Static',
-	'pw.fieldsets.project-blocks' => 'Project related',
+	'pw.fieldsets.static-blocks'  => 'Pagewizard',
+	'pw.fieldsets.project-blocks' => 'Project Related',
 	'pw.fieldsets.dynamic-blocks' => 'Dynamic',
 
 	'pw.block.shared.name' => 'Shared block',
