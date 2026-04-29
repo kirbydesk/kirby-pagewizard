@@ -139,6 +139,36 @@ class pwConfig
 			self::extractCategoryDefaults($effectsVis)
 		);
 
+		/* -------------- Legacy defaults.json (pre-projectwizard plugins) --------------*/
+		$legacyDefaultsFile = $configDir . '/defaults.json';
+		if (file_exists($legacyDefaultsFile)) {
+			$legacyDefaults = json_decode(file_get_contents($legacyDefaultsFile), true) ?? [];
+
+			// Content section: { heading: { align: "left", level: "h2" } } → fields[align-heading], fields[level-heading]
+			foreach ($legacyDefaults['content'] ?? [] as $fieldKey => $props) {
+				if (!is_array($props)) {
+					$fields[$fieldKey] = $fields[$fieldKey] ?? $props;
+					continue;
+				}
+				foreach ($props as $prop => $val) {
+					$flatProp = ($prop === 'sizes') ? 'size' : $prop;
+					$key = $flatProp . '-' . $fieldKey;
+					if (!array_key_exists($key, $fields)) {
+						$fields[$key] = $val;
+					}
+				}
+			}
+
+			// Categories: { layout: { padding-top: true } } → defaults[padding-top]
+			foreach (['layout', 'style', 'grid', 'settings', 'effects'] as $cat) {
+				foreach ($legacyDefaults[$cat] ?? [] as $key => $val) {
+					if (!array_key_exists($key, $defaults)) {
+						$defaults[$key] = $val;
+					}
+				}
+			}
+		}
+
 		/* -------------- Editor config --------------*/
 		$editorFile = $configDir . '/editor.json';
 		$editor = file_exists($editorFile)
