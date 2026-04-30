@@ -125,6 +125,7 @@ class pwConfig
 		$rawContent  = $fieldsRaw['content']  ?? [];
 		$layoutVis   = $fieldsRaw['layout']   ?? [];
 		$styleVis    = $fieldsRaw['style']    ?? [];
+		$gridVis     = $fieldsRaw['grid']     ?? [];
 		$effectsVis  = $fieldsRaw['effects']  ?? [];
 		$settingsVis = $fieldsRaw['settings'] ?? [];
 
@@ -134,7 +135,7 @@ class pwConfig
 		$defaults = array_merge(
 			self::extractCategoryDefaults($layoutVis),
 			self::extractCategoryDefaults($styleVis),
-			self::extractCategoryDefaults($fieldsRaw['grid'] ?? []),
+			self::extractCategoryDefaults($gridVis),
 			self::extractCategoryDefaults($settingsVis),
 			self::extractCategoryDefaults($effectsVis)
 		);
@@ -203,8 +204,21 @@ class pwConfig
 			}
 			if (!empty($cfgVis['fields']['layout']))   $layoutVis   = array_merge($layoutVis,   $cfgVis['fields']['layout']);
 			if (!empty($cfgVis['fields']['style']))    $styleVis    = array_merge($styleVis,    $cfgVis['fields']['style']);
+			if (!empty($cfgVis['fields']['grid']))     $gridVis     = array_merge($gridVis,     $cfgVis['fields']['grid']);
 			if (!empty($cfgVis['fields']['effects']))  $effectsVis  = array_merge($effectsVis,  $cfgVis['fields']['effects']);
 			if (!empty($cfgVis['fields']['settings'])) $settingsVis = array_merge($settingsVis, $cfgVis['fields']['settings']);
+
+			// Re-extract category defaults so per-field default overrides
+			// (e.g. settings.fields.layout.padding-top.default = 'small')
+			// actually replace the plugin defaults populated earlier.
+			$defaults = array_merge(
+				$defaults,
+				self::extractCategoryDefaults($layoutVis),
+				self::extractCategoryDefaults($styleVis),
+				self::extractCategoryDefaults($gridVis),
+				self::extractCategoryDefaults($settingsVis),
+				self::extractCategoryDefaults($effectsVis)
+			);
 		}
 		// defaults overrides (legacy format from existing stored overrides)
 		if (!empty($cfg['defaults']) && is_array($cfg['defaults'])) {
