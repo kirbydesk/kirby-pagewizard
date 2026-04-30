@@ -2,9 +2,6 @@
 title: pw.page.article
 icon: file
 navigation: true
-status:
-  draft: Draft
-  unlisted: Published
 options:
   access:	true
   changeSlug:	true

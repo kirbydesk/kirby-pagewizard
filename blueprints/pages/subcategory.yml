@@ -1,6 +1,6 @@
 ---
 title: pw.page.subcategory
-icon: file
+icon: folder
 navigation: true
 options:
   access:	true
