@@ -64,8 +64,11 @@ header.desktop {
 					padding: var(--nav-desktop-items-padding);
 				}
 
-				&:hover, &:active {
-					@apply cursor-pointer;
+				&:hover {
+					@apply text-(--nav-desktop-textcolor-hover) cursor-pointer;
+				}
+				&:active, &.active, &[aria-current="page"] {
+					@apply text-(--nav-desktop-textcolor-active);
 				}
 
 				&.open div.flyout {
