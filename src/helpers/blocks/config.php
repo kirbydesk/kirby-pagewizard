@@ -7,6 +7,7 @@ class pwConfig
 	/** @deprecated — font generation now checks $imports directly */
 	private static bool $fontsGenerated = false;
 	private static bool $panelColorsGenerated = false;
+	private static bool $blockValuesGenerated = false;
 
 	/**
 	 * Read projectwizard config directly from JSON files.
@@ -99,6 +100,35 @@ class pwConfig
 	public static function registered(): array
 	{
 		return self::$configPaths;
+	}
+
+	/**
+	 * Load per-block CSS-variable definitions ('values' section in settings.json)
+	 * plus any user-edited overrides from site/config/projectwizard/<blockType>.json.
+	 *
+	 * Returns ['defaults' => [...], 'overrides' => [...]] where defaults follows
+	 * the same shape as global.json (groups → vars), and overrides is a flat
+	 * map { varName: value, … }.
+	 */
+	public static function loadValues(string $blockType): array
+	{
+		$configDir = self::$configPaths[$blockType] ?? null;
+		if ($configDir === null) return ['defaults' => [], 'overrides' => []];
+
+		$defaults = [];
+		$settingsFile = $configDir . '/settings.json';
+		if (file_exists($settingsFile)) {
+			$settings = json_decode(file_get_contents($settingsFile), true) ?? [];
+			$defaults = $settings['values'] ?? [];
+		}
+
+		$overrides = [];
+		$overrideFile = kirby()->root('site') . '/config/projectwizard/' . $blockType . '.json';
+		if (file_exists($overrideFile)) {
+			$overrides = json_decode(file_get_contents($overrideFile), true) ?? [];
+		}
+
+		return ['defaults' => $defaults, 'overrides' => $overrides];
 	}
 
 	/**
@@ -803,6 +833,53 @@ class pwConfig
 					}
 				}
 			}
+		}
+
+		// Per-block CSS variables (each plugin's settings.json 'values' section,
+		// merged with site/config/projectwizard/<blockType>.json overrides).
+		// Each variable becomes --<blockType>-<varName>[suffix]: value;
+		// Render only once per build — tailwindSetup() runs per plugin.
+		if (!self::$blockValuesGenerated) {
+			self::$blockValuesGenerated = true;
+		$blockValueLines = [];
+		foreach (self::registered() as $blockType => $blockConfigDir) {
+			$blockValues   = self::loadValues($blockType);
+			$blockDefaults = $blockValues['defaults'];
+			$blockOverrides = $blockValues['overrides'];
+
+			foreach ($blockDefaults as $groupKey => $group) {
+				if (!is_array($group) || !isset($group['vars'])) continue;
+				foreach ($group['vars'] as $varName => $def) {
+					$type = is_array($def) ? ($def['type'] ?? null) : null;
+					$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
+					$override = $blockOverrides[$varName] ?? null;
+					$prefix = '--' . $blockType . '-' . $varName;
+
+					// Multi-value with suffixes (small/large, top-left/-right/…)
+					if (is_array($defaultVal) && isset($def['suffixes'])) {
+						$vals = is_array($override) ? $override : $defaultVal;
+						foreach ($def['suffixes'] as $i => $suffix) {
+							$blockValueLines[] = "\t" . $prefix . $suffix . ': ' . ($vals[$i] ?? '') . ';';
+						}
+						continue;
+					}
+
+					// Plain array (no suffixes) → join with spaces
+					if (is_array($defaultVal)) {
+						$vals = is_array($override) ? $override : $defaultVal;
+						$blockValueLines[] = "\t" . $prefix . ': ' . implode(' ', $vals) . ';';
+						continue;
+					}
+
+					// Scalar (single value or color)
+					$val = $override ?? $defaultVal;
+					$blockValueLines[] = "\t" . $prefix . ': ' . $val . ';';
+				}
+			}
+		}
+		if (!empty($blockValueLines)) {
+			$imports[] = ":root {\n" . implode("\n", $blockValueLines) . "\n}";
+		}
 		}
 
 		// Sprites stub
