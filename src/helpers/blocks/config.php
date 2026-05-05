@@ -848,32 +848,48 @@ class pwConfig
 			$blockOverrides = $blockValues['overrides'];
 
 			foreach ($blockDefaults as $groupKey => $group) {
-				if (!is_array($group) || !isset($group['vars'])) continue;
-				foreach ($group['vars'] as $varName => $def) {
-					$type = is_array($def) ? ($def['type'] ?? null) : null;
-					$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
-					$override = $blockOverrides[$varName] ?? null;
-					$prefix = '--' . $blockType . '-' . $varName;
+				if (!is_array($group)) continue;
 
-					// Multi-value with suffixes (small/large, top-left/-right/…)
-					if (is_array($defaultVal) && isset($def['suffixes'])) {
-						$vals = is_array($override) ? $override : $defaultVal;
-						foreach ($def['suffixes'] as $i => $suffix) {
-							$blockValueLines[] = "\t" . $prefix . $suffix . ': ' . ($vals[$i] ?? '') . ';';
+				// vars: flat single/multi-value variables (padding, radius, …)
+				if (isset($group['vars'])) {
+					foreach ($group['vars'] as $varName => $def) {
+						$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
+						$override = $blockOverrides[$varName] ?? null;
+						$prefix = '--' . $blockType . '-' . $varName;
+
+						// Multi-value with suffixes (small/large, top-left/-right/…)
+						if (is_array($defaultVal) && isset($def['suffixes'])) {
+							$vals = is_array($override) ? $override : $defaultVal;
+							foreach ($def['suffixes'] as $i => $suffix) {
+								$blockValueLines[] = "\t" . $prefix . $suffix . ': ' . ($vals[$i] ?? '') . ';';
+							}
+							continue;
 						}
-						continue;
-					}
 
-					// Plain array (no suffixes) → join with spaces
-					if (is_array($defaultVal)) {
-						$vals = is_array($override) ? $override : $defaultVal;
-						$blockValueLines[] = "\t" . $prefix . ': ' . implode(' ', $vals) . ';';
-						continue;
-					}
+						// Plain array (no suffixes) → join with spaces
+						if (is_array($defaultVal)) {
+							$vals = is_array($override) ? $override : $defaultVal;
+							$blockValueLines[] = "\t" . $prefix . ': ' . implode(' ', $vals) . ';';
+							continue;
+						}
 
-					// Scalar (single value or color)
-					$val = $override ?? $defaultVal;
-					$blockValueLines[] = "\t" . $prefix . ': ' . $val . ';';
+						// Scalar (single value or color)
+						$val = $override ?? $defaultVal;
+						$blockValueLines[] = "\t" . $prefix . ': ' . $val . ';';
+					}
+				}
+
+				// colors: multi-theme colors ({ default, variant, variant2 })
+				// Override format: nested by theme — { default: {…}, variant: {…}, variant2: {…} }
+				if (isset($group['colors'])) {
+					foreach ($group['colors'] as $varName => $themes) {
+						if (!is_array($themes)) continue;
+						foreach ($themes as $theme => $themeValue) {
+							$override = $blockOverrides[$theme][$varName] ?? null;
+							$suffix = $theme === 'default' ? '' : '-' . $theme;
+							$blockValueLines[] = "\t--" . $blockType . '-' . $varName . $suffix . ': ' . ($override ?? $themeValue) . ';';
+						}
+					}
 				}
 			}
 		}
