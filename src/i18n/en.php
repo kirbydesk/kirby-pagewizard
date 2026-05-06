@@ -354,6 +354,7 @@
 	'pw.option.border' => 'Border',
 	'pw.option.bookmark' => 'Permalink',
 	'pw.option.bottom' => 'Bottom',
+	'pw.option.button' => 'Button',
 	'pw.option.center' => 'Center',
 	'pw.option.color' => 'Color',
 	'pw.option.custom' => 'Custom',
