@@ -66,6 +66,12 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		"shared-block": '<path d="M12 2.58582L18.2071 8.79292L16.7929 10.2071L13 6.41424V16H11V6.41424L7.20711 10.2071L5.79289 8.79292L12 2.58582ZM3 18V14H5V18C5 18.5523 5.44772 19 6 19H18C18.5523 19 19 18.5523 19 18V14H21V18C21 19.6569 19.6569 21 18 21H6C4.34315 21 3 19.6569 3 18Z"/>',
 		"textsize-large": '<path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"/>',
 		"textsize-normal": '<path d="M10 6V21H8V6H2V4H16V6H10ZM18 14V21H16V14H13V12H21V14H18Z"/>',
-		"textsize-xlarge": '<path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"/>'
+		"textsize-xlarge": '<path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"/>',
+		"pw-deco-none":       '<line x1="6" y1="12" x2="18" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+		"pw-deco-underline":  '<path d="M5 4v8a7 7 0 0 0 14 0V4M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+		"pw-deco-arrow":      '<path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+		"pw-deco-long-arrow": '<path d="M2 12h19m-5-5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+		"pw-deco-chevron":    '<polyline points="9 6 15 12 9 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+		"pw-deco-caret":      '<path d="M8 5l8 7-8 7z" fill="currentColor"/>'
 	}
 });
