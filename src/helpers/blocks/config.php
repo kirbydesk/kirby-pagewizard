@@ -85,6 +85,35 @@ class pwConfig
 	}
 
 	/**
+	 * Flatten footer.json into a simple key→value array, merged with projectwizard overrides.
+	 * Mirrors navConfig() for the footer config so snippets can read footer-* values directly.
+	 */
+	public static function footerConfig(): array
+	{
+		static $cache = null;
+		if ($cache !== null) return $cache;
+
+		$pluginDir = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
+		$footerFile = $pluginDir . '/config/footer.json';
+		$footer = file_exists($footerFile) ? (json_decode(file_get_contents($footerFile), true) ?? []) : [];
+
+		$overrideFile = kirby()->root('site') . '/config/projectwizard/footer.json';
+		$overrides = file_exists($overrideFile) ? (json_decode(file_get_contents($overrideFile), true)['global'] ?? []) : [];
+
+		$flat = [];
+		foreach ($footer as $group) {
+			if (!is_array($group) || !isset($group['vars'])) continue;
+			foreach ($group['vars'] as $varName => $def) {
+				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
+				$flat[$varName] = $overrides[$varName] ?? $defaultVal;
+			}
+		}
+
+		$cache = $flat;
+		return $flat;
+	}
+
+	/**
 	 * Register a block type's config directory (call from plugin index.php).
 	 */
 	public static function register(string $blockType, string $configDir): void

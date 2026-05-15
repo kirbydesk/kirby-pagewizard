@@ -1,7 +1,18 @@
+<?php
+	$footerCfg = pwConfig::footerConfig();
+	$renderLogo = function () use ($footerCfg) {
+		if (empty($footerCfg['footer-logo-src'])) return;
+		$h = $footerCfg['footer-logo-display-height'] ?? '';
+		echo '<div data-type="logo"'.($h ? ' style="height:'.$h.'"' : '').'>'.$footerCfg['footer-logo-src'].'</div>';
+	};
+?>
 <footer>
 	<div>
 
-		<?php if ($site->address()->toObject()->addressposition()->value() === 'left') snippet('address') ?>
+		<?php if ($site->address()->toObject()->addressposition()->value() === 'left') : ?>
+			<?php $renderLogo(); ?>
+			<?php snippet('address') ?>
+		<?php endif; ?>
 
 		<div data-type="items">
 			<?php foreach ($site->footer()->toBlocks() as $footer) : ?>
@@ -27,7 +38,10 @@
 				</div>
 			<?php endforeach ?>
 		</div>
-		<?php if ($site->address()->toObject()->addressposition()->value() === 'right') snippet('address') ?>
+		<?php if ($site->address()->toObject()->addressposition()->value() === 'right') : ?>
+			<?php $renderLogo(); ?>
+			<?php snippet('address') ?>
+		<?php endif; ?>
 	</div><?php
 
 	// Social media
