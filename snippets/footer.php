@@ -3,15 +3,20 @@
 	$renderLogo = function () use ($footerCfg) {
 		if (empty($footerCfg['footer-logo-src'])) return;
 		$h = $footerCfg['footer-logo-display-height'] ?? '';
-		echo '<div data-type="logo"'.($h ? ' style="height:'.$h.'"' : '').'>'.$footerCfg['footer-logo-src'].'</div>';
+		// Strip the SVG's intrinsic width/height attrs so our display height wins
+		$svg = preg_replace('/\s(width|height)="[^"]*"/i', '', $footerCfg['footer-logo-src']);
+		$svg = preg_replace('/<svg\b/', '<svg style="height:'.$h.';width:auto;display:block"', $svg, 1);
+		echo '<div data-type="logo">'.$svg.'</div>';
 	};
 ?>
 <footer>
 	<div>
 
 		<?php if ($site->address()->toObject()->addressposition()->value() === 'left') : ?>
-			<?php $renderLogo(); ?>
-			<?php snippet('address') ?>
+			<div data-type="address-wrap">
+				<?php $renderLogo(); ?>
+				<?php snippet('address') ?>
+			</div>
 		<?php endif; ?>
 
 		<div data-type="items">
@@ -39,8 +44,10 @@
 			<?php endforeach ?>
 		</div>
 		<?php if ($site->address()->toObject()->addressposition()->value() === 'right') : ?>
-			<?php $renderLogo(); ?>
-			<?php snippet('address') ?>
+			<div data-type="address-wrap">
+				<?php $renderLogo(); ?>
+				<?php snippet('address') ?>
+			</div>
 		<?php endif; ?>
 	</div><?php
 
