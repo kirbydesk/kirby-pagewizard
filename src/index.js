@@ -16,6 +16,7 @@ import pwtext        from "@/fields/pwtext.js";
 import pweditor      from "@/fields/pweditor.js";
 import pwalign       from "@/fields/pwalign.js";
 import pwicon        from "@/fields/pwicon.js";
+import pwlinkicon    from "@/fields/pwlinkicon.js";
 import pwsharedname  from "@/fields/pwsharedname.js";
 
 // Views
@@ -43,6 +44,7 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		pweditor,
 		pwalign,
 		pwicon,
+		pwlinkicon,
 		pwsharedname,
 	},
 	components: {

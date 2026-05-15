@@ -68,6 +68,14 @@ return [
 			}
 		]
 	],
+	'pwlinkicon' => [
+		'extends' => 'text',
+		'props' => [
+			'value' => function (string $value = 'arrow') {
+				return $value;
+			}
+		]
+	],
 	'pwsharedname' => [
 		'extends' => 'text',
 		'props' => [
