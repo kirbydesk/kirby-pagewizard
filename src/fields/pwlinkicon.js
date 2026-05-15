@@ -31,7 +31,7 @@ export default {
 			this.$emit('input', opt);
 		},
 		iconHtml(key) {
-			return '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' + (icons[key] || '') + '</svg>';
+			return '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:20px;height:20px;display:block">' + (icons[key] || '') + '</svg>';
 		},
 		isActive(opt) {
 			return this.current === opt;
@@ -42,7 +42,7 @@ export default {
 	},
 	template: `
 		<k-field v-bind="$props" class="pw-link-icon-field">
-			<div class="pw-link-icon-row">
+			<div class="pw-link-icon-row" style="display:flex; gap:0.25rem; flex-wrap:wrap;">
 				<button
 					v-for="opt in allOptions()"
 					:key="opt"
@@ -51,7 +51,20 @@ export default {
 					:class="{ 'is-active': isActive(opt) }"
 					:disabled="disabled"
 					@click="select(opt)"
-				><span v-html="iconHtml(opt)"></span></button>
+					:style="{
+						width: '32px',
+						height: '32px',
+						display: 'inline-flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						border: '1px solid var(--color-border)',
+						borderRadius: 'var(--rounded)',
+						background: isActive(opt) ? 'var(--color-blue-600)' : 'var(--color-white)',
+						color: isActive(opt) ? 'var(--color-white)' : 'var(--color-text-dimmed)',
+						cursor: 'pointer',
+						padding: '0'
+					}"
+				><span style="display:inline-flex" v-html="iconHtml(opt)"></span></button>
 			</div>
 		</k-field>
 	`
