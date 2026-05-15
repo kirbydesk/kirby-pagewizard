@@ -140,8 +140,6 @@
 	'pagewizard/fields/image-zoom' => __DIR__ . '/../../blueprints/fields/image-zoom.yml',
 	'pagewizard/fields/images' => __DIR__ . '/../../blueprints/fields/images.yml',
 	'pagewizard/fields/link-align' => __DIR__ . '/../../blueprints/fields/link-align.yml',
-	'pagewizard/fields/link-decoration' => __DIR__ . '/../../blueprints/fields/link-decoration.yml',
-	'pagewizard/fields/link-icon' => __DIR__ . '/../../blueprints/fields/link-icon.yml',
 	'pagewizard/fields/link-aria-describedby' => __DIR__ . '/../../blueprints/fields/link-aria-describedby.yml',
 	'pagewizard/fields/link-aria-label' => __DIR__ . '/../../blueprints/fields/link-aria-label.yml',
 	'pagewizard/fields/link-external' => __DIR__ . '/../../blueprints/fields/link-external.yml',
