@@ -1,0 +1,17 @@
+label: pw.field.link-icon
+type: toggles
+labels: false
+required: true
+default: arrow
+options:
+  - value: none
+    icon: pw-deco-none
+  - value: arrow
+    icon: pw-deco-arrow
+  - value: long-arrow
+    icon: pw-deco-long-arrow
+  - value: chevron
+    icon: pw-deco-chevron
+  - value: caret
+    icon: pw-deco-caret
+help: pw.field.link-icon.help
