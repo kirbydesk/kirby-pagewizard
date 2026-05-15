@@ -232,11 +232,25 @@ class pwConfig
 				}
 				$fields       = array_merge($fields, self::extractContentDefaults($cfgVis['fields']['content']));
 			}
-			if (!empty($cfgVis['fields']['layout']))   $layoutVis   = array_merge($layoutVis,   $cfgVis['fields']['layout']);
-			if (!empty($cfgVis['fields']['style']))    $styleVis    = array_merge($styleVis,    $cfgVis['fields']['style']);
-			if (!empty($cfgVis['fields']['grid']))     $gridVis     = array_merge($gridVis,     $cfgVis['fields']['grid']);
-			if (!empty($cfgVis['fields']['effects']))  $effectsVis  = array_merge($effectsVis,  $cfgVis['fields']['effects']);
-			if (!empty($cfgVis['fields']['settings'])) $settingsVis = array_merge($settingsVis, $cfgVis['fields']['settings']);
+			// Per-field shallow merge: overrides typically carry only the changed
+			// property (e.g. { default: 'foo' }); a plain array_merge at this level
+			// would replace the whole field def and drop the plugin's options/type/
+			// labels/SVGs. Merge per field so override keys win and the rest survives.
+			$mergeFields = function (array $base, array $overrides): array {
+				foreach ($overrides as $fieldKey => $override) {
+					if (isset($base[$fieldKey]) && is_array($base[$fieldKey]) && is_array($override)) {
+						$base[$fieldKey] = array_merge($base[$fieldKey], $override);
+					} else {
+						$base[$fieldKey] = $override;
+					}
+				}
+				return $base;
+			};
+			if (!empty($cfgVis['fields']['layout']))   $layoutVis   = $mergeFields($layoutVis,   $cfgVis['fields']['layout']);
+			if (!empty($cfgVis['fields']['style']))    $styleVis    = $mergeFields($styleVis,    $cfgVis['fields']['style']);
+			if (!empty($cfgVis['fields']['grid']))     $gridVis     = $mergeFields($gridVis,     $cfgVis['fields']['grid']);
+			if (!empty($cfgVis['fields']['effects']))  $effectsVis  = $mergeFields($effectsVis,  $cfgVis['fields']['effects']);
+			if (!empty($cfgVis['fields']['settings'])) $settingsVis = $mergeFields($settingsVis, $cfgVis['fields']['settings']);
 
 			// Re-extract category defaults so per-field default overrides
 			// (e.g. settings.fields.layout.padding-top.default = 'small')
