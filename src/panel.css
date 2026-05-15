@@ -368,12 +368,12 @@ span.tag.screensize {
 	}
 }
 /* -------------- pwlinkicon field --------------*/
-.pw-link-icon-field {
+.pw-link-icon-row {
 	display: flex;
 	gap: var(--spacing-1);
 	flex-wrap: wrap;
 }
-.pw-link-icon-field .pw-link-icon-option {
+.pw-link-icon-option {
 	width: 32px;
 	height: 32px;
 	display: inline-flex;
@@ -386,15 +386,15 @@ span.tag.screensize {
 	cursor: pointer;
 	padding: 0;
 }
-.pw-link-icon-field .pw-link-icon-option svg {
+.pw-link-icon-option svg {
 	width: 20px;
 	height: 20px;
 }
-.pw-link-icon-field .pw-link-icon-option:hover {
+.pw-link-icon-option:hover {
 	color: var(--color-text);
 	border-color: var(--color-blue-400);
 }
-.pw-link-icon-field .pw-link-icon-option.is-active {
+.pw-link-icon-option.is-active {
 	background: var(--color-blue-600);
 	border-color: var(--color-blue-600);
 	color: var(--color-white);

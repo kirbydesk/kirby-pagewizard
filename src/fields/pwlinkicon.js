@@ -8,49 +8,50 @@ const icons = {
 	caret:        '<path d="M8 5l8 7-8 7z" fill="currentColor"/>'
 };
 
+const options = ['none', 'arrow', 'long-arrow', 'chevron', 'caret'];
+
 export default {
 	props: {
-		value:    { type: String, default: 'arrow' },
-		default:  { type: String, default: 'arrow' },
+		value:    String,
 		label:    String,
 		help:     String,
-		name:     String,
 		required: Boolean,
-		disabled: Boolean,
-		options:  { type: Array, default: () => ['none', 'arrow', 'long-arrow', 'chevron', 'caret'] }
+		disabled: Boolean
 	},
 	data() {
-		return { current: this.value || this.default || 'arrow' };
+		return { current: this.value || 'arrow' };
 	},
 	watch: {
-		value(v) { this.current = v || this.default || 'arrow'; }
-	},
-	mounted() {
-		if (!this.value && this.current) this.$emit('input', this.current);
+		value(v) { this.current = v || 'arrow'; }
 	},
 	methods: {
-		select(val) {
+		select(opt) {
 			if (this.disabled) return;
-			this.current = val;
-			this.$emit('input', val);
+			this.current = opt;
+			this.$emit('input', opt);
 		},
 		iconHtml(key) {
 			return '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' + (icons[key] || '') + '</svg>';
+		},
+		isActive(opt) {
+			return this.current === opt;
+		},
+		allOptions() {
+			return options;
 		}
 	},
 	template: `
-		<k-field v-bind="$props" :input="name">
-			<div class="pw-link-icon-field">
+		<k-field v-bind="$props" class="pw-link-icon-field">
+			<div class="pw-link-icon-row">
 				<button
-					v-for="opt in options"
+					v-for="opt in allOptions()"
 					:key="opt"
 					type="button"
 					class="pw-link-icon-option"
-					:class="{ 'is-active': current === opt }"
+					:class="{ 'is-active': isActive(opt) }"
 					:disabled="disabled"
 					@click="select(opt)"
-					v-html="iconHtml(opt)"
-				></button>
+				><span v-html="iconHtml(opt)"></span></button>
 			</div>
 		</k-field>
 	`
