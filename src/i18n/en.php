@@ -177,6 +177,8 @@
 	'pw.field.link-text' => 'Link Text',
 	'pw.field.link-text.help' => 'Label displayed for the link (e.g. on the button or as a text link). Leave empty to use a default.',
 	'pw.field.link-text.placeholder' => 'e.g. "Read more"',
+	'pw.field.link-align' => 'Alignment',
+	'pw.field.link-align.help' => 'Horizontal alignment of the link / button.',
 	'pw.field.link-external' => 'Link',
 	'pw.field.link-external.help' => 'Use a valid URL',
 	'pw.field.link-internal' => 'Link',

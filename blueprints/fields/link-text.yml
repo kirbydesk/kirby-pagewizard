@@ -1,6 +1,6 @@
 label: pw.field.link-text
 type: text
-icon: text
+icon: tag
 placeholder: pw.field.link-text.placeholder
 counter: false
 help: pw.field.link-text.help
