@@ -6,7 +6,7 @@
 		// Strip the SVG's intrinsic width/height attrs so our display height wins
 		$svg = preg_replace('/\s(width|height)="[^"]*"/i', '', $footerCfg['footer-logo-src']);
 		$svg = preg_replace('/<svg\b/', '<svg style="height:'.$h.';width:auto;display:block"', $svg, 1);
-		echo '<div data-type="logo">'.$svg.'</div>';
+		echo '<div data-type="logo" style="margin-bottom:0.3em">'.$svg.'</div>';
 	};
 ?>
 <footer>
