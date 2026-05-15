@@ -6,20 +6,14 @@ default: none
 options:
   - value: none
     icon: pw-deco-none
-    text: none
   - value: underline
     icon: pw-deco-underline
-    text: underline
   - value: arrow
     icon: pw-deco-arrow
-    text: arrow
   - value: long-arrow
     icon: pw-deco-long-arrow
-    text: long arrow
   - value: chevron
     icon: pw-deco-chevron
-    text: chevron
   - value: caret
     icon: pw-deco-caret
-    text: caret
 help: pw.field.link-decoration.help
