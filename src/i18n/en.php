@@ -360,6 +360,8 @@
 	'pw.option.bookmark' => 'Permalink',
 	'pw.option.bottom' => 'Bottom',
 	'pw.option.button' => 'Button',
+	'pw.option.none' => 'none',
+	'pw.option.underline' => 'Underline',
 	'pw.option.center' => 'Center',
 	'pw.option.color' => 'Color',
 	'pw.option.custom' => 'Custom',
