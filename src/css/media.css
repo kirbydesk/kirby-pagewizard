@@ -6,6 +6,7 @@
 ------------------------------------------------------------------------------------------------*/
 
 figure[data-ratio] > div {
+	position: relative;
 	overflow: hidden;
 
 	img, video {
