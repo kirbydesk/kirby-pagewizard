@@ -58,7 +58,7 @@ document.addEventListener('click', (e) => {
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
     iframe.allowFullscreen = true;
     iframe.loading = 'lazy';
-    iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+    iframe.style.cssText = 'width:100%;height:100%;border:0;';
     placeholder.replaceWith(iframe);
 });
 
