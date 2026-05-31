@@ -341,6 +341,9 @@
 	'pw.field.video-url.help' => 'Enter a valid URL to a video platform (e.g. YouTube, Vimeo, etc).',
 	'pw.field.video-url.placeholder' => 'e.g. https://youtube.com/?v=',
 
+	'pw.video.consent.button' => 'Load video',
+	'pw.video.consent.notice' => 'By clicking, a connection to the video provider (e.g. YouTube or Vimeo) is established. The provider may collect data and set cookies. Please refer to our privacy policy for details.',
+
 	'pw.lightbox.open' => 'Open image in lightbox',
 
 	'pw.option.1column' => '1 column',
