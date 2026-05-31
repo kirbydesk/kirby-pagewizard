@@ -115,7 +115,6 @@ elseif ($source === 'external' && !empty($url)):
 		echo '<div data-consent-video="'.esc($embedUrl).'">';
 		echo '<button type="button">';
 		echo '<svg viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/><polygon points="10,8 17,12 10,16" fill="currentColor"/></svg>';
-		echo '<span>'.t('pw.video.consent.button').'</span>';
 		echo '<small>'.t('pw.video.consent.notice').'</small>';
 		echo '</button>';
 		echo '</div>';
