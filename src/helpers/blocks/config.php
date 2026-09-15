@@ -1049,4 +1049,228 @@ class pwConfig
 		$enabled = !empty($tabSettings['grid']) || !empty($tabSettings['tab-grid']);
 		self::addTab($tabs, 'grid', $enabled, pwGrid::layout($blockType, $defaults));
 	}
+
+	/**
+	 * The route:after hook body — invoked from every project's
+	 * projectbuilder.php. Ensures required project directories exist,
+	 * generates stub files for CSS/JS/snippets/templates, and rebuilds
+	 * storage/temp/{tailwind,vars}.css from plugin sources + overrides.
+	 *
+	 * Kept as a single static entry point so projectbuilder.php in each
+	 * project stays a minimal wrapper — no logic to maintain per project.
+	 */
+	public static function runProjectBuilder(): void
+	{
+		// Ensure required output/patches directories exist.
+		// npm run ... writes final css/js into /public/assets/.
+		$dirs = [
+			kirby()->root('index') . '/assets/js',
+			kirby()->root('index') . '/assets/css',
+			kirby()->root('site')  . '/patches/css',
+			kirby()->root('site')  . '/patches/js',
+			kirby()->root('site')  . '/blueprints/blocks',
+			kirby()->root('site')  . '/blueprints/pages',
+			kirby()->root('site')  . '/snippets',
+			kirby()->root('site')  . '/templates',
+		];
+		foreach ($dirs as $dir) {
+			if (!is_dir($dir)) mkdir($dir, 0777, true);
+		}
+
+		// Temp directory for temporary css file.
+		// Fallback for first-run setup when the current Kirby bootstrap
+		// has no 'temp' root defined yet (new public/index.php not loaded).
+		$tempDir = kirby()->root('temp') ?? kirby()->root('site') . '/../storage/temp';
+		if (!is_dir($tempDir)) mkdir($tempDir, 0777, true);
+
+		$patchesJsDir = kirby()->root('site') . '/patches/js';
+		$outputFile   = $tempDir . '/tailwind.css';
+		$imports      = [];
+
+		// Iterate every plugin that has a src/css/.stub marker.
+		foreach (kirby()->plugins() as $plugin) {
+			$marker = $plugin->root() . '/src/css/.stub';
+			if (!file_exists($marker)) continue;
+
+			$pluginDir    = $plugin->root();
+			$dirName      = basename($pluginDir);
+			$pluginName   = $plugin->name();
+			$packageName  = substr(strrchr($pluginName, '/'), 1);
+
+			$imports[] = "\n/* Plugin: " . $packageName . " */";
+
+			// Plugin-specific tailwind setup (CSS vars, stubs).
+			self::tailwindSetup($pluginDir, $imports);
+
+			$patchDir      = kirby()->root('site') . '/patches/css/' . $packageName;
+			$pluginCssDir  = $plugin->root() . '/src/css';
+
+			// Import active CSS patches or plugin defaults, sorted by name.
+			if (is_dir($patchDir)) {
+				$cssFiles = glob($pluginCssDir . '/*.css') ?: [];
+				sort($cssFiles);
+				foreach ($cssFiles as $cssFile) {
+					$moduleName    = basename($cssFile);
+					$modulePatch   = $patchDir . '/' . $moduleName;
+					$moduleDefault = $cssFile;
+					if (file_exists($modulePatch)) {
+						$imports[] = "@import '../../site/patches/css/" . $packageName . "/" . $moduleName . "';";
+					} elseif (file_exists($moduleDefault)) {
+						$imports[] = "@import '../../site/plugins/" . $dirName . "/src/css/" . $moduleName . "';";
+					}
+				}
+			} else {
+				$cssFiles = glob($pluginCssDir . '/*.css') ?: [];
+				sort($cssFiles);
+				foreach ($cssFiles as $cssFile) {
+					$moduleName = basename($cssFile);
+					$imports[] = "@import '../../site/plugins/" . $dirName . "/src/css/" . $moduleName . "';";
+				}
+			}
+
+			// Tailwind watcher entries for the plugin's snippets and templates.
+			$imports[] = "@source '../../site/plugins/" . $dirName . "/snippets';";
+			$imports[] = "@source '../../site/plugins/" . $dirName . "/templates';";
+
+			// Generate CSS stubs for each plugin CSS module.
+			if (is_dir($pluginCssDir)) {
+				$cssFiles = glob($pluginCssDir . '/*.css') ?: [];
+				if (!empty($cssFiles)) {
+					if (!is_dir($patchDir)) mkdir($patchDir, 0777, true);
+					foreach ($cssFiles as $cssFile) {
+						$fileName   = basename($cssFile);
+						$activeFile = $patchDir . '/' . $fileName;
+						$stubFile   = $patchDir . '/_' . $fileName;
+						if (!file_exists($activeFile) && !file_exists($stubFile)) {
+							$comment    = "/* Remove the leading underscore from filename and start editing */\n\n";
+							$cssContent = preg_replace('/^\/\* DO NOT MODIFY THIS FILE[^\*]*\*\/\n?/m', '', file_get_contents($cssFile));
+							file_put_contents($stubFile, $comment . ltrim($cssContent));
+						}
+					}
+				}
+			}
+
+			// Generate JS stubs (src/js/*.js).
+			$pluginJsDir = $plugin->root() . '/src/js';
+			if (is_dir($pluginJsDir)) {
+				$jsFiles = glob($pluginJsDir . '/*.js') ?: [];
+				foreach ($jsFiles as $jsFile) {
+					$fileName   = basename($jsFile);
+					$activeFile = $patchesJsDir . '/' . $fileName;
+					$stubFile   = $patchesJsDir . '/_' . $fileName;
+					if (!file_exists($activeFile) && !file_exists($stubFile)) {
+						$comment = "/* Remove the leading underscore from filename and start editing */\n\n";
+						file_put_contents($stubFile, $comment . file_get_contents($jsFile));
+					}
+				}
+			}
+
+			// Generate snippet stubs (only if snippets/.stub marker exists).
+			$snippetMarker     = $plugin->root() . '/snippets/.stub';
+			$pluginSnippetsDir = $plugin->root() . '/snippets';
+			if (file_exists($snippetMarker) && is_dir($pluginSnippetsDir)) {
+				if (strpos($packageName, 'kirbyblock-') === 0) {
+					// kirbyblock-* → site/snippets/blocks/_pw<name>.php
+					$snippetBlocksDir = kirby()->root('site') . '/snippets/blocks';
+					if (!is_dir($snippetBlocksDir)) mkdir($snippetBlocksDir, 0777, true);
+					$blockName   = str_replace('kirbyblock-', '', $packageName);
+					$snippetName = 'pw' . strtolower($blockName);
+					$snippetFile = $pluginSnippetsDir . '/index.php';
+					if (file_exists($snippetFile)) {
+						$stubSnippet   = $snippetBlocksDir . '/_' . $snippetName . '.php';
+						$activeSnippet = $snippetBlocksDir . '/' . $snippetName . '.php';
+						if (!file_exists($activeSnippet) && !file_exists($stubSnippet)) {
+							$originalContent = file_get_contents($snippetFile);
+							$originalContent = preg_replace('/^<\?php\s*\n?/', '', $originalContent, 1);
+							$comment         = "<?php\n/* Remove the leading underscore from filename and start editing */\n\n";
+							file_put_contents($stubSnippet, $comment . $originalContent);
+						}
+					}
+				} elseif ($packageName === 'kirby-pagewizard') {
+					// kirby-pagewizard → site/snippets/_*.php (flat)
+					$projectSnippetsDir = kirby()->root('site') . '/snippets';
+					if (!is_dir($projectSnippetsDir)) mkdir($projectSnippetsDir, 0777, true);
+					$snippetFiles = glob($pluginSnippetsDir . '/*.php') ?: [];
+					foreach ($snippetFiles as $snippetFile) {
+						$snippetName   = basename($snippetFile);
+						$stubSnippet   = $projectSnippetsDir . '/_' . $snippetName;
+						$activeSnippet = $projectSnippetsDir . '/' . $snippetName;
+						if (!file_exists($activeSnippet) && !file_exists($stubSnippet)) {
+							$originalContent = file_get_contents($snippetFile);
+							if (preg_match('/^<\?php/', $originalContent)) {
+								$originalContent = preg_replace('/^<\?php\s*\n?/', '', $originalContent, 1);
+								$comment         = "<?php\n/* Remove the leading underscore from filename and start editing */\n\n";
+								file_put_contents($stubSnippet, $comment . $originalContent);
+							} else {
+								$comment = "<?php /* Remove the leading underscore from filename and start editing */ ?>\n";
+								file_put_contents($stubSnippet, $comment . $originalContent);
+							}
+						}
+					}
+				}
+			}
+
+			// Generate template stubs (only if templates/.stub marker exists).
+			$templateMarker     = $plugin->root() . '/templates/.stub';
+			$pluginTemplatesDir = $plugin->root() . '/templates';
+			if (file_exists($templateMarker) && is_dir($pluginTemplatesDir)) {
+				$projectTemplatesDir = kirby()->root('site') . '/templates';
+				if (!is_dir($projectTemplatesDir)) mkdir($projectTemplatesDir, 0777, true);
+				$templateFiles = glob($pluginTemplatesDir . '/*.php') ?: [];
+				foreach ($templateFiles as $templateFile) {
+					$templateName   = basename($templateFile);
+					$stubTemplate   = $projectTemplatesDir . '/_' . $templateName;
+					$activeTemplate = $projectTemplatesDir . '/' . $templateName;
+					if (!file_exists($activeTemplate) && !file_exists($stubTemplate)) {
+						$originalContent = file_get_contents($templateFile);
+						$originalContent = preg_replace('/^<\?php\s*\n?/', '', $originalContent, 1);
+						$comment         = "<?php\n/* Remove the leading underscore from filename and start editing */\n\n";
+						file_put_contents($stubTemplate, $comment . $originalContent);
+					}
+				}
+			}
+
+			// panel-colors.css for the pagewizard/colors API.
+			self::panelColorsSetup($pluginDir);
+		}
+
+		// Tailwind watcher — project-level snippets and templates.
+		$watchers = [
+			"@source '../../site/snippets';",
+			"@source '../../site/templates';",
+		];
+
+		// Split imports: @font-face + :root vars → vars.css, everything else → tailwind.css.
+		$varsContent = [];
+		$cssImports  = [];
+		foreach ($imports as $entry) {
+			$trimmed = trim($entry);
+			if (str_starts_with($trimmed, '@import') || str_starts_with($trimmed, '@source') || str_starts_with($trimmed, "\n/*")) {
+				$cssImports[] = $entry;
+			} else {
+				$varsContent[] = $entry;
+			}
+		}
+
+		// vars.css — @font-face + :root blocks (watched by Tailwind via @import).
+		// Only write when content changed to avoid triggering unnecessary Tailwind rebuilds.
+		$varsPath = $tempDir . '/vars.css';
+		$varsNew  = "/* Auto-generated — do not edit */\n\n" . implode("\n", $varsContent);
+		if (!file_exists($varsPath) || file_get_contents($varsPath) !== $varsNew) {
+			file_put_contents($varsPath, $varsNew);
+		}
+
+		// tailwind.css — static shell with @import to vars.css.
+		$tailwindNew =
+			"/* This file is automatically generated by a hook, when \n" .
+			"Kirby is in debug mode. Do not edit this file manually! */\n\n" .
+			"@import './vars.css';\n\n" .
+			"/* TailwindCSS */\n@import 'tailwindcss';\n\n" .
+			"@plugin 'tailwindcss-debug-screens' {\n\tclassName: \"debug-screens\";\n\tposition: \"bottom, left\";\n\tprefix: \"\";\n}\n\n" .
+			"/* Tailwind Watcher */\n" . implode("\n", $watchers) . "\n" .
+			implode("\n", $cssImports);
+		if (!file_exists($outputFile) || file_get_contents($outputFile) !== $tailwindNew) {
+			file_put_contents($outputFile, $tailwindNew);
+		}
+	}
 }
