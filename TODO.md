@@ -89,17 +89,21 @@ Composer-Autoload würde zentralisieren, funktioniert aber nur bei composer-inst
 
 ---
 
-### [ ] 6. Zwei Override-Formate konsolidieren
+### [x] 6. Override-Format konsolidiert (nur wrapped)  ✅ 2026-09-15
 
-**Problem**: `pwConfig::load()` akzeptiert
-- `$cfg['tabs']` (flat)
-- `$cfg['settings']['tabs']` (wrapped)
+**Problem**: `pwConfig::load()` akzeptierte
+- `$cfg['tabs']`, `$cfg['fields']` (flat, wrapped) für tabs/fields
+- `$cfg['defaults']`, `$cfg['editor']` immer flat — inkonsistent
 
 Zwischenzustand alter Migration.
 
-**Ziel**: Ein Format wählen (wrapped ist konsistenter), Migrations-Script für existierende JSONs. `pwConfig::load()` akzeptiert nur noch das eine Format.
+**Umsetzung**:
+1. `pwConfig::load()` liest jetzt **nur** noch `$cfg['settings'][*]` — tabs, fields, defaults und editor müssen unter `settings` liegen.
+2. `encom/site/config/pagewizard.php` migriert: für alle 8 Blöcke `defaults` und `editor` unter `settings` verschoben (Python-Skript, 853 Zeilen strukturell umformatiert).
+3. `encom/site/config/projectwizard/overrides.json` migriert: `pwtext.editor` → `pwtext.settings.editor`.
+4. Legacy-Fallback (`$cfg['tabs']` etc. auf Top-Level) komplett entfernt.
 
-**Test**: nach Migration in claude/rh/encom die overrides.json prüfen; visuellen Vergleich.
+**Ergebnis**: Ein einheitliches Format. Alle 25 encom-Panel-Blueprints byte-identisch, alle 8 claude-Blueprints byte-identisch, beide Frontends byte-identisch.
 
 ---
 
@@ -180,3 +184,4 @@ Zwischenzustand alter Migration.
 - ✅ Punkt 3: `pwSnippet`-Helper — 8 Snippets migriert, 251 Zeilen weg, alle byte-identisch
 - ✅ Punkt 2: `pwBlueprint`-Helper — 8 Blueprints migriert, 825 Zeilen weg, alle 22 JSONs byte-identisch
 - ✅ Punkt 5: `settings.json.defaults` als konsolidierter Ersatz für separate `defaults.json`, 2 encom-User-Plugins migriert, Legacy-Fallback bleibt
+- ✅ Punkt 6: Override-Format auf wrapped konsolidiert, encom pagewizard.php + overrides.json migriert, alle 25 Blueprints byte-identisch

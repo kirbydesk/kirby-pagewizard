@@ -238,8 +238,8 @@ class pwConfig
 		$raw = self::projectConfig("kirbyblocks.{$blockType}");
 		$cfg = is_array($raw) ? $raw : [];
 
-		// Support both flat format ($cfg['tabs']) and wrapped format ($cfg['settings']['tabs'])
-		$cfgVis = (!empty($cfg['settings']) && is_array($cfg['settings'])) ? $cfg['settings'] : $cfg;
+		// Overrides live under $cfg['settings'] — one wrapped format only.
+		$cfgVis = (!empty($cfg['settings']) && is_array($cfg['settings'])) ? $cfg['settings'] : [];
 
 		// tabs
 		if (!empty($cfgVis['tabs']) && is_array($cfgVis['tabs'])) {
@@ -292,29 +292,22 @@ class pwConfig
 				self::extractCategoryDefaults($effectsVis)
 			);
 		}
-		// defaults overrides (legacy format from existing stored overrides)
-		if (!empty($cfg['defaults']) && is_array($cfg['defaults'])) {
-			$isNested = isset($cfg['defaults']['layout']) || isset($cfg['defaults']['style'])
-				|| isset($cfg['defaults']['grid']) || isset($cfg['defaults']['settings'])
-				|| isset($cfg['defaults']['effects']);
-			if ($isNested) {
-				$flatOverrides = array_merge(
-					$cfg['defaults']['layout']   ?? [],
-					$cfg['defaults']['style']    ?? [],
-					$cfg['defaults']['grid']     ?? [],
-					$cfg['defaults']['settings'] ?? [],
-					$cfg['defaults']['effects']  ?? []
-				);
-				$defaults = array_merge($defaults, $flatOverrides);
-				if (!empty($cfg['defaults']['content'])) {
-					$fields = array_merge($fields, self::flattenContentDefaults($cfg['defaults']['content']));
-				}
-			} else {
-				$defaults = array_merge($defaults, $cfg['defaults']);
+		// defaults overrides — nested by category (content/layout/style/grid/settings/effects)
+		if (!empty($cfgVis['defaults']) && is_array($cfgVis['defaults'])) {
+			$flatOverrides = array_merge(
+				$cfgVis['defaults']['layout']   ?? [],
+				$cfgVis['defaults']['style']    ?? [],
+				$cfgVis['defaults']['grid']     ?? [],
+				$cfgVis['defaults']['settings'] ?? [],
+				$cfgVis['defaults']['effects']  ?? []
+			);
+			$defaults = array_merge($defaults, $flatOverrides);
+			if (!empty($cfgVis['defaults']['content'])) {
+				$fields = array_merge($fields, self::flattenContentDefaults($cfgVis['defaults']['content']));
 			}
 		}
-		if (!empty($cfg['editor']) && is_array($cfg['editor'])) {
-			foreach ($cfg['editor'] as $key => $value) {
+		if (!empty($cfgVis['editor']) && is_array($cfgVis['editor'])) {
+			foreach ($cfgVis['editor'] as $key => $value) {
 				if (is_array($value) && isset($editor[$key]) && is_array($editor[$key])) {
 					$editor[$key] = array_merge($editor[$key], $value);
 				} else {
