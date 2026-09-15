@@ -76,13 +76,16 @@ Composer-Autoload würde zentralisieren, funktioniert aber nur bei composer-inst
 
 ## Priorität 2 — Legacy aufräumen
 
-### [x] 5. `defaults.json` konsolidiert  ✅ 2026-09-15
+### [x] 5. Separates `defaults.json` entfernt  ✅ 2026-09-15
 
-**Problem**: `pwConfig::load()` hat ~30 Zeilen Legacy-Handling für alte `defaults.json`-Files (Pre-Projectwizard). In pluginsources selbst nicht mehr genutzt, aber **encom hat 2 aktive User-Plugins** (`site-monstercards`, `site-monstercall`), die auf das Format angewiesen sind.
+**Problem**: `pwConfig::load()` hat ~30 Zeilen Legacy-Handling für alte `defaults.json`-Files (Pre-Projectwizard). In pluginsources selbst nicht mehr genutzt, aber **encom hatte 2 aktive User-Plugins** (`site-monstercards`, `site-monstercall`), die darauf angewiesen waren.
 
-**Umsetzung**: statt kompletter Entfernung Konsolidierung — `pwConfig::load()` liest jetzt bevorzugt `settings.json.defaults` (Top-Level-Key) und fällt auf separate `defaults.json` zurück. Beide Formate haben identische Semantik. Migration der 2 User-Plugins: `defaults.json`-Inhalt nach `settings.json.defaults` verschoben, `defaults.json` gelöscht.
+**Umsetzung**:
+1. Handler-Semantik (~25 Zeilen) beibehalten, aber die Datenquelle konsolidiert: `settings.json.defaults` (Top-Level-Key) statt separater `defaults.json`.
+2. Beide encom-User-Plugins migriert: `defaults.json`-Inhalt nach `settings.json.defaults` verschoben, `defaults.json` gelöscht.
+3. File-Fallback für separate `defaults.json` komplett entfernt.
 
-**Ergebnis**: Ein-File-Config für neue Plugins möglich. Legacy-Fallback bleibt für unbekannte externe Plugins → keine Breaking Changes. Panel-Blueprints der 2 migrierten Plugins byte-identisch, encom-Frontend byte-identisch.
+**Ergebnis**: Ein-File-Config für alle Plugins. Panel-Blueprints der 2 migrierten Plugins byte-identisch, encom + claude Frontend byte-identisch. Falls je ein Plugin mit alter separater `defaults.json` auftaucht: 30-Sekunden-Copy in `settings.json.defaults`.
 
 ---
 

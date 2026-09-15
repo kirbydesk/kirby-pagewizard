@@ -198,17 +198,10 @@ class pwConfig
 			self::extractCategoryDefaults($effectsVis)
 		);
 
-		/* -------------- Legacy defaults (pre-projectwizard plugins) --------------*/
-		// Source priority:
-		//   1. settings.json's top-level "defaults" key (preferred, consolidated)
-		//   2. separate defaults.json file (legacy, kept for backward compat)
+		/* -------------- Optional defaults block (pre-projectwizard style) ---------*/
+		// Plugins that use the older content/layout/style/grid/settings/effects
+		// defaults shape can carry it under settings.json's top-level "defaults" key.
 		$legacyDefaults = $settingsRaw['defaults'] ?? null;
-		if ($legacyDefaults === null) {
-			$legacyDefaultsFile = $configDir . '/defaults.json';
-			if (file_exists($legacyDefaultsFile)) {
-				$legacyDefaults = json_decode(file_get_contents($legacyDefaultsFile), true) ?? [];
-			}
-		}
 		if (is_array($legacyDefaults)) {
 			// Content section: { heading: { align: "left", level: "h2" } } → fields[align-heading], fields[level-heading]
 			foreach ($legacyDefaults['content'] ?? [] as $fieldKey => $props) {
