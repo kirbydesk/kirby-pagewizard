@@ -8,6 +8,50 @@ class pwConfig
 	private static bool $fontsGenerated = false;
 	private static bool $panelColorsGenerated = false;
 
+	/* ============================================================
+	   I/O helpers — one place for reading JSON config files.
+	   ============================================================ */
+
+	/**
+	 * Read + json_decode a file, returning the decoded array or a
+	 * caller-provided default when the file is missing or invalid JSON.
+	 */
+	private static function readJson(string $path, array $default = []): array
+	{
+		if (!file_exists($path)) return $default;
+		$decoded = json_decode(file_get_contents($path), true);
+		return is_array($decoded) ? $decoded : $default;
+	}
+
+	/**
+	 * Read a JSON file from the kirby-pagewizard plugin's /config directory.
+	 * Example: pluginConfig('navigation') → <plugin>/config/navigation.json
+	 */
+	private static function pluginConfig(string $name, array $default = []): array
+	{
+		return self::readJson(self::pluginDir() . '/config/' . $name . '.json', $default);
+	}
+
+	/**
+	 * Read a JSON file from the project's projectwizard override directory.
+	 * Example: projectOverride('navigation') → site/config/projectwizard/navigation.json
+	 */
+	private static function projectOverride(string $name, array $default = []): array
+	{
+		return self::readJson(kirby()->root('site') . '/config/projectwizard/' . $name . '.json', $default);
+	}
+
+	/**
+	 * Path to the kirby-pagewizard plugin directory. Cached to avoid
+	 * repeated Kirby::plugin() lookups within a request.
+	 */
+	private static function pluginDir(): string
+	{
+		static $cached = null;
+		if ($cached !== null) return $cached;
+		return $cached = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
+	}
+
 	/**
 	 * Read projectwizard config directly from JSON files.
 	 * Replaces the old option('kirbydesk.pagewizard') approach.
@@ -15,18 +59,10 @@ class pwConfig
 	public static function projectConfig(?string $key = null)
 	{
 		if (self::$projectConfig === null) {
-			$dir = kirby()->root('site') . '/config/projectwizard';
-			self::$projectConfig = [];
-
-			// Active blocks
-			$blocksFile = $dir . '/blocks.json';
-			self::$projectConfig['blocks'] = file_exists($blocksFile)
-				? (json_decode(file_get_contents($blocksFile), true)['blocks'] ?? []) : [];
-
-			// Block overrides
-			$overridesFile = $dir . '/overrides.json';
-			self::$projectConfig['kirbyblocks'] = file_exists($overridesFile)
-				? (json_decode(file_get_contents($overridesFile), true) ?? []) : [];
+			self::$projectConfig = [
+				'blocks'       => self::projectOverride('blocks')['blocks'] ?? [],
+				'kirbyblocks'  => self::projectOverride('overrides'),
+			];
 		}
 
 		if ($key === null) return self::$projectConfig;
@@ -50,12 +86,8 @@ class pwConfig
 		static $cache = null;
 		if ($cache !== null) return $cache;
 
-		$pluginDir = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
-		$navFile = $pluginDir . '/config/navigation.json';
-		$nav = file_exists($navFile) ? (json_decode(file_get_contents($navFile), true) ?? []) : [];
-
-		$overrideFile = kirby()->root('site') . '/config/projectwizard/navigation.json';
-		$overrides = file_exists($overrideFile) ? (json_decode(file_get_contents($overrideFile), true)['global'] ?? []) : [];
+		$nav       = self::pluginConfig('navigation');
+		$overrides = self::projectOverride('navigation')['global'] ?? [];
 
 		$flat = [];
 		foreach ($nav as $group) {
@@ -92,12 +124,8 @@ class pwConfig
 		static $cache = null;
 		if ($cache !== null) return $cache;
 
-		$pluginDir = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
-		$footerFile = $pluginDir . '/config/footer.json';
-		$footer = file_exists($footerFile) ? (json_decode(file_get_contents($footerFile), true) ?? []) : [];
-
-		$overrideFile = kirby()->root('site') . '/config/projectwizard/footer.json';
-		$overrides = file_exists($overrideFile) ? (json_decode(file_get_contents($overrideFile), true)['global'] ?? []) : [];
+		$footer    = self::pluginConfig('footer');
+		$overrides = self::projectOverride('footer')['global'] ?? [];
 
 		$flat = [];
 		foreach ($footer as $group) {
@@ -144,17 +172,8 @@ class pwConfig
 		if ($configDir === null) return ['defaults' => [], 'overrides' => []];
 
 		$defaults = [];
-		$settingsFile = $configDir . '/settings.json';
-		if (file_exists($settingsFile)) {
-			$settings = json_decode(file_get_contents($settingsFile), true) ?? [];
-			$defaults = $settings['values'] ?? [];
-		}
-
-		$overrides = [];
-		$overrideFile = kirby()->root('site') . '/config/projectwizard/' . $blockType . '.json';
-		if (file_exists($overrideFile)) {
-			$overrides = json_decode(file_get_contents($overrideFile), true) ?? [];
-		}
+		$defaults  = self::readJson($configDir . '/settings.json')['values'] ?? [];
+		$overrides = self::projectOverride($blockType);
 
 		return ['defaults' => $defaults, 'overrides' => $overrides];
 	}
@@ -172,10 +191,7 @@ class pwConfig
 		}
 
 		/* -------------- Block Settings (merged source for toggles + defaults) --------------*/
-		$settingsFile = $configDir . '/settings.json';
-		$settingsRaw = file_exists($settingsFile)
-			? json_decode(file_get_contents($settingsFile), true)
-			: [];
+		$settingsRaw = self::readJson($configDir . '/settings.json');
 
 		$tabSettings = $settingsRaw['tabs'] ?? [];
 
@@ -229,10 +245,7 @@ class pwConfig
 		}
 
 		/* -------------- Editor config --------------*/
-		$editorFile = $configDir . '/editor.json';
-		$editor = file_exists($editorFile)
-			? json_decode(file_get_contents($editorFile), true)
-			: [];
+		$editor = self::readJson($configDir . '/editor.json');
 
 		/* -------------- Config overrides from config.php --------------*/
 		$raw = self::projectConfig("kirbyblocks.{$blockType}");
@@ -514,32 +527,24 @@ class pwConfig
 		$patchConfigDir = kirby()->root('site') . '/patches/config';
 		if (!is_dir($patchConfigDir)) mkdir($patchConfigDir, 0777, true);
 
-		// Fonts: load early so all sections can reference them for font-family lookups
-		$fontsDefault = $pluginDir . '/config/fonts.json';
-		$fontsProjectFile = kirby()->root('site') . '/config/projectwizard/fonts.json';
-		$builtinFonts = file_exists($fontsDefault) ? (json_decode(file_get_contents($fontsDefault), true) ?? []) : [];
-		$projectFonts = file_exists($fontsProjectFile) ? (json_decode(file_get_contents($fontsProjectFile), true) ?? []) : [];
+		// Fonts: load early so all sections can reference them for font-family lookups.
+		// Reads the plugin's own config/fonts.json (only pagewizard actually has one —
+		// for other plugins in the loop, this is intentionally empty).
+		$builtinFonts = self::readJson($pluginDir . '/config/fonts.json');
+		$projectFonts = self::projectOverride('fonts');
 		unset($projectFonts['_default']);
 		$allFonts = array_merge($builtinFonts, $projectFonts);
 
-		// Resolve body default font (used as fallback when font-family value is "default")
-		$pwDir = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
-		$globalDefault = $pwDir . '/config/global.json';
-		$globalOverride = kirby()->root('site') . '/config/projectwizard/global.json';
-		$globalData = file_exists($globalDefault) ? (json_decode(file_get_contents($globalDefault), true) ?? []) : [];
-		$globalOv = file_exists($globalOverride) ? (json_decode(file_get_contents($globalOverride), true) ?? []) : [];
+		// Resolve body default font (always reads pagewizard's global.json).
+		$globalData = self::pluginConfig('global');
+		$globalOv   = self::projectOverride('global');
 		$bodyDefaultFont = $globalOv['global']['font-family-default']
 			?? $globalData['body']['vars']['font-family-default']['value']
 			?? 'Inter';
 
-		// Navigation: read config/navigation.json (nested format), merge with projectwizard overrides
-		$navDefault = $pluginDir . '/config/navigation.json';
-		$navOverride = kirby()->root('site') . '/config/projectwizard/navigation.json';
-		$nav = file_exists($navDefault) ? (json_decode(file_get_contents($navDefault), true) ?? []) : [];
-		$navOverrides = [];
-		if (file_exists($navOverride)) {
-			$navOverrides = json_decode(file_get_contents($navOverride), true) ?? [];
-		}
+		// Navigation: read the plugin's own config/navigation.json (plugin-local).
+		$nav          = self::readJson($pluginDir . '/config/navigation.json');
+		$navOverrides = self::projectOverride('navigation');
 
 		$rootLines = [];
 		$navLinesLg = [];
@@ -666,14 +671,9 @@ class pwConfig
 			$imports[] = ":root {\n" . implode("\n", $globalLines) . "\n}";
 		}
 
-		// Font sizes: read config/fontsizes.json, merge with projectwizard overrides
-		$fontsDefault = $pluginDir . '/config/fontsizes.json';
-		$fontsOverride = kirby()->root('site') . '/config/projectwizard/fontsizes.json';
-		$fonts = file_exists($fontsDefault) ? (json_decode(file_get_contents($fontsDefault), true) ?? []) : [];
-		$fontOverrides = [];
-		if (file_exists($fontsOverride)) {
-			$fontOverrides = json_decode(file_get_contents($fontsOverride), true) ?? [];
-		}
+		// Font sizes: read the plugin's own config/fontsizes.json (plugin-local).
+		$fonts         = self::readJson($pluginDir . '/config/fontsizes.json');
+		$fontOverrides = self::projectOverride('fontsizes');
 
 		$breakpoints = [
 			'default' => null,
@@ -702,14 +702,9 @@ class pwConfig
 			}
 		}
 
-		// Elements: read config/elements.json, merge with projectwizard overrides
-		$elementsDefault = $pluginDir . '/config/elements.json';
-		$elementsOverride = kirby()->root('site') . '/config/projectwizard/elements.json';
-		$elements = file_exists($elementsDefault) ? (json_decode(file_get_contents($elementsDefault), true) ?? []) : [];
-		$elementOverrides = [];
-		if (file_exists($elementsOverride)) {
-			$elementOverrides = json_decode(file_get_contents($elementsOverride), true) ?? [];
-		}
+		// Elements: read the plugin's own config/elements.json (plugin-local).
+		$elements         = self::readJson($pluginDir . '/config/elements.json');
+		$elementOverrides = self::projectOverride('elements');
 
 		$elementLines = [];
 		$elementLinesLg = [];
@@ -787,14 +782,9 @@ class pwConfig
 			$imports[] = "@media (min-width: 1280px) {\n:root {\n" . implode("\n", $elementLinesXl) . "\n}\n}";
 		}
 
-		// Footer: read config/footer.json, merge with projectwizard overrides
-		$footerDefault = $pluginDir . '/config/footer.json';
-		$footerOverride = kirby()->root('site') . '/config/projectwizard/footer.json';
-		$footer = file_exists($footerDefault) ? (json_decode(file_get_contents($footerDefault), true) ?? []) : [];
-		$footerOverrides = [];
-		if (file_exists($footerOverride)) {
-			$footerOverrides = json_decode(file_get_contents($footerOverride), true) ?? [];
-		}
+		// Footer: read the plugin's own config/footer.json (plugin-local).
+		$footer          = self::readJson($pluginDir . '/config/footer.json');
+		$footerOverrides = self::projectOverride('footer');
 
 		$footerLines = [];
 		foreach ($footer as $groupKey => $group) {
@@ -957,18 +947,12 @@ class pwConfig
 		self::$panelColorsGenerated = true;
 
 		// Read color values directly from JSON configs (always from pagewizard plugin)
-		$pwDir = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
-		$elementsDefault = $pwDir . '/config/elements.json';
-		$globalDefault   = $pwDir . '/config/global.json';
-		$elements = file_exists($elementsDefault) ? (json_decode(file_get_contents($elementsDefault), true) ?? []) : [];
-		$global   = file_exists($globalDefault) ? (json_decode(file_get_contents($globalDefault), true) ?? []) : [];
+		$elements = self::pluginConfig('elements');
+		$global   = self::pluginConfig('global');
 
-		// Merge with projectwizard overrides
-		$overrideDir = kirby()->root('site') . '/config/projectwizard';
-		$elementsOverrides = file_exists($overrideDir . '/elements.json')
-			? (json_decode(file_get_contents($overrideDir . '/elements.json'), true)['global'] ?? []) : [];
-		$globalOverrides = file_exists($overrideDir . '/global.json')
-			? (json_decode(file_get_contents($overrideDir . '/global.json'), true)['global'] ?? []) : [];
+		// Merge with projectwizard overrides (only the ['global'] slice is relevant here)
+		$elementsOverrides = self::projectOverride('elements')['global'] ?? [];
+		$globalOverrides   = self::projectOverride('global')['global']   ?? [];
 
 		// Collect all color definitions from JSON (elements + global)
 		$allColors = [];

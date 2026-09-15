@@ -117,16 +117,19 @@ Zwischenzustand alter Migration.
 
 ## Priorität 3 — Struktur/Naming
 
-### [ ] 8. Config-Reader konsolidieren
+### [x] 8. Config-Reader konsolidiert  ✅ 2026-09-15
 
-**Problem**: Drei parallele Wege in `pwConfig`:
-- `projectConfig("kirbyblocks.pwtext")` — Dot-Notation
-- `navConfig()` / `footerConfig()` — spezialisiert
-- `tailwindSetup()` liest configs direkt selbst nochmal
+**Problem**: ~10× wiederholtes `file_exists ? json_decode(file_get_contents) : []`-Boilerplate — in `projectConfig()`, `navConfig()`, `footerConfig()`, `load()`, `tailwindSetup()`, `panelColorsSetup()`.
 
-**Ziel**: eine Reader-Facade. `navConfig` / `footerConfig` bleiben als Convenience-Wrapper.
+**Umsetzung**: Drei private I/O-Helper in `pwConfig`:
+- `readJson($path, $default = [])` — sichere Read+Decode mit Default-Rückgabe
+- `pluginConfig($name)` — liest aus pagewizard's `/config/<name>.json`
+- `projectOverride($name)` — liest aus `site/config/projectwizard/<name>.json`
+- `pluginDir()` — gecachte Pfad-Auflösung für pagewizard's Root
 
-**Test**: alle Config-abhängigen Bereiche visuell (Nav, Footer, Blocks).
+Alle Reader benutzen jetzt diese Helper. Ausnahme: in `tailwindSetup()` bleiben die **plugin-lokalen** JSONs (fonts, navigation, fontsizes, elements, footer) auf `$pluginDir` (Parameter) — bewusst, weil tailwindSetup pro Plugin läuft und für Nicht-pagewizard-Plugins keine Datei existiert (leerer Output). Für global/pagewizard-Wide Configs (global.json etc.) wird die Facade genutzt.
+
+**Ergebnis**: -16 Zeilen netto in `config.php` (82 in / 98 out), klare Trennung zwischen Plugin-Default und Projekt-Override. Frontend/Blueprints/tailwind.css/vars.css in claude + encom byte-identisch verifiziert.
 
 ---
 
@@ -185,3 +188,4 @@ Zwischenzustand alter Migration.
 - ✅ Punkt 2: `pwBlueprint`-Helper — 8 Blueprints migriert, 825 Zeilen weg, alle 22 JSONs byte-identisch
 - ✅ Punkt 5: `settings.json.defaults` als konsolidierter Ersatz für separate `defaults.json`, 2 encom-User-Plugins migriert, Legacy-Fallback bleibt
 - ✅ Punkt 6: Override-Format auf wrapped konsolidiert, encom pagewizard.php + overrides.json migriert, alle 25 Blueprints byte-identisch
+- ✅ Punkt 8: Config-Reader konsolidiert — readJson/pluginConfig/projectOverride als I/O-Facade, -16 Zeilen netto
