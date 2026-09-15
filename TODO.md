@@ -133,13 +133,13 @@ Alle Reader benutzen jetzt diese Helper. Ausnahme: in `tailwindSetup()` bleiben 
 
 ---
 
-### [ ] 9. `ProjectConfig::detectBlocks()` über `pwConfig::registered()`
+### [x] 9. `ProjectConfig::detectBlocks()` über `pwConfig::registered()`  ✅ 2026-09-15
 
-**Problem**: Aktuell Filesystem-Scan über `site/plugins/*/src/config/settings.json`. Registry wäre schneller und deterministischer.
+**Problem**: Alter Ansatz war reiner Filesystem-Scan (`glob site/plugins/*`), gefolgt von regex-parse von `index.php` für den blockType. Die Registry (`pwConfig::registered()`) enthält bereits blockType → configDir und ist zur Zeit jedes bekannten Aufrufs (Panel-Areas + API) bereits vollständig.
 
-**Ziel**: Registry als primäre Quelle, Filesystem-Scan als Fallback für nicht-registrierte Blocks.
+**Umsetzung**: `detectBlocks()` nutzt jetzt **Registry primär** (kein Filesystem-Scan, keine regex-Extraktion), fällt danach auf glob-Scan **nur** für Plugins zurück, die noch nicht registriert sind. Metadaten-Extraktion (name, icon, package.json, i18n) in eine neue private `buildBlockInfo()`-Methode verschoben und wird beiden Wegen wiederverwendet. Zusätzlich per-Request-Cache — detectBlocks() wird aus mehreren Areas (api.php, areas.php, blockConfig()) aufgerufen; jetzt nur ein Scan pro Request.
 
-**Test**: Panel > Project Wizard > Overview zeigt alle Blocks. Aktivieren, Speichern, Frontend-Render.
+**Ergebnis**: Kein Filesystem-Zugriff im Registry-Pfad, deterministische Reihenfolge, byte-identische Ausgabe. Frontend + Panel-Blueprints unverändert in claude + encom.
 
 ---
 
@@ -189,3 +189,8 @@ Alle Reader benutzen jetzt diese Helper. Ausnahme: in `tailwindSetup()` bleiben 
 - ✅ Punkt 5: `settings.json.defaults` als konsolidierter Ersatz für separate `defaults.json`, 2 encom-User-Plugins migriert, Legacy-Fallback bleibt
 - ✅ Punkt 6: Override-Format auf wrapped konsolidiert, encom pagewizard.php + overrides.json migriert, alle 25 Blueprints byte-identisch
 - ✅ Punkt 8: Config-Reader konsolidiert — readJson/pluginConfig/projectOverride als I/O-Facade, -16 Zeilen netto
+- ✅ Punkt 9: detectBlocks nutzt Registry primär, glob als Fallback, per-Request-Cache
+
+## Bekannte Kleinigkeiten (nachziehen wenn Zeit)
+
+- `detectBlocks()` icon-Extraktion via regex trifft den ersten `'icon' => '...'` in `blueprints.php`. Bei multicolumn ist das seit Punkt 2 (pwBlueprint-Refactor) der Sub-Block-Icon `title` statt Main-Block-Icon `layout-columns`. Panel-menu-Only, kein Frontend-Impact. Fix: `package.json.icon` in kirbyblock-multicolumn setzen (analog für alle 8 Plugins für Konsistenz).
