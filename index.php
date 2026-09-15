@@ -8,6 +8,7 @@ require_once __DIR__ . '/src/helpers/blocks/style.php';
 require_once __DIR__ . '/src/helpers/blocks/settings.php';
 require_once __DIR__ . '/src/helpers/blocks/editor.php';
 require_once __DIR__ . '/src/helpers/blocks/snippet.php';
+require_once __DIR__ . '/src/helpers/blocks/blueprint.php';
 
 Kirby::plugin('kirbydesk/kirby-pagewizard', [
 	/* -------------- Options --------------*/

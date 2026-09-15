@@ -26,23 +26,24 @@ return ['route:after' => fn() => pwConfig::runProjectBuilder()];
 
 ---
 
-### [ ] 2. `pwBlueprint::build()`-Helper
+### [x] 2. `pwBlueprint`-Helper  ✅ 2026-09-15
 
 **Problem**: `kirbyblock-*/src/extensions/blueprints.php` sind zu ~80% identisch (Config-Load, Content-Tab-Assembly, Style/Layout/Grid/Settings-Tabs). Bei text 89 Zeilen, bei hero 144.
 
-**Ziel**: Helper wie
-```php
-pwBlueprint::build('pwtext', [
-  'icon'          => 'text-left',
-  'contentExtras' => [...],   // block-spezifische Content-Fields
-  'layoutExtras'  => [...],   // hero: position-horizontal/vertical
-  'styleExtras'   => [...],   // hero: background-type, image, video
-]);
-```
+**Umsetzung**: `pwBlueprint::main($blockName, $builder)` in `src/helpers/blocks/blueprint.php` — kapselt Config-Load, Standard-Tabs, headlineContent-Header. Ergänzender `pwBlueprint::stdContent($cfg, ['tagline','heading','editor','buttons'])` als Preset-Factory für die häufigsten Content-Fields.
 
-**Nutzen**: Neue Blocks in ~15 statt ~90 Zeilen. Bugfixes im Blueprint-Assembly gelten für alle Blocks.
+**Ergebnis**: 8 Main-Blueprints migriert, ~825 Zeilen weniger (1316 → 491, mit dem 178-Zeilen-Helper netto -647). Alle 22 Blueprint-JSONs byte-identisch verifiziert (8 Main + 14 Sub).
 
-**Test**: pro migriertem Block visueller Vergleich (Panel-Blueprint-Rendering + Frontend-Rendering).
+| Blueprint | vorher | nachher |
+|---|---|---|
+| text | 89 | 7 |
+| quote | 59 | 21 |
+| heading | 67 | 7 |
+| media | 160 | 73 |
+| featurelist | 118 | 43 |
+| multicolumn | 433 | 249 |
+| hero | 144 | 66 |
+| cardlets | 246 | 157 |
 
 ---
 
@@ -174,3 +175,4 @@ Zwischenzustand alter Migration.
 - ✅ Punkt 1: `projectbuilder.php` → 2-Zeilen-Wrapper via `pwConfig::runProjectBuilder()`
 - ✅ Punkt 7: `method_exists()`-Checks entfernt (mit Punkt 1)
 - ✅ Punkt 3: `pwSnippet`-Helper — 8 Snippets migriert, 251 Zeilen weg, alle byte-identisch
+- ✅ Punkt 2: `pwBlueprint`-Helper — 8 Blueprints migriert, 825 Zeilen weg, alle 22 JSONs byte-identisch
