@@ -160,15 +160,22 @@ Alle Reader benutzen jetzt diese Helper. Ausnahme: in `tailwindSetup()` bleiben 
 
 ## Priorität 4 — Neue Erkenntnisse aus 2026-09-15
 
-### [ ] 11. Update-Checkliste für Live-Projekte dokumentieren
+### [x] 11. Update-Checkliste für Live-Projekte dokumentiert  ✅ 2026-09-15
 
-**Problem**: Bei rh und encom haben wir Legacy-Files gefunden, die nach Plugin-Refactor obsolet wurden und aktiv Bugs verursachten:
-- Alte CSS-Patches (hardcoded statt var-basiert) überschreiben neue Plugin-CSS
-- Alte Snippet-Overrides in `site/snippets/blocks/*.php` blockieren neue Snippet-Version
+**Problem**: Nach Plugin-Update können projekt-lokale Dateien aus älterer Version stumm das neue Plugin überschreiben (alte CSS-Patches, alte Snippet-Overrides, alte projectbuilder.php).
 
-**Ziel**: In `MIGRATION.md` (bereits in rh/encom vorhanden) einen Deprecation-Check-Schritt ergänzen: bei jedem Plugin-Update prüfen, welche Patches/Overrides ggf. obsolet sind (`_`-Prefix umschalten).
+**Umsetzung**: Neuer Schritt **4.5 Deprecation-Check** in `MIGRATION.md` — konkrete Prüfstellen mit `find`/`ls`-Snippets für:
+1. CSS-Patches in `site/patches/css/`
+2. Snippet-Overrides in `site/snippets/blocks/*.php`
+3. Projekt-lokale `projectbuilder.php` (soll ab v1.1.35 einzeiliger Wrapper sein)
+4. Alte projectwizard-Overrides (defaults.json → settings.json.defaults; flat overrides → wrapped)
 
-**Test**: nach Update ohne Deprecation-Check: bekanntes Symptom (font-sizes, fehlende Radius, alte HTML-Struktur).
+Vorgehen: `_`-Prefix zum Deaktivieren → Frontend/Panel-Test → wenn identisch, löschen.
+
+Verteilung:
+- `rh/MIGRATION.md` (bestehend) erweitert
+- `encom/MIGRATION.md` (neu angelegt)
+- `pluginsources/kirby-projectwizard/src/scaffold/copy/MIGRATION.md` als Template für zukünftige Projekte
 
 ---
 
@@ -196,6 +203,7 @@ Alle Reader benutzen jetzt diese Helper. Ausnahme: in `tailwindSetup()` bleiben 
 - ✅ Punkt 8: Config-Reader konsolidiert — readJson/pluginConfig/projectOverride als I/O-Facade, -16 Zeilen netto
 - ✅ Punkt 9: detectBlocks nutzt Registry primär, glob als Fallback, per-Request-Cache
 - ✅ Punkt 10: pwConfig I/O-Helper public, ProjectConfig-Duplikation entfernt, Aufgabentrennung dokumentiert
+- ✅ Punkt 11: Deprecation-Check-Schritt in MIGRATION.md (rh + encom + scaffold-Template)
 
 ## Bekannte Kleinigkeiten (nachziehen wenn Zeit)
 
