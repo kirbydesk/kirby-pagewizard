@@ -7,7 +7,6 @@ class pwConfig
 	/** @deprecated — font generation now checks $imports directly */
 	private static bool $fontsGenerated = false;
 	private static bool $panelColorsGenerated = false;
-	private static bool $blockValuesGenerated = false;
 
 	/**
 	 * Read projectwizard config directly from JSON files.
@@ -881,9 +880,12 @@ class pwConfig
 		// Per-block CSS variables (each plugin's settings.json 'values' section,
 		// merged with site/config/projectwizard/<blockType>.json overrides).
 		// Each variable becomes --<blockType>-<varName>[suffix]: value;
-		// Render only once per build — tailwindSetup() runs per plugin.
-		if (!self::$blockValuesGenerated) {
-			self::$blockValuesGenerated = true;
+		// Rendered for every tailwindSetup() call. Duplicate :root {} blocks
+		// across multiple hook invocations in the same request (e.g. language
+		// redirect fires route:after twice) are harmless — Tailwind's build
+		// consolidates identical declarations. A previous static guard broke
+		// multi-request scenarios: the second hook invocation had a fresh
+		// $imports array but the static was still true → block-vars missing.
 		$blockValueLines = [];
 		foreach (self::registered() as $blockType => $blockConfigDir) {
 			$blockValues   = self::loadValues($blockType);
@@ -938,7 +940,6 @@ class pwConfig
 		}
 		if (!empty($blockValueLines)) {
 			$imports[] = ":root {\n" . implode("\n", $blockValueLines) . "\n}";
-		}
 		}
 
 		// Sprites stub
