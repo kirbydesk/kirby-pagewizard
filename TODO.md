@@ -76,13 +76,13 @@ Composer-Autoload würde zentralisieren, funktioniert aber nur bei composer-inst
 
 ## Priorität 2 — Legacy aufräumen
 
-### [ ] 5. Legacy `defaults.json`-Pfad in `pwConfig::load()` entfernen
+### [x] 5. `defaults.json` konsolidiert  ✅ 2026-09-15
 
-**Problem**: `pwConfig::load()` hat ~30 Zeilen Legacy-Handling für alte `defaults.json`-Files (Pre-Projectwizard). Weder Packagist-Version noch pluginsources-Version der kirbyblock-* hat noch eins.
+**Problem**: `pwConfig::load()` hat ~30 Zeilen Legacy-Handling für alte `defaults.json`-Files (Pre-Projectwizard). In pluginsources selbst nicht mehr genutzt, aber **encom hat 2 aktive User-Plugins** (`site-monstercards`, `site-monstercall`), die auf das Format angewiesen sind.
 
-**Voraussetzung**: prüfen ob externe/User-Plugins darauf angewiesen sind. Wenn nein → entfernen.
+**Umsetzung**: statt kompletter Entfernung Konsolidierung — `pwConfig::load()` liest jetzt bevorzugt `settings.json.defaults` (Top-Level-Key) und fällt auf separate `defaults.json` zurück. Beide Formate haben identische Semantik. Migration der 2 User-Plugins: `defaults.json`-Inhalt nach `settings.json.defaults` verschoben, `defaults.json` gelöscht.
 
-**Test**: alle Blocks in claude visuell prüfen.
+**Ergebnis**: Ein-File-Config für neue Plugins möglich. Legacy-Fallback bleibt für unbekannte externe Plugins → keine Breaking Changes. Panel-Blueprints der 2 migrierten Plugins byte-identisch, encom-Frontend byte-identisch.
 
 ---
 
@@ -176,3 +176,4 @@ Zwischenzustand alter Migration.
 - ✅ Punkt 7: `method_exists()`-Checks entfernt (mit Punkt 1)
 - ✅ Punkt 3: `pwSnippet`-Helper — 8 Snippets migriert, 251 Zeilen weg, alle byte-identisch
 - ✅ Punkt 2: `pwBlueprint`-Helper — 8 Blueprints migriert, 825 Zeilen weg, alle 22 JSONs byte-identisch
+- ✅ Punkt 5: `settings.json.defaults` als konsolidierter Ersatz für separate `defaults.json`, 2 encom-User-Plugins migriert, Legacy-Fallback bleibt
