@@ -35,7 +35,7 @@ class pwConfig
 
 	/**
 	 * Read a JSON file from the project's projectwizard override directory.
-	 * Example: projectOverride('navigation') → site/config/projectwizard/navigation.json
+	 * Example: projectOverride('navigation') → content/.projectwizard/navigation.json
 	 */
 	public static function projectOverride(string $name, array $default = []): array
 	{
@@ -54,12 +54,32 @@ class pwConfig
 	}
 
 	/**
-	 * Path to the project's projectwizard config directory
-	 * (site/config/projectwizard). Where overrides live.
+	 * Path to the project's projectwizard override directory. Panel-edited
+	 * JSON configs (blocks, overrides, global, navigation, footer,
+	 * elements, fontsizes, fonts, per-block values) live here.
+	 *
+	 * Location: content/.projectwizard/ — deliberately inside the content
+	 * folder so panel edits (design, colors, block visibility etc. that
+	 * the editor makes) travel with the content repo, not the code repo.
+	 *
+	 * Auto-migrates from the legacy location site/config/projectwizard/
+	 * on first access after upgrading the plugin.
 	 */
 	public static function projectDir(): string
 	{
-		return kirby()->root('site') . '/config/projectwizard';
+		static $migrated = false;
+		$new = kirby()->root('content') . '/.projectwizard';
+
+		if (!$migrated) {
+			$migrated = true;
+			$legacy = kirby()->root('site') . '/config/projectwizard';
+			if (is_dir($legacy) && !is_dir($new)) {
+				// Ensure parent exists (content/ always does in a Kirby install).
+				@rename($legacy, $new);
+			}
+		}
+
+		return $new;
 	}
 
 	/**
@@ -170,7 +190,7 @@ class pwConfig
 
 	/**
 	 * Load per-block CSS-variable definitions ('values' section in settings.json)
-	 * plus any user-edited overrides from site/config/projectwizard/<blockType>.json.
+	 * plus any user-edited overrides from content/.projectwizard/<blockType>.json.
 	 *
 	 * Returns ['defaults' => [...], 'overrides' => [...]] where defaults follows
 	 * the same shape as global.json (groups → vars), and overrides is a flat
@@ -871,7 +891,7 @@ class pwConfig
 		}
 
 		// Per-block CSS variables (each plugin's settings.json 'values' section,
-		// merged with site/config/projectwizard/<blockType>.json overrides).
+		// merged with content/.projectwizard/<blockType>.json overrides).
 		// Each variable becomes --<blockType>-<varName>[suffix]: value;
 		// Rendered for every tailwindSetup() call. Duplicate :root {} blocks
 		// across multiple hook invocations in the same request (e.g. language
