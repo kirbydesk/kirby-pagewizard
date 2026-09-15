@@ -179,13 +179,19 @@ Verteilung:
 
 ---
 
-### [ ] 12. Dev-Snapshot vs. Packagist-Divergenz vermeiden
+### [x] 12. Release-Disziplin dokumentiert  ✅ 2026-09-15
 
-**Problem**: 1.5.x-Files auf Dev-Rechner (nicht auf Packagist) verursachten heute massive Verwirrung. Der Rechner hatte manuell reinkopierte Dev-Snapshots, die weder mit Packagist noch mit lokalen composer.locks harmonierten.
+**Problem**: 1.5.x-Files auf Dev-Rechner (nicht auf Packagist) verursachten am 2026-09-15 massive Verwirrung. Manuell reinkopierte Dev-Snapshots harmonierten weder mit Packagist noch mit lokalen composer.locks.
 
-**Ziel**: pluginsources und Packagist sollten immer synchron sein. Wenn Dev-Änderungen anstehen: kleine Version-Bumps + Packagist-Release. Keine "manuell auf Live-Rechner kopierten" Zwischenstände mehr.
+**Umsetzung**: Neuer Abschnitt **"Release-Disziplin — keine Divergenz zwischen pluginsources und Packagist"** in `pluginsources/kirby-pagewizard/DEVELOPMENT.md`. Deckt:
+- Grundregel (nie manuelle Kopien in Projekte)
+- Dev-Loop mit Path-Repository + Symlink (composer.json version-Feld muss dem Tag entsprechen)
+- Release-Prozedur (thematischer Commit → version bump → tag → push → composer update)
+- Cross-Plugin-Abhängigkeiten im Commit-Body dokumentieren (für manuelle Installer)
+- Was nie passieren darf (3 konkrete Anti-Pattern)
+- Wiederherstellungs-Prozedur bei divergent-Verdacht (Verweis auf MIGRATION.md)
 
-**Test**: prozessuale Disziplin, kein Code-Test.
+Prozessdisziplin, kein Code-Test.
 
 ---
 
@@ -204,6 +210,7 @@ Verteilung:
 - ✅ Punkt 9: detectBlocks nutzt Registry primär, glob als Fallback, per-Request-Cache
 - ✅ Punkt 10: pwConfig I/O-Helper public, ProjectConfig-Duplikation entfernt, Aufgabentrennung dokumentiert
 - ✅ Punkt 11: Deprecation-Check-Schritt in MIGRATION.md (rh + encom + scaffold-Template)
+- ✅ Punkt 12: Release-Disziplin in DEVELOPMENT.md dokumentiert (Path-Repo-Dev-Loop, Release-Prozedur, Anti-Pattern)
 
 ## Bekannte Kleinigkeiten (nachziehen wenn Zeit)
 
