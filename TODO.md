@@ -143,13 +143,18 @@ Alle Reader benutzen jetzt diese Helper. Ausnahme: in `tailwindSetup()` bleiben 
 
 ---
 
-### [ ] 10. Zwei ähnlich benannte Config-Klassen entwirren
+### [x] 10. Config-Klassen-Trennung dokumentiert + I/O konsolidiert  ✅ 2026-09-15
 
-**Problem**: `pwConfig` (pagewizard, Runtime) und `ProjectConfig` (projectwizard, Panel-API) — Naming führt zu Verwirrung, beide lesen die gleichen Files, teilweise mit unterschiedlicher Merge-Semantik.
+**Problem**: `pwConfig` und `ProjectConfig` lasen mit teils dupliziertem Boilerplate die gleichen JSON-Files (jede Klasse hatte ihre eigene private `readJson()`, ProjectConfig konstruierte `$pluginDir = kirby()->root('plugins') . '/kirby-pagewizard'` sechsmal von Hand).
 
-**Ziel**: gemeinsame Facade oder klarer Namespace-Split. Backward-compat via Aliase.
+**Umsetzung**:
+1. `pwConfig`-I/O-Helper `readJson()`, `pluginConfig()`, `projectOverride()`, `pluginDir()` von `private` auf `public` gehoben, plus neuer `projectDir()`.
+2. Kompletter Docstring am `ProjectConfig`-Klassenkopf, der die Aufgabentrennung fixiert: **reads → pwConfig, writes + Panel-CRUD → ProjectConfig**.
+3. `ProjectConfig::readJson()` (dupliziert) entfernt — alle Aufrufer nutzen jetzt `pwConfig::readJson()`.
+4. Die 6 `$pluginDir = kirby()->root('plugins') . '/kirby-pagewizard'; ... readJson($pluginDir . '/config/X.json')`-Blöcke durch `pwConfig::pluginConfig('X')` ersetzt (loadFooter, loadNavigation, loadElements, loadFontsizes, loadGlobal, loadFonts, scaffold).
+5. `ProjectConfig::configDir()` delegiert an `pwConfig::projectDir()`.
 
-**Test**: Panel-Overview + alle Frontend-Blocks.
+**Ergebnis**: Eine Wahrheitsquelle für File-I/O, keine hardcoded `'/kirby-pagewizard'`-Pfade mehr in ProjectConfig, klarer Split. Frontend + Panel-API + Blueprints byte-identisch in claude + encom.
 
 ---
 
@@ -190,6 +195,7 @@ Alle Reader benutzen jetzt diese Helper. Ausnahme: in `tailwindSetup()` bleiben 
 - ✅ Punkt 6: Override-Format auf wrapped konsolidiert, encom pagewizard.php + overrides.json migriert, alle 25 Blueprints byte-identisch
 - ✅ Punkt 8: Config-Reader konsolidiert — readJson/pluginConfig/projectOverride als I/O-Facade, -16 Zeilen netto
 - ✅ Punkt 9: detectBlocks nutzt Registry primär, glob als Fallback, per-Request-Cache
+- ✅ Punkt 10: pwConfig I/O-Helper public, ProjectConfig-Duplikation entfernt, Aufgabentrennung dokumentiert
 
 ## Bekannte Kleinigkeiten (nachziehen wenn Zeit)
 

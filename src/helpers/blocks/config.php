@@ -9,14 +9,15 @@ class pwConfig
 	private static bool $panelColorsGenerated = false;
 
 	/* ============================================================
-	   I/O helpers — one place for reading JSON config files.
+	   I/O helpers — the single place other classes (e.g. ProjectConfig)
+	   should go through when reading pagewizard-owned config files.
 	   ============================================================ */
 
 	/**
 	 * Read + json_decode a file, returning the decoded array or a
 	 * caller-provided default when the file is missing or invalid JSON.
 	 */
-	private static function readJson(string $path, array $default = []): array
+	public static function readJson(string $path, array $default = []): array
 	{
 		if (!file_exists($path)) return $default;
 		$decoded = json_decode(file_get_contents($path), true);
@@ -27,7 +28,7 @@ class pwConfig
 	 * Read a JSON file from the kirby-pagewizard plugin's /config directory.
 	 * Example: pluginConfig('navigation') → <plugin>/config/navigation.json
 	 */
-	private static function pluginConfig(string $name, array $default = []): array
+	public static function pluginConfig(string $name, array $default = []): array
 	{
 		return self::readJson(self::pluginDir() . '/config/' . $name . '.json', $default);
 	}
@@ -36,20 +37,29 @@ class pwConfig
 	 * Read a JSON file from the project's projectwizard override directory.
 	 * Example: projectOverride('navigation') → site/config/projectwizard/navigation.json
 	 */
-	private static function projectOverride(string $name, array $default = []): array
+	public static function projectOverride(string $name, array $default = []): array
 	{
-		return self::readJson(kirby()->root('site') . '/config/projectwizard/' . $name . '.json', $default);
+		return self::readJson(self::projectDir() . '/' . $name . '.json', $default);
 	}
 
 	/**
 	 * Path to the kirby-pagewizard plugin directory. Cached to avoid
 	 * repeated Kirby::plugin() lookups within a request.
 	 */
-	private static function pluginDir(): string
+	public static function pluginDir(): string
 	{
 		static $cached = null;
 		if ($cached !== null) return $cached;
 		return $cached = kirby()->plugin('kirbydesk/kirby-pagewizard')->root();
+	}
+
+	/**
+	 * Path to the project's projectwizard config directory
+	 * (site/config/projectwizard). Where overrides live.
+	 */
+	public static function projectDir(): string
+	{
+		return kirby()->root('site') . '/config/projectwizard';
 	}
 
 	/**
