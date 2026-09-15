@@ -60,26 +60,11 @@ class pwConfig
 	 *
 	 * Location: content/.projectwizard/ — deliberately inside the content
 	 * folder so panel edits (design, colors, block visibility etc. that
-	 * the editor makes) travel with the content repo, not the code repo.
-	 *
-	 * Auto-migrates from the legacy location site/config/projectwizard/
-	 * on first access after upgrading the plugin.
+	 * the editor makes) travel with the content deploy, not the code deploy.
 	 */
 	public static function projectDir(): string
 	{
-		static $migrated = false;
-		$new = kirby()->root('content') . '/.projectwizard';
-
-		if (!$migrated) {
-			$migrated = true;
-			$legacy = kirby()->root('site') . '/config/projectwizard';
-			if (is_dir($legacy) && !is_dir($new)) {
-				// Ensure parent exists (content/ always does in a Kirby install).
-				@rename($legacy, $new);
-			}
-		}
-
-		return $new;
+		return kirby()->root('content') . '/.projectwizard';
 	}
 
 	/**
