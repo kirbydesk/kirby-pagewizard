@@ -212,6 +212,6 @@ Prozessdisziplin, kein Code-Test.
 - ✅ Punkt 11: Deprecation-Check-Schritt in MIGRATION.md (rh + encom + scaffold-Template)
 - ✅ Punkt 12: Release-Disziplin in DEVELOPMENT.md dokumentiert (Path-Repo-Dev-Loop, Release-Prozedur, Anti-Pattern)
 
-## Bekannte Kleinigkeiten (nachziehen wenn Zeit)
+## Bekannte Kleinigkeiten
 
-- `detectBlocks()` icon-Extraktion via regex trifft den ersten `'icon' => '...'` in `blueprints.php`. Bei multicolumn ist das seit Punkt 2 (pwBlueprint-Refactor) der Sub-Block-Icon `title` statt Main-Block-Icon `layout-columns`. Panel-menu-Only, kein Frontend-Impact. Fix: `package.json.icon` in kirbyblock-multicolumn setzen (analog für alle 8 Plugins für Konsistenz).
+- ✅ **`detectBlocks()` icon-Regex-Fallback abgesichert** (2026-09-15) — `description` und `icon` in `package.json` **aller 8 kirbyblock-*** gesetzt. Der Regex-Fallback über `blueprints.php` wird nicht mehr getriggert und der pwmulticolumn-Icon-Bug (fälschlich `title` statt `layout-columns` durch Sub-Block-Header seit pwBlueprint-Refactor) ist damit behoben. Panel + Frontend byte-identisch verifiziert.
