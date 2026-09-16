@@ -55,12 +55,16 @@ div.pwHeading {
 	color: var(--pw-color-heading, inherit);
 	line-height: 1.3;
 
+	&:has([data-textbackground]) {
+		line-height: 1.6;
+	}
+
 	[data-textbackground] {
 		color: var(--pw-color-heading-marked-text);
 		background-color: var(--pw-color-heading-marked-background);
 		box-decoration-break: clone;
 		-webkit-box-decoration-break: clone;
-		padding: 0.1em 0.3em;
+		padding: 0.05em 0.3em;
 		border-radius: 0.15em;
 	}
 
