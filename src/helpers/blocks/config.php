@@ -987,10 +987,12 @@ class pwConfig
 			'element-heading-text'              => 'pw-color-heading',
 			'element-heading-marked-text'       => 'pw-color-heading-marked-text',
 			'element-heading-marked-background' => 'pw-color-heading-marked-background',
+			'element-heading-flourish-color'    => 'pw-color-heading-flourish-color',
 			'element-tagline-text'              => 'pw-color-tagline',
 			'element-editor-text'               => 'pw-color-text',
 			'element-button-text'               => 'pw-color-button-text',
 			'element-button-background'         => 'pw-color-button-background',
+			'element-button-icon'               => 'pw-color-button-icon',
 			'element-icon-fill'                 => 'pw-color-icon',
 			'element-caption-text'              => 'pw-color-caption',
 			'element-quote-text'                => 'pw-color-quote',
@@ -1029,6 +1031,31 @@ class pwConfig
 		if (!empty($palettes['variant2'])) {
 			$css .= "\n[data-style=\"variant2\"] {\n" . $varLines($palettes['variant2']) . "\n}\n";
 		}
+
+		// Plugin-specific item colors (from each registered block's values.items.colors)
+		$pluginPalettes = ['default' => [], 'variant' => [], 'variant2' => []];
+		foreach (self::registered() as $blockType => $blockConfigDir) {
+			$blockSettings = self::readJson($blockConfigDir . '/settings.json');
+			$blockOverrides = self::projectOverride($blockType);
+			foreach ($blockSettings['values'] ?? [] as $groupKey => $group) {
+				if (empty($group['colors']) || !is_array($group['colors'])) continue;
+				foreach ($group['colors'] as $colorKey => $colorDef) {
+					foreach (['default', 'variant', 'variant2'] as $theme) {
+						if (!isset($colorDef[$theme])) continue;
+						$value = $blockOverrides[$theme][$colorKey] ?? $colorDef[$theme];
+						$pluginPalettes[$theme][$blockType . '-' . $colorKey] = $value;
+					}
+				}
+			}
+		}
+		if (!empty($pluginPalettes['default'])) {
+			$css .= "\n:root {\n" . $varLines($pluginPalettes['default']) . "\n}\n";
+			$css .= "\n[data-style=\"variant\"] {\n" . $varLines($pluginPalettes['variant']) . "\n}\n";
+			if (!empty($pluginPalettes['variant2'])) {
+				$css .= "\n[data-style=\"variant2\"] {\n" . $varLines($pluginPalettes['variant2']) . "\n}\n";
+			}
+		}
+
 		file_put_contents(kirby()->root('index') . '/assets/css/panel-colors.css', $css);
 	}
 
@@ -1248,6 +1275,22 @@ class pwConfig
 		// Only write when content changed to avoid triggering unnecessary Tailwind rebuilds.
 		$varsPath = $tempDir . '/vars.css';
 		$varsNew  = "/* Auto-generated — do not edit */\n\n" . implode("\n", $varsContent);
+		// Convert 8-digit hex (#rrggbbaa) to rgba() — Tailwind's CSS minifier
+		// strips the alpha channel when it collapses e.g. #ff0000 to `red`,
+		// dropping the trailing #38 (alpha). rgba() is safe from that.
+		$varsNew = preg_replace_callback(
+			'/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})\b/i',
+			function ($m) {
+				return sprintf(
+					'rgba(%d, %d, %d, %s)',
+					hexdec($m[1]),
+					hexdec($m[2]),
+					hexdec($m[3]),
+					rtrim(rtrim(number_format(hexdec($m[4]) / 255, 3), '0'), '.')
+				);
+			},
+			$varsNew
+		);
 		if (!file_exists($varsPath) || file_get_contents($varsPath) !== $varsNew) {
 			file_put_contents($varsPath, $varsNew);
 		}

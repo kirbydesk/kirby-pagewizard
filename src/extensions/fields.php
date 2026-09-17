@@ -35,6 +35,33 @@ return [
 			},
 			'size' => function (?string $size = null) {
 				return $size;
+			},
+			'textbackground' => function (?string $textbackground = null) {
+				return $textbackground;
+			},
+			'multiline' => function (?string $multiline = null) {
+				return $multiline;
+			},
+			'flourish' => function (?string $flourish = null) {
+				return $flourish;
+			},
+			'alignOptions' => function ($alignOptions = null) {
+				return $alignOptions;
+			},
+			'levelOptions' => function ($levelOptions = null) {
+				return $levelOptions;
+			},
+			'sizeOptions' => function ($sizeOptions = null) {
+				return $sizeOptions;
+			},
+			'textbackgroundOptions' => function ($textbackgroundOptions = null) {
+				return $textbackgroundOptions;
+			},
+			'multilineOptions' => function ($multilineOptions = null) {
+				return $multilineOptions;
+			},
+			'flourishOptions' => function ($flourishOptions = null) {
+				return $flourishOptions;
 			}
 		]
 	],
@@ -44,8 +71,20 @@ return [
 			'value' => function (?string $value = null) {
 				return $value;
 			},
+			'align' => function (?string $align = null) {
+				return $align;
+			},
 			'size' => function (?string $size = null) {
 				return $size;
+			},
+			'alignOptions' => function ($alignOptions = null) {
+				return $alignOptions;
+			},
+			'sizeOptions' => function ($sizeOptions = null) {
+				return $sizeOptions;
+			},
+			'defaultMode' => function (?string $defaultMode = null) {
+				return $defaultMode;
 			},
 			'fieldHelp' => function (?string $fieldHelp = null) {
 				return $fieldHelp;

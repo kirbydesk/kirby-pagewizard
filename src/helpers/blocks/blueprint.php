@@ -153,6 +153,10 @@ class pwBlueprint
 					'levelOptions' => $fieldOptions['heading']['level'] ?? null,
 					'textbackground'        => $fields['textbackground-heading'] ?? null,
 					'textbackgroundOptions' => $fieldOptions['heading']['textbackground'] ?? null,
+					'multiline'        => $fields['multiline-heading'] ?? null,
+					'multilineOptions' => $fieldOptions['heading']['multiline'] ?? null,
+					'flourish'         => $fields['flourish-heading'] ?? null,
+					'flourishOptions'  => $fieldOptions['heading']['flourish'] ?? null,
 				];
 			} elseif ($key === 'editor' && !empty($settings['editor'])) {
 				$editorField = pwEditor::contentField($editor, $settings);

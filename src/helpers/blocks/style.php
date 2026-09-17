@@ -26,6 +26,9 @@ class pwStyle
 			$themeField['options'] = array_values(
 				array_intersect_key(self::$allThemeOptions, array_flip($themeOptions))
 			);
+			if (count($themeField['options']) <= 1) {
+				$themeField = ['type' => 'hidden', 'default' => $defaults['theme']];
+			}
 		}
 
 		$fields = [
@@ -56,6 +59,9 @@ class pwStyle
 				$buttonStyleField['options'] = array_values(
 					array_intersect_key(self::$allThemeOptions, array_flip($buttonThemes))
 				);
+				if (count($buttonStyleField['options']) <= 1) {
+					$buttonStyleField = ['type' => 'hidden', 'default' => $defaults['buttonstyle'] ?? ''];
+				}
 			}
 			$fields['buttonstyle'] = $buttonStyleField;
 		}

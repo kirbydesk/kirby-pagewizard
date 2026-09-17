@@ -16,6 +16,10 @@
 				'linkRel'         => $button->linkrel()->value(),
 				'ariaLabel'       => $button->arialabel()->value(),
 				'ariaDescribedby' => $button->ariadescribedby()->value(),
+				'icon'            => $button->iconposition()->value() === 'right'
+					? $button->iconright()->value()
+					: $button->iconleft()->value(),
+				'iconPosition'    => $button->iconposition()->value(),
 			]);
 			$linkHtml = ob_get_clean();
 			if ($linkHtml) :

@@ -62,13 +62,14 @@ export default {
 		<k-field v-bind="$props" class="pw-icon-field">
 			<div class="pw-icon-search">
 				<div class="pw-icon-input-wrap">
+					<span class="pw-icon-search-icon"><k-icon type="search" /></span>
 					<k-input
 						type="text"
 						:placeholder="$t('pw.field.icon.placeholder')"
 						:value="search"
 						@input="search = $event"
 					/>
-					<span class="pw-icon-count">{{ showCount }}</span>
+					<span class="pw-icon-count">{{ showCount }} {{ showCount === 1 ? 'Icon' : 'Icons' }}</span>
 				</div>
 				<button
 					v-if="current"

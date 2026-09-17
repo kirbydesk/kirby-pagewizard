@@ -69,7 +69,7 @@
 	&[data-align="center"] { justify-content: center; }
 	&[data-align="right"]  { justify-content: flex-end; }
 }
-[data-field="button"] a, [data-field="button"] span {
+[data-field="button"] > a, [data-field="button"] > span {
 	font-family: var(--button-font-family);
 	font-size: var(--button-font-size);
 	font-weight: var(--button-font-weight);

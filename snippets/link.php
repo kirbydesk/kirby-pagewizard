@@ -62,5 +62,15 @@ if (!empty($linkType) && !empty($linkTarget)) :
 	$svg    = '<svg aria-hidden="true" class="external"><use xlink:href="#external"></use></svg>';
 endif;
 
+// Optional icon (position = 'left' or 'right'). Only renders when both are set.
+// Colour comes from --element-button-icon (project-wizard, per theme).
+$iconHtml = '';
+$position = $iconPosition ?? '';
+if (!empty($icon ?? null) && !empty($position)) :
+	$iconHtml = '<span class="link-icon link-icon--' . esc($position) . '" aria-hidden="true">' . $icon . '</span>';
+endif;
+$content = ($position === 'right')
+	? $linkText . $iconHtml . $svg
+	: $iconHtml . $linkText . $svg;
 
-?><a href="<?= $url ?>"<?= $target . $rel . $label . $describedby ?>><?= $linkText . $svg ?></a>
+?><a href="<?= $url ?>"<?= $target . $rel . $label . $describedby ?>><?= $content ?></a>

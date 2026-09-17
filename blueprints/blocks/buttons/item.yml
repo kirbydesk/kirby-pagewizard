@@ -28,6 +28,28 @@ tabs:
           linkTarget: true
       linkText:
         extends: pagewizard/fields/link-text
+        width: 3/4
+      iconPosition:
+        label: pw.field.button.icon
+        help: pw.field.button.icon.help
+        type: toggles
+        labels: false
+        options:
+          - value: left
+            icon: text-left
+          - value: right
+            icon: text-right
+        width: 1/4
+      iconLeft:
+        label: pw.field.button.icon.search
+        type: pwicon
+        when:
+          iconPosition: left
+      iconRight:
+        label: pw.field.button.icon.search
+        type: pwicon
+        when:
+          iconPosition: right
       ariaLabel:
         extends: pagewizard/fields/link-aria-label
       ariaDescribedby:

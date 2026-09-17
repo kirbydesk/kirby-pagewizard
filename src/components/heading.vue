@@ -1,8 +1,18 @@
 <template>
 	<div class="pwHeading" :data-align="align" :data-size="size">
     <div v-if="text">
-      <span v-if="textbackground === 'enabled'" data-textbackground v-html="text"></span>
-      <span v-else v-html="text"></span>
+      <template v-if="multiline === 'enabled'">
+        <template v-for="(line, i) in textLines">
+          <br v-if="i > 0" :key="'br-' + i" />
+          <span v-if="textbackground === 'enabled'" :key="i" data-textbackground v-html="line"></span>
+          <span v-else :key="i" v-html="line"></span>
+        </template>
+      </template>
+      <template v-else>
+        <span v-if="textbackground === 'enabled'" data-textbackground v-html="text"></span>
+        <span v-else v-html="text"></span>
+      </template>
+      <div v-if="flourish === 'enabled'" data-flourish :data-align="align"></div>
     </div>
     <div v-else class="placeholder">
       {{ $t('pw.field.heading.placeholder') }}
@@ -19,7 +29,9 @@ export default {
     },
     alignDefault:          { type: String, default: null },
     sizeDefault:           { type: String, default: null },
-    textbackgroundDefault: { type: String, default: null }
+    textbackgroundDefault: { type: String, default: null },
+    multilineDefault:      { type: String, default: null },
+    flourishDefault:       { type: String, default: null }
   },
   computed: {
     parsedData() {
@@ -46,6 +58,17 @@ export default {
     textbackground() {
       const { textbackground = this.textbackgroundDefault } = this.parsedData;
       return textbackground;
+    },
+    multiline() {
+      const { multiline = this.multilineDefault } = this.parsedData;
+      return multiline;
+    },
+    flourish() {
+      const { flourish = this.flourishDefault } = this.parsedData;
+      return flourish;
+    },
+    textLines() {
+      return this.text.split(/\r\n|\r|\n/).filter(l => l !== '');
     }
   }
 }
@@ -56,7 +79,7 @@ div.pwHeading {
 	line-height: 1.3;
 
 	&:has([data-textbackground]) {
-		line-height: 1.6;
+		line-height: 1.8;
 	}
 
 	[data-textbackground] {
@@ -67,6 +90,16 @@ div.pwHeading {
 		padding: 0.05em 0.3em;
 		border-radius: 0.15em;
 	}
+
+	[data-flourish] {
+		display: block;
+		width: 4em;
+		height: 2px;
+		background-color: var(--pw-color-heading-flourish-color, currentColor);
+		margin-top: 0.5em;
+	}
+	[data-flourish][data-align="center"] { margin-left: auto; margin-right: auto; }
+	[data-flourish][data-align="right"]  { margin-left: auto; }
 
 	&[data-size="xs"]  { font-size: var(--text-md); font-weight: var(--font-bold)}
 	&[data-size="sm"]  { font-size: var(--text-lg); font-weight: var(--font-bold); }
