@@ -417,6 +417,7 @@
 	'pw.option.ugc' => 'Community content',
 	'pw.option.variant' => 'Variant',
 	'pw.option.variant2' => 'Variant 2',
+	'pw.option.variant3' => 'Variant 3',
 	'pw.option.video' => 'Video',
 	'pw.option.writer' => 'Extended',
 	'pw.option.xl' => 'X-Large',

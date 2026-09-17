@@ -1000,8 +1000,8 @@ class pwConfig
 			'element-breadcrumb-text'           => 'pw-color-breadcrumb',
 		];
 
-		// Build theme palettes (default, variant, variant2)
-		$themes = ['default', 'variant', 'variant2'];
+		// Build theme palettes (default, variant, variant2, variant3)
+		$themes = ['default', 'variant', 'variant2', 'variant3'];
 		$palettes = [];
 		foreach ($themes as $theme) {
 			$palette = [];
@@ -1031,16 +1031,19 @@ class pwConfig
 		if (!empty($palettes['variant2'])) {
 			$css .= "\n[data-style=\"variant2\"] {\n" . $varLines($palettes['variant2']) . "\n}\n";
 		}
+		if (!empty($palettes['variant3'])) {
+			$css .= "\n[data-style=\"variant3\"] {\n" . $varLines($palettes['variant3']) . "\n}\n";
+		}
 
 		// Plugin-specific item colors (from each registered block's values.items.colors)
-		$pluginPalettes = ['default' => [], 'variant' => [], 'variant2' => []];
+		$pluginPalettes = ['default' => [], 'variant' => [], 'variant2' => [], 'variant3' => []];
 		foreach (self::registered() as $blockType => $blockConfigDir) {
 			$blockSettings = self::readJson($blockConfigDir . '/settings.json');
 			$blockOverrides = self::projectOverride($blockType);
 			foreach ($blockSettings['values'] ?? [] as $groupKey => $group) {
 				if (empty($group['colors']) || !is_array($group['colors'])) continue;
 				foreach ($group['colors'] as $colorKey => $colorDef) {
-					foreach (['default', 'variant', 'variant2'] as $theme) {
+					foreach (['default', 'variant', 'variant2', 'variant3'] as $theme) {
 						if (!isset($colorDef[$theme])) continue;
 						$value = $blockOverrides[$theme][$colorKey] ?? $colorDef[$theme];
 						$pluginPalettes[$theme][$blockType . '-' . $colorKey] = $value;
@@ -1053,6 +1056,9 @@ class pwConfig
 			$css .= "\n[data-style=\"variant\"] {\n" . $varLines($pluginPalettes['variant']) . "\n}\n";
 			if (!empty($pluginPalettes['variant2'])) {
 				$css .= "\n[data-style=\"variant2\"] {\n" . $varLines($pluginPalettes['variant2']) . "\n}\n";
+			}
+			if (!empty($pluginPalettes['variant3'])) {
+				$css .= "\n[data-style=\"variant3\"] {\n" . $varLines($pluginPalettes['variant3']) . "\n}\n";
 			}
 		}
 

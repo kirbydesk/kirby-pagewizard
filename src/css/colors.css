@@ -376,4 +376,129 @@ section[data-block][data-style="custom"][data-button-style="variant2"] {
 			}
 		}
 	}
+}/*------------------------------------------------------------------------------------------------
+	Variant 3 color definitions
+------------------------------------------------------------------------------------------------*/
+section[data-block][data-style="variant3"] {
+	background-color: var(--block-background-variant3);
+
+	/* -------------- Links --------------*/
+	a {
+		color: var(--block-link-variant3);
+
+		&:hover {
+			color: var(--block-link-hover-variant3);
+		}
+		&:active {
+			color: var(--block-link-active-variant3);
+		}
+	}
+
+	/* -------------- Heading --------------*/
+	[data-field="heading"] {
+		color: var(--element-heading-text-variant3);
+	}
+	[data-textbackground] {
+		color: var(--element-heading-marked-text-variant3);
+		background-color: var(--element-heading-marked-background-variant3);
+	}
+	[data-flourish] {
+		background-color: var(--element-heading-flourish-color-variant3);
+	}
+
+	/* -------------- Tagline --------------*/
+	[data-field="tagline"] {
+		color: var(--element-tagline-text-variant3);
+	}
+
+	/* -------------- Editor --------------*/
+	[data-field="textarea"],
+	[data-field="writer"],
+	[data-field="markdown"],
+	[data-field="text"] {
+		color: var(--element-editor-text-variant3);
+	}
+
+	/* -------------- Icon --------------*/
+	[data-field="icon"] svg {
+		fill: var(--element-icon-fill-variant3);
+	}
+
+	/* -------------- Caption --------------*/
+	[data-field="caption"] {
+		color: var(--element-caption-text-variant3);
+	}
+
+	/* -------------- Quote --------------*/
+	[data-field="quote"] {
+		color: var(--element-quote-text-variant3);
+	}
+
+	/* -------------- Cite --------------*/
+	[data-field="cite"] {
+		color: var(--element-cite-text-variant3);
+	}
+
+	/* -------------- Breadcrumb --------------*/
+	[data-field="breadcrumb"] {
+		color: var(--element-breadcrumb-text-variant3);
+
+		a:hover {
+			color: var(--element-breadcrumb-text-hover-variant3);
+		}
+		a:active {
+			color: var(--element-breadcrumb-text-active-variant3);
+		}
+	}
+
+	/* -------------- Media --------------*/
+	figure[data-ratio] > div {
+		background: var(--element-media-background-variant3);
+	}
+	figure[data-zoom] > div .zoom-icon {
+		color: var(--element-image-zoom-variant3);
+		background-color: var(--element-image-zoom-background-variant3);
+	}
+	[data-field="slideshow"] {
+		.swiper-pagination-bullet {
+			background: var(--element-slideshow-bullet-variant3);
+		}
+		.swiper-pagination-bullet-active {
+			background: var(--element-slideshow-bullet-active-variant3);
+		}
+	}
+}
+
+/* -------------- Button (Variant 3) --------------*/
+section[data-block][data-style="variant3"],
+section[data-block][data-style="custom"][data-button-style="variant3"] {
+
+	[data-field="button"] a {
+		color: var(--element-button-text-variant3);
+		background-color: var(--element-button-background-variant3);
+		border-color: var(--element-button-border-variant3);
+
+		.link-icon {
+			color: var(--element-button-icon-variant3);
+		}
+
+		&:hover {
+			color: var(--element-button-text-hover-variant3);
+			background-color: var(--element-button-background-hover-variant3);
+			border-color: var(--element-button-border-hover-variant3);
+
+			.link-icon {
+				color: var(--element-button-icon-hover-variant3);
+			}
+		}
+		&:active {
+			color: var(--element-button-text-active-variant3);
+			background-color: var(--element-button-background-active-variant3);
+			border-color: var(--element-button-border-active-variant3);
+
+			.link-icon {
+				color: var(--element-button-icon-active-variant3);
+			}
+		}
+	}
 }

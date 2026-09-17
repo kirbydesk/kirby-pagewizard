@@ -6,6 +6,7 @@ class pwStyle
 		'default'  => ['value' => 'default',  'text' => ['*' => 'pw.option.default']],
 		'variant'  => ['value' => 'variant',  'text' => ['*' => 'pw.option.variant']],
 		'variant2' => ['value' => 'variant2', 'text' => ['*' => 'pw.option.variant2']],
+		'variant3' => ['value' => 'variant3', 'text' => ['*' => 'pw.option.variant3']],
 		'custom'   => ['value' => 'custom',   'text' => ['*' => 'pw.option.custom']],
 	];
 

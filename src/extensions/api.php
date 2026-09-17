@@ -114,11 +114,11 @@ return [
 				$colorsFile  = file_exists($publicFile) ? $publicFile : $pluginFile;
 
 				if (!file_exists($colorsFile)) {
-					return ['default' => [], 'variant' => [], 'variant2' => []];
+					return ['default' => [], 'variant' => [], 'variant2' => [], 'variant3' => []];
 				}
 
 				$css = file_get_contents($colorsFile);
-				$panelColors = ['default' => [], 'variant' => [], 'variant2' => []];
+				$panelColors = ['default' => [], 'variant' => [], 'variant2' => [], 'variant3' => []];
 
 				// :root {} → default colors (all pw-color-* and plugin-specific pw*-item-*)
 				preg_match_all('/:root\s*\{([^}]+)\}/s', $css, $rootBlocks);
@@ -130,7 +130,7 @@ return [
 				}
 
 				// [data-style="X"] {} → theme colors
-				foreach (['variant', 'variant2'] as $theme) {
+				foreach (['variant', 'variant2', 'variant3'] as $theme) {
 					preg_match_all('/\[data-style="' . $theme . '"\]\s*\{([^}]+)\}/s', $css, $matches);
 					foreach ($matches[1] as $block) {
 						preg_match_all('/--(pw[\w-]+)\s*:\s*([^;]+);/', $block, $vars, PREG_SET_ORDER);
