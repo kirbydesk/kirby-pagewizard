@@ -19,4 +19,3 @@ options:
     text:
       *: pw.option.5columns
 help: pw.field.columns.help
-translate: false

@@ -1,7 +1,6 @@
 ---
 label: pw.field.overlay-type.label
 type: toggles
-translate: false
 options:
   - value: solid
     text:

@@ -23,4 +23,3 @@ options:
     icon: text-bottom
 help: pw.field.overlay-position.help
 width: 1/2
-translate: false

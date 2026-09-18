@@ -18,4 +18,3 @@ options:
       *: pw.option.video
     icon: video
 help: pw.field.media-type.help
-translate: false

@@ -15,5 +15,4 @@ options:
     text:
       *: pw.option.noarchive
 search: false
-translate: false
 help: pw.field.seo-robots.help

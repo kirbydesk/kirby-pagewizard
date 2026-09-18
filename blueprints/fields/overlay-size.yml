@@ -18,4 +18,3 @@ options:
       *: "100%"
 help: pw.field.overlay-size.help
 width: 1/2
-translate: false

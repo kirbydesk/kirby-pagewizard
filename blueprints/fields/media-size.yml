@@ -21,4 +21,3 @@ options:
       *: "100%"
 help: pw.field.media-size.help
 width: 1/2
-translate: false

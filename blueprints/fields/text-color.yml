@@ -2,6 +2,5 @@
 label: pw.field.text-color.label
 type: color
 default: "#ffffff"
-translate: false
 help: pw.field.text-color.help
 width: 1/3

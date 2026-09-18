@@ -16,4 +16,3 @@ options:
     icon: video
 help: pw.field.background-type.help
 width: 1/2
-translate: false

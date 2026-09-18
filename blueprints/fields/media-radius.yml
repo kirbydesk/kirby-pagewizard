@@ -12,4 +12,3 @@ options:
     icon: customradius
 help: pw.field.media-radius.help
 width: 1/2
-translate: false

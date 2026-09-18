@@ -6,4 +6,3 @@ max: 11
 step: 1
 help: pw.field.grid-offset.help
 width: 1/3
-translate: false

@@ -21,4 +21,3 @@ options:
       *: "100%"
 help: pw.field.height.help
 width: 1/2
-translate: false
