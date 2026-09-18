@@ -346,7 +346,7 @@
 	'pw.field.video-title.help' => 'A short, descriptive title for the video. Helps users and search engines identify the content.',
 	'pw.field.video-title.placeholder' => 'Title ...',
 	'pw.field.video-transcript' => 'Video Transcript',
-	'pw.field.video-transcript.help' => 'This field is output as an `<defails>` attribute and provides the full transcript of the video. This helps people who cannot see the video to still understand its content.',
+	'pw.field.video-transcript.help' => 'This field is output as an `<details>` element and provides the full transcript of the video. This helps people who cannot see the video to still understand its content.',
 	'pw.field.video-transcript.placeholder' => 'Video Transcript ...',
 	'pw.field.video-url' => 'Video URL',
 	'pw.field.video-url.help' => 'Enter a valid URL to a video platform (e.g. YouTube, Vimeo, etc).',
