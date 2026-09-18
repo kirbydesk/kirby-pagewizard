@@ -3,6 +3,37 @@
 /* -------------- API Routes --------------*/
 return [
 	'routes' => [
+		/* -------------- API keys of the AI plugins (.env) — admins only --------------*/
+		[
+			'pattern' => 'pagewizard/secrets',
+			'method'  => 'GET',
+			'action'  => function () {
+				if (!pwSecrets::allowed()) throw new Kirby\Exception\PermissionException(message: 'Not allowed.');
+				return ['secrets' => pwSecrets::status(), 'writable' => is_writable(is_file(pwSecrets::file()) ? pwSecrets::file() : dirname(pwSecrets::file()))];
+			}
+		],
+		[
+			'pattern' => 'pagewizard/secrets',
+			'method'  => 'POST',
+			'action'  => function () {
+				if (!pwSecrets::allowed()) throw new Kirby\Exception\PermissionException(message: 'Not allowed.');
+
+				$input  = kirby()->request()->body()->toArray();
+				$labels = array_column(pwSecrets::declared(), 'label', 'env');
+
+				// set: {ENV: "new key"} — empty values keep the stored key
+				foreach ((array) ($input['set'] ?? []) as $env => $value) {
+					if (!is_string($value) || trim($value) === '' || !pwSecrets::isDeclared((string) $env)) continue;
+					pwSecrets::write((string) $env, $value, $labels[$env] ?? '');
+				}
+				// remove: ["ENV", …]
+				foreach ((array) ($input['remove'] ?? []) as $env) {
+					if (is_string($env) && pwSecrets::isDeclared($env)) pwSecrets::write($env, '');
+				}
+
+				return ['secrets' => pwSecrets::status(), 'writable' => true];
+			}
+		],
 		[
 			'pattern' => 'pagewizard/settings/(:any)',
 			'action'  => function (string $blockType) {
