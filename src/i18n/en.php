@@ -148,6 +148,8 @@
 	'pw.icon.count.one' => 'Icon',
 	'pw.icon.count.other' => 'Icons',
 
+	'pw.ai.button' => 'AI',
+
 	'pw.login.title' => 'Protected',
 
 	'pw.toolbar.align' => 'Align',
