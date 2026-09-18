@@ -213,7 +213,7 @@ export default {
 						<button
 							data-has-icon="true"
 							data-has-text="false"
-							aria-label="Flourish"
+							:aria-label="$t('pw.toolbar.flourish')"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
@@ -239,7 +239,7 @@ export default {
 						<button
 							data-has-icon="true"
 							data-has-text="false"
-							aria-label="Multiline"
+							:aria-label="$t('pw.toolbar.multiline')"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
@@ -265,7 +265,7 @@ export default {
 						<button
 							data-has-icon="true"
 							data-has-text="false"
-							aria-label="Text background"
+							:aria-label="$t('pw.toolbar.textbackground')"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
@@ -291,7 +291,7 @@ export default {
 						<button
 							data-has-icon="true"
 							data-has-text="false"
-							aria-label="Align"
+							:aria-label="$t('pw.toolbar.align')"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
@@ -323,7 +323,7 @@ export default {
 						<button
 							data-has-icon="false"
 							data-has-text="true"
-							aria-label="Size"
+							:aria-label="$t('pw.toolbar.size')"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
@@ -350,7 +350,7 @@ export default {
 						<button
 							data-has-icon="true"
 							data-has-text="false"
-							aria-label="Level"
+							:aria-label="$t('pw.toolbar.level')"
 							data-size="xs"
 							data-variant="filled"
 							type="button"

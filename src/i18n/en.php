@@ -152,6 +152,24 @@
 	'pw.field.icon.label' => 'Icon',
 	'pw.field.icon.none' => 'No icon',
 	'pw.field.icon.placeholder' => 'Start typing to search …',
+
+	'pw.icon.title' => 'Icons',
+	'pw.icon.reference' => 'Icon reference',
+	'pw.icon.search' => 'Search icons …',
+	'pw.icon.copied' => 'copied to clipboard',
+	'pw.icon.count.one' => 'Icon',
+	'pw.icon.count.other' => 'Icons',
+
+	'pw.login.title' => 'Protected',
+
+	'pw.toolbar.align' => 'Align',
+	'pw.toolbar.flourish' => 'Flourish',
+	'pw.toolbar.level' => 'Level',
+	'pw.toolbar.mode' => 'Mode',
+	'pw.toolbar.multiline' => 'Multiline',
+	'pw.toolbar.size' => 'Size',
+	'pw.toolbar.textbackground' => 'Text background',
+
 	'pw.field.image-aria-describedby' => 'Long description',
 	'pw.field.image-aria-describedby.help' => 'A more detailed image description including visually important but not immediately obvious details. This field is output as an `aria-describedby` attribute and provides additional context for screen reader users.',
 	'pw.field.image-aria-describedby.placeholder' => 'e.g. "Three employees sit at a conference table in front of a large window, with the Statue of Liberty visible in the background."',

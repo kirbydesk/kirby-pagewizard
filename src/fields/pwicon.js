@@ -69,7 +69,7 @@ export default {
 						:value="search"
 						@input="search = $event"
 					/>
-					<span class="pw-icon-count">{{ showCount }} {{ showCount === 1 ? 'Icon' : 'Icons' }}</span>
+					<span class="pw-icon-count">{{ showCount }} {{ showCount === 1 ? $t('pw.icon.count.one') : $t('pw.icon.count.other') }}</span>
 				</div>
 				<button
 					v-if="current"

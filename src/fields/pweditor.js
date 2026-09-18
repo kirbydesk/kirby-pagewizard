@@ -156,7 +156,7 @@ export default {
 						<button
 							:data-has-icon="current.align ? 'true' : 'false'"
 							:data-has-text="current.align ? 'false' : 'true'"
-							aria-label="Align"
+							:aria-label="$t('pw.toolbar.align')"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
@@ -179,7 +179,7 @@ export default {
 						<button
 							data-has-icon="false"
 							data-has-text="true"
-							aria-label="Size"
+							:aria-label="$t('pw.toolbar.size')"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
@@ -198,7 +198,7 @@ export default {
 						<button
 							data-has-icon="false"
 							data-has-text="true"
-							aria-label="Mode"
+							:aria-label="$t('pw.toolbar.mode')"
 							data-size="xs"
 							data-variant="filled"
 							type="button"
