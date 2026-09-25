@@ -440,6 +440,7 @@
 	'pw.option.h2' => 'H2',
 	'pw.option.h3' => 'H3',
 	'pw.option.h4' => 'H4',
+	'pw.option.div' => 'DIV',
 	'pw.option.bold' => 'Bold',
 	'pw.option.italic' => 'Italic',
 	'pw.option.underline' => 'Underline',

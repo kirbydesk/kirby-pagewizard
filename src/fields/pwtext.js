@@ -124,6 +124,10 @@ export default {
 			this.showMultilineDropdown = false;
 			this.showFlourishDropdown = false;
 		},
+		// "div" (no heading element, e.g. a slogan) has no Kirby h-icon → own icon
+		levelIcon(level) {
+			return level === 'div' ? 'pw-level-div' : level;
+		},
 		toggleLevelDropdown() {
 			const was = this.showLevelDropdown;
 			this.closeDropdowns();
@@ -358,7 +362,7 @@ export default {
 							@click.stop="toggleLevelDropdown"
 						><span class="k-button-icon">
 							<svg aria-hidden="true" class="k-icon">
-								<use :xlink:href="'#icon-' + currentLevel"></use>
+								<use :xlink:href="'#icon-' + levelIcon(currentLevel)"></use>
 							</svg>
 						</span></button>
 						<dialog v-if="showLevelDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
@@ -372,7 +376,7 @@ export default {
 									data-has-icon="true"
 								>
 									<span class="k-button-icon">
-										<svg class="k-icon"><use :xlink:href="'#icon-' + option"></use></svg>
+										<svg class="k-icon"><use :xlink:href="'#icon-' + levelIcon(option)"></use></svg>
 									</span>
 								</button>
 							</div>
