@@ -79,7 +79,7 @@ div.pwHeading {
 	line-height: 1.3;
 
 	&:has([data-textbackground]) {
-		line-height: 1.8;
+		line-height: var(--heading-marked-line-height);
 	}
 
 	[data-textbackground] {
@@ -88,7 +88,7 @@ div.pwHeading {
 		box-decoration-break: clone;
 		-webkit-box-decoration-break: clone;
 		padding: 0.05em 0.3em;
-		border-radius: 0.15em;
+		border-radius: var(--heading-marked-radius);
 	}
 
 	[data-flourish] {
