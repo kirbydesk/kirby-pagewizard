@@ -37,6 +37,16 @@ class pwConfig
 	 * Read a JSON file from the project's projectwizard override directory.
 	 * Example: projectOverride('navigation') → content/.projectwizard/navigation.json
 	 */
+	/**
+	 * Theme variants switched on in the Project Wizard (settings), "default"
+	 * always included. Without a setting: variant and variant2 (variant3 off).
+	 */
+	public static function activeVariants(): array
+	{
+		$variants = self::projectOverride('blocks')['variants'] ?? ['variant', 'variant2'];
+		return ['default', ...array_values(array_intersect(['variant', 'variant2', 'variant3'], $variants))];
+	}
+
 	public static function projectOverride(string $name, array $default = []): array
 	{
 		return self::readJson(self::projectDir() . '/' . $name . '.json', $default);

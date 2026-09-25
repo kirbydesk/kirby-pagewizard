@@ -2,14 +2,6 @@
 
 	/* -------------- Areas --------------*/
 	$areas = [];
-	$areas['divider'] = [
-		'label'    => '',
-		'icon'     => 'blank',
-		'menu'     => true,
-		'link'     => false,
-		'disabled' => true,
-	];
-
 	$areas['pw-icons'] = fn() => [
 		'label' => t('pw.icon.title', 'Icons'),
 		'icon'  => 'image',

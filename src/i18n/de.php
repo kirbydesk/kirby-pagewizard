@@ -375,7 +375,6 @@
 	'pw.option.bookmark' => 'Permalink',
 	'pw.option.bottom' => 'Unten',
 	'pw.option.button' => 'Button',
-	'pw.option.none' => 'keine',
 	'pw.option.underline' => 'Unterstrichen',
 	'pw.option.center' => 'Mitte',
 	'pw.option.color' => 'Farbe',

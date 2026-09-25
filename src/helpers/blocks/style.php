@@ -22,14 +22,17 @@ class pwStyle
 		];
 
 		$themeConfig = $fieldVisibility['theme'] ?? true;
-		$themeOptions = is_array($themeConfig) ? ($themeConfig['options'] ?? $themeConfig) : null;
-		if (is_array($themeOptions)) {
-			$themeField['options'] = array_values(
-				array_intersect_key(self::$allThemeOptions, array_flip($themeOptions))
-			);
-			if (count($themeField['options']) <= 1) {
-				$themeField = ['type' => 'hidden', 'default' => $defaults['theme']];
-			}
+		$themeOptions = is_array($themeConfig) ? ($themeConfig['options'] ?? $themeConfig) : array_keys(self::$allThemeOptions);
+		// only the variants switched on in the Project Wizard (custom stays)
+		$themeOptions = array_values(array_intersect($themeOptions, [...pwConfig::activeVariants(), 'custom']));
+		if (!in_array($themeField['default'], $themeOptions, true)) {
+			$themeField['default'] = $themeOptions[0] ?? 'default';
+		}
+		$themeField['options'] = array_values(
+			array_intersect_key(self::$allThemeOptions, array_flip($themeOptions))
+		);
+		if (count($themeField['options']) <= 1) {
+			$themeField = ['type' => 'hidden', 'default' => $themeField['default']];
 		}
 
 		$fields = [
