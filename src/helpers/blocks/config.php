@@ -805,6 +805,8 @@ class pwConfig
 		foreach ($footer as $groupKey => $group) {
 			if (!is_array($group) || !isset($group['vars'])) continue;
 			foreach ($group['vars'] as $varName => $def) {
+				// Skip non-CSS types (rendered in PHP snippets, not via CSS variables)
+				if (in_array($def['type'] ?? null, ['label', 'svg', 'visibility', 'icon-select', 'config'])) continue;
 				$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
 				$override = ($footerOverrides['global'][$varName] ?? null);
 				if (is_array($defaultVal) && isset($def['suffixes'])) {
@@ -884,7 +886,9 @@ class pwConfig
 		// consolidates identical declarations. A previous static guard broke
 		// multi-request scenarios: the second hook invocation had a fresh
 		// $imports array but the static was still true → block-vars missing.
-		$blockValueLines = [];
+		$blockValueLines   = [];
+		$blockValueLinesLg = [];
+		$blockValueLinesXl = [];
 		foreach (self::registered() as $blockType => $blockConfigDir) {
 			$blockValues   = self::loadValues($blockType);
 			$blockDefaults = $blockValues['defaults'];
@@ -899,6 +903,16 @@ class pwConfig
 						$defaultVal = is_array($def) ? ($def['value'] ?? '') : $def;
 						$override = $blockOverrides[$varName] ?? null;
 						$prefix = '--' . $blockType . '-' . $varName;
+
+						// Responsive (default/lg/xl, like the element sizes):
+						// lg and xl go into min-width 1024px / 1280px media queries.
+						if (is_array($def) && !isset($def['value']) && isset($def['default'], $def['lg'])) {
+							$ov = is_array($override) ? $override : [];
+							$blockValueLines[] = "\t" . $prefix . ': ' . ($ov['default'] ?? $def['default']) . ';';
+							$blockValueLinesLg[] = "\t" . $prefix . ': ' . ($ov['lg'] ?? $def['lg']) . ';';
+							if (isset($def['xl'])) $blockValueLinesXl[] = "\t" . $prefix . ': ' . ($ov['xl'] ?? $def['xl']) . ';';
+							continue;
+						}
 
 						// Multi-value with suffixes (small/large, top-left/-right/…)
 						if (is_array($defaultVal) && isset($def['suffixes'])) {
@@ -938,6 +952,12 @@ class pwConfig
 		}
 		if (!empty($blockValueLines)) {
 			$imports[] = ":root {\n" . implode("\n", $blockValueLines) . "\n}";
+		}
+		if (!empty($blockValueLinesLg)) {
+			$imports[] = "@media (min-width: 1024px) {\n:root {\n" . implode("\n", $blockValueLinesLg) . "\n}\n}";
+		}
+		if (!empty($blockValueLinesXl)) {
+			$imports[] = "@media (min-width: 1280px) {\n:root {\n" . implode("\n", $blockValueLinesXl) . "\n}\n}";
 		}
 
 		// Sprites stub

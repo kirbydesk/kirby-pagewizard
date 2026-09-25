@@ -87,10 +87,10 @@ section[data-block] {
 		border-top-right-radius: var(--global-top-right-radius);
 	}
 	&[data-radius-bottom-right="true"] {
-		border-bottom-right-radius: var(--global-bottom-left-radius);
+		border-bottom-right-radius: var(--global-bottom-right-radius);
 	}
 	&[data-radius-bottom-left="true"] {
-		border-bottom-left-radius: var(--global-bottom-right-radius);
+		border-bottom-left-radius: var(--global-bottom-left-radius);
 	}
 }
 

@@ -7,6 +7,5 @@ options:
   - tel
   - email
   - file
-required: true
 width: 2/3
 help: pw.field.link-internal.help

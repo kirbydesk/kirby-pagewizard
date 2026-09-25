@@ -26,8 +26,8 @@
 						<div data-type="category"><?= $footer->name() ?></div><?php
 
 							foreach ($footer->blocks()->toBlocks() as $item) :
-							?><div data-type="item">
-								<?php snippet('link', [
+								// Items without a link are not rendered
+								$linkHtml = snippet('link', [
 									'linkType'        => $item->linktype()->isTrue(),
 									'linkInternal'    => $item->content()->get('link-internal')->value(),
 									'linkExternal'    => $item->content()->get('link-external')->value(),
@@ -36,9 +36,12 @@
 									'linkRel'         => $item->linkrel()->value(),
 									'ariaLabel'       => $item->arialabel()->value(),
 									'ariaDescribedby' => $item->ariadescribedby()->value(),
-								]) ?>
+								], true);
+								if ($linkHtml) :
+							?><div data-type="item">
+								<?= $linkHtml ?>
 							</div>
-						<?php endforeach ?>
+						<?php endif; endforeach ?>
 					
 				</div>
 			<?php endforeach ?>

@@ -3,6 +3,5 @@ label: pw.field.link-external
 type: link
 options:
   - url
-required: true
 width: 2/3
 help: pw.field.link-external.help
