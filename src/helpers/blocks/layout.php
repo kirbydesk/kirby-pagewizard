@@ -65,7 +65,8 @@ class pwLayout
 			$fields['paddingRight']['when']  = ['__never__' => 'yes'];
 		}
 
-		if (isset($fieldVisibility['radius']) && $fieldVisibility['radius'] === false) {
+		// no corner toggles while the blocks are square (all radii 0)
+		if ((isset($fieldVisibility['radius']) && $fieldVisibility['radius'] === false) || pwConfig::blocksSquare()) {
 			unset($fields['headlineBlockradius']);
 			$fields['radiusTopLeft']['when']     = ['__never__' => 'yes'];
 			$fields['radiusTopRight']['when']    = ['__never__' => 'yes'];

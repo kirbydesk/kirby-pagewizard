@@ -47,6 +47,31 @@ class pwConfig
 		return ['default', ...array_values(array_intersect(['variant', 'variant2', 'variant3'], $variants))];
 	}
 
+	/**
+	 * Blocks are square: all four global corner radii ("global-", Project
+	 * Wizard › Blocks › Shape) are 0. Their corner toggles then have no effect.
+	 */
+	public static function blocksSquare(): bool
+	{
+		static $cached = null;
+		if ($cached !== null) return $cached;
+
+		$radii = self::projectOverride('global')['global']['global-'] ?? null;
+		if (!is_array($radii)) {
+			foreach (self::pluginConfig('global') as $group) {
+				if (isset($group['vars']['global-']['value'])) {
+					$radii = $group['vars']['global-']['value'];
+					break;
+				}
+			}
+		}
+		if (!is_array($radii) || $radii === []) return $cached = false;
+		foreach ($radii as $radius) {
+			if ((float)$radius !== 0.0) return $cached = false;
+		}
+		return $cached = true;
+	}
+
 	public static function projectOverride(string $name, array $default = []): array
 	{
 		return self::readJson(self::projectDir() . '/' . $name . '.json', $default);
