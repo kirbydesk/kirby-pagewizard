@@ -1011,7 +1011,6 @@ class pwConfig
 			'element-button-text'               => 'pw-color-button-text',
 			'element-button-background'         => 'pw-color-button-background',
 			'element-button-icon'               => 'pw-color-button-icon',
-			'element-icon-fill'                 => 'pw-color-icon',
 			'element-caption-text'              => 'pw-color-caption',
 			'element-quote-text'                => 'pw-color-quote',
 			'element-cite-text'                 => 'pw-color-cite',
