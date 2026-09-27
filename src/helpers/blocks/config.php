@@ -279,10 +279,6 @@ class pwConfig
 		// Overrides live under $cfg['settings'] — one wrapped format only.
 		$cfgVis = (!empty($cfg['settings']) && is_array($cfg['settings'])) ? $cfg['settings'] : [];
 
-		// tabs
-		if (!empty($cfgVis['tabs']) && is_array($cfgVis['tabs'])) {
-			$tabSettings = array_merge($tabSettings, $cfgVis['tabs']);
-		}
 		// fields: nested { content: {}, layout: {}, style: {}, settings: {} }
 		if (!empty($cfgVis['fields']) && is_array($cfgVis['fields'])) {
 			if (!empty($cfgVis['fields']['content'])) {
@@ -434,15 +430,6 @@ class pwConfig
 		$settings     = [];
 		$fieldOptions = [];
 		foreach ($raw as $fieldKey => $fieldValue) {
-			// Disabled field
-			if (is_array($fieldValue) && !empty($fieldValue['_disabled'])) {
-				$settings[$fieldKey] = false;
-				continue;
-			}
-			if ($fieldValue === false) {
-				$settings[$fieldKey] = false;
-				continue;
-			}
 			if ($fieldValue === 'enabled') {
 				$settings[$fieldKey] = true;
 			} elseif (is_array($fieldValue) && !array_is_list($fieldValue)) {
@@ -450,10 +437,6 @@ class pwConfig
 				$hasNestedProps = false;
 				foreach ($fieldValue as $propValue) {
 					if (is_array($propValue) && (isset($propValue['options']) || isset($propValue['default']))) {
-						$hasNestedProps = true;
-						break;
-					}
-					if ($propValue === false) {
 						$hasNestedProps = true;
 						break;
 					}
@@ -479,8 +462,6 @@ class pwConfig
 						if ($prop === 'mode') {
 							$mode = $propValue;
 						}
-					} elseif ($propValue === false) {
-						$opts[$prop] = false;
 					}
 				}
 
@@ -489,7 +470,8 @@ class pwConfig
 					$fieldOptions[$fieldKey] = $opts;
 				}
 			} else {
-				// Plain array (e.g., column-blocks) or boolean
+				// Plain array (e.g., column-blocks) or true; fields are not switched off
+				if ($fieldValue === false) continue;
 				$settings[$fieldKey] = $fieldValue;
 				if (is_array($fieldValue)) {
 					$fieldOptions[$fieldKey] = ['mode' => $fieldValue];
@@ -663,6 +645,12 @@ class pwConfig
 						$override = ($globalOverrides['global'][$varName] ?? null);
 						$vals = is_array($override) ? $override : $defaultVal;
 						$globalLines[] = "\t--" . $varName . ': ' . implode(' ', $vals) . ';';
+					} elseif (isset($def['generates'])) {
+						// A choice that generates CSS variables (e.g. link underline)
+						$state = $globalOverrides['global'][$varName] ?? $defaultVal;
+						foreach ($def['generates'] as $genVar => $mapping) {
+							$globalLines[] = "\t--" . $genVar . ': ' . ($mapping[$state] ?? '') . ';';
+						}
 					} elseif (($def['type'] ?? null) === 'font-family') {
 						$override = ($globalOverrides['global'][$varName] ?? null);
 						$fontVal = $override ?? $defaultVal;

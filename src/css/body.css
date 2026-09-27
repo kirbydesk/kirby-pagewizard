@@ -105,6 +105,14 @@ section[data-block] {
 }
 [data-field="heading"]:has([data-textbackground]) {
 	line-height: var(--heading-marked-line-height);
+	/* the larger line height adds half its extra space above the first and
+	   below the last line: the heading moves up by that half and gives the
+	   whole extra space back below, so its first line keeps its place and
+	   only the gaps between its lines grow (margin-top stays free for the
+	   blocks' own spacing) */
+	position: relative;
+	top: calc((var(--heading-line-height) - var(--heading-marked-line-height)) * 0.5em);
+	margin-bottom: calc(var(--heading-line-height) * 1em - var(--heading-marked-line-height) * 1em);
 }
 
 /* -------------- Flourish --------------*/
