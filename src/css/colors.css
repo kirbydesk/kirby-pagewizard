@@ -42,11 +42,6 @@ section[data-block]{
 		color: var(--element-editor-text);
 	}
 
-	/* -------------- Icon --------------*/
-	[data-field="icon"] svg {
-		fill: var(--element-icon-fill);
-	}
-
 	/* -------------- Caption --------------*/
 	[data-field="caption"] {
 		color: var(--element-caption-text);
@@ -164,11 +159,6 @@ section[data-block][data-style="variant"] {
 	[data-field="markdown"],
 	[data-field="text"] {
 		color: var(--element-editor-text-variant);
-	}
-
-	/* -------------- Icon --------------*/
-	[data-field="icon"] svg {
-		fill: var(--element-icon-fill-variant);
 	}
 
 	/* -------------- Caption --------------*/
@@ -294,11 +284,6 @@ section[data-block][data-style="variant2"] {
 		color: var(--element-editor-text-variant2);
 	}
 
-	/* -------------- Icon --------------*/
-	[data-field="icon"] svg {
-		fill: var(--element-icon-fill-variant2);
-	}
-
 	/* -------------- Caption --------------*/
 	[data-field="caption"] {
 		color: var(--element-caption-text-variant2);
@@ -417,11 +402,6 @@ section[data-block][data-style="variant3"] {
 	[data-field="markdown"],
 	[data-field="text"] {
 		color: var(--element-editor-text-variant3);
-	}
-
-	/* -------------- Icon --------------*/
-	[data-field="icon"] svg {
-		fill: var(--element-icon-fill-variant3);
 	}
 
 	/* -------------- Caption --------------*/

@@ -820,12 +820,6 @@
 				"variant2": "#FFFFFF",
 				"variant3": "#FFFFFF"
 			},
-			"element-icon-fill": {
-				"default": "#6B7280",
-				"variant": "#6B7280",
-				"variant2": "#B0C4DE",
-				"variant3": "#B0C4DE"
-			},
 			"element-image-zoom": {
 				"default": "#FFFFFF",
 				"variant": "#FFFFFF",
