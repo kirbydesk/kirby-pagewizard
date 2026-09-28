@@ -115,10 +115,10 @@ section[data-block] [data-field="textarea"] a {
 	font-style: var(--button-font-style);
 	margin: 0;
 	padding: var(--button-padding);
-	/* width auto, or the same manual width for all buttons (button-width-mode):
+	/* width auto, or filling its wrapper with the manual width (button-width-mode):
 	   then text and icon centred, a text too long cut off with "…" */
 	display: var(--button-display);
-	width: var(--button-width-applied);
+	width: var(--button-inner-width);
 	max-width: 100%;
 	justify-content: center;
 	align-items: center;
@@ -133,9 +133,10 @@ section[data-block] [data-field="textarea"] a {
 	transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
-/* the button's wrapper may shrink to the row, so a manual width never
-   reaches beyond the content area */
+/* the button's wrapper carries the manual width (rem, or % of the row) and
+   may shrink to the row, so it never reaches beyond the content area */
 [data-field="button"] {
+	width: var(--button-width-applied);
 	min-width: 0;
 	max-width: 100%;
 }
