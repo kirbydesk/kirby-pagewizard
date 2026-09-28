@@ -372,7 +372,11 @@ class pwConfig
 			'field-options' => $fieldOptions,
 			// fields hidden from the editors (setting keys: tagline, padding-top,
 			// grid-size-sm …); they keep their start values
-			'hidden'       => array_values(array_filter((array)($cfgVis['hidden'] ?? []), 'is_string')),
+			// (never the fields a block needs: "locked" in its settings.json)
+			'hidden'       => array_values(array_filter(
+				(array)($cfgVis['hidden'] ?? []),
+				fn($key) => is_string($key) && empty($rawContent[$key]['locked'])
+			)),
 		];
 	}
 
