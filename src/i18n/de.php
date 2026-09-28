@@ -388,7 +388,7 @@
 	'pw.option.external' => 'Extern',
 	'pw.option.footerbottom' => 'Footer unten',
 	'pw.option.fullscreen' => 'Vollbild',
-	'pw.option.global' => 'Global',
+	'pw.option.global' => 'Globale Elemente',
 	'pw.option.gradient' => 'Verlauf',
 	'pw.option.image' => 'Bild',
 	'pw.option.informative' => 'Informativ',
