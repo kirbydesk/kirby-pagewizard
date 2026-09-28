@@ -1,3 +1,8 @@
+import pwFieldToolbar from '@/components/field-toolbar.vue';
+
+// The alignment of the field in the next column (media, buttons): this
+// field stays invisible, its dropdown – the content fields' shared one, with
+// Kirby's arrow – sits in the header of that next field.
 export default {
 	props: {
 		value: String,
@@ -8,11 +13,8 @@ export default {
 	data() {
 		return {
 			current: this.value || this.align,
-			show: false,
-			btnEl: null,
-			dropdownEl: null,
+			toolbar: null,
 			container: null,
-			_closeHandler: null,
 			_observer: null,
 			_nextColumn: null,
 		}
@@ -20,7 +22,7 @@ export default {
 	watch: {
 		value(v) {
 			this.current = v || this.align;
-			this.updateIcon();
+			if (this.toolbar) this.toolbar.items = this.toolbarItems();
 		}
 	},
 	mounted() {
@@ -39,28 +41,20 @@ export default {
 			this.container.className = 'pw-align-btn';
 			this.container.style.cssText = 'position:relative;display:flex;align-items:center;';
 
-			this.btnEl = document.createElement('button');
-			this.btnEl.type = 'button';
-			this.btnEl.className = 'input-focus k-button';
-			this.btnEl.setAttribute('data-has-icon', 'true');
-			this.btnEl.setAttribute('data-has-text', 'false');
-			this.btnEl.setAttribute('data-size', 'xs');
-			this.btnEl.setAttribute('data-variant', 'filled');
-			this.btnEl.setAttribute('aria-label', 'Align');
-			this.updateIcon();
-			this.container.appendChild(this.btnEl);
-
-			this.btnEl.addEventListener('click', (e) => {
-				e.stopPropagation();
-				this.toggleDropdown();
-			});
-
-			this._closeHandler = (e) => {
-				if (!this.container.contains(e.target)) {
-					this.closeDropdown();
-				}
-			};
-			document.addEventListener('click', this._closeHandler);
+			// the shared dropdown, mounted into the other field's header
+			const Vue = this.$options._base;
+			const self = this;
+			this.toolbar = new Vue({
+				parent: this,
+				data: { items: this.toolbarItems() },
+				render(h) {
+					return h(pwFieldToolbar, {
+						props: { items: this.items },
+						on: { input: ({ value }) => self.select(value) },
+					});
+				},
+			}).$mount();
+			this.container.appendChild(this.toolbar.$el);
 
 			// Insert inside the same action group as the Add/options buttons
 			const existingBtn = header.querySelector('.k-button');
@@ -89,64 +83,19 @@ export default {
 			const hasItems = this._nextColumn.querySelector('.k-item, .k-block, .k-structure-item') !== null;
 			this.container.style.display = hasItems ? 'flex' : 'none';
 		},
-		updateIcon() {
-			if (!this.btnEl) return;
-			const icon = this.current || 'left';
-			this.btnEl.innerHTML = '<span class="k-button-icon"><svg class="k-icon"><use xlink:href="#icon-text-' + icon + '"></use></svg></span>';
-		},
-		toggleDropdown() {
-			if (this.show) {
-				this.closeDropdown();
-			} else {
-				this.showDropdown();
-			}
-		},
-		showDropdown() {
-			if (this.dropdownEl) this.dropdownEl.remove();
-
-			this.dropdownEl = document.createElement('dialog');
-			this.dropdownEl.className = 'k-dropdown-content pw-dropdown';
-			this.dropdownEl.setAttribute('data-theme', 'dark');
-			this.dropdownEl.setAttribute('open', '');
-
-			const navEl = document.createElement('div');
-			navEl.className = 'k-navigate';
-
-			this.alignOptions.forEach((opt) => {
-				const btn = document.createElement('button');
-				btn.type = 'button';
-				btn.className = 'k-button k-dropdown-item';
-				btn.setAttribute('data-has-icon', 'true');
-				btn.innerHTML = '<span class="k-button-icon"><svg class="k-icon"><use xlink:href="#icon-text-' + opt + '"></use></svg></span>';
-				btn.addEventListener('click', (e) => {
-					e.stopPropagation();
-					this.select(opt);
-				});
-				navEl.appendChild(btn);
-			});
-
-			this.dropdownEl.appendChild(navEl);
-			this.container.appendChild(this.dropdownEl);
-			this.show = true;
-		},
-		closeDropdown() {
-			if (this.dropdownEl) {
-				this.dropdownEl.remove();
-				this.dropdownEl = null;
-			}
-			this.show = false;
+		toolbarItems() {
+			return [{ key: 'align', value: this.current || 'left', options: this.alignOptions }];
 		},
 		select(opt) {
 			this.current = opt;
-			this.updateIcon();
-			this.closeDropdown();
+			if (this.toolbar) this.toolbar.items = this.toolbarItems();
 			this.$emit('input', opt);
 		}
 	},
 	beforeDestroy() {
 		if (this._observer) this._observer.disconnect();
+		if (this.toolbar) this.toolbar.$destroy();
 		if (this.container) this.container.remove();
-		if (this._closeHandler) document.removeEventListener('click', this._closeHandler);
 	},
 	template: '<div style="display:none"></div>'
 };
