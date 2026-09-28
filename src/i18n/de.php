@@ -376,6 +376,7 @@
 	'pw.option.bottom' => 'Unten',
 	'pw.option.button' => 'Button',
 	'pw.option.underline' => 'Unterstrichen',
+	'pw.option.justify' => 'Blocksatz',
 	'pw.option.center' => 'Mitte',
 	'pw.option.color' => 'Farbe',
 	'pw.option.custom' => 'Eigene',

@@ -33,6 +33,11 @@ body {
 [data-align="right"] {
 	text-align: right;
 }
+/* justified (texts only): with hyphenation, so the gaps stay small */
+[data-align="justify"] {
+	text-align: justify;
+	hyphens: auto;
+}
 [data-position="top"] {
 	align-self: start;
 }

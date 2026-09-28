@@ -376,6 +376,7 @@
 	'pw.option.bottom' => 'Bottom',
 	'pw.option.button' => 'Button',
 	'pw.option.underline' => 'Underline',
+	'pw.option.justify' => 'Justified',
 	'pw.option.center' => 'Center',
 	'pw.option.color' => 'Color',
 	'pw.option.custom' => 'Custom',
