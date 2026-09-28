@@ -55,17 +55,19 @@ class pwBlueprint
 
 			$tabs = [];
 
-			// Content Tab
-			$contentFields = !empty($parts['noContentHeader'])
-				? ($parts['contentFields'] ?? [])
-				: array_merge(
-					['headlineContent' => ['extends' => 'pagewizard/headlines/content']],
-					$parts['contentFields'] ?? []
-				);
-			$tabs['content'] = [
-				'label'  => 'pw.tab.content',
-				'fields' => $contentFields,
-			];
+			// Content Tab (none when all its fields are switched off in the project)
+			if (!empty($parts['contentFields'])) {
+				$contentFields = !empty($parts['noContentHeader'])
+					? $parts['contentFields']
+					: array_merge(
+						['headlineContent' => ['extends' => 'pagewizard/headlines/content']],
+						$parts['contentFields']
+					);
+				$tabs['content'] = [
+					'label'  => 'pw.tab.content',
+					'fields' => $contentFields,
+				];
+			}
 
 			// Layout Tab
 			pwConfig::addTab(

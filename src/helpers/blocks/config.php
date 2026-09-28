@@ -305,26 +305,25 @@ class pwConfig
 		$cfgVis = (!empty($cfg['settings']) && is_array($cfg['settings'])) ? $cfg['settings'] : [];
 
 		// fields: nested { content: {}, layout: {}, style: {}, settings: {} }
+		// The project (Project Wizard) sets start values ("default") and can
+		// switch whole content fields off (false); the options offered to the
+		// editors always stay the plugin's.
 		if (!empty($cfgVis['fields']) && is_array($cfgVis['fields'])) {
 			if (!empty($cfgVis['fields']['content'])) {
-				[$cfgSettings, $cfgFieldOptions] = self::parseContentSettings($cfgVis['fields']['content']);
-				$settings     = array_merge($settings,     $cfgSettings);
-				// Deep merge fieldOptions so individual properties are overridden, not entire field entries
-				foreach ($cfgFieldOptions as $fk => $fv) {
-					if (isset($fieldOptions[$fk]) && is_array($fieldOptions[$fk]) && is_array($fv)) {
-						$fieldOptions[$fk] = array_merge($fieldOptions[$fk], $fv);
-					} else {
-						$fieldOptions[$fk] = $fv;
+				foreach ($cfgVis['fields']['content'] as $fieldKey => $fieldValue) {
+					// a field switched off: not in the drawer, not rendered
+					if ($fieldValue === false) {
+						unset($settings[$fieldKey], $fieldOptions[$fieldKey]);
 					}
 				}
-				$fields       = array_merge($fields, self::extractContentDefaults($cfgVis['fields']['content']));
+				$fields = array_merge($fields, self::extractContentDefaults($cfgVis['fields']['content']));
 			}
-			// Per-field shallow merge: overrides typically carry only the changed
-			// property (e.g. { default: 'foo' }); a plain array_merge at this level
-			// would replace the whole field def and drop the plugin's options/type/
-			// labels/SVGs. Merge per field so override keys win and the rest survives.
+			// Per-field shallow merge: overrides carry the changed start value
+			// ({ default: 'foo' }); the plugin's options/type/labels/SVGs survive
+			// (restricted options of older projects are ignored).
 			$mergeFields = function (array $base, array $overrides): array {
 				foreach ($overrides as $fieldKey => $override) {
+					if (is_array($override)) unset($override['options']);
 					if (isset($base[$fieldKey]) && is_array($base[$fieldKey]) && is_array($override)) {
 						$base[$fieldKey] = array_merge($base[$fieldKey], $override);
 					} else {
@@ -365,15 +364,7 @@ class pwConfig
 				$fields = array_merge($fields, self::flattenContentDefaults($cfgVis['defaults']['content']));
 			}
 		}
-		if (!empty($cfgVis['editor']) && is_array($cfgVis['editor'])) {
-			foreach ($cfgVis['editor'] as $key => $value) {
-				if (is_array($value) && isset($editor[$key]) && is_array($editor[$key])) {
-					$editor[$key] = array_merge($editor[$key], $value);
-				} else {
-					$editor[$key] = $value;
-				}
-			}
-		}
+		// (the editor's formatting and lists are always the plugin's editor.json)
 
 		return [
 			'content'      => $settings,
