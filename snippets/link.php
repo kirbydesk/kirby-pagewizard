@@ -69,8 +69,10 @@ $position = $iconPosition ?? '';
 if (!empty($icon ?? null) && !empty($position)) :
 	$iconHtml = '<span class="link-icon link-icon--' . esc($position) . '" aria-hidden="true">' . $icon . '</span>';
 endif;
+// the text in its own span (buttons with a manual width cut it off with "…")
+$textHtml = '<span class="link-text">' . $linkText . '</span>';
 $content = ($position === 'right')
-	? $linkText . $iconHtml . $svg
-	: $iconHtml . $linkText . $svg;
+	? $textHtml . $iconHtml . $svg
+	: $iconHtml . $textHtml . $svg;
 
 ?><a href="<?= $url ?>"<?= $target . $rel . $label . $describedby ?>><?= $content ?></a>

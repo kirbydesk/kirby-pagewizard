@@ -610,6 +610,37 @@
 					"pw.option.bottom-right"
 				]
 			},
+			"button-width-mode": {
+				"value": "auto",
+				"options": [
+					"auto",
+					"manual"
+				],
+				"type": "toggle-pair",
+				"generates": {
+					"button-width-applied": {
+						"auto": "auto",
+						"manual": "var(--button-width)"
+					},
+					"button-display": {
+						"auto": "inline-block",
+						"manual": "inline-flex"
+					},
+					"button-white-space": {
+						"auto": "normal",
+						"manual": "nowrap"
+					}
+				}
+			},
+			"button-width": {
+				"default": "12rem",
+				"lg": "12rem",
+				"xl": "12rem",
+				"unit": "rem",
+				"step": 0.5,
+				"min": 1,
+				"max": 40
+			},
 			"button-border-width": {
 				"value": "1px",
 				"unit": "px",

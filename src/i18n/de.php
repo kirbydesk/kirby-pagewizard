@@ -367,6 +367,7 @@
 	'pw.option.5columns' => '5 Spalten',
 	'pw.option.addressblock' => 'Adressblock',
 	'pw.option.auto' => 'Auto',
+	'pw.option.manual' => 'Manuell',
 	'pw.option.background' => 'Hintergrund',
 	'pw.option.backgroundcolor' => 'Hintergrundfarbe',
 	'pw.option.backgroundimage' => 'Hintergrundbild',
