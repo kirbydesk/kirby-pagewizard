@@ -55,19 +55,17 @@ class pwBlueprint
 
 			$tabs = [];
 
-			// Content Tab (none when all its fields are switched off in the project)
-			if (!empty($parts['contentFields'])) {
-				$contentFields = !empty($parts['noContentHeader'])
-					? $parts['contentFields']
-					: array_merge(
-						['headlineContent' => ['extends' => 'pagewizard/headlines/content']],
-						$parts['contentFields']
-					);
-				$tabs['content'] = [
-					'label'  => 'pw.tab.content',
-					'fields' => $contentFields,
-				];
-			}
+			// Content Tab
+			$contentFields = !empty($parts['noContentHeader'])
+				? ($parts['contentFields'] ?? [])
+				: array_merge(
+					['headlineContent' => ['extends' => 'pagewizard/headlines/content']],
+					$parts['contentFields'] ?? []
+				);
+			$tabs['content'] = [
+				'label'  => 'pw.tab.content',
+				'fields' => $contentFields,
+			];
 
 			// Layout Tab
 			pwConfig::addTab(
@@ -114,9 +112,75 @@ class pwBlueprint
 			return [
 				'name' => $parts['name'],
 				'icon' => $parts['icon'],
-				'tabs' => $tabs,
+				'tabs' => self::hideFields($tabs, $config['hidden'] ?? []),
 			];
 		};
+	}
+
+	/**
+	 * Fields hidden from the editors in the Project Wizard (setting keys such
+	 * as tagline, padding-top, grid-size-sm): they stay in the block as hidden
+	 * fields with their start value, so the frontend keeps using it. A
+	 * headline without visible fields goes; a tab without visible fields goes
+	 * too, its hidden fields move to the first tab that is left.
+	 */
+	public static function hideFields(array $tabs, array $hidden): array
+	{
+		if (empty($hidden)) return $tabs;
+
+		// setting key → field name (padding-top → paddingTop); buttons with their alignment
+		$names = [];
+		foreach ($hidden as $key) {
+			$name = lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', $key))));
+			$names[$name] = true;
+			if ($key === 'buttons') $names['buttonsAlignment'] = true;
+		}
+
+		$isHidden = fn($field) => is_array($field) && ($field['type'] ?? null) === 'hidden';
+		$moved = [];
+
+		foreach ($tabs as $tabKey => $tab) {
+			$fields = [];
+			foreach ($tab['fields'] ?? [] as $name => $field) {
+				if (isset($names[$name])) {
+					$field = array_key_exists('default', (array)$field)
+						? ['type' => 'hidden', 'default' => $field['default']]
+						: ['type' => 'hidden'];
+				}
+				$fields[$name] = $field;
+			}
+
+			// headlines followed by hidden fields only
+			$keys = array_keys($fields);
+			foreach ($keys as $i => $name) {
+				if (!str_starts_with($name, 'headline')) continue;
+				$visible = false;
+				for ($j = $i + 1; $j < count($keys) && !str_starts_with($keys[$j], 'headline'); $j++) {
+					if (!$isHidden($fields[$keys[$j]])) { $visible = true; break; }
+				}
+				if (!$visible) unset($fields[$name]);
+			}
+
+			// no visible field left: the tab goes, its hidden fields move on
+			if (count(array_filter($fields, fn($f) => !$isHidden($f))) === 0) {
+				$moved += $fields;
+				unset($tabs[$tabKey]);
+				continue;
+			}
+			$tabs[$tabKey]['fields'] = $fields;
+		}
+
+		if (!empty($moved)) {
+			$first = array_key_first($tabs);
+			if ($first !== null) {
+				$tabs[$first]['fields'] += $moved;
+			} else {
+				// every field hidden: one tab keeps them (Kirby needs one)
+				$tabs['content'] = ['label' => 'pw.tab.content', 'fields' => $moved];
+			}
+		}
+
+		return $tabs;
 	}
 
 	/**

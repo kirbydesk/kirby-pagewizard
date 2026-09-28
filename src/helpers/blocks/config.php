@@ -305,17 +305,10 @@ class pwConfig
 		$cfgVis = (!empty($cfg['settings']) && is_array($cfg['settings'])) ? $cfg['settings'] : [];
 
 		// fields: nested { content: {}, layout: {}, style: {}, settings: {} }
-		// The project (Project Wizard) sets start values ("default") and can
-		// switch whole content fields off (false); the options offered to the
-		// editors always stay the plugin's.
+		// The project (Project Wizard) sets start values ("default"); the
+		// options offered to the editors always stay the plugin's.
 		if (!empty($cfgVis['fields']) && is_array($cfgVis['fields'])) {
 			if (!empty($cfgVis['fields']['content'])) {
-				foreach ($cfgVis['fields']['content'] as $fieldKey => $fieldValue) {
-					// a field switched off: not in the drawer, not rendered
-					if ($fieldValue === false) {
-						unset($settings[$fieldKey], $fieldOptions[$fieldKey]);
-					}
-				}
 				$fields = array_merge($fields, self::extractContentDefaults($cfgVis['fields']['content']));
 			}
 			// Per-field shallow merge: overrides carry the changed start value
@@ -377,6 +370,9 @@ class pwConfig
 			'effects'      => $effectsVis,
 			'settings'     => $settingsVis,
 			'field-options' => $fieldOptions,
+			// fields hidden from the editors (setting keys: tagline, padding-top,
+			// grid-size-sm …); they keep their start values
+			'hidden'       => array_values(array_filter((array)($cfgVis['hidden'] ?? []), 'is_string')),
 		];
 	}
 
