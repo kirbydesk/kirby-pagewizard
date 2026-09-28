@@ -120,9 +120,14 @@ export default {
 .pw-field-toolbar-item {
   position: relative;
 }
+/* the dropdown arrow close to the icon / text */
+.pw-field-toolbar-item > .k-button {
+  gap: var(--spacing-1);
+}
 /* icon buttons are square in Kirby; with the dropdown arrow they need room */
 .pw-field-toolbar-item > .k-button:not([data-has-text="true"]) {
-  --button-padding: var(--spacing-2);
+  --button-padding: var(--spacing-1);
+  padding-inline: var(--spacing-2) var(--spacing-1);
   aspect-ratio: auto;
 }
 </style>
