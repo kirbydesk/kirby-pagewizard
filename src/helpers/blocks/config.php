@@ -912,10 +912,34 @@ class pwConfig
 		$blockValueLines   = [];
 		$blockValueLinesLg = [];
 		$blockValueLinesXl = [];
+		$ownSpacingRules   = [];
 		foreach (self::registered() as $blockType => $blockConfigDir) {
 			$blockValues   = self::loadValues($blockType);
 			$blockDefaults = $blockValues['defaults'];
 			$blockOverrides = $blockValues['overrides'];
+
+			// Own "space after" for the block's tagline, heading and text: a block
+			// that brings tagline-/heading-/editor-spacing among its values and
+			// has them switched on (item-spacing "own", Project Wizard → Design)
+			// points the elements' --pw-space-after at its own values
+			$spacingVars = [];
+			foreach ($blockDefaults as $group) {
+				foreach (['tagline', 'heading', 'editor'] as $el) {
+					if (isset($group['vars'][$el . '-spacing'])) $spacingVars[$el] = true;
+				}
+			}
+			if ($spacingVars && ((self::load($blockType)['defaults']['item-spacing'] ?? 'global') === 'own')) {
+				$name   = preg_replace('/^pw/', '', $blockType);
+				$fields = [
+					'tagline' => '[data-field="tagline"]',
+					'heading' => '[data-field="heading"]',
+					'editor'  => ':is([data-field="textarea"], [data-field="writer"], [data-field="markdown"])',
+				];
+				foreach ($spacingVars as $el => $_) {
+					$ownSpacingRules[] = 'section[data-block="' . $name . '"][data-block] ' . $fields[$el]
+						. ' { --pw-space-after: var(--' . $blockType . '-' . $el . '-spacing); }';
+				}
+			}
 
 			foreach ($blockDefaults as $groupKey => $group) {
 				if (!is_array($group)) continue;
@@ -975,6 +999,9 @@ class pwConfig
 		}
 		if (!empty($blockValueLines)) {
 			$imports[] = ":root {\n" . implode("\n", $blockValueLines) . "\n}";
+		}
+		if (!empty($ownSpacingRules)) {
+			$imports[] = implode("\n", $ownSpacingRules);
 		}
 		if (!empty($blockValueLinesLg)) {
 			$imports[] = "@media (min-width: 1024px) {\n:root {\n" . implode("\n", $blockValueLinesLg) . "\n}\n}";
