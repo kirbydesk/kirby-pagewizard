@@ -116,11 +116,12 @@ section[data-block] [data-field="textarea"] a {
 	margin: 0;
 	padding: var(--button-padding);
 	/* width auto, or filling its wrapper with the manual width (button-width-mode):
-	   then text and icon centred, a text too long cut off with "…" */
+	   a text too long cut off with "…" */
 	display: var(--button-display);
 	width: var(--button-inner-width);
 	max-width: 100%;
-	justify-content: center;
+	/* text and icon left, centred or right in the manual width */
+	justify-content: var(--button-justify);
 	align-items: center;
 	text-decoration: none;
 	color: var(--element-button-text);

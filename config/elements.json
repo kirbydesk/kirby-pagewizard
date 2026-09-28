@@ -649,6 +649,22 @@
 				"min": 1,
 				"max": 40
 			},
+			"button-content-align": {
+				"value": "center",
+				"options": [
+					"left",
+					"center",
+					"right"
+				],
+				"type": "toggle-pair",
+				"generates": {
+					"button-justify": {
+						"left": "flex-start",
+						"center": "center",
+						"right": "flex-end"
+					}
+				}
+			},
 			"button-border-width": {
 				"value": "1px",
 				"unit": "px",
