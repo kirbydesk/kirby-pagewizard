@@ -17,6 +17,8 @@
       >
         <span v-if="hasIcon(item)" class="k-button-icon"><svg aria-hidden="true" class="k-icon" viewBox="0 0 24 24" fill="currentColor" v-html="icon(item.key, item.value)"></svg></span>
         <span v-else class="k-button-text pw-size-label">{{ text(item.key, item.value) }}</span>
+        <!-- it opens a menu: Kirby's dropdown arrow (as k-button with "dropdown") -->
+        <span class="k-button-arrow"><k-icon type="angle-dropdown" /></span>
       </button>
       <dialog v-if="open === item.key" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
         <div class="k-navigate">
