@@ -19,6 +19,24 @@
 	padding: 0;
 }
 
+/* -------------- Space after an element --------------*/
+/* Each element keeps its own gap to whatever follows (Project Wizard →
+   Elements › "Space after"); the last element of a block has none. Not
+   inside a block's items (they have their own layout) and not in the
+   multicolumn (its columns space their elements themselves). */
+section[data-block]:not([data-block="multicolumn"]) :is(
+	[data-field="tagline"],
+	[data-field="heading"],
+	[data-field="textarea"],
+	[data-field="writer"],
+	[data-field="markdown"]
+):not(:last-child):not([data-block="item"] *) {
+	margin-bottom: var(--pw-space-after);
+}
+section[data-block] [data-field="tagline"]  { --pw-space-after: var(--tagline-spacing); }
+section[data-block] [data-field="heading"]  { --pw-space-after: var(--heading-spacing); }
+section[data-block] :is([data-field="textarea"], [data-field="writer"], [data-field="markdown"]) { --pw-space-after: var(--editor-spacing); }
+
 /* -------------- Tagline --------------*/
 [data-field="tagline"] {
 	font-family: var(--tagline-font-family);
