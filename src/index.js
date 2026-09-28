@@ -9,6 +9,7 @@ import pwshared from "@/blocks/shared/index.vue";
 // Components
 import pwButton from "@/components/button.vue";
 import pwButtons from "@/components/buttons.vue";
+import pwFieldToolbar from "@/components/field-toolbar.vue";
 
 // Fields
 import htmlheadline  from "@/fields/htmlheadline.js";
@@ -47,6 +48,8 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 	},
 	components: {
 		'pw-icons-view': iconsView,
+		// the dropdowns of a content field (also used by the Project Wizard)
+		'pw-field-toolbar': pwFieldToolbar,
 	},
 	icons: {
 		"pw-level-div": '<path d="M13 6V21H11V6H5V4H19V6H13Z"/>',

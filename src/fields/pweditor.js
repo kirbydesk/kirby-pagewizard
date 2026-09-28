@@ -18,10 +18,6 @@ export default {
 	data() {
 		return {
 			current: this.parse(this.value),
-			showModeDropdown:  false,
-			showAlignDropdown: false,
-			showSizeDropdown:  false,
-			_closeHandler: null,
 			_updating: false,
 		};
 	},
@@ -38,8 +34,13 @@ export default {
 		translatedLabel() {
 			return this.label || this.$t('pw.field.text');
 		},
-		modeLabel() {
-			return this.$t('pw.field.text-' + this.current.mode, this.current.mode);
+		// the dropdowns shown, in the order of the drawer: alignment, size
+		// (with a preset), editor mode (with at least two)
+		toolbarItems() {
+			const items = [{ key: 'align', value: this.current.align, options: this.alignOptions }];
+			if (this.size && this.sizeOptions) items.push({ key: 'size', value: this.current.size, options: this.sizeOptions });
+			if (this.showModeSwitcher) items.push({ key: 'mode', value: this.current.mode, options: this.writerModes });
+			return items;
 		},
 		translatedHelp() {
 			return this.fieldHelp || this.$t('pw.field.text-' + this.current.mode + '.help', '');
@@ -77,23 +78,10 @@ export default {
 			this.$emit('input', JSON.stringify(this.current));
 			this.$nextTick(() => { this._updating = false; });
 		},
-		setMode(mode) {
-			this.current = { ...this.current, mode };
-			this.showModeDropdown = false;
+		// a dropdown chose a value (align, size or mode)
+		setOption({ key, value }) {
+			this.current = { ...this.current, [key]: value };
 			this.emit();
-		},
-		setAlign(align) {
-			this.current = { ...this.current, align };
-			this.showAlignDropdown = false;
-			this.emit();
-		},
-		setSize(size) {
-			this.current = { ...this.current, size };
-			this.showSizeDropdown = false;
-			this.emit();
-		},
-		sizeLabel(size) {
-			return this.$t('pw.option.' + size, size);
 		},
 		onTextInput(e) {
 			this.current = { ...this.current, [this.current.mode]: e.target.value };
@@ -107,43 +95,13 @@ export default {
 		autoResize(el) {
 			el.style.height = 'auto';
 			el.style.height = el.scrollHeight + 'px';
-		},
-		toggleModeDropdown() {
-			const was = this.showModeDropdown;
-			this.closeAllDropdowns();
-			this.showModeDropdown = !was;
-		},
-		toggleAlignDropdown() {
-			const was = this.showAlignDropdown;
-			this.closeAllDropdowns();
-			this.showAlignDropdown = !was;
-		},
-		toggleSizeDropdown() {
-			const was = this.showSizeDropdown;
-			this.closeAllDropdowns();
-			this.showSizeDropdown = !was;
-		},
-		closeAllDropdowns() {
-			this.showModeDropdown = false;
-			this.showAlignDropdown = false;
-			this.showSizeDropdown = false;
-		},
-		handleClose(e) {
-			if (!this.$el.contains(e.target)) {
-				this.closeAllDropdowns();
-			}
 		}
 	},
 	mounted() {
-		this._closeHandler = this.handleClose;
-		document.addEventListener('click', this._closeHandler, true);
 		this.$nextTick(() => {
 			const ta = this.$el.querySelector('textarea');
 			if (ta) this.autoResize(ta);
 		});
-	},
-	beforeDestroy() {
-		document.removeEventListener('click', this._closeHandler, true);
 	},
 	template: `
 		<div class="k-field pw-editor-field">
@@ -151,69 +109,7 @@ export default {
 				<label class="k-label k-field-label" style="flex:1;">
 					<span class="k-label-text">{{ translatedLabel }}</span>
 				</label>
-				<div class="k-button-group">
-					<span style="position:relative;">
-						<button
-							:data-has-icon="current.align ? 'true' : 'false'"
-							:data-has-text="current.align ? 'false' : 'true'"
-							:aria-label="$t('pw.toolbar.align')"
-							data-size="xs"
-							data-variant="filled"
-							type="button"
-							class="input-focus k-button"
-							@click.stop="toggleAlignDropdown"
-						><span v-if="current.align" class="k-button-icon">
-							<svg aria-hidden="true" class="k-icon">
-								<use :xlink:href="'#icon-text-' + current.align"></use>
-							</svg>
-						</span><span v-else class="k-button-text">···</span></button>
-						<dialog v-if="showAlignDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
-							<div class="k-navigate">
-								<button v-for="opt in alignOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-icon="true" @click.stop="setAlign(opt)">
-									<span class="k-button-icon"><svg class="k-icon"><use :xlink:href="'#icon-text-' + opt"></use></svg></span>
-								</button>
-							</div>
-						</dialog>
-					</span>
-					<span v-if="size && sizeOptions" style="position:relative;">
-						<button
-							data-has-icon="false"
-							data-has-text="true"
-							:aria-label="$t('pw.toolbar.size')"
-							data-size="xs"
-							data-variant="filled"
-							type="button"
-							class="input-focus k-button"
-							@click.stop="toggleSizeDropdown"
-						><span class="k-button-text pw-size-label">{{ sizeLabel(current.size) }}</span></button>
-						<dialog v-if="showSizeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
-							<div class="k-navigate">
-								<button v-for="opt in sizeOptions" :key="opt" type="button" class="k-button k-dropdown-item" data-has-text="true" data-has-icon="false" @click.stop="setSize(opt)">
-									<span class="k-button-text pw-size-label">{{ sizeLabel(opt) }}</span>
-								</button>
-							</div>
-						</dialog>
-					</span>
-					<span v-if="showModeSwitcher" style="position:relative;">
-						<button
-							data-has-icon="false"
-							data-has-text="true"
-							:aria-label="$t('pw.toolbar.mode')"
-							data-size="xs"
-							data-variant="filled"
-							type="button"
-							class="input-focus k-button"
-							@click.stop="toggleModeDropdown"
-						><span class="k-button-text"> {{ modeLabel }} </span></button>
-						<dialog v-if="showModeDropdown" class="k-dropdown-content pw-dropdown" data-theme="dark" open>
-							<div class="k-navigate">
-								<button v-for="m in writerModes" :key="m" type="button" class="k-button k-dropdown-item" data-has-text="true" data-has-icon="false" @click.stop="setMode(m)">
-									<span class="k-button-text">{{ $t('pw.field.text-' + m) }}</span>
-								</button>
-							</div>
-						</dialog>
-					</span>
-				</div>
+				<pw-field-toolbar :items="toolbarItems" @input="setOption" />
 			</header>
 			<div v-show="current.mode === 'textarea'" class="k-input pw-editor-textarea" data-type="textarea">
 				<span class="k-input-element">
