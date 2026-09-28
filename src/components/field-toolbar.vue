@@ -120,6 +120,14 @@ export default {
 .pw-field-toolbar-item {
   position: relative;
 }
+/* menu entries: full width and left aligned as in Kirby's menus, so the
+   icons line up and the current one's check mark sits on the right */
+.pw-field-toolbar .pw-dropdown .k-dropdown-item {
+  --button-width: 100%;
+  aspect-ratio: auto;
+  justify-content: flex-start;
+  padding-inline: var(--spacing-2);
+}
 /* the dropdown arrow close to the icon / text */
 .pw-field-toolbar-item > .k-button {
   gap: var(--spacing-1);
