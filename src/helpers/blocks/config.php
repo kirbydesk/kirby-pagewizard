@@ -372,10 +372,19 @@ class pwConfig
 			'field-options' => $fieldOptions,
 			// fields hidden from the editors (setting keys: tagline, padding-top,
 			// grid-size-sm …); they keep their start values
-			// (never the fields a block needs: "locked" in its settings.json)
+			// (never the fields a block needs: "locked" in its settings.json,
+			// also a field's setting such as media-type → media.type)
 			'hidden'       => array_values(array_filter(
 				(array)($cfgVis['hidden'] ?? []),
-				fn($key) => is_string($key) && empty($rawContent[$key]['locked'])
+				function ($key) use ($rawContent) {
+					if (!is_string($key) || !empty($rawContent[$key]['locked'])) return false;
+					foreach ($rawContent as $field => $props) {
+						if (!is_array($props) || !str_starts_with($key, $field . '-')) continue;
+						$prop = substr($key, strlen($field) + 1);
+						if (!empty($props[$prop]['locked'])) return false;
+					}
+					return true;
+				}
 			)),
 		];
 	}
