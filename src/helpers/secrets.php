@@ -128,6 +128,8 @@ class pwSecrets
 
 			$out[] = [
 				'env'    => $secret['env'],
+				// (the plugin: the wizard shows its keys on its own page)
+				'plugin' => $secret['plugin'],
 				'label'  => $secret['label'],
 				'help'   => $secret['help'],
 				'source' => $source,
