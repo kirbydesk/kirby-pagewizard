@@ -334,6 +334,13 @@
 					}
 				}
 			},
+			"list-marker-size": {
+				"value": "100%",
+				"unit": "%",
+				"step": 5,
+				"min": 50,
+				"max": 200
+			},
 			"list-indent": {
 				"value": "1.5em",
 				"unit": "em",
