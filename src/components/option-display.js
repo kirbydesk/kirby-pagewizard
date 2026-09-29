@@ -23,15 +23,13 @@ const PATHS = {
 export function hasIcon(type, value) {
 	if (type === 'size' || type === 'mode') return false;
 	if (type === 'align') return !!value;
-	return ['level', 'textbackground', 'multiline', 'flourish', 'style'].includes(type);
+	return ['level', 'textbackground', 'multiline', 'flourish'].includes(type);
 }
 
 // the icon's svg content
 export function iconHtml(type, value) {
 	if (PATHS[type]) return PATHS[type][value] || PATHS[type].disabled;
-	// Kirby's sprite: text-left …, h1 …; "div" (no heading element) its own;
-	// a list's style: bullets, numbers or none
-	if (type === 'style') return '<use href="#icon-' + ({ bullet: 'list-bullet', ordered: 'list-numbers', none: 'cancel-small' }[value] || 'list-bullet') + '"></use>';
+	// Kirby's sprite: text-left …, h1 …; "div" (no heading element) its own
 	const name = type === 'align' ? 'text-' + value : (value === 'div' ? 'pw-level-div' : value);
 	return '<use href="#icon-' + name + '"></use>';
 }
@@ -43,5 +41,7 @@ export function optionText(type, value, t, options) {
 	if (type === 'mode') return t('pw.field.text-' + value, value);
 	if (type === 'align' && !value) return '···';
 	if (type === 'size' && Array.isArray(options) && options.includes('normal')) return t('pw.option.text-' + value, value);
+	// a list's style: bullets, numbers or none
+	if (type === 'style') return t('pw.option.list-' + value, value);
 	return t('pw.option.' + value, value);
 }
