@@ -167,6 +167,10 @@
 					"block-link-font-weight": {
 						"normal": "inherit",
 						"bold": "700"
+					},
+					"block-link-cta-font-weight": {
+						"normal": "500",
+						"bold": "700"
 					}
 				}
 			},
