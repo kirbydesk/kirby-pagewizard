@@ -786,8 +786,9 @@ class pwConfig
 							}
 						}
 						$elementLines[] = "\t--" . $varName . ": '" . $fontVal . "', " . $fontCategory . ';';
-					} elseif (($def['type'] ?? null) === 'toggle-pair' && isset($def['generates'])) {
-						// Toggle that generates multiple CSS variables
+					} elseif (isset($def['generates'])) {
+						// A toggle or choice that generates CSS variables (e.g. the
+						// lists' marker)
 						$override = ($elementOverrides['global'][$varName] ?? null);
 						$state = $override ?? $defaultVal;
 						foreach ($def['generates'] as $genVar => $mapping) {

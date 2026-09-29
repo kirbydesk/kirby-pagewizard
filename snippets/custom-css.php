@@ -14,6 +14,9 @@
 	section[data-block-id="<?=$blockid?>"] [data-entry] > [data-field="text"]{
 		color: <?=$textcolor?>;
 	}
+	section[data-block-id="<?=$blockid?>"] {
+		--pw-list-marker: <?=$textcolor?>;
+	}
 	section[data-block-id="<?=$blockid?>"] [data-field="icon"] svg {
 		fill: <?=$textcolor?>;
 	}

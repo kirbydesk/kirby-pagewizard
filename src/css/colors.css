@@ -10,6 +10,9 @@
 	Default colors definitions
 ------------------------------------------------------------------------------------------------*/
 section[data-block]{
+	/* the lists' markers (li::marker in elements.css) */
+	--pw-list-marker: var(--element-editor-marker);
+
 	background-color: var(--block-background);
 
 	/* -------------- Links --------------*/
@@ -130,6 +133,9 @@ section[data-block]{
 	Variant color definitions (overwrites default colors when variant style is active)
 ------------------------------------------------------------------------------------------------*/
 section[data-block][data-style="variant"] {
+	/* the lists' markers (li::marker in elements.css) */
+	--pw-list-marker: var(--element-editor-marker-variant);
+
 	background-color: var(--block-background-variant);
 
 	/* -------------- Links --------------*/
@@ -261,6 +267,9 @@ section[data-block][data-style="custom"][data-button-style="variant"] {
 	Variant 2 color definitions
 ------------------------------------------------------------------------------------------------*/
 section[data-block][data-style="variant2"] {
+	/* the lists' markers (li::marker in elements.css) */
+	--pw-list-marker: var(--element-editor-marker-variant2);
+
 	background-color: var(--block-background-variant2);
 
 	/* -------------- Links --------------*/
@@ -389,6 +398,9 @@ section[data-block][data-style="custom"][data-button-style="variant2"] {
 	Variant 3 color definitions
 ------------------------------------------------------------------------------------------------*/
 section[data-block][data-style="variant3"] {
+	/* the lists' markers (li::marker in elements.css) */
+	--pw-list-marker: var(--element-editor-marker-variant3);
+
 	background-color: var(--block-background-variant3);
 
 	/* -------------- Links --------------*/
