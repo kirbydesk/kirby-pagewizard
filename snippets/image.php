@@ -5,7 +5,9 @@ $file = $file?->toFile();
 if ($file):
 	// Thumb options
 	$thumbOptions = ['width' => 1280, 'quality' => 90, 'format' => 'webp'];
-	$crop = $file->imageCrop()->toBool();
+	// (the caller may demand cropping, e.g. the cards' fixed ratio: then the
+	// focus point picks the section)
+	$crop = ($cover ?? false) || $file->imageCrop()->toBool();
 	$ratio = $file->imageRatio()->value();
 
 	// Srcset (Feature 2: responsive file sizes)
