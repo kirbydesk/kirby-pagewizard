@@ -21,10 +21,10 @@
 
 /* -------------- Space after an element --------------*/
 /* Each element keeps its own gap to whatever follows (Project Wizard →
-   Elements › "Space after"); the last element of a block has none. Not
-   inside a block's items (they have their own layout) and not in the
-   multicolumn (its columns space their elements themselves). */
-section[data-block]:not([data-block="multicolumn"]) :is(
+   Elements › "Space after"); the last element of a block (or of a
+   multicolumn's column) has none. Not inside a block's items (they have
+   their own layout). */
+section[data-block] :is(
 	[data-field="tagline"],
 	[data-field="heading"],
 	[data-field="textarea"],
