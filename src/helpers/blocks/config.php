@@ -955,6 +955,14 @@ class pwConfig
 					$ownSpacingRules[] = 'section[data-block="' . $name . '"][data-block] ' . $fields[$el]
 						. ' { --pw-space-after: var(--' . $blockType . '-' . $el . '-spacing); }';
 				}
+				// (the lists' space below: their own value, Elements › Lists)
+				$hasListSpacing = false;
+				foreach ($blockDefaults as $group) {
+					if (isset($group['vars']['list-spacing'])) $hasListSpacing = true;
+				}
+				if ($hasListSpacing) {
+					$ownSpacingRules[] = 'section[data-block="' . $name . '"][data-block] { --list-spacing: var(--' . $blockType . '-list-spacing); }';
+				}
 			}
 
 			foreach ($blockDefaults as $groupKey => $group) {
