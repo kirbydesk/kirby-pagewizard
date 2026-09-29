@@ -74,7 +74,7 @@ section[data-block] :is([data-field="textarea"], [data-field="writer"], [data-fi
 /* -------------- Lists --------------*/
 /* in texts and the multicolumn's list (Project Wizard → Elements › Lists):
    bullet lists their marker and indent, numbered lists their format and
-   indent, both the gap between the points */
+   indent, both the gap between the points and the space below */
 @counter-style pw-decimal-paren {
 	system: extends decimal;
 	suffix: ") ";
@@ -94,6 +94,11 @@ section[data-block] ul[data-field="list"] {
 section[data-block] ol[data-field="list"] {
 	padding-left: var(--list-number-indent);
 	list-style-type: var(--list-number-style);
+}
+/* the space below a list in a text: to whatever follows (above it the
+   paragraph spacing) */
+:is([data-field="writer"], [data-field="markdown"]) > :is(ul, ol) + * {
+	margin-top: var(--list-spacing);
 }
 section[data-block] li::marker {
 	color: var(--pw-list-marker);
