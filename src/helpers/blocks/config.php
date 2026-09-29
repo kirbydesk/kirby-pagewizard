@@ -928,6 +928,21 @@ class pwConfig
 					if (isset($group['vars'][$el . '-spacing'])) $spacingVars[$el] = true;
 				}
 			}
+			// Own values for the entries (Elements › Items): a block that brings
+			// item-title-font-size … among its values and has them switched on
+			// (item-entry "own") points the element's variables at its own
+			$entryVars = [];
+			foreach ($blockDefaults as $group) {
+				foreach (['item-title-font-size', 'item-title-line-height', 'item-text-font-size', 'item-title-spacing'] as $var) {
+					if (isset($group['vars'][$var])) $entryVars[] = $var;
+				}
+			}
+			if ($entryVars && ((self::load($blockType)['defaults']['item-entry'] ?? 'global') === 'own')) {
+				$name  = preg_replace('/^pw/', '', $blockType);
+				$decls = array_map(fn($var) => '--' . $var . ': var(--' . $blockType . '-' . $var . ');', array_unique($entryVars));
+				$ownSpacingRules[] = 'section[data-block="' . $name . '"] [data-entry] { ' . implode(' ', $decls) . ' }';
+			}
+
 			if ($spacingVars && ((self::load($blockType)['defaults']['item-spacing'] ?? 'global') === 'own')) {
 				$name   = preg_replace('/^pw/', '', $blockType);
 				$fields = [
