@@ -72,6 +72,47 @@ class pwConfig
 		return $cached = true;
 	}
 
+	/**
+	 * Exceptions (Project Wizard → Project › Exceptions): a JSON by block
+	 * type in the shape of the block's settings.json (and under "editor" its
+	 * editor.json), laid over the plugin's files as the last layer. Objects
+	 * merge key by key, lists (options, nodes …) replace. Lives in
+	 * content/.projectwizard/patches.json.
+	 */
+	public static function patches(): array
+	{
+		static $cached = null;
+		if ($cached !== null) return $cached;
+		return $cached = self::readJson(self::projectDir() . '/patches.json');
+	}
+
+	public static function mergePatch(array $base, array $patch): array
+	{
+		foreach ($patch as $key => $value) {
+			$both = is_array($value) && !array_is_list($value) && isset($base[$key]) && is_array($base[$key]) && !array_is_list($base[$key]);
+			$base[$key] = $both ? self::mergePatch($base[$key], $value) : $value;
+		}
+		return $base;
+	}
+
+	/**
+	 * A block's settings.json or editor.json ($file 'settings' / 'editor')
+	 * with the project's exceptions laid over it.
+	 */
+	public static function blockJson(string $configDir, string $file): array
+	{
+		$data = self::readJson($configDir . '/' . $file . '.json');
+		$blockType = array_search($configDir, self::$configPaths, true);
+		$patch = $blockType !== false ? (self::patches()[$blockType] ?? []) : [];
+		if (!is_array($patch)) return $data;
+		if ($file === 'editor') {
+			$patch = is_array($patch['editor'] ?? null) ? $patch['editor'] : [];
+		} else {
+			unset($patch['editor']);
+		}
+		return $patch ? self::mergePatch($data, $patch) : $data;
+	}
+
 	public static function projectOverride(string $name, array $default = []): array
 	{
 		return self::readJson(self::projectDir() . '/' . $name . '.json', $default);
@@ -222,7 +263,7 @@ class pwConfig
 		if ($configDir === null) return ['defaults' => [], 'overrides' => []];
 
 		$defaults = [];
-		$defaults  = self::readJson($configDir . '/settings.json')['values'] ?? [];
+		$defaults  = self::blockJson($configDir, 'settings')['values'] ?? [];
 		$overrides = self::projectOverride($blockType);
 
 		return ['defaults' => $defaults, 'overrides' => $overrides];
@@ -241,7 +282,7 @@ class pwConfig
 		}
 
 		/* -------------- Block Settings (merged source for toggles + defaults) --------------*/
-		$settingsRaw = self::readJson($configDir . '/settings.json');
+		$settingsRaw = self::blockJson($configDir, 'settings');
 
 		$tabSettings = $settingsRaw['tabs'] ?? [];
 
@@ -295,7 +336,7 @@ class pwConfig
 		}
 
 		/* -------------- Editor config --------------*/
-		$editor = self::readJson($configDir . '/editor.json');
+		$editor = self::blockJson($configDir, 'editor');
 
 		/* -------------- Config overrides from config.php --------------*/
 		$raw = self::projectConfig("kirbyblocks.{$blockType}");
@@ -1134,7 +1175,7 @@ class pwConfig
 		// Plugin-specific item colors (from each registered block's values.items.colors)
 		$pluginPalettes = ['default' => [], 'variant' => [], 'variant2' => [], 'variant3' => []];
 		foreach (self::registered() as $blockType => $blockConfigDir) {
-			$blockSettings = self::readJson($blockConfigDir . '/settings.json');
+			$blockSettings = self::blockJson($blockConfigDir, 'settings');
 			$blockOverrides = self::projectOverride($blockType);
 			foreach ($blockSettings['values'] ?? [] as $groupKey => $group) {
 				if (empty($group['colors']) || !is_array($group['colors'])) continue;
