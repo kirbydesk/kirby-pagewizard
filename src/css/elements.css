@@ -122,6 +122,10 @@ section[data-block] [data-entry] > [data-field="text"] {
 section[data-block] [data-entry] > [data-field="heading"] + [data-field="text"] {
 	margin-top: var(--item-title-spacing);
 }
+/* paragraphs and lists of the description */
+section[data-block] [data-entry] > [data-field="text"] > * + * {
+	margin-top: var(--item-text-paragraph-spacing);
+}
 
 /* -------------- Buttons --------------*/
 [data-field="buttons"] {
