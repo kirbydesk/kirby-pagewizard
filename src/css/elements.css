@@ -81,10 +81,12 @@ section[data-block] :is([data-field="textarea"], [data-field="writer"], [data-fi
 
 /* -------------- Links in texts --------------*/
 /* underline: none, always or on hover only (block links, Project → Blocks).
-   Only inside blocks: header and footer keep their own link styles */
+   Only inside blocks: header and footer keep their own link styles; also in
+   the description of the entries (Elements › Items) */
 section[data-block] [data-field="writer"] a,
 section[data-block] [data-field="markdown"] a,
-section[data-block] [data-field="textarea"] a {
+section[data-block] [data-field="textarea"] a,
+section[data-block] [data-entry] > [data-field="text"] a {
 	text-decoration-line: var(--block-link-decoration);
 	text-decoration-thickness: var(--block-link-thickness);
 	text-underline-offset: var(--block-link-offset);
