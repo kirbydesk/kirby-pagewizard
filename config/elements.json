@@ -227,12 +227,6 @@
 				"variant": "#262626",
 				"variant2": "#FFFFFF",
 				"variant3": "#FFFFFF"
-			},
-			"element-editor-marker": {
-				"default": "#262626",
-				"variant": "#262626",
-				"variant2": "#FFFFFF",
-				"variant3": "#FFFFFF"
 			}
 		},
 		"vars": {
@@ -310,22 +304,12 @@
 				"step": 0.1,
 				"min": 0,
 				"max": 6
-			},
-			"editor-list-indent": {
-				"value": "1.5em",
-				"unit": "em",
-				"step": 0.1,
-				"min": 0,
-				"max": 4
-			},
-			"editor-list-item-spacing": {
-				"value": "0.25em",
-				"unit": "em",
-				"step": 0.05,
-				"min": 0,
-				"max": 3
-			},
-			"editor-list-marker": {
+			}
+		}
+	},
+	"list": {
+		"vars": {
+			"list-marker": {
 				"value": "disc",
 				"options": [
 					"disc",
@@ -333,12 +317,34 @@
 					"check"
 				],
 				"generates": {
-					"editor-list-style": {
+					"list-style": {
 						"disc": "disc",
 						"dash": "\"–  \"",
 						"check": "\"✓  \""
 					}
 				}
+			},
+			"list-indent": {
+				"value": "1.5em",
+				"unit": "em",
+				"step": 0.1,
+				"min": 0,
+				"max": 4
+			},
+			"list-item-spacing": {
+				"value": "0.25em",
+				"unit": "em",
+				"step": 0.05,
+				"min": 0,
+				"max": 3
+			}
+		},
+		"colors": {
+			"element-list-marker": {
+				"default": "#262626",
+				"variant": "#262626",
+				"variant2": "#FFFFFF",
+				"variant3": "#FFFFFF"
 			}
 		}
 	},

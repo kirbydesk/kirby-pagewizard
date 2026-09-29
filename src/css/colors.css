@@ -11,7 +11,7 @@
 ------------------------------------------------------------------------------------------------*/
 section[data-block]{
 	/* the lists' markers (li::marker in elements.css) */
-	--pw-list-marker: var(--element-editor-marker);
+	--pw-list-marker: var(--element-list-marker);
 
 	background-color: var(--block-background);
 
@@ -134,7 +134,7 @@ section[data-block]{
 ------------------------------------------------------------------------------------------------*/
 section[data-block][data-style="variant"] {
 	/* the lists' markers (li::marker in elements.css) */
-	--pw-list-marker: var(--element-editor-marker-variant);
+	--pw-list-marker: var(--element-list-marker-variant);
 
 	background-color: var(--block-background-variant);
 
@@ -268,7 +268,7 @@ section[data-block][data-style="custom"][data-button-style="variant"] {
 ------------------------------------------------------------------------------------------------*/
 section[data-block][data-style="variant2"] {
 	/* the lists' markers (li::marker in elements.css) */
-	--pw-list-marker: var(--element-editor-marker-variant2);
+	--pw-list-marker: var(--element-list-marker-variant2);
 
 	background-color: var(--block-background-variant2);
 
@@ -399,7 +399,7 @@ section[data-block][data-style="custom"][data-button-style="variant2"] {
 ------------------------------------------------------------------------------------------------*/
 section[data-block][data-style="variant3"] {
 	/* the lists' markers (li::marker in elements.css) */
-	--pw-list-marker: var(--element-editor-marker-variant3);
+	--pw-list-marker: var(--element-list-marker-variant3);
 
 	background-color: var(--block-background-variant3);
 

@@ -73,18 +73,18 @@ section[data-block] :is([data-field="textarea"], [data-field="writer"], [data-fi
 
 /* -------------- Lists --------------*/
 /* in texts and the multicolumn's list: indent, gap between the points, the
-   marker (Project Wizard → Elements › Text › Lists); numbered lists keep
+   marker (Project Wizard → Elements › Lists); numbered lists keep
    their numbers */
 :is([data-field="writer"], [data-field="markdown"]) :is(ul, ol),
 section[data-block] [data-field="list"] {
-	padding-left: var(--editor-list-indent);
+	padding-left: var(--list-indent);
 
 	& > li + li {
-		margin-top: var(--editor-list-item-spacing);
+		margin-top: var(--list-item-spacing);
 	}
 }
 :is([data-field="writer"], [data-field="markdown"]) ul {
-	list-style-type: var(--editor-list-style);
+	list-style-type: var(--list-style);
 }
 :is([data-field="writer"], [data-field="markdown"]) ol {
 	list-style-type: decimal;
