@@ -36,6 +36,21 @@ section[data-block] :is(
 section[data-block] [data-field="tagline"]  { --pw-space-after: var(--tagline-spacing); }
 section[data-block] [data-field="heading"]  { --pw-space-after: var(--heading-spacing); }
 section[data-block] :is([data-field="textarea"], [data-field="writer"], [data-field="markdown"]) { --pw-space-after: var(--editor-spacing); }
+/* quote, media and buttons: the same where something follows them (e.g. in
+   a multicolumn's column) */
+section[data-block] :is(
+	figure:has(> [data-field="quote"]),
+	[data-field="image"],
+	[data-field="slideshow"],
+	[data-field="video"],
+	[data-field="buttons"],
+	[data-field="button"]
+):not(:last-child):not([data-block="item"] *) {
+	margin-bottom: var(--pw-space-after);
+}
+section[data-block] figure:has(> [data-field="quote"]) { --pw-space-after: var(--quote-spacing); }
+section[data-block] :is([data-field="image"], [data-field="slideshow"], [data-field="video"]) { --pw-space-after: var(--media-spacing); }
+section[data-block] :is([data-field="buttons"], [data-field="button"]) { --pw-space-after: var(--button-spacing); }
 
 /* -------------- Tagline --------------*/
 [data-field="tagline"] {

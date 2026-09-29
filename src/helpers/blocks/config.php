@@ -925,7 +925,7 @@ class pwConfig
 			// points the elements' --pw-space-after at its own values
 			$spacingVars = [];
 			foreach ($blockDefaults as $group) {
-				foreach (['tagline', 'heading', 'editor'] as $el) {
+				foreach (['tagline', 'heading', 'editor', 'quote', 'media', 'button'] as $el) {
 					if (isset($group['vars'][$el . '-spacing'])) $spacingVars[$el] = true;
 				}
 			}
@@ -950,6 +950,9 @@ class pwConfig
 					'tagline' => '[data-field="tagline"]',
 					'heading' => '[data-field="heading"]',
 					'editor'  => ':is([data-field="textarea"], [data-field="writer"], [data-field="markdown"])',
+					'quote'   => 'figure:has(> [data-field="quote"])',
+					'media'   => ':is([data-field="image"], [data-field="slideshow"], [data-field="video"])',
+					'button'  => ':is([data-field="buttons"], [data-field="button"])',
 				];
 				foreach ($spacingVars as $el => $_) {
 					$ownSpacingRules[] = 'section[data-block="' . $name . '"][data-block] ' . $fields[$el]
