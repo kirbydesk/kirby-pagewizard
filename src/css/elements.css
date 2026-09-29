@@ -94,6 +94,33 @@ section[data-block] [data-field="textarea"] a {
 	}
 }
 
+/* -------------- Item (Project Wizard → Elements › Item) --------------*/
+/* The entries of a list (featurelist, steplist): their title and description.
+   A block opts in with data-entry on each item's content. */
+section[data-block] [data-entry] > [data-field="heading"] {
+	font-family: var(--item-title-font-family);
+	font-size: var(--item-title-font-size);
+	font-weight: var(--item-title-font-weight);
+	line-height: var(--item-title-line-height);
+	letter-spacing: var(--item-title-letter-spacing);
+	text-transform: var(--item-title-text-transform);
+	font-style: var(--item-title-font-style);
+	margin: 0;
+}
+section[data-block] [data-entry] > [data-field="text"] {
+	font-family: var(--item-text-font-family);
+	font-size: var(--item-text-font-size);
+	font-weight: var(--item-text-font-weight);
+	line-height: var(--item-text-line-height);
+	letter-spacing: var(--item-text-letter-spacing);
+	text-transform: var(--item-text-text-transform);
+	font-style: var(--item-text-font-style);
+	margin: 0;
+}
+section[data-block] [data-entry] > [data-field="heading"] + [data-field="text"] {
+	margin-top: var(--item-title-spacing);
+}
+
 /* -------------- Buttons --------------*/
 [data-field="buttons"] {
 	display: flex;

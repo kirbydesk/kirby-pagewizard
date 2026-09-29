@@ -42,6 +42,14 @@ section[data-block]{
 		color: var(--element-editor-text);
 	}
 
+	/* -------------- Item (entries) --------------*/
+	[data-entry] > [data-field="heading"] {
+		color: var(--element-item-title-text);
+	}
+	[data-entry] > [data-field="text"] {
+		color: var(--element-item-text-text);
+	}
+
 	/* -------------- Caption --------------*/
 	[data-field="caption"] {
 		color: var(--element-caption-text);
@@ -159,6 +167,14 @@ section[data-block][data-style="variant"] {
 	[data-field="markdown"],
 	[data-field="text"] {
 		color: var(--element-editor-text-variant);
+	}
+
+	/* -------------- Item (entries) --------------*/
+	[data-entry] > [data-field="heading"] {
+		color: var(--element-item-title-text-variant);
+	}
+	[data-entry] > [data-field="text"] {
+		color: var(--element-item-text-text-variant);
 	}
 
 	/* -------------- Caption --------------*/
@@ -284,6 +300,14 @@ section[data-block][data-style="variant2"] {
 		color: var(--element-editor-text-variant2);
 	}
 
+	/* -------------- Item (entries) --------------*/
+	[data-entry] > [data-field="heading"] {
+		color: var(--element-item-title-text-variant2);
+	}
+	[data-entry] > [data-field="text"] {
+		color: var(--element-item-text-text-variant2);
+	}
+
 	/* -------------- Caption --------------*/
 	[data-field="caption"] {
 		color: var(--element-caption-text-variant2);
@@ -402,6 +426,14 @@ section[data-block][data-style="variant3"] {
 	[data-field="markdown"],
 	[data-field="text"] {
 		color: var(--element-editor-text-variant3);
+	}
+
+	/* -------------- Item (entries) --------------*/
+	[data-entry] > [data-field="heading"] {
+		color: var(--element-item-title-text-variant3);
+	}
+	[data-entry] > [data-field="text"] {
+		color: var(--element-item-text-text-variant3);
 	}
 
 	/* -------------- Caption --------------*/
