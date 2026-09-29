@@ -331,6 +331,30 @@
 				"min": 0,
 				"max": 4
 			},
+			"list-number-format": {
+				"value": "decimal",
+				"options": [
+					"decimal",
+					"decimal-paren",
+					"lower-alpha",
+					"lower-roman"
+				],
+				"generates": {
+					"list-number-style": {
+						"decimal": "decimal",
+						"decimal-paren": "pw-decimal-paren",
+						"lower-alpha": "lower-alpha",
+						"lower-roman": "lower-roman"
+					}
+				}
+			},
+			"list-number-indent": {
+				"value": "2em",
+				"unit": "em",
+				"step": 0.1,
+				"min": 0,
+				"max": 4
+			},
 			"list-item-spacing": {
 				"value": "0.25em",
 				"unit": "em",

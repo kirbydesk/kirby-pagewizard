@@ -72,22 +72,28 @@ section[data-block] :is([data-field="textarea"], [data-field="writer"], [data-fi
 }
 
 /* -------------- Lists --------------*/
-/* in texts and the multicolumn's list: indent, gap between the points, the
-   marker (Project Wizard → Elements › Lists); numbered lists keep
-   their numbers */
+/* in texts and the multicolumn's list (Project Wizard → Elements › Lists):
+   bullet lists their marker and indent, numbered lists their format and
+   indent, both the gap between the points */
+@counter-style pw-decimal-paren {
+	system: extends decimal;
+	suffix: ") ";
+}
 :is([data-field="writer"], [data-field="markdown"]) :is(ul, ol),
 section[data-block] [data-field="list"] {
-	padding-left: var(--list-indent);
-
 	& > li + li {
 		margin-top: var(--list-item-spacing);
 	}
 }
-:is([data-field="writer"], [data-field="markdown"]) ul {
+:is([data-field="writer"], [data-field="markdown"]) ul,
+section[data-block] ul[data-field="list"] {
+	padding-left: var(--list-indent);
 	list-style-type: var(--list-style);
 }
-:is([data-field="writer"], [data-field="markdown"]) ol {
-	list-style-type: decimal;
+:is([data-field="writer"], [data-field="markdown"]) ol,
+section[data-block] ol[data-field="list"] {
+	padding-left: var(--list-number-indent);
+	list-style-type: var(--list-number-style);
 }
 section[data-block] li::marker {
 	color: var(--pw-list-marker);
