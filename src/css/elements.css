@@ -193,7 +193,8 @@ section[data-block] [data-entry] > [data-field="text"] > * + * {
 	letter-spacing: var(--caption-letter-spacing);
 	text-transform: var(--caption-text-transform);
 	font-style: var(--caption-font-style);
-	margin: 0;
+	/* its gap to the image or video above (Elements › Media) */
+	margin: var(--caption-spacing) 0 0;
 	padding: 0;
 }
 
