@@ -918,7 +918,7 @@
 				"max": 20
 			},
 			"caption-spacing": {
-				"value": "0.5rem",
+				"value": "0rem",
 				"unit": "rem",
 				"step": 0.1,
 				"min": 0,
