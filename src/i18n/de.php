@@ -426,6 +426,7 @@
 	'pw.option.arrow' => 'Pfeil',
 	'pw.option.chevron' => 'Winkel',
 	'pw.option.box' => 'Quadrat',
+	'pw.option.star' => 'Stern',
 	'pw.option.normal' => 'Normal',
 	'pw.option.text-normal' => 'Normal',
 	'pw.option.text-lg' => 'Etwas größer',

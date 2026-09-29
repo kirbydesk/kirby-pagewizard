@@ -426,6 +426,7 @@
 	'pw.option.arrow' => 'Arrow',
 	'pw.option.chevron' => 'Chevron',
 	'pw.option.box' => 'Square',
+	'pw.option.star' => 'Star',
 	'pw.option.normal' => 'Normal',
 	'pw.option.text-normal' => 'Normal',
 	'pw.option.text-lg' => 'Slightly larger',

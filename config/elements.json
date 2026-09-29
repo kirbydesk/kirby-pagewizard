@@ -318,7 +318,8 @@
 					"dash",
 					"arrow",
 					"chevron",
-					"check"
+					"check",
+					"star"
 				],
 				"generates": {
 					"list-style": {
@@ -328,7 +329,8 @@
 						"circle": "circle",
 						"arrow": "\"→  \"",
 						"chevron": "\"›  \"",
-						"box": "square"
+						"box": "square",
+						"star": "\"★  \""
 					}
 				}
 			},
