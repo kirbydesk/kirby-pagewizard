@@ -16,6 +16,7 @@
 	}
 	section[data-block-id="<?=$blockid?>"] {
 		--pw-list-marker: <?=$textcolor?>;
+		--pw-list-number: <?=$textcolor?>;
 	}
 	section[data-block-id="<?=$blockid?>"] [data-field="icon"] svg {
 		fill: <?=$textcolor?>;

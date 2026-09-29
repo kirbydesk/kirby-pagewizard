@@ -393,6 +393,12 @@
 				"variant": "#262626",
 				"variant2": "#FFFFFF",
 				"variant3": "#FFFFFF"
+			},
+			"element-list-number": {
+				"default": "#262626",
+				"variant": "#262626",
+				"variant2": "#FFFFFF",
+				"variant3": "#FFFFFF"
 			}
 		}
 	},

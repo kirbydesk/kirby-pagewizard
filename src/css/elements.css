@@ -103,6 +103,9 @@ section[data-block] ol[data-field="list"] {
 section[data-block] li::marker {
 	color: var(--pw-list-marker);
 }
+section[data-block] ol > li::marker {
+	color: var(--pw-list-number);
+}
 /* the bullets' size relative to the text (numbers keep the text's size) */
 :is([data-field="writer"], [data-field="markdown"]) ul > li::marker,
 section[data-block] ul[data-field="list"] > li::marker {
