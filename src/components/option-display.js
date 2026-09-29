@@ -34,9 +34,12 @@ export function iconHtml(type, value) {
 	return '<use href="#icon-' + name + '"></use>';
 }
 
-// the text (t: the panel's translate function)
-export function optionText(type, value, t) {
+// the text (t: the panel's translate function); the size steps of texts
+// (their scale starts at "normal") are named apart from the headings' (the
+// same step is smaller there: "lg" of a text is not "lg" of a heading)
+export function optionText(type, value, t, options) {
 	if (type === 'mode') return t('pw.field.text-' + value, value);
 	if (type === 'align' && !value) return '···';
+	if (type === 'size' && Array.isArray(options) && options.includes('normal')) return t('pw.option.text-' + value, value);
 	return t('pw.option.' + value, value);
 }

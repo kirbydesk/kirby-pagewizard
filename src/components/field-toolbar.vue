@@ -15,7 +15,7 @@
         class="input-focus k-button"
         @click.stop="toggle(item.key)"
       >
-        <pw-option-icon :type="item.key" :value="item.value" />
+        <pw-option-icon :type="item.key" :value="item.value" :options="item.options" />
         <!-- it opens a menu: Kirby's dropdown arrow (as k-button with "dropdown") -->
         <span class="k-button-arrow"><k-icon type="angle-dropdown" /></span>
       </button>
@@ -31,7 +31,7 @@
             :aria-current="option === item.value ? 'true' : undefined"
             @click.stop="choose(item.key, option)"
           >
-            <pw-option-icon :type="item.key" :value="option" />
+            <pw-option-icon :type="item.key" :value="option" :options="item.options" />
           </button>
         </div>
       </dialog>

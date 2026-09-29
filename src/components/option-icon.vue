@@ -12,6 +12,8 @@ export default {
     // level, size, align, textbackground, multiline, flourish, mode
     type: { type: String, required: true },
     value: { type: String, default: '' },
+    // all options of the dropdown (tells the texts' size scale apart)
+    options: { type: Array, default: null },
   },
   computed: {
     isIcon() {
@@ -21,7 +23,7 @@ export default {
       return iconHtml(this.type, this.value);
     },
     text() {
-      return optionText(this.type, this.value, (key, fallback) => this.$t(key, fallback));
+      return optionText(this.type, this.value, (key, fallback) => this.$t(key, fallback), this.options);
     },
   },
 };
