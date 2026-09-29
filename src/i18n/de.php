@@ -380,7 +380,7 @@
 	'pw.option.justify' => 'Blocksatz',
 	'pw.option.center' => 'Mitte',
 	'pw.option.color' => 'Farbe',
-	'pw.option.custom' => 'Eigene',
+	'pw.option.custom' => 'Benutzerdefiniert',
 	'pw.option.decorative' => 'Dekorativ',
 	'pw.option.default' => 'Standard',
 	'pw.option.disabled' => 'Deaktiviert',
