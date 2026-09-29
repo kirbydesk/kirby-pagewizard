@@ -156,6 +156,20 @@
 					}
 				}
 			},
+			"block-link-weight": {
+				"value": "normal",
+				"options": [
+					"normal",
+					"bold"
+				],
+				"type": "toggle-pair",
+				"generates": {
+					"block-link-font-weight": {
+						"normal": "inherit",
+						"bold": "700"
+					}
+				}
+			},
 			"block-link-thickness": {
 				"value": "1px",
 				"unit": "px",

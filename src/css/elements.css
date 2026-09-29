@@ -88,6 +88,8 @@ section[data-block] [data-field="markdown"] a,
 section[data-block] [data-field="textarea"] a,
 section[data-block] [data-entry] > [data-field="text"] a {
 	text-decoration-line: var(--block-link-decoration);
+	/* normal or bold (Project → Blocks): links recognisable without colour */
+	font-weight: var(--block-link-font-weight);
 	text-decoration-thickness: var(--block-link-thickness);
 	text-underline-offset: var(--block-link-offset);
 
