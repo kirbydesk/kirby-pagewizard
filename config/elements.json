@@ -313,14 +313,22 @@
 				"value": "disc",
 				"options": [
 					"disc",
+					"circle",
+					"box",
 					"dash",
+					"arrow",
+					"chevron",
 					"check"
 				],
 				"generates": {
 					"list-style": {
 						"disc": "disc",
 						"dash": "\"–  \"",
-						"check": "\"✓  \""
+						"check": "\"✓  \"",
+						"circle": "circle",
+						"arrow": "\"→  \"",
+						"chevron": "\"›  \"",
+						"box": "square"
 					}
 				}
 			},
