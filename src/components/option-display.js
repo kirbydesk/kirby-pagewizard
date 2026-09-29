@@ -23,13 +23,15 @@ const PATHS = {
 export function hasIcon(type, value) {
 	if (type === 'size' || type === 'mode') return false;
 	if (type === 'align') return !!value;
-	return ['level', 'textbackground', 'multiline', 'flourish'].includes(type);
+	return ['level', 'textbackground', 'multiline', 'flourish', 'style'].includes(type);
 }
 
 // the icon's svg content
 export function iconHtml(type, value) {
 	if (PATHS[type]) return PATHS[type][value] || PATHS[type].disabled;
-	// Kirby's sprite: text-left …, h1 …; "div" (no heading element) its own
+	// Kirby's sprite: text-left …, h1 …; "div" (no heading element) its own;
+	// a list's style: bullets, numbers or none
+	if (type === 'style') return '<use href="#icon-' + ({ bullet: 'list-bullet', ordered: 'list-numbers', none: 'cancel-small' }[value] || 'list-bullet') + '"></use>';
 	const name = type === 'align' ? 'text-' + value : (value === 'div' ? 'pw-level-div' : value);
 	return '<use href="#icon-' + name + '"></use>';
 }

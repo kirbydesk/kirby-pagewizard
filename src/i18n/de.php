@@ -158,6 +158,7 @@
 	'pw.toolbar.mode' => 'Modus',
 	'pw.toolbar.multiline' => 'Mehrzeilig',
 	'pw.toolbar.size' => 'Größe',
+	'pw.toolbar.style' => 'Listenstil',
 	'pw.toolbar.textbackground' => 'Texthintergrund',
 
 	'pw.field.image-aria-describedby' => 'Ausführliche Beschreibung',
