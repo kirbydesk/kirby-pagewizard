@@ -12,10 +12,11 @@ $quoteText = $quote['textarea'] ?? '';
 if (!empty($quoteText)):
 
 	echo '<figure>' . "\n";
-	echo '<blockquote data-field="quote" data-align="'.$quote['align'].'" data-quote-size="'.($quote['size'] ?? 'normal').'">'.$quoteText.'</blockquote>' . "\n";
+	// (plain text: masked, its line breaks kept)
+	echo '<blockquote data-field="quote" data-align="'.esc($quote['align'] ?? '', 'attr').'" data-quote-size="'.esc($quote['size'] ?? 'normal', 'attr').'">'.nl2br(esc($quoteText), false).'</blockquote>' . "\n";
 
 	if (!empty($author['text'])):
-		echo '<figcaption><cite data-field="cite" data-align="'.$author['align'].'">'.$author['text'].'</cite></figcaption>' . "\n";
+		echo '<figcaption><cite data-field="cite" data-align="'.esc($author['align'] ?? '', 'attr').'">'.esc($author['text']).'</cite></figcaption>' . "\n";
 	endif;
 
 	echo '</figure>' . "\n";
