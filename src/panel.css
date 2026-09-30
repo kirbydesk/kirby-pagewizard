@@ -380,3 +380,23 @@ span.tag.screensize {
 	}
 }
 
+/* values per screen size (pwbreakpoints): only the rows of the size
+   chosen in its pills */
+[data-pw-bp-columns]:not([data-pw-bp-columns="sm"]) .k-column:has(> .k-field-name-columnssm),
+[data-pw-bp-columns]:not([data-pw-bp-columns="md"]) .k-column:has(> .k-field-name-columnsmd),
+[data-pw-bp-columns]:not([data-pw-bp-columns="lg"]) .k-column:has(> .k-field-name-columnslg),
+[data-pw-bp-columns]:not([data-pw-bp-columns="xl"]) .k-column:has(> .k-field-name-columnsxl),
+[data-pw-bp-logos]:not([data-pw-bp-logos="sm"]) .k-column:has(> .k-field-name-logossm),
+[data-pw-bp-logos]:not([data-pw-bp-logos="md"]) .k-column:has(> .k-field-name-logosmd),
+[data-pw-bp-logos]:not([data-pw-bp-logos="lg"]) .k-column:has(> .k-field-name-logoslg),
+[data-pw-bp-logos]:not([data-pw-bp-logos="xl"]) .k-column:has(> .k-field-name-logosxl),
+[data-pw-bp-grid]:not([data-pw-bp-grid="sm"]) .k-column:has(> .k-field-name-gridsizesm),
+[data-pw-bp-grid]:not([data-pw-bp-grid="sm"]) .k-column:has(> .k-field-name-gridoffsetsm),
+[data-pw-bp-grid]:not([data-pw-bp-grid="md"]) .k-column:has(> .k-field-name-gridsizemd),
+[data-pw-bp-grid]:not([data-pw-bp-grid="md"]) .k-column:has(> .k-field-name-gridoffsetmd),
+[data-pw-bp-grid]:not([data-pw-bp-grid="lg"]) .k-column:has(> .k-field-name-gridsizelg),
+[data-pw-bp-grid]:not([data-pw-bp-grid="lg"]) .k-column:has(> .k-field-name-gridoffsetlg),
+[data-pw-bp-grid]:not([data-pw-bp-grid="xl"]) .k-column:has(> .k-field-name-gridsizexl),
+[data-pw-bp-grid]:not([data-pw-bp-grid="xl"]) .k-column:has(> .k-field-name-gridoffsetxl) {
+	display: none;
+}

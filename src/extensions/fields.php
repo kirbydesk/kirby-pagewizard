@@ -3,6 +3,13 @@
 return [
 	// the pages' blocks field: Kirby's own, as a type of its own
 	'pwblocks' => PwblocksField::class,
+	// a heading over values per screen size, with the sizes as pills
+	'pwbreakpoints' => [
+		'extends' => 'headline',
+		'props'   => [
+			'group' => fn (string $group = 'columns') => $group,
+		],
+	],
 	'headline' => [
 		'extends' => 'headline',
 		'props' => [

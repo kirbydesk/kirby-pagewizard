@@ -1,4 +1,5 @@
 ---
 label: pw.headline.columns
-type: headline
+type: pwbreakpoints
+group: columns
 help: pw.headline.columns.help

@@ -1,4 +1,5 @@
 ---
 label: pw.headline.grid
-type: headline
+type: pwbreakpoints
+group: grid
 help: pw.headline.grid.help
