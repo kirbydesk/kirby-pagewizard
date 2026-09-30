@@ -99,10 +99,12 @@ class pwConfig
 	 * A block's settings.json or editor.json ($file 'settings' / 'editor')
 	 * with the project's exceptions laid over it.
 	 */
-	public static function blockJson(string $configDir, string $file): array
+	public static function blockJson(string $configDir, string $file, ?string $blockType = null): array
 	{
 		$data = self::readJson($configDir . '/' . $file . '.json');
-		$blockType = array_search($configDir, self::$configPaths, true);
+		// (the block type from the caller, where the block is not registered
+		// yet – e.g. the projectwizard's panel area, loaded before the blocks)
+		$blockType ??= array_search($configDir, self::$configPaths, true);
 		$patch = $blockType !== false ? (self::patches()[$blockType] ?? []) : [];
 		if (!is_array($patch)) return $data;
 		if ($file === 'editor') {
