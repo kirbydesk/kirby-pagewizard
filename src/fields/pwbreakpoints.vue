@@ -36,6 +36,9 @@ export default {
     group: { type: String, default: 'columns' },
     // the help of each size: shown for the chosen one
     sizeHelps: { type: Object, default: () => ({}) },
+    // the heading and its rows gone while a field has this value
+    // (e.g. { itemstyle: 'connected' })
+    unless: { type: Object, default: null },
   },
   data() {
     return { sizes: ['sm', 'md', 'lg', 'xl'], bp: deviceSize() };
@@ -43,6 +46,21 @@ export default {
   computed: {
     shownHelp() {
       return this.sizeHelps[this.bp] || this.help;
+    },
+    // the form's values: of the fieldset around the field
+    formValues() {
+      let vm = this.$parent;
+      while (vm && vm.$options.name !== 'k-fieldset') vm = vm.$parent;
+      return (vm && vm.value) || {};
+    },
+    off() {
+      if (!this.unless) return false;
+      return Object.keys(this.unless).some((key) => this.formValues[key.toLowerCase()] === this.unless[key]);
+    },
+  },
+  watch: {
+    off() {
+      this.mark();
     },
   },
   mounted() {
@@ -63,7 +81,10 @@ export default {
     },
     mark() {
       const scope = this.scope();
-      if (scope) scope.setAttribute('data-pw-bp-' + this.group, this.bp);
+      // (gone: none of the sizes' rows, the heading's column hidden too)
+      if (scope) scope.setAttribute('data-pw-bp-' + this.group, this.off ? 'off' : this.bp);
+      const column = this.$el.closest('.k-column');
+      if (column) column.style.display = this.off ? 'none' : '';
     },
     choose(b) {
       this.bp = b;

@@ -8,6 +8,8 @@ return [
 		'extends' => 'headline',
 		'props'   => [
 			'group' => fn (string $group = 'columns') => $group,
+			// the heading and its rows gone while a field has this value
+			'unless' => fn (?array $unless = null) => $unless,
 		],
 		// the help of each size (shown for the chosen pill instead of the
 		// heading's own)
