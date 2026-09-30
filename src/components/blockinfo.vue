@@ -41,10 +41,13 @@ div.blockinfo div {
   display: none;
   position: absolute;
   top: 0;
-  margin-top: calc(var(--spacing-4) * -1);
+  /* as high and as placed as Kirby's block toolbar on the right (30px and
+     its border, above the block) */
+  margin-top: calc(-1.75rem + 2px);
 	margin-left: var(--spacing-2);
   font-size: var(--text-xs);
-  height: calc(var(--toolbar-size) - 8px);
+  height: 32px;
+  box-sizing: border-box;
   padding: 0 var(--spacing-2) 0 var(--spacing-1);
   border-radius: var(--rounded-md);
   box-shadow: var(--shadow-xl);
