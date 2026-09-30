@@ -10,6 +10,8 @@
 	section[data-block-id="<?=$blockid?>"] [data-field="writer"],
 	section[data-block-id="<?=$blockid?>"] [data-field="markdown"],
 	section[data-block-id="<?=$blockid?>"] [data-field="icon"],
+	section[data-block-id="<?=$blockid?>"] [data-field="quote"],
+	section[data-block-id="<?=$blockid?>"] [data-field="cite"],
 	section[data-block-id="<?=$blockid?>"] [data-entry] > [data-field="heading"],
 	section[data-block-id="<?=$blockid?>"] [data-entry] > [data-field="text"]{
 		color: <?=$textcolor?>;
