@@ -7,8 +7,6 @@
       :title="design ? $t('pw.blockinfo.design') : null"
       :role="design ? 'link' : null"
       @click="go"
-      @dblclick="design && $event.stopPropagation()"
-      @mousedown="design && $event.stopPropagation()"
     >
       <svg aria-hidden="true" class="k-icon">
         <use :xlink:href="'#icon-' + icon"></use>
