@@ -96,6 +96,51 @@ class pwConfig
 	}
 
 	/**
+	 * The project's wizard settings without what the block's exceptions set:
+	 * the exceptions come last, so a value they set is never replaced.
+	 * Objects are compared key by key; where the exception sets a value or a
+	 * list, the setting's entry is dropped.
+	 */
+	public static function withoutPatched(array $own, array $patch): array
+	{
+		foreach ($patch as $key => $value) {
+			if (!array_key_exists($key, $own)) continue;
+			$both = is_array($value) && !array_is_list($value) && is_array($own[$key]) && !array_is_list($own[$key]);
+			if ($both) {
+				$own[$key] = self::withoutPatched($own[$key], $value);
+				// (nothing left: gone, so no empty object replaces the value)
+				if ($own[$key] === []) unset($own[$key]);
+			} else {
+				unset($own[$key]);
+			}
+		}
+		return $own;
+	}
+
+	/**
+	 * The same for a block's values (pw<block>.json): a var whose value an
+	 * exception sets (values › group › vars › name › value), a colour per
+	 * variant (values › group › colors › name › variant).
+	 */
+	private static function withoutPatchedValues(array $own, $patch): array
+	{
+		if (!is_array($patch)) return $own;
+		foreach ($patch as $group) {
+			if (!is_array($group)) continue;
+			foreach ((array)($group['vars'] ?? []) as $name => $var) {
+				if (is_array($var) && array_key_exists('value', $var)) unset($own[$name]);
+			}
+			foreach ((array)($group['colors'] ?? []) as $name => $variants) {
+				if (!is_array($variants)) continue;
+				foreach (array_keys($variants) as $variant) {
+					if (is_array($own[$variant] ?? null)) unset($own[$variant][$name]);
+				}
+			}
+		}
+		return $own;
+	}
+
+	/**
 	 * A block's settings.json or editor.json ($file 'settings' / 'editor')
 	 * with the project's exceptions laid over it.
 	 */
@@ -266,7 +311,10 @@ class pwConfig
 
 		$defaults = [];
 		$defaults  = self::blockJson($configDir, 'settings')['values'] ?? [];
-		$overrides = self::projectOverride($blockType);
+		$overrides = self::withoutPatchedValues(
+			self::projectOverride($blockType),
+			self::patches()[$blockType]['values'] ?? null
+		);
 
 		return ['defaults' => $defaults, 'overrides' => $overrides];
 	}
@@ -346,6 +394,12 @@ class pwConfig
 
 		// Overrides live under $cfg['settings'] — one wrapped format only.
 		$cfgVis = (!empty($cfg['settings']) && is_array($cfg['settings'])) ? $cfg['settings'] : [];
+		// (without what the block's exceptions set: they come last)
+		$patch = self::patches()[$blockType] ?? null;
+		if (is_array($patch)) {
+			unset($patch['editor']);
+			$cfgVis = self::withoutPatched($cfgVis, $patch);
+		}
 
 		// fields: nested { content: {}, layout: {}, style: {}, settings: {} }
 		// The project (Project Wizard) sets start values ("default"); the
