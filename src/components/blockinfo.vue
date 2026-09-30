@@ -18,10 +18,6 @@
     </div>
   </div>
 </template>
-      <span v-if="layout">({{ layout }})</span>
-    </div>
-  </div>
-</template>
 <script>
 export default {
   props: {
