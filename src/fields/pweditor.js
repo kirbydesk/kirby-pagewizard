@@ -9,7 +9,7 @@ export default {
 		size:           { type: String, default: null },
 		sizeOptions:    { type: Array,  default: null },
 		defaultMode:    { type: String, default: null },
-		writerModes:    { type: Array,  default: () => ['textarea', 'writer', 'markdown'] },
+		writerModes:    { type: Array,  default: () => ['textarea', 'writer'] },
 		writerMarks:    { type: Array,  default: () => ['bold', 'italic', 'underline', 'strike', 'link'] },
 		writerNodes:    { type: Array,  default: () => ['heading', 'bulletList', 'orderedList'] },
 		writerHeadings: { type: Array,  default: () => [2, 3, 4] },
@@ -54,7 +54,7 @@ export default {
 			const fallbackMode = (this.defaultMode && this.writerModes.includes(this.defaultMode))
 				? this.defaultMode
 				: (this.writerModes[0] || 'textarea');
-			const base = { mode: fallbackMode, align: this.align, size: this.size, textarea: '', writer: '', markdown: '' };
+			const base = { mode: fallbackMode, align: this.align, size: this.size, textarea: '', writer: '' };
 			if (!val) return base;
 			try {
 				const d = JSON.parse(val);
@@ -66,11 +66,10 @@ export default {
 						size: d.size || this.size,
 						textarea: d.textarea || '',
 						writer: d.writer || '',
-						markdown: d.markdown || '',
 					};
 				}
 			} catch(e) {}
-			const allowed = ['textarea', 'writer', 'markdown'];
+			const allowed = ['textarea', 'writer'];
 			return { ...base, mode: allowed.includes(val) ? val : 'textarea' };
 		},
 		emit() {
@@ -115,16 +114,6 @@ export default {
 				<span class="k-input-element">
 					<textarea
 						:value="current.textarea"
-						:placeholder="translatedPlaceholder"
-						class="k-string-input k-textarea-input pw-textarea"
-						@input="onTextInput"
-					></textarea>
-				</span>
-			</div>
-			<div v-show="current.mode === 'markdown'" class="k-input pw-editor-textarea" data-type="textarea">
-				<span class="k-input-element">
-					<textarea
-						:value="current.markdown"
 						:placeholder="translatedPlaceholder"
 						class="k-string-input k-textarea-input pw-textarea"
 						@input="onTextInput"

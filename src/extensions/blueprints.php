@@ -176,7 +176,6 @@
 	'pagewizard/fields/style' => __DIR__ . '/../../blueprints/fields/style.yml',
 	'pagewizard/fields/tagline' => __DIR__ . '/../../blueprints/fields/tagline.yml',
 	'pagewizard/fields/text-color' => __DIR__ . '/../../blueprints/fields/text-color.yml',
-	'pagewizard/fields/text-markdown' => __DIR__ . '/../../blueprints/fields/text-markdown.yml',
 	'pagewizard/fields/text-mode' => __DIR__ . '/../../blueprints/fields/text-mode.yml',
 	'pagewizard/fields/text-textarea' => __DIR__ . '/../../blueprints/fields/text-textarea.yml',
 	'pagewizard/fields/text-writer' => __DIR__ . '/../../blueprints/fields/text-writer.yml',

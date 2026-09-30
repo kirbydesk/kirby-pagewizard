@@ -5,7 +5,7 @@ class pwEditor
 	public static function contentField(array $editorConfig = [], array $settings = []): array
 	{
 		// Allowed modes: settings['editor'] is either false or an array of mode names
-		$allModes    = ['textarea', 'writer', 'markdown'];
+		$allModes    = ['textarea', 'writer'];
 		$editorSetting = $settings['editor'] ?? $allModes;
 		$writerModes = is_array($editorSetting)
 			? array_values(array_intersect($allModes, $editorSetting))

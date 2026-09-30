@@ -2,7 +2,6 @@
   <div class="pwEditor">
     <pw-textarea v-if="mode === 'textarea'" :value="text" :align="align" :size="size"/>
     <pw-writer   v-else-if="mode === 'writer'"   :value="text" :align="align" :size="size"/>
-    <pw-markdown v-else-if="mode === 'markdown'" :value="text" :align="align" :size="size"/>
     <div v-else class="placeholder">
       {{ $t('pw.field.text-textarea.placeholder') }}
     </div>
@@ -12,10 +11,9 @@
 <script>
 import PwTextarea from './textarea.vue';
 import PwWriter   from './writer.vue';
-import PwMarkdown from './markdown.vue';
 
 export default {
-  components: { PwTextarea, PwWriter, PwMarkdown },
+  components: { PwTextarea, PwWriter },
   props: {
     content: {
       type: Object,

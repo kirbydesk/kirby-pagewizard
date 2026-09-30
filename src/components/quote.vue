@@ -27,7 +27,7 @@ export default {
       try {
         const d = typeof val === 'string' ? JSON.parse(val) : val;
         if (d.mode !== undefined) {
-          return { text: d.writer || d.textarea || d.markdown || '', align: d.align || this.alignQuoteDefault, size: d.size || 'normal', html: d.mode === 'writer' };
+          return { text: d.writer || d.textarea || '', align: d.align || this.alignQuoteDefault, size: d.size || 'normal', html: d.mode === 'writer' };
         }
         return { text: d.text || '', align: d.align || this.alignQuoteDefault, size: 'normal', html: false };
       } catch(e) {
