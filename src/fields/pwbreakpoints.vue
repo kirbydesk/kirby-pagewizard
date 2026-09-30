@@ -16,8 +16,8 @@
         >{{ b.toUpperCase() }}</button>
       </span>
     </div>
-    <footer v-if="help" class="k-field-footer">
-      <k-text class="k-help k-field-help" :html="help" />
+    <footer v-if="shownHelp" class="k-field-footer">
+      <k-text class="k-help k-field-help" :html="shownHelp" />
     </footer>
   </div>
 </template>
@@ -34,9 +34,16 @@ export default {
     help: String,
     // which rows: columns (columnssm …), grid (gridsize…/gridoffset…), logos (logossm …)
     group: { type: String, default: 'columns' },
+    // the help of each size: shown for the chosen one
+    sizeHelps: { type: Object, default: () => ({}) },
   },
   data() {
     return { sizes: ['sm', 'md', 'lg', 'xl'], bp: deviceSize() };
+  },
+  computed: {
+    shownHelp() {
+      return this.sizeHelps[this.bp] || this.help;
+    },
   },
   mounted() {
     this.mark();

@@ -9,6 +9,17 @@ return [
 		'props'   => [
 			'group' => fn (string $group = 'columns') => $group,
 		],
+		// the help of each size (shown for the chosen pill instead of the
+		// heading's own)
+		'computed' => [
+			'sizeHelps' => function () {
+				$helps = [];
+				foreach (['sm', 'md', 'lg', 'xl'] as $bp) {
+					$helps[$bp] = $this->kirby()->kirbytext(\Kirby\Toolkit\I18n::translate('pw.headline.screen.' . $bp . '.help'));
+				}
+				return $helps;
+			},
+		],
 	],
 	'headline' => [
 		'extends' => 'headline',
