@@ -18,33 +18,4 @@
 		],
 	];
 
-	/* -------------- AI view button --------------*/
-	// Shared "AI" button for page views. The entries come from the
-	// installed AI plugins, each exposing an `aiActions` option:
-	//   fn(ModelWithContent $model): array  — Kirby dropdown items
-	// The button only appears when at least one plugin has entries for
-	// the current view.
-	$areas['site'] = fn() => [
-		'buttons' => [
-			'ai' => function ($model = null) {
-				if ($model === null) return null;
-
-				$kirby   = kirby();
-				$options = [];
-				foreach (['kirbydesk.translatewizard', 'kirbydesk.contentwizard'] as $plugin) {
-					$actions = $kirby->option($plugin . '.aiActions');
-					if (is_callable($actions)) array_push($options, ...$actions($model));
-				}
-
-				if ($options === []) return null;
-
-				return [
-					'icon'    => 'ai',
-					'title'   => t('pw.ai.button', 'AI'),
-					'options' => $options,
-				];
-			},
-		],
-	];
-
 	return $areas;

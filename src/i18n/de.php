@@ -148,7 +148,6 @@
 	'pw.icon.count.one' => 'Icon',
 	'pw.icon.count.other' => 'Icons',
 
-	'pw.ai.button' => 'KI',
 
 	'pw.login.title' => 'Geschützt',
 
