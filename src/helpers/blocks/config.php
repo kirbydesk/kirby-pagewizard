@@ -141,6 +141,22 @@ class pwConfig
 	}
 
 	/**
+	 * A start value among the field's options – else (options narrowed by an
+	 * exception, an older start value) the first option. Options are values
+	 * or objects with a "value"; true/false and empty values stay as they are.
+	 */
+	public static function validStart($value, $options)
+	{
+		if (!is_array($options) || $options === [] || !array_is_list($options)) return $value;
+		if ($value === null || is_bool($value) || is_array($value)) return $value;
+		$values = array_map(fn($o) => is_array($o) ? ($o['value'] ?? null) : $o, $options);
+		foreach ($values as $v) {
+			if ((string) $v === (string) $value) return $value;
+		}
+		return $values[0] ?? $value;
+	}
+
+	/**
 	 * A block's settings.json or editor.json ($file 'settings' / 'editor')
 	 * with the project's exceptions laid over it.
 	 */
@@ -455,6 +471,23 @@ class pwConfig
 			}
 		}
 		// (the editor's formatting and lists are always the plugin's editor.json)
+
+		// start values always among the options (see validStart)
+		foreach ($rawContent as $fieldKey => $fieldValue) {
+			if (!is_array($fieldValue) || array_is_list($fieldValue)) continue;
+			foreach ($fieldValue as $prop => $propValue) {
+				if (!is_array($propValue) || !isset($propValue['options'])) continue;
+				$key = (($prop === 'sizes') ? 'size' : $prop) . '-' . $fieldKey;
+				if (array_key_exists($key, $fields)) $fields[$key] = self::validStart($fields[$key], $propValue['options']);
+			}
+		}
+		foreach ([$layoutVis, $styleVis, $gridVis, $settingsVis, $effectsVis] as $category) {
+			foreach ($category as $key => $field) {
+				if (is_array($field) && isset($field['options']) && array_key_exists($key, $defaults)) {
+					$defaults[$key] = self::validStart($defaults[$key], $field['options']);
+				}
+			}
+		}
 
 		return [
 			'content'      => $settings,
