@@ -182,7 +182,7 @@
 	'pw.field.image-zoom.help' =>	'Enable or disable the option to allow image enlargement.',
 	'pw.field.layout' => 'Layout',
 	'pw.field.link-aria-describedby' => 'Additional link description',
-	'pw.field.link-aria-describedby.help' => 'This field is output as an `aria-describedby` attribute and provides additional context for screen reader users. It does not replace aria-label, but complements it. Use this field to reference an element that contains further information about the link. Avoid long subordinate clauses or complex explanations (max 100 characters).',
+	'pw.field.link-aria-describedby.help' => 'A short description that screen readers read out in addition to the link text, for example what the target page contains. It complements the alternative link text and is not visible on the page. Keep it short (max. 100 characters).',
 	'pw.field.link-aria-describedby.placeholder' => 'e.g. "The page contains information about fees, benefits, and cancellation terms."',
 	'pw.field.link-aria-label' => 'Alternative link text',
 	'pw.field.link-aria-label.help' => 'This field is output as an `aria-label` attribute and overrides the visible link text for screen readers. Use this field if the link text is not descriptive enough. Provide a clear, concise description instead of full sentences (2–10 words). A screen reader should convey the information quickly. <strong>Do Not repeat the link text!</strong>',

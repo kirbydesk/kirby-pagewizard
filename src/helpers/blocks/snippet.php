@@ -7,6 +7,28 @@
  */
 class pwSnippet
 {
+	/** Links described so far on this page (their description ids). */
+	private static int $describedLinks = 0;
+
+	/**
+	 * A link's additional description (aria-describedby): its text in a
+	 * hidden element with an id of its own, the link pointing to it – as
+	 * the images do. Returns the attribute for the link and the element
+	 * (both empty without text).
+	 *
+	 * @return array{attr: string, html: string}
+	 */
+	public static function describedBy(?string $text): array
+	{
+		$text = trim((string) $text);
+		if ($text === '') return ['attr' => '', 'html' => ''];
+		$id = 'link-desc-' . ++self::$describedLinks;
+		return [
+			'attr' => ' aria-describedby="' . $id . '"',
+			'html' => '<span id="' . $id . '" hidden>' . esc($text) . '</span>',
+		];
+	}
+
 	/**
 	 * Render the opening <section> tag with all standard data-attributes:
 	 * data-block, data-block-id, data-margin/padding/radius-*, data-style,

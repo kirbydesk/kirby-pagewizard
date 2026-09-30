@@ -182,7 +182,7 @@
 	'pw.field.image-zoom.help' =>	'Erlaubt oder verhindert das Vergrößern des Bildes.',
 	'pw.field.layout' => 'Layout',
 	'pw.field.link-aria-describedby' => 'Zusätzliche Linkbeschreibung',
-	'pw.field.link-aria-describedby.help' => 'Das Feld wird als `aria-describedby`-Attribut ausgegeben und gibt Screenreader-Nutzern zusätzlichen Kontext. Es ersetzt aria-label nicht, sondern ergänzt es. Verweise damit auf ein Element, das weitere Informationen zum Link enthält. Vermeide lange Nebensätze oder komplizierte Erklärungen (max. 100 Zeichen).',
+	'pw.field.link-aria-describedby.help' => 'Eine kurze Beschreibung, die Screenreader zusätzlich zum Linktext vorlesen, zum Beispiel was die Zielseite enthält. Sie ergänzt den alternativen Linktext und ist auf der Seite nicht sichtbar. Möglichst kurz halten (max. 100 Zeichen).',
 	'pw.field.link-aria-describedby.placeholder' => 'z. B. „Die Seite enthält Informationen zu Gebühren, Leistungen und Kündigungsfristen.“',
 	'pw.field.link-aria-label' => 'Alternativer Linktext',
 	'pw.field.link-aria-label.help' => 'Das Feld wird als `aria-label`-Attribut ausgegeben und ersetzt für Screenreader den sichtbaren Linktext. Nutze es, wenn der Linktext nicht aussagekräftig genug ist. Formuliere eine klare, knappe Beschreibung statt ganzer Sätze (2–10 Wörter). Ein Screenreader soll die Information schnell vermitteln. <strong>Wiederhole nicht den Linktext!</strong>',

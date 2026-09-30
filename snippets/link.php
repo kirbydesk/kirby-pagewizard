@@ -55,7 +55,9 @@ if (empty($url)) return;
 $svg         = $target = '';
 $rel         = (!empty($linkType) && isset($linkRel) && $linkRel !== '') ? ' rel="' . esc($linkRel) . '"' : '';
 $label       = isset($ariaLabel) && $ariaLabel !== '' ? ' aria-label="' . esc($ariaLabel) . '"'              : '';
-$describedby = isset($ariaDescribedby) && $ariaDescribedby !== '' ? ' aria-describedby="' . esc($ariaDescribedby) . '"' : '';
+// the additional description: a hidden element of its own the link points to
+$described   = pwSnippet::describedBy($ariaDescribedby ?? null);
+$describedby = $described['attr'];
 
 if (!empty($linkType) && !empty($linkTarget)) :
 	$target = ' target="_blank"';
@@ -75,4 +77,4 @@ $content = ($position === 'right')
 	? $textHtml . $iconHtml . $svg
 	: $iconHtml . $textHtml . $svg;
 
-?><a href="<?= $url ?>"<?= $target . $rel . $label . $describedby ?>><?= $content ?></a>
+?><a href="<?= $url ?>"<?= $target . $rel . $label . $describedby ?>><?= $content ?></a><?= $described['html'] ?>
