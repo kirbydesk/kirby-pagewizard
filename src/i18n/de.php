@@ -12,6 +12,7 @@
 	'pw.file.caption' => 'Untertitel für Hörgeschädigte',
 	'pw.file.image' => 'Bild',
 	'pw.file.backgroundimage' => 'Hintergrundbild',
+	'pw.file.poster' => 'Vorschaubild',
 	'pw.file.subtitle' => 'Untertitel',
 	'pw.file.video' => 'Video',
 	'pw.file.videochapters' => 'Kapitel',

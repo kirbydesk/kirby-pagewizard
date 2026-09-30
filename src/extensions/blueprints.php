@@ -242,5 +242,4 @@
 	'files/pwImage' => __DIR__ . '/../../blueprints/files/image.yml',
 	'files/pwPoster' => __DIR__ . '/../../blueprints/files/poster.yml',
 	'files/pwVideo' => __DIR__ . '/../../blueprints/files/video.yml',
-	'files/pwVideoPoster' => __DIR__ . '/../../blueprints/files/poster.yml',
 ];

@@ -12,6 +12,7 @@
 	'pw.file.caption' => 'Caption',
 	'pw.file.image' => 'Image',
 	'pw.file.backgroundimage' => 'Background image',
+	'pw.file.poster' => 'Preview image',
 	'pw.file.subtitle' => 'Subtitle',
 	'pw.file.video' => 'Video',
 	'pw.file.videochapters' => 'Chapters',
