@@ -33,6 +33,11 @@ body {
 [data-align="right"] {
 	text-align: right;
 }
+/* a word too long for its column (a long compound in a narrow column, on a
+   phone) breaks instead of sticking out; other words are not touched */
+section[data-block] {
+	overflow-wrap: break-word;
+}
 /* justified (texts only): with hyphenation, so the gaps stay small */
 [data-align="justify"] {
 	text-align: justify;
