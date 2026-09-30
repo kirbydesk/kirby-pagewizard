@@ -13,7 +13,8 @@
         data-variant="filled"
         type="button"
         class="input-focus k-button"
-        @click.stop="toggle(item.key)"
+        :disabled="item.locked || null"
+        @click.stop="!item.locked && toggle(item.key)"
       >
         <pw-option-icon :type="item.key" :value="item.value" :options="item.options" />
         <!-- it opens a menu: Kirby's dropdown arrow (as k-button with "dropdown") -->
@@ -47,7 +48,8 @@ export default {
   components: { pwOptionIcon },
   props: {
     // [{ key: 'level' | 'size' | 'align' | 'textbackground' | 'multiline' |
-    //    'flourish' | 'mode', value, options: [...] }] in the order shown
+    //    'flourish' | 'mode', value, options: [...], locked? }] in the order
+    //    shown (locked: the value is set elsewhere, the menu stays shut)
     items: { type: Array, default: () => [] },
   },
   emits: ['input'],
@@ -93,6 +95,11 @@ export default {
 <style>
 .pw-field-toolbar-item {
   position: relative;
+}
+/* a locked value: shown, not changeable (faded, no pointer) */
+.pw-field-toolbar-item > .k-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 /* menu entries: full width and left aligned as in Kirby's menus, so the
    icons line up and the current one's check mark sits on the right */
