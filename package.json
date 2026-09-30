@@ -1,10 +1,7 @@
 {
     "name": "kirby-pagewizard",
-		"version": "1.1.57",
+    "version": "1.1.57",
     "devDependencies": {
         "kirbyup": "^3.4.1"
-    },
-    "dependencies": {
-        "marked": "^16.4.1"
     }
 }
