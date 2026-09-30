@@ -14,7 +14,11 @@ if (!empty($text)):
 	if ($mode === 'markdown'):
 		echo '<div data-field="markdown" data-align="'.$align.'" data-editor-size="'.$size.'">'.kirbytext($text).'</div>'."\n";
 
-	// Textarea / Writer: output as-is
+	// Textarea: plain text – masked, its line breaks kept
+	elseif ($mode === 'textarea'):
+		echo '<div data-field="textarea" data-align="'.$align.'" data-editor-size="'.$size.'">'.nl2br(esc($text), false).'</div>'."\n";
+
+	// Writer: its HTML as it is
 	else:
 		echo '<div data-field="'.$mode.'" data-align="'.$align.'" data-editor-size="'.$size.'">'.$text.'</div>'."\n";
 
