@@ -10,6 +10,7 @@ require_once __DIR__ . '/src/helpers/blocks/editor.php';
 require_once __DIR__ . '/src/helpers/blocks/snippet.php';
 require_once __DIR__ . '/src/helpers/blocks/blueprint.php';
 require_once __DIR__ . '/src/helpers/secrets.php';
+require_once __DIR__ . '/src/helpers/fields/pwblocks.php';
 
 Kirby::plugin('kirbydesk/kirby-pagewizard', [
 	/* -------------- Options --------------*/

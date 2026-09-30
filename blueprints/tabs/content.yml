@@ -10,4 +10,4 @@ columns:
           headlineContent:
             extends: pagewizard/headlines/content
           blocks:
-            type: blocks
+            type: pwblocks

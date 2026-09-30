@@ -8,6 +8,6 @@ columns:
         type: fields
         fields:
           sharedblocks:
-            type: blocks
+            type: pwblocks
             label: pw.field.blocks
             empty: pw.field.blocks.empty

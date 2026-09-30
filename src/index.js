@@ -40,6 +40,8 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		pwshared: pwshared
 	},
 	fields: {
+		// the pages' blocks field: Kirby's own (the Project Wizard adds to it)
+		pwblocks: { extends: 'k-blocks-field' },
 		htmlheadline,
 		pwtext,
 		pweditor,

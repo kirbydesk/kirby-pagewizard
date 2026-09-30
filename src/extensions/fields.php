@@ -1,6 +1,8 @@
 <?php
 
 return [
+	// the pages' blocks field: Kirby's own, as a type of its own
+	'pwblocks' => PwblocksField::class,
 	'headline' => [
 		'extends' => 'headline',
 		'props' => [

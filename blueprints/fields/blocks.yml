@@ -1,4 +1,4 @@
 ---
 label: pw.field.blocks
-type: blocks
+type: pwblocks
 empty: pw.field.blocks.empty
