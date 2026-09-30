@@ -12,6 +12,9 @@
  *   ]
  * `option` is the plugin option that takes precedence (e.g. set in
  * config.php); `env` is the .env variable the panel reads and writes.
+ * An optional `check` – fn (string $key): bool – tells whether a key is
+ * valid (throwing when the service cannot tell, e.g. not reachable);
+ * pwSecrets::httpCheck() does it for a simple request.
  */
 class pwSecrets
 {
@@ -42,10 +45,48 @@ class pwSecrets
 					'plugin' => $plugin,
 					'label'  => (string) ($secret['label'] ?? $secret['env']),
 					'help'   => $secret['help'] ?? null,
+					'check'  => is_callable($secret['check'] ?? null) ? $secret['check'] : null,
 				];
 			}
 		}
 		return $list;
+	}
+
+	/**
+	 * Are the stored keys valid? env => true / false, null where the plugin
+	 * has no check or the service cannot tell (not reachable …).
+	 * @return array<string, ?bool>
+	 */
+	public static function check(): array
+	{
+		$env = self::read();
+		$out = [];
+		foreach (self::declared() as $secret) {
+			$fromConfig = kirby()->option($secret['option']);
+			$key = is_string($fromConfig) && $fromConfig !== '' ? $fromConfig : ($env[$secret['env']] ?? '');
+			if ($key === '' || $secret['check'] === null) {
+				$out[$secret['env']] = null;
+				continue;
+			}
+			try {
+				$out[$secret['env']] = (bool) ($secret['check'])($key);
+			} catch (Throwable) {
+				$out[$secret['env']] = null;
+			}
+		}
+		return $out;
+	}
+
+	/**
+	 * A key check by one request: 2xx valid, 401/403 invalid, anything
+	 * else (no answer, other errors) unknown – thrown.
+	 */
+	public static function httpCheck(string $url, array $headers): bool
+	{
+		$code = Kirby\Http\Remote::request($url, ['method' => 'GET', 'headers' => $headers, 'timeout' => 6])->code();
+		if ($code === 401 || $code === 403) return false;
+		if ($code >= 200 && $code < 300) return true;
+		throw new RuntimeException('HTTP ' . $code);
 	}
 
 	/** Value of a variable in the .env file ('' if missing). */

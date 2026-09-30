@@ -12,6 +12,15 @@ return [
 				return ['secrets' => pwSecrets::status(), 'writable' => is_writable(is_file(pwSecrets::file()) ? pwSecrets::file() : dirname(pwSecrets::file()))];
 			}
 		],
+		// the stored keys checked with their services (valid / invalid / unknown)
+		[
+			'pattern' => 'pagewizard/secrets/check',
+			'method'  => 'GET',
+			'action'  => function () {
+				if (!pwSecrets::allowed()) throw new Kirby\Exception\PermissionException(message: 'Not allowed.');
+				return ['valid' => pwSecrets::check()];
+			}
+		],
 		[
 			'pattern' => 'pagewizard/secrets',
 			'method'  => 'POST',
