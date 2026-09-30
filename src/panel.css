@@ -400,3 +400,17 @@ span.tag.screensize {
 [data-pw-bp-grid]:not([data-pw-bp-grid="xl"]) .k-column:has(> .k-field-name-gridoffsetxl) {
 	display: none;
 }
+
+/* the entries' previews in the drawers (featurelist, steplist …): their
+   description's lists with markers again (the panel resets them) */
+.pwPreview .pwText ul {
+	list-style: disc;
+	padding-inline-start: 1.25em;
+}
+.pwPreview .pwText ol {
+	list-style: decimal;
+	padding-inline-start: 1.5em;
+}
+.pwPreview .pwText :is(p, ul, ol) + :is(p, ul, ol) {
+	margin-top: 0.5em;
+}

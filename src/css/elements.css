@@ -87,7 +87,8 @@ section[data-block] :is([data-field="buttons"], [data-field="button"]) { --pw-sp
 }
 
 /* -------------- Lists --------------*/
-/* in texts and the multicolumn's list (Project Wizard → Elements › Lists):
+/* in texts, the entries' descriptions and the multicolumn's list (Project
+   Wizard → Elements › Lists):
    bullet lists their marker and indent, numbered lists their format and
    indent, both the gap between the points and the space below */
 @counter-style pw-decimal-paren {
@@ -95,17 +96,20 @@ section[data-block] :is([data-field="buttons"], [data-field="button"]) { --pw-sp
 	suffix: ") ";
 }
 :is([data-field="writer"], [data-field="markdown"]) :is(ul, ol),
+section[data-block] [data-entry] > [data-field="text"] :is(ul, ol),
 section[data-block] [data-field="list"] {
 	& > li + li {
 		margin-top: var(--list-item-spacing);
 	}
 }
 :is([data-field="writer"], [data-field="markdown"]) ul,
+section[data-block] [data-entry] > [data-field="text"] ul,
 section[data-block] ul[data-field="list"] {
 	padding-left: var(--list-indent);
 	list-style-type: var(--list-style);
 }
 :is([data-field="writer"], [data-field="markdown"]) ol,
+section[data-block] [data-entry] > [data-field="text"] ol,
 section[data-block] ol[data-field="list"] {
 	padding-left: var(--list-number-indent);
 	list-style-type: var(--list-number-style);
@@ -123,6 +127,7 @@ section[data-block] ol > li::marker {
 }
 /* the bullets' size relative to the text (numbers keep the text's size) */
 :is([data-field="writer"], [data-field="markdown"]) ul > li::marker,
+section[data-block] [data-entry] > [data-field="text"] ul > li::marker,
 section[data-block] ul[data-field="list"] > li::marker {
 	font-size: var(--list-marker-size);
 }
