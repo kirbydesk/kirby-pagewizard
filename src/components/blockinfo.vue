@@ -42,7 +42,8 @@ div.blockinfo div {
   /* as high and as placed as Kirby's block toolbar on the right (30px,
      its border included; above the block) */
   margin-top: calc(-1.75rem + 2px);
-	margin-left: var(--spacing-2);
+  /* (as far from the edge as the toolbar on the right) */
+  margin-left: var(--spacing-3);
   font-size: var(--text-sm);
   height: 30px;
   box-sizing: border-box;
