@@ -18,4 +18,3 @@ options:
   - value: "5"
     text:
       *: pw.option.5columns
-help: pw.field.columns.help
