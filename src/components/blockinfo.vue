@@ -1,21 +1,23 @@
 <template>
   <div class="blockinfo">
-    <div>
+    <!-- with a block type the whole label leads to its design in the
+         Project Wizard -->
+    <div
+      :class="{ 'is-link': design }"
+      :title="design ? $t('pw.blockinfo.design') : null"
+      :role="design ? 'link' : null"
+      @click="go"
+      @dblclick="design && $event.stopPropagation()"
+      @mousedown="design && $event.stopPropagation()"
+    >
       <svg aria-hidden="true" class="k-icon">
         <use :xlink:href="'#icon-' + icon"></use>
       </svg>
-      <!-- the name: with a block type a link to its design in the Project
-           Wizard -->
-      <button
-        v-if="design"
-        type="button"
-        class="blockinfo-design"
-        :title="$t('pw.blockinfo.design')"
-        @click.stop="$go('projectwizard/block/' + design)"
-        @dblclick.stop
-        @mousedown.stop
-      >{{ value }}</button>
-      <template v-else>{{ value }}</template>
+      {{ value }}
+      <span v-if="layout">({{ layout }})</span>
+    </div>
+  </div>
+</template>
       <span v-if="layout">({{ layout }})</span>
     </div>
   </div>
@@ -28,6 +30,13 @@ export default {
     layout: String,
     // the block type: a button to its design in the Project Wizard
     design: String
+  },
+  methods: {
+    go(event) {
+      if (!this.design) return;
+      event.stopPropagation();
+      this.$go('projectwizard/block/' + this.design);
+    }
   }
 }
 </script>
@@ -55,15 +64,11 @@ div.blockinfo div {
 		fill: #c4dff9
   }
 }
-/* the name as a link to the design */
-.blockinfo-design {
-  display: inline;
-  padding: 0;
-  color: white;
-  font: inherit;
+/* the label as a link to the design */
+div.blockinfo div.is-link {
   cursor: pointer;
 }
-.blockinfo-design:hover {
-  text-decoration: underline;
+div.blockinfo div.is-link:hover {
+  background-color: var(--color-blue-700, #1d4ed8);
 }
 </style>
