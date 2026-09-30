@@ -14,7 +14,9 @@
  * config.php); `env` is the .env variable the panel reads and writes.
  * An optional `check` – fn (string $key): bool – tells whether a key is
  * valid (throwing when the service cannot tell, e.g. not reachable);
- * pwSecrets::httpCheck() does it for a simple request.
+ * pwSecrets::httpCheck() does it for a simple request. An optional
+ * `type` – fn (string $key): ?string – names the kind of key (DeepL: Free
+ * or Pro), shown with a valid key.
  */
 class pwSecrets
 {
@@ -46,6 +48,7 @@ class pwSecrets
 					'label'  => (string) ($secret['label'] ?? $secret['env']),
 					'help'   => $secret['help'] ?? null,
 					'check'  => is_callable($secret['check'] ?? null) ? $secret['check'] : null,
+					'type'   => is_callable($secret['type'] ?? null) ? $secret['type'] : null,
 				];
 			}
 		}
@@ -53,14 +56,16 @@ class pwSecrets
 	}
 
 	/**
-	 * Are the stored keys valid? env => true / false, null where the plugin
-	 * has no check or the service cannot tell (not reachable …).
-	 * @return array<string, ?bool>
+	 * Are the stored keys valid? valid: env => true / false, null where the
+	 * plugin has no check or the service cannot tell (not reachable …);
+	 * types: env => the kind of a valid key (null without).
+	 * @return array{valid: array<string, ?bool>, types: array<string, ?string>}
 	 */
 	public static function check(): array
 	{
 		$env = self::read();
 		$out = [];
+		$types = [];
 		foreach (self::declared() as $secret) {
 			$fromConfig = kirby()->option($secret['option']);
 			$key = is_string($fromConfig) && $fromConfig !== '' ? $fromConfig : ($env[$secret['env']] ?? '');
@@ -73,8 +78,12 @@ class pwSecrets
 			} catch (Throwable) {
 				$out[$secret['env']] = null;
 			}
+			if ($out[$secret['env']] === true && $secret['type'] !== null) {
+				$type = ($secret['type'])($key);
+				$types[$secret['env']] = is_string($type) && $type !== '' ? $type : null;
+			}
 		}
-		return $out;
+		return ['valid' => $out, 'types' => $types];
 	}
 
 	/**

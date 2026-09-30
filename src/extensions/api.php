@@ -18,7 +18,7 @@ return [
 			'method'  => 'GET',
 			'action'  => function () {
 				if (!pwSecrets::allowed()) throw new Kirby\Exception\PermissionException(message: 'Not allowed.');
-				return ['valid' => pwSecrets::check()];
+				return pwSecrets::check();
 			}
 		],
 		[
