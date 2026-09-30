@@ -504,6 +504,7 @@
 	'pw.headline.color.help' => 'Define the color settings for this block.',
 	'pw.headline.contact' => 'Contact',
 	'pw.headline.contact.help' => 'The following information will appear in the footer of every page. Both blocks are optional.',
+	'pw.blockinfo.design' => 'Adjust design',
 	'pw.headline.content' => 'Content',
 	'pw.headline.content.help' => 'The page can be filled with any combination of available content blocks. Use different block types to structure text, images, and other elements as needed.',
 	'pw.headline.copyright' => 'Copyright',

@@ -504,6 +504,7 @@
 	'pw.headline.color.help' => 'Lege die Farbeinstellungen für diesen Block fest.',
 	'pw.headline.contact' => 'Kontakt',
 	'pw.headline.contact.help' => 'Die folgenden Angaben erscheinen im Footer jeder Seite. Beide Blöcke sind optional.',
+	'pw.blockinfo.design' => 'Design anpassen',
 	'pw.headline.content' => 'Inhalt',
 	'pw.headline.content.help' => 'Die Seite lässt sich mit einer beliebigen Kombination der verfügbaren Inhaltsblöcke füllen. Nutze verschiedene Blocktypen, um Text, Bilder und andere Elemente nach Bedarf zu gliedern.',
 	'pw.headline.copyright' => 'Copyright',
