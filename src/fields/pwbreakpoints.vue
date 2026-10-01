@@ -24,7 +24,7 @@
 
 <script>
 // the previews' device (the Project Wizard marks it on <html>) → a size
-const FROM_DEVICE = { xl: 'xl', lg: 'lg', default: 'sm' };
+const FROM_DEVICE = { xl: 'xl', lg: 'lg', md: 'md', sm: 'sm', default: 'sm' };
 const deviceSize = () => FROM_DEVICE[document.documentElement.dataset.pwDevice] || 'xl';
 
 export default {
