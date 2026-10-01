@@ -1,0 +1,10 @@
+---
+label: pw.field.overlay-size.label
+type: range
+default: 50
+min: 10
+max: 100
+step: 5
+after: "%"
+help: pw.field.overlay-size.help
+width: 1/2

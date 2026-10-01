@@ -8,7 +8,9 @@ return [
 	'pwoverlay' => [
 		'extends' => 'range',
 		'props'   => [
-			'block' => fn (?string $block = null) => $block,
+			'block'  => fn (?string $block = null) => $block,
+			// the colour's name in the block's values (cards: item-overlay)
+			'swatch' => fn (string $swatch = 'item-overlay') => $swatch,
 		],
 	],
 	// a heading over values per screen size, with the sizes as pills

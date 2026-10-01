@@ -164,7 +164,7 @@
 	'pagewizard/fields/meta-teaser' => __DIR__ . '/../../blueprints/fields/meta-teaser.yml',
 	'pagewizard/fields/overlay-intensity' => __DIR__ . '/../../blueprints/fields/overlay-intensity.yml',
 	'pagewizard/fields/overlay-position' => __DIR__ . '/../../blueprints/fields/overlay-position.yml',
-	'pagewizard/fields/overlay-size' => __DIR__ . '/../../blueprints/fields/overlay-size.yml',
+	'pagewizard/fields/overlay-width' => __DIR__ . '/../../blueprints/fields/overlay-width.yml',
 	'pagewizard/fields/overlay-type' => __DIR__ . '/../../blueprints/fields/overlay-type.yml',
 	'pagewizard/fields/position-horizontal' => __DIR__ . '/../../blueprints/fields/position-horizontal.yml',
 	'pagewizard/fields/position-vertical' => __DIR__ . '/../../blueprints/fields/position-vertical.yml',
