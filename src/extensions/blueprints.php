@@ -1,4 +1,21 @@
-<?php return [
+<?php
+
+// the blocks of the "add block" dialog: alphabetical by their name in the
+// panel's language (the order of activation in the Project Wizard is no
+// order)
+$pwSortBlocks = function (array $types): array {
+	$name = function (string $type): string {
+		$bp  = \Kirby\Cms\Blueprint::find('blocks/' . $type);
+		$key = is_array($bp) ? ($bp['name'] ?? $type) : $type;
+		return \Kirby\Toolkit\I18n::translate($key, $key) ?? $type;
+	};
+	$names = array_combine($types, array_map($name, $types));
+	$collator = class_exists('Collator') ? new \Collator(\Kirby\Toolkit\I18n::locale() ?? 'de') : null;
+	usort($types, fn($a, $b) => $collator ? $collator->compare($names[$a], $names[$b]) : strnatcasecmp($names[$a], $names[$b]));
+	return $types;
+};
+
+return [
 
 	/* -------------- Pages --------------*/
 	'site' => __DIR__ . '/../../blueprints/site.yml',
@@ -9,10 +26,10 @@
 	'pages/home' => __DIR__ . '/../../blueprints/pages/home.yml',
 
 	/* -------------- Tabs --------------*/
-	'tabs/content' => function() {
+	'tabs/content' => function() use ($pwSortBlocks) {
 		$data          = \Kirby\Data\Data::read(__DIR__ . '/../../blueprints/tabs/content.yml');
 		$allBlocks     = pwConfig::projectConfig('blocks');
-		$staticBlocks  = array_values(array_filter($allBlocks, fn($b) => str_starts_with($b, 'pw')));
+		$staticBlocks  = $pwSortBlocks(array_values(array_filter($allBlocks, fn($b) => str_starts_with($b, 'pw'))));
 		$projectBlocks = array_values(array_filter($allBlocks, fn($b) => !str_starts_with($b, 'pw')));
 
 		$fieldsets = [];
@@ -52,10 +69,10 @@
 	'tabs/files/video-player' => __DIR__ . '/../../blueprints/tabs/files/video-player.yml',
 	'tabs/home' => __DIR__ . '/../../blueprints/tabs/home.yml',
 	'tabs/project' => __DIR__ . '/../../blueprints/tabs/project.yml',
-	'tabs/shared' => function() {
+	'tabs/shared' => function() use ($pwSortBlocks) {
 		$data          = \Kirby\Data\Data::read(__DIR__ . '/../../blueprints/tabs/shared.yml');
 		$allBlocks     = pwConfig::projectConfig('blocks');
-		$staticBlocks  = array_values(array_filter($allBlocks, fn($b) => str_starts_with($b, 'pw')));
+		$staticBlocks  = $pwSortBlocks(array_values(array_filter($allBlocks, fn($b) => str_starts_with($b, 'pw'))));
 		$projectBlocks = array_values(array_filter($allBlocks, fn($b) => !str_starts_with($b, 'pw')));
 
 		$fieldsets = [];
