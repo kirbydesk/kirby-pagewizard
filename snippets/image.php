@@ -40,8 +40,9 @@ if ($file):
 	// Focus point
 	$focus = $file->focus()->isNotEmpty() ? $file->focus()->value() : '50% 50%';
 
-	// Zoom
-	$zoom = $file->imageZoom()->toBool();
+	// Zoom (the caller may forbid it – e.g. an image inside a link: no
+	// link in a link)
+	$zoom = empty($noZoom) && $file->imageZoom()->toBool();
 
 	// Radius
 	$radiusStyle = '';
