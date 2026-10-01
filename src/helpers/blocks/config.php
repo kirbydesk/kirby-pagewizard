@@ -6,7 +6,6 @@ class pwConfig
 	private static ?array $projectConfig = null;
 	/** @deprecated — font generation now checks $imports directly */
 	private static bool $fontsGenerated = false;
-	private static bool $panelColorsGenerated = false;
 
 	/* ============================================================
 	   I/O helpers — the single place other classes (e.g. ProjectConfig)
@@ -1180,118 +1179,6 @@ class pwConfig
 
 
 	/**
-	 * Generates public/assets/css/panel-colors.css from the plugin's colors.css.
-	 * Called by projectbuilder-hook for the pagewizard/colors Panel API.
-	 */
-	public static function panelColorsSetup(string $pluginDir): void
-	{
-		if (self::$panelColorsGenerated) return;
-		self::$panelColorsGenerated = true;
-
-		// Read color values directly from JSON configs (always from pagewizard plugin)
-		$elements = self::pluginConfig('elements');
-		$global   = self::pluginConfig('global');
-
-		// Merge with projectwizard overrides (only the ['global'] slice is relevant here)
-		$elementsOverrides = self::projectOverride('elements')['global'] ?? [];
-		$globalOverrides   = self::projectOverride('global')['global']   ?? [];
-
-		// Collect all color definitions from JSON (elements + global)
-		$allColors = [];
-		foreach ([$elements, $global] as $source) {
-			foreach ($source as $group) {
-				if (!isset($group['colors'])) continue;
-				foreach ($group['colors'] as $varName => $colorDef) {
-					$allColors[$varName] = $colorDef;
-				}
-			}
-		}
-
-		// Map JSON variable names → panel color names
-		$colorMap = [
-			'block-background'                  => 'pw-color-block-background',
-			'block-link'                        => 'pw-color-link',
-			'element-heading-text'              => 'pw-color-heading',
-			'element-heading-marked-text'       => 'pw-color-heading-marked-text',
-			'element-heading-marked-background' => 'pw-color-heading-marked-background',
-			'element-heading-flourish-color'    => 'pw-color-heading-flourish-color',
-			'element-tagline-text'              => 'pw-color-tagline',
-			'element-editor-text'               => 'pw-color-text',
-			'element-button-text'               => 'pw-color-button-text',
-			'element-button-background'         => 'pw-color-button-background',
-			'element-button-icon'               => 'pw-color-button-icon',
-			'element-caption-text'              => 'pw-color-caption',
-			'element-quote-text'                => 'pw-color-quote',
-			'element-cite-text'                 => 'pw-color-cite',
-			'element-breadcrumb-text'           => 'pw-color-breadcrumb',
-		];
-
-		// Build theme palettes (default, variant, variant2, variant3)
-		$themes = ['default', 'variant', 'variant2', 'variant3'];
-		$palettes = [];
-		foreach ($themes as $theme) {
-			$palette = [];
-			foreach ($colorMap as $jsonVar => $panelVar) {
-				if (!isset($allColors[$jsonVar][$theme])) continue;
-				// Override from projectwizard (stored under global.{theme}.{varName})
-				$value = $elementsOverrides[$theme][$jsonVar]
-					?? $globalOverrides[$theme][$jsonVar]
-					?? $allColors[$jsonVar][$theme];
-				$palette[$panelVar] = $value;
-			}
-			$palettes[$theme] = $palette;
-		}
-
-		// Generate panel-colors.css
-		$varLines = function (array $colors): string {
-			$lines = [];
-			foreach ($colors as $key => $value) {
-				$lines[] = "\t--" . $key . ': ' . $value . ';';
-			}
-			return implode("\n", $lines);
-		};
-
-		$css = "/* This file is auto-generated from JSON configs. Do not edit manually! */\n\n" .
-			":root {\n" . $varLines($palettes['default']) . "\n}\n\n" .
-			"[data-style=\"variant\"] {\n" . $varLines($palettes['variant']) . "\n}\n";
-		if (!empty($palettes['variant2'])) {
-			$css .= "\n[data-style=\"variant2\"] {\n" . $varLines($palettes['variant2']) . "\n}\n";
-		}
-		if (!empty($palettes['variant3'])) {
-			$css .= "\n[data-style=\"variant3\"] {\n" . $varLines($palettes['variant3']) . "\n}\n";
-		}
-
-		// Plugin-specific item colors (from each registered block's values.items.colors)
-		$pluginPalettes = ['default' => [], 'variant' => [], 'variant2' => [], 'variant3' => []];
-		foreach (self::registered() as $blockType => $blockConfigDir) {
-			$blockSettings = self::blockJson($blockConfigDir, 'settings');
-			$blockOverrides = self::projectOverride($blockType);
-			foreach ($blockSettings['values'] ?? [] as $groupKey => $group) {
-				if (empty($group['colors']) || !is_array($group['colors'])) continue;
-				foreach ($group['colors'] as $colorKey => $colorDef) {
-					foreach (['default', 'variant', 'variant2', 'variant3'] as $theme) {
-						if (!isset($colorDef[$theme])) continue;
-						$value = $blockOverrides[$theme][$colorKey] ?? $colorDef[$theme];
-						$pluginPalettes[$theme][$blockType . '-' . $colorKey] = $value;
-					}
-				}
-			}
-		}
-		if (!empty($pluginPalettes['default'])) {
-			$css .= "\n:root {\n" . $varLines($pluginPalettes['default']) . "\n}\n";
-			$css .= "\n[data-style=\"variant\"] {\n" . $varLines($pluginPalettes['variant']) . "\n}\n";
-			if (!empty($pluginPalettes['variant2'])) {
-				$css .= "\n[data-style=\"variant2\"] {\n" . $varLines($pluginPalettes['variant2']) . "\n}\n";
-			}
-			if (!empty($pluginPalettes['variant3'])) {
-				$css .= "\n[data-style=\"variant3\"] {\n" . $varLines($pluginPalettes['variant3']) . "\n}\n";
-			}
-		}
-
-		file_put_contents(kirby()->root('index') . '/assets/css/panel-colors.css', $css);
-	}
-
-	/**
 	 * Build common tabs (grid, spacing, theme) and add them to $tabs.
 	 */
 	public static function buildTabs(string $blockType, array $defaults, array $tabSettings, array &$tabs): void
@@ -1480,9 +1367,6 @@ class pwConfig
 					}
 				}
 			}
-
-			// panel-colors.css for the pagewizard/colors API.
-			self::panelColorsSetup($pluginDir);
 		}
 
 		// Tailwind watcher — project-level snippets and templates.

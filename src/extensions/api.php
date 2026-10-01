@@ -145,43 +145,6 @@ return [
 				}
 				return $result;
 			}
-		],
-		[
-			'pattern' => 'pagewizard/colors',
-			'action'  => function () {
-				$publicFile  = kirby()->root('index') . '/assets/css/panel-colors.css';
-				$pluginFile  = __DIR__ . '/../../src/panel-colors.css';
-				$colorsFile  = file_exists($publicFile) ? $publicFile : $pluginFile;
-
-				if (!file_exists($colorsFile)) {
-					return ['default' => [], 'variant' => [], 'variant2' => [], 'variant3' => []];
-				}
-
-				$css = file_get_contents($colorsFile);
-				$panelColors = ['default' => [], 'variant' => [], 'variant2' => [], 'variant3' => []];
-
-				// :root {} → default colors (all pw-color-* and plugin-specific pw*-item-*)
-				preg_match_all('/:root\s*\{([^}]+)\}/s', $css, $rootBlocks);
-				foreach ($rootBlocks[1] as $block) {
-					preg_match_all('/--(pw[\w-]+)\s*:\s*([^;]+);/', $block, $vars, PREG_SET_ORDER);
-					foreach ($vars as $v) {
-						$panelColors['default'][$v[1]] = trim($v[2]);
-					}
-				}
-
-				// [data-style="X"] {} → theme colors
-				foreach (['variant', 'variant2', 'variant3'] as $theme) {
-					preg_match_all('/\[data-style="' . $theme . '"\]\s*\{([^}]+)\}/s', $css, $matches);
-					foreach ($matches[1] as $block) {
-						preg_match_all('/--(pw[\w-]+)\s*:\s*([^;]+);/', $block, $vars, PREG_SET_ORDER);
-						foreach ($vars as $v) {
-							$panelColors[$theme][$v[1]] = trim($v[2]);
-						}
-					}
-				}
-
-				return $panelColors;
-			}
 		]
 	]
 ];

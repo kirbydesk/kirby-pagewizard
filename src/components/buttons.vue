@@ -49,8 +49,8 @@ export default {
 }
 button {
 	padding: var(--spacing-4) var(--spacing-2);
-	background-color: var(--pw-color-button-background, var(--color-gray-600));
-	color: var(--pw-color-button-text, white);
+	background-color: var(--color-gray-600);
+	color: white;
 
 	.k-button-text.placeholder {
 		opacity: 0.5;
@@ -66,7 +66,7 @@ button {
 		width: 1em;
 		height: 1em;
 		flex-shrink: 0;
-		color: var(--pw-color-button-icon, currentColor);
+		color: currentColor;
 	}
 	.pw-link-icon :deep(svg) {
 		width: 100%;
