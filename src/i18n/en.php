@@ -258,7 +258,6 @@
 	'pw.field.position-horizontal.column.help' => 'Defines the horizontal position of the content within this column.',
 	'pw.field.position-horizontal.label' => 'Horizontal position',
   'pw.field.position-horizontal.help' => 'Defines the horizontal position of the content within this block.',
-	'pw.field.position-vertical.column.help' => 'Vertical position of the content within this column.',
 	'pw.field.position-vertical.label' => 'Vertical position',
 	'pw.field.position-vertical.help' => 'Defines the vertical position of the content within this block.',
 	'pw.field.quote' => 'Quote',

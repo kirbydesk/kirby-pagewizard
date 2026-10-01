@@ -258,7 +258,6 @@
 	'pw.field.position-horizontal.column.help' => 'Legt die horizontale Position des Inhalts in dieser Spalte fest.',
 	'pw.field.position-horizontal.label' => 'Horizontale Position',
   'pw.field.position-horizontal.help' => 'Legt die horizontale Position des Inhalts in diesem Block fest.',
-	'pw.field.position-vertical.column.help' => 'Vertikale Position des Inhalts in dieser Spalte.',
 	'pw.field.position-vertical.label' => 'Vertikale Position',
 	'pw.field.position-vertical.help' => 'Legt die vertikale Position des Inhalts in diesem Block fest.',
 	'pw.field.quote' => 'Zitat',

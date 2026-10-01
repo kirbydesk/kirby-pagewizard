@@ -13,6 +13,10 @@ return [
 			'swatch' => fn (string $swatch = 'item-overlay') => $swatch,
 		],
 	],
+	// a heading with its toggles on the right (a column's vertical position)
+	'pwheadtoggles' => [
+		'extends' => 'toggles',
+	],
 	// a heading over values per screen size, with the sizes as pills
 	'pwbreakpoints' => [
 		'extends' => 'headline',

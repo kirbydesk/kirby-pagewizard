@@ -20,6 +20,7 @@ import pwalign       from "@/fields/pwalign.js";
 import pwicon        from "@/fields/pwicon.js";
 import pwsharedname  from "@/fields/pwsharedname.js";
 import pwbreakpoints from "@/fields/pwbreakpoints.vue";
+import pwheadtoggles from "@/fields/pwheadtoggles.vue";
 
 // Views
 import iconsView from "@/views/icons.vue";
@@ -50,6 +51,7 @@ panel.plugin("kirbydesk/kirby-pagewizard", {
 		pwicon,
 		pwsharedname,
 		pwbreakpoints,
+		pwheadtoggles,
 	},
 	components: {
 		'pw-icons-view': iconsView,
