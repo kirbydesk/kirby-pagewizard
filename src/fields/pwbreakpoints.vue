@@ -32,7 +32,8 @@ export default {
   props: {
     label: String,
     help: String,
-    // which rows: columns (columnssm …), grid (gridsize…/gridoffset…), logos (logossm …)
+    // which rows: columns (columnssm …), grid (gridsize…/gridoffset…), logos
+    // (logossm …), distribution (distributionsm …)
     group: { type: String, default: 'columns' },
     // the help of each size: shown for the chosen one
     sizeHelps: { type: Object, default: () => ({}) },

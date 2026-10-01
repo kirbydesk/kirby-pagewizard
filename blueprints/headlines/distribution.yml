@@ -1,4 +1,4 @@
 ---
 label: pw.headline.distribution
-type: headline
-help: pw.headline.distribution.help
+type: pwbreakpoints
+group: distribution
