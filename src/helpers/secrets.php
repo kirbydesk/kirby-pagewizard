@@ -21,7 +21,7 @@
 class pwSecrets
 {
 	/** AI plugins that may declare keys (same list as the AI view button). */
-	public const PLUGINS = ['kirbydesk.translatewizard', 'kirbydesk.contentwizard'];
+	public const PLUGINS = ['kirbydesk.kirby-translatewizard', 'kirbydesk.kirby-contentwizard'];
 
 	public static function file(): string
 	{
