@@ -3,10 +3,10 @@
 return [
 	// the pages' blocks field: Kirby's own, as a type of its own
 	'pwblocks' => PwblocksField::class,
-	// the overlay's strength on an image: toggles with swatches in the
+	// the overlay's strength on an image: a range with a square in the
 	// block's overlay colour (shown by the Project Wizard)
 	'pwoverlay' => [
-		'extends' => 'toggles',
+		'extends' => 'range',
 		'props'   => [
 			'block' => fn (?string $block = null) => $block,
 		],
