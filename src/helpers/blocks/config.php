@@ -1061,17 +1061,22 @@ class pwConfig
 				}
 			}
 			// Own values for the entries (Elements › Items): a block that brings
-			// item-title-font-size … among its values and has them switched on
-			// (item-entry "own") points the element's variables at its own
+			// item-title-font-size … among its values and has them switched on –
+			// the title and the description each on its own (item-entry-title /
+			// -text "own"; an older project's item-entry for both) – points the
+			// element's variables at its own
 			$entryVars = [];
 			foreach ($blockDefaults as $group) {
 				foreach (['item-title-font-size', 'item-title-line-height', 'item-text-font-size', 'item-title-spacing'] as $var) {
 					if (isset($group['vars'][$var])) $entryVars[] = $var;
 				}
 			}
-			if ($entryVars && ((self::load($blockType)['defaults']['item-entry'] ?? 'global') === 'own')) {
+			$entryDefaults = self::load($blockType)['defaults'];
+			$entryOwn = fn(string $part) => ($entryDefaults['item-entry-' . $part] ?? $entryDefaults['item-entry'] ?? 'global') === 'own';
+			$entryVars = array_values(array_filter(array_unique($entryVars), fn($var) => $entryOwn(str_starts_with($var, 'item-text-') ? 'text' : 'title')));
+			if ($entryVars) {
 				$name  = preg_replace('/^pw/', '', $blockType);
-				$decls = array_map(fn($var) => '--' . $var . ': var(--' . $blockType . '-' . $var . ');', array_unique($entryVars));
+				$decls = array_map(fn($var) => '--' . $var . ': var(--' . $blockType . '-' . $var . ');', $entryVars);
 				$ownSpacingRules[] = 'section[data-block="' . $name . '"] [data-entry] { ' . implode(' ', $decls) . ' }';
 			}
 
