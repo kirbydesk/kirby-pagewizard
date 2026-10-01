@@ -144,10 +144,12 @@ class pwConfig
 	 * exception, an older start value) the first option. Options are values
 	 * or objects with a "value"; true/false and empty values stay as they are.
 	 */
-	public static function validStart($value, $options)
+	public static function validStart($value, $options, $empty = null)
 	{
 		if (!is_array($options) || $options === [] || !array_is_list($options)) return $value;
 		if ($value === null || is_bool($value) || is_array($value)) return $value;
+		// (the value a field allows for "nothing chosen", e.g. an icon: none)
+		if ($empty !== null && (string) $value === (string) $empty) return $value;
 		$values = array_map(fn($o) => is_array($o) ? ($o['value'] ?? null) : $o, $options);
 		foreach ($values as $v) {
 			if ((string) $v === (string) $value) return $value;
@@ -483,7 +485,7 @@ class pwConfig
 		foreach ([$layoutVis, $styleVis, $gridVis, $settingsVis, $effectsVis] as $category) {
 			foreach ($category as $key => $field) {
 				if (is_array($field) && isset($field['options']) && array_key_exists($key, $defaults)) {
-					$defaults[$key] = self::validStart($defaults[$key], $field['options']);
+					$defaults[$key] = self::validStart($defaults[$key], $field['options'], $field['empty'] ?? null);
 				}
 			}
 		}
