@@ -3,6 +3,14 @@
 return [
 	// the pages' blocks field: Kirby's own, as a type of its own
 	'pwblocks' => PwblocksField::class,
+	// the overlay's strength on an image: toggles with swatches in the
+	// block's overlay colour (shown by the Project Wizard)
+	'pwoverlay' => [
+		'extends' => 'toggles',
+		'props'   => [
+			'block' => fn (?string $block = null) => $block,
+		],
+	],
 	// a heading over values per screen size, with the sizes as pills
 	'pwbreakpoints' => [
 		'extends' => 'headline',
