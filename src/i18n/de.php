@@ -383,7 +383,7 @@
 	'pw.option.footerbottom' => 'Footer unten',
 	'pw.option.fullscreen' => 'Vollbild',
 	'pw.option.global' => 'Standard',
-	'pw.field.item-spacing' => 'Abstände nach unten',
+	'pw.field.item-spacing' => 'Werte',
 	'pw.field.item-entry' => 'Werte',
 	'pw.option.gradient' => 'Verlauf',
 	'pw.option.image' => 'Bild',
