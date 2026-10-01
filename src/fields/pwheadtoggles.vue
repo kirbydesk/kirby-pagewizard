@@ -30,12 +30,19 @@ export default {
 </script>
 
 <style>
-/* the toggles as small as their icons */
+/* the toggles as small as their icons (as high as the pills) */
 .pw-headtoggles-input {
   flex: 0 0 auto;
   width: auto;
 }
 .pw-headtoggles-input ul {
   display: inline-flex;
+}
+.pw-headtoggles-input li {
+  height: var(--height-xs, 1.5rem);
+}
+.pw-headtoggles-input label {
+  padding: 0 var(--spacing-2);
+  --icon-size: 14px;
 }
 </style>

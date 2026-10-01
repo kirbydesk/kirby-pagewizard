@@ -16,6 +16,9 @@ return [
 	// a heading with its toggles on the right (a column's vertical position)
 	'pwheadtoggles' => [
 		'extends' => 'toggles',
+		'props'   => [
+			'class' => fn (?string $class = null) => $class,
+		],
 	],
 	// a heading over values per screen size, with the sizes as pills
 	'pwbreakpoints' => [

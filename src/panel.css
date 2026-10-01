@@ -173,7 +173,8 @@ span.tag.screensize {
 	background-color: light-dark(var(--color-gray-250),var(--color-gray-950));
 }
 
-/* Patch Kirbyblock Multicolumn: 2 headline fields in drawer side-by-side */
+/* Patch Kirbyblock Multicolumn: 2 headline fields in drawer side-by-side
+   (also its column headings with the vertical position, pwheadtoggles) */
 .k-headline-field.patch {
 	padding-top: 0;
 }
