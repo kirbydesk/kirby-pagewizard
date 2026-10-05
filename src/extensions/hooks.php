@@ -1,8 +1,23 @@
 <?php return [
 
-	/* -------------- Reload on Save --------------*/
+	/* -------------- Soft hyphens, Reload on Save --------------*/
 	'page.render:after' => function (string $contentType, string $html): string {
 		if ($contentType !== 'html') return $html;
+
+		// soft hyphens: "[-]" in any text (and an "&shy;" a text field masked)
+		// becomes a place to break a long word – invisible unless the word is
+		// broken there; in the head, scripts (e.g. the FAQ's structured data)
+		// and styles it is only removed
+		if (str_contains($html, '[-]') || str_contains($html, '&amp;shy;')) {
+			$parts = preg_split('~(<head\b.*?</head>|<script\b.*?</script>|<style\b.*?</style>|<textarea\b.*?</textarea>)~is', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
+			foreach ($parts as $i => $part) {
+				$parts[$i] = $i % 2 === 1
+					? str_replace('[-]', '', $part)
+					: str_replace(['[-]', '&amp;shy;'], '&shy;', $part);
+			}
+			$html = implode('', $parts);
+		}
+
 		if (option('kirbydesk.pagewizard.reloadOnSave') !== true) return $html;
 
 		$siteUrl = kirby()->url();
