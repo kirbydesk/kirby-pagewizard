@@ -22,10 +22,25 @@ if ($mobile ?? false): ?>
 	</form>
 </div>
 <?php else: ?>
+<?php /* opened as the other menu items (desktopNav, its own key "language") */ ?>
 <div class="navitem language md:-ml-6 lg:-ml-8 xl:-ml-10">
-	<div class="item md:ml-3 lg:ml-4 xl:ml-5" tabindex="<?=$tabindex?>" role="menu" aria-haspopup="true" aria-expanded="false">
+	<div
+		class="item md:ml-3 lg:ml-4 xl:ml-5"
+		tabindex="<?=$tabindex?>"
+		role="button"
+		aria-haspopup="true"
+		:aria-expanded="String(isOpen('language'))"
+		:class="{ 'open': isOpen('language') }"
+		@mouseenter="open('language')"
+		@mouseleave="close()"
+		@click.stop="toggle('language')"
+		@keydown.enter.prevent="toggle('language')"
+		@keydown.space.prevent="toggle('language')"
+		@keydown.escape.prevent="close()"
+		@click.outside="close()"
+	>
 		<?=$globe?>
-		<div class="flyout">
+		<div class="flyout" x-show="isOpen('language')" x-transition.opacity.duration.200ms x-cloak>
 			<?php foreach ($kirby->languages() as $language) : ?>
 			<a href="<?= $page->url($language->code()) ?>" class="border-t" role="menuitem" tabindex="<?=$tabindex?>"><?php e($kirby->language()->code() == $language, '<svg class="fill-current" aria-hidden="true"><use xlink:href="#check"></use></svg><span class="active">', '<span>') ?><?= html($language->name()) ?></span></a>
 			<?php endforeach; ?>
