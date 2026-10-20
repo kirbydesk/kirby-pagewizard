@@ -685,10 +685,13 @@ class pwConfig
 	 * Reads navigation.json, navigation-colors.json, colors.json, merges with project overrides,
 	 * appends :root { ... } to $imports, and creates config/sprites stubs.
 	 */
-	public static function tailwindSetup(string $pluginDir, array &$imports): void
+	public static function tailwindSetup(string $pluginDir, array &$imports, bool $sideEffects = true): void
 	{
-		$patchConfigDir = kirby()->root('site') . '/patches/config';
-		if (!is_dir($patchConfigDir)) mkdir($patchConfigDir, 0777, true);
+		// $sideEffects = false: only generate CSS (runtime vars.css) – never write into the project
+		if ($sideEffects) {
+			$patchConfigDir = kirby()->root('site') . '/patches/config';
+			if (!is_dir($patchConfigDir)) mkdir($patchConfigDir, 0777, true);
+		}
 
 		// Fonts: load early so all sections can reference them for font-family lookups.
 		// Reads the plugin's own config/fonts.json (only pagewizard actually has one —
@@ -992,21 +995,9 @@ class pwConfig
 			$imports[] = ":root {\n" . implode("\n", $footerLines) . "\n}";
 		}
 
-		// Fonts: generate @font-face rules, copy files
-		$fontsDir = kirby()->root('index') . '/assets/fonts';
-		if (!is_dir($fontsDir)) mkdir($fontsDir, 0777, true);
-
-		// Copy builtin font files to public/assets/fonts/
-		foreach ($builtinFonts as $font) {
-			if (!($font['builtin'] ?? false)) continue;
-			foreach ($font['files'] ?? [] as $file) {
-				$src = $pluginDir . '/assets/fonts/' . $file['src'];
-				$dst = $fontsDir . '/' . $file['src'];
-				if (file_exists($src) && !file_exists($dst)) {
-					copy($src, $dst);
-				}
-			}
-		}
+		// Fonts: builtin fonts are served as plugin assets (media/plugins/…),
+		// uploaded fonts from content/.projectwizard/fonts via the media route –
+		// nothing is copied into public/assets anymore (see fontUrl())
 
 		// Generate @font-face rules (only once, not per plugin call)
 		$hasExistingFontFace = false;
@@ -1024,7 +1015,7 @@ class pwConfig
 						$fontFace .= "\tfont-family: '" . $font['family'] . "';\n";
 						$fontFace .= "\tfont-style: " . $style . ";\n";
 						$fontFace .= "\tfont-weight: " . ($file['weight'] ?? '400') . ";\n";
-						$fontFace .= "\tsrc: url('/assets/fonts/" . $file['src'] . "') format('woff2');\n";
+						$fontFace .= "\tsrc: url('" . self::fontUrl($font, $file['src']) . "') format('woff2');\n";
 						$fontFace .= "}";
 						$imports[] = $fontFace;
 					}
@@ -1174,6 +1165,7 @@ class pwConfig
 		}
 
 		// Sprites stub
+		if (!$sideEffects) return;
 		$spritesDir     = kirby()->root('site') . '/patches/sprites';
 		$spriteOverride = $spritesDir . '/symbols.txt';
 		$spriteStub     = $spritesDir . '/_symbols.txt';
@@ -1193,6 +1185,140 @@ class pwConfig
 		/* -------------- Grid Tab --------------*/
 		$enabled = !empty($tabSettings['grid']) || !empty($tabSettings['tab-grid']);
 		self::addTab($tabs, 'grid', $enabled, pwGrid::layout($blockType, $defaults));
+	}
+
+	/* -------------- Runtime vars.css --------------*/
+
+	/**
+	 * URL of a font file for @font-face. Builtin fonts are plugin assets
+	 * (served by Kirby under media/plugins/…), uploaded fonts live in
+	 * content/.projectwizard/fonts and are served via the media route.
+	 * Fonts uploaded before 1.2 still sit in public/assets/fonts.
+	 */
+	public static function fontUrl(array $font, string $src): string
+	{
+		if ($font['builtin'] ?? false) {
+			$asset = kirby()->plugin('kirbydesk/kirby-pagewizard')?->asset('fonts/' . $src);
+			if ($asset) return $asset->url();
+		}
+		$uploaded = self::projectDir() . '/fonts/' . $src;
+		if (is_file($uploaded)) {
+			return kirby()->url('media') . '/pagewizard/fonts/' . self::fileHash($uploaded) . '/' . rawurlencode($src);
+		}
+		return kirby()->url('assets') . '/fonts/' . rawurlencode($src);
+	}
+
+	/** Short hash of a file – part of its media URL, so a changed file gets a new URL */
+	public static function fileHash(string $path): string
+	{
+		return substr(md5(filesize($path) . '-' . filemtime($path) . '-' . basename($path)), 0, 12);
+	}
+
+	/**
+	 * Hash over everything vars.css is built from: the Panel-edited JSON in
+	 * content/.projectwizard, the plugin defaults (pagewizard config, each
+	 * block's config) and the installed plugin versions. It is part of the
+	 * URL, so browsers may cache vars.css forever.
+	 */
+	public static function varsHash(): string
+	{
+		static $hash = null;
+		if ($hash !== null) return $hash;
+
+		$files = array_merge(
+			glob(self::projectDir() . '/*.json') ?: [],
+			glob(self::projectDir() . '/fonts/*') ?: [],
+			glob(self::pluginDir() . '/config/*.json') ?: []
+		);
+		foreach (self::registered() as $configDir) {
+			$files = array_merge($files, glob($configDir . '/*.json') ?: []);
+		}
+		$parts = [];
+		foreach (array_unique($files) as $file) {
+			$parts[] = $file . ':' . filemtime($file) . ':' . filesize($file);
+		}
+		foreach (kirby()->plugins() as $plugin) {
+			$parts[] = $plugin->name() . '@' . $plugin->version();
+		}
+		$parts[] = kirby()->url('media');
+		return $hash = substr(md5(implode('|', $parts)), 0, 12);
+	}
+
+	/** URL of the current vars.css – in the page head before site.min.css */
+	public static function varsUrl(): string
+	{
+		return kirby()->url('media') . '/pagewizard/vars.' . self::varsHash() . '.css';
+	}
+
+	/**
+	 * vars.css: CSS variables and @font-face rules from the plugin defaults
+	 * and the Panel-edited project config – generated at runtime, without
+	 * writing anything into the project.
+	 */
+	public static function varsCss(): string
+	{
+		$imports = [];
+		self::tailwindSetup(self::pluginDir(), $imports, false);
+		$vars = array_filter($imports, function ($entry) {
+			$trimmed = trim($entry);
+			return $trimmed !== '' && !str_starts_with($trimmed, '@import') && !str_starts_with($trimmed, '@source')
+				&& !str_starts_with($trimmed, '/*');
+		});
+		return self::hex8ToRgba("/* Generated by kirby-pagewizard – do not edit */\n\n" . implode("\n", $vars) . "\n");
+	}
+
+	/**
+	 * 8-digit hex (#rrggbbaa) as rgba() – minifiers that shorten colors may
+	 * drop the alpha channel; rgba() is safe from that.
+	 */
+	public static function hex8ToRgba(string $css): string
+	{
+		return preg_replace_callback(
+			'/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})\b/i',
+			fn ($m) => sprintf(
+				'rgba(%d, %d, %d, %s)',
+				hexdec($m[1]),
+				hexdec($m[2]),
+				hexdec($m[3]),
+				rtrim(rtrim(number_format(hexdec($m[4]) / 255, 3), '0'), '.')
+			),
+			$css
+		);
+	}
+
+	/**
+	 * Route media/pagewizard/vars.<hash>.css: written into the media folder
+	 * on first request, after that the web server delivers the file itself.
+	 * An outdated hash (e.g. from a cached page) gets the current CSS without
+	 * being stored.
+	 */
+	public static function varsResponse(string $hash): \Kirby\Http\Response
+	{
+		$css = self::varsCss();
+		if ($hash === self::varsHash()) {
+			$dir = kirby()->root('media') . '/pagewizard';
+			if (!is_dir($dir)) mkdir($dir, 0777, true);
+			// older versions are of no use anymore
+			foreach (glob($dir . '/vars.*.css') ?: [] as $old) @unlink($old);
+			file_put_contents($dir . '/vars.' . $hash . '.css', $css);
+			return new \Kirby\Http\Response($css, 'text/css', 200, ['Cache-Control' => 'public, max-age=31536000, immutable']);
+		}
+		return new \Kirby\Http\Response($css, 'text/css', 200, ['Cache-Control' => 'no-cache']);
+	}
+
+	/** Route media/pagewizard/fonts/<hash>/<file>: an uploaded font, copied into the media folder */
+	public static function fontResponse(string $hash, string $filename): \Kirby\Http\Response|false
+	{
+		$filename = basename(rawurldecode($filename));
+		$source   = self::projectDir() . '/fonts/' . $filename;
+		if (!str_ends_with(strtolower($filename), '.woff2') || !is_file($source) || self::fileHash($source) !== $hash) {
+			return false;
+		}
+		$dir = kirby()->root('media') . '/pagewizard/fonts/' . $hash;
+		if (!is_dir($dir)) mkdir($dir, 0777, true);
+		copy($source, $dir . '/' . $filename);
+		return new \Kirby\Http\Response(file_get_contents($source), 'font/woff2', 200,
+			['Cache-Control' => 'public, max-age=31536000, immutable']);
 	}
 
 	/**
@@ -1382,47 +1508,20 @@ class pwConfig
 			"@source '../../site/templates';",
 		];
 
-		// Split imports: @font-face + :root vars → vars.css, everything else → tailwind.css.
-		$varsContent = [];
-		$cssImports  = [];
-		foreach ($imports as $entry) {
+		// Only code goes into tailwind.css. The CSS variables and @font-face
+		// rules (everything else in $imports) are no longer part of the build:
+		// pagewizard serves them at runtime as vars.css (varsUrl()), so Panel
+		// edits need no rebuild – on a server without npm, too.
+		$cssImports = array_values(array_filter($imports, function ($entry) {
 			$trimmed = trim($entry);
-			if (str_starts_with($trimmed, '@import') || str_starts_with($trimmed, '@source') || str_starts_with($trimmed, "\n/*")) {
-				$cssImports[] = $entry;
-			} else {
-				$varsContent[] = $entry;
-			}
-		}
+			return str_starts_with($trimmed, '@import') || str_starts_with($trimmed, '@source')
+				|| str_starts_with($trimmed, '/* Plugin:');
+		}));
 
-		// vars.css — @font-face + :root blocks (watched by Tailwind via @import).
-		// Only write when content changed to avoid triggering unnecessary Tailwind rebuilds.
-		$varsPath = $tempDir . '/vars.css';
-		$varsNew  = "/* Auto-generated — do not edit */\n\n" . implode("\n", $varsContent);
-		// Convert 8-digit hex (#rrggbbaa) to rgba() — Tailwind's CSS minifier
-		// strips the alpha channel when it collapses e.g. #ff0000 to `red`,
-		// dropping the trailing #38 (alpha). rgba() is safe from that.
-		$varsNew = preg_replace_callback(
-			'/#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})\b/i',
-			function ($m) {
-				return sprintf(
-					'rgba(%d, %d, %d, %s)',
-					hexdec($m[1]),
-					hexdec($m[2]),
-					hexdec($m[3]),
-					rtrim(rtrim(number_format(hexdec($m[4]) / 255, 3), '0'), '.')
-				);
-			},
-			$varsNew
-		);
-		if (!file_exists($varsPath) || file_get_contents($varsPath) !== $varsNew) {
-			file_put_contents($varsPath, $varsNew);
-		}
-
-		// tailwind.css — static shell with @import to vars.css.
+		// tailwind.css — static shell (code only)
 		$tailwindNew =
 			"/* This file is automatically generated by a hook, when \n" .
 			"Kirby is in debug mode. Do not edit this file manually! */\n\n" .
-			"@import './vars.css';\n\n" .
 			"/* TailwindCSS */\n@import 'tailwindcss';\n\n" .
 			"@plugin 'tailwindcss-debug-screens' {\n\tclassName: \"debug-screens\";\n\tposition: \"bottom, left\";\n\tprefix: \"\";\n}\n\n" .
 			"/* Tailwind Watcher */\n" . implode("\n", $watchers) . "\n" .

@@ -4,6 +4,16 @@
 	'page.render:after' => function (string $contentType, string $html): string {
 		if ($contentType !== 'html') return $html;
 
+		// vars.css: a project's own header.php (from the _header.php stub) may
+		// not include it yet – then before the first stylesheet in the head
+		if (!str_contains($html, 'data-pagewizard-vars') && str_contains($html, '</head>')) {
+			$link = '<link rel="stylesheet" href="' . pwConfig::varsUrl() . '" data-pagewizard-vars />';
+			$html = preg_match('~<link\b[^>]*rel=["\']stylesheet["\'][^>]*>~i', $html, $match, PREG_OFFSET_CAPTURE)
+				&& $match[0][1] < strpos($html, '</head>')
+				? substr_replace($html, $link, $match[0][1], 0)
+				: str_replace('</head>', $link . '</head>', $html);
+		}
+
 		// soft hyphens: "[-]" in any text (and an "&shy;" a text field masked)
 		// becomes a place to break a long word – invisible unless the word is
 		// broken there; in the head, scripts (e.g. the FAQ's structured data)

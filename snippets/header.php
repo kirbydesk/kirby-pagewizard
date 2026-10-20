@@ -7,6 +7,9 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge"><?php
 
+			/* CSS variables and fonts from the Project Wizard – served at runtime, before the site CSS */
+			print '<link rel="stylesheet" href="'.pwConfig::varsUrl().'" data-pagewizard-vars />';
+
 			/* CSS */
 			file_exists($kirby->roots()->assets()."/css/site.min.css") && print '<link rel="stylesheet" href="'.$kirby->urls()->assets().'/css/site.min.css?'.filemtime($kirby->roots()->assets().'/css/site.min.css').'" />';
 
