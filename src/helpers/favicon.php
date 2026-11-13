@@ -94,7 +94,8 @@ class pwFavicon
 	 */
 	public static function response(string $hash, string $name): \Kirby\Http\Response|false
 	{
-		if (!self::exists() || !array_key_exists($name, self::FILES)) return false;
+		// the SVG on its own (uploaded before the PNG): shown in the Panel already
+		if (!array_key_exists($name, self::FILES) || (!self::exists() && $name !== 'favicon.svg')) return false;
 		$made = self::make($name);
 		if ($made === null) return false;
 		[$body, $type] = $made;
@@ -123,12 +124,12 @@ class pwFavicon
 	/** [body, mime type] of one file – null if it can't be made (no SVG uploaded, …) */
 	public static function make(string $name): ?array
 	{
-		$png = self::png();
-		if (!$png) return null;
+		if ($name === 'favicon.svg') {
+			$svg = self::svg();
+			return $svg ? [(string) file_get_contents($svg), 'image/svg+xml'] : null;
+		}
+		if (!self::png()) return null;
 		switch ($name) {
-			case 'favicon.svg':
-				$svg = self::svg();
-				return $svg ? [(string) file_get_contents($svg), 'image/svg+xml'] : null;
 			case 'site.webmanifest':
 				return [self::manifest(), 'application/manifest+json'];
 			case 'favicon.ico':
