@@ -12,7 +12,7 @@ return function (App $kirby) {
 
 	return [
 
-		/* -------------- Runtime vars.css and uploaded fonts --------------*/
+		/* -------------- Runtime vars.css, uploaded fonts and favicon --------------*/
 		// Before the password interceptor below: the protected page needs its
 		// styles, too. Both are written into the media folder on first request.
 		[
@@ -24,6 +24,18 @@ return function (App $kirby) {
 			'pattern' => $media . '/pagewizard/fonts/(:alphanum)/(:any)',
 			'method'  => 'GET',
 			'action'  => fn (string $hash, string $file) => pwConfig::fontResponse($hash, $file),
+		],
+		// Favicon from the Project Wizard: the sizes, made on first request
+		[
+			'pattern' => $media . '/pagewizard/favicon/(:alphanum)/(:any)',
+			'method'  => 'GET',
+			'action'  => fn (string $hash, string $file) => pwFavicon::response($hash, $file),
+		],
+		// …and /favicon.ico for browsers and crawlers that don't read the head
+		[
+			'pattern' => 'favicon.ico',
+			'method'  => 'GET',
+			'action'  => fn () => pwFavicon::rootResponse(),
 		],
 
 		/* -------------- Password Protection: POST handler --------------*/

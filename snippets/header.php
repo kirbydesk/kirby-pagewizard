@@ -16,10 +16,14 @@
 			/* JS */
 			file_exists($kirby->roots()->assets()."/js/site.min.js") && print '<script src="'.$kirby->urls()->assets().'/js/site.min.js?'.filemtime($kirby->roots()->assets().'/js/site.min.js').'" defer></script>';
 
-			/* Favicon */
-			file_exists($kirby->roots()->index()."/favicon.ico") && print '<link rel="icon" href="'.$kirby->urls()->index().'/favicon.ico" sizes="32x32">';
-			file_exists($kirby->roots()->assets()."/img/favicon.svg") && print '<link rel="icon" type="image/svg+xml" href="'.$kirby->urls()->assets().'/img/favicon.svg">';
-			file_exists($kirby->roots()->assets()."/img/apple-touch-icon.png") && print '<link rel="apple-touch-icon" href="'.$kirby->urls()->assets().'/img/apple-touch-icon.png">';
+			/* Favicon: from the Project Wizard – otherwise the files in the project, if there are any */
+			if (pwFavicon::exists()) {
+				print pwFavicon::head();
+			} else {
+				file_exists($kirby->roots()->index()."/favicon.ico") && print '<link rel="icon" href="'.$kirby->urls()->index().'/favicon.ico" sizes="32x32">';
+				file_exists($kirby->roots()->assets()."/img/favicon.svg") && print '<link rel="icon" type="image/svg+xml" href="'.$kirby->urls()->assets().'/img/favicon.svg">';
+				file_exists($kirby->roots()->assets()."/img/apple-touch-icon.png") && print '<link rel="apple-touch-icon" href="'.$kirby->urls()->assets().'/img/apple-touch-icon.png">';
+			}
 
 		
 		?><title><?=$page->title()->value()?></title>
