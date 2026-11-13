@@ -11,6 +11,8 @@ return [
 			'block'  => fn (?string $block = null) => $block,
 			// the colour's name in the block's values (cards: item-overlay)
 			'swatch' => fn (string $swatch = 'item-overlay') => $swatch,
+			// the block's own colour field for the custom variant (cards: cardoverlaycolor)
+			'color'  => fn (?string $color = null) => $color === null ? null : strtolower($color),
 		],
 	],
 	// a heading with its toggles on the right (a column's vertical position)
