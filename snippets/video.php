@@ -3,10 +3,14 @@
 // Radius
 // clip-path and isolation: browsers sometimes lose the overflow clip of a video or image layer while
 // scrolling (e.g. under a fixed header) – the square inside then shows. The inner div takes the radius too.
+// The video itself gets a mask: Firefox on Windows hands playing videos to the graphics card as an overlay,
+// which ignores every clip of its parents – a masked video can't become an overlay and is clipped normally.
 $radiusValue = $radius ?? '';
 $radiusStyle = '';
+$videoStyle = '';
 if ($radiusValue === 'round') {
 	$radiusStyle = 'border-radius:9999px;overflow:hidden;clip-path:inset(0 round 9999px);isolation:isolate;';
+	$videoStyle = 'border-radius:inherit;mask-image:radial-gradient(circle closest-side,#000 calc(100% - 0.5px),transparent 100%);';
 } elseif ($radiusValue === 'custom') {
 	$isTrue = fn($v) => $v === true || $v === 'true' || $v === 1;
 	$tl = $isTrue($radiusTopLeft     ?? false) ? 'var(--media-radius-top-left)'     : '0';
@@ -14,6 +18,8 @@ if ($radiusValue === 'round') {
 	$br = $isTrue($radiusBottomRight ?? false) ? 'var(--media-radius-bottom-right)' : '0';
 	$bl = $isTrue($radiusBottomLeft  ?? false) ? 'var(--media-radius-bottom-left)'  : '0';
 	$radiusStyle = "border-radius:{$tl} {$tr} {$br} {$bl};overflow:hidden;clip-path:inset(0 round {$tl} {$tr} {$br} {$bl});isolation:isolate;";
+	// Fully opaque mask – it only stops the overlay; the video's own radius clips
+	$videoStyle = 'border-radius:inherit;mask-image:linear-gradient(#000,#000);';
 }
 
 // Internal Video
@@ -70,7 +76,7 @@ if ($source === 'internal'):
 		echo '>';
 		echo '<div'.(empty($radiusStyle) ? '' : ' style="border-radius:inherit"').'>';
 		echo '<video';
-		e(!empty($radiusStyle), ' style="border-radius:inherit"');
+		e(!empty($videoStyle), ' style="'.$videoStyle.'"');
 		e(!empty($title), ' title="'.$title.'"');
 		e(!empty($ariaLabel), ' aria-label="'.$ariaLabel.'"');
 		e(!empty($describedbyId), ' aria-describedby="'.$describedbyId.'"');
