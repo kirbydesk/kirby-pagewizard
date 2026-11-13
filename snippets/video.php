@@ -1,17 +1,19 @@
 <?php
 
 // Radius
+// clip-path and isolation: browsers sometimes lose the overflow clip of a video or image layer while
+// scrolling (e.g. under a fixed header) – the square inside then shows. The inner div takes the radius too.
 $radiusValue = $radius ?? '';
 $radiusStyle = '';
 if ($radiusValue === 'round') {
-	$radiusStyle = 'border-radius:9999px;overflow:hidden;';
+	$radiusStyle = 'border-radius:9999px;overflow:hidden;clip-path:inset(0 round 9999px);isolation:isolate;';
 } elseif ($radiusValue === 'custom') {
 	$isTrue = fn($v) => $v === true || $v === 'true' || $v === 1;
 	$tl = $isTrue($radiusTopLeft     ?? false) ? 'var(--media-radius-top-left)'     : '0';
 	$tr = $isTrue($radiusTopRight    ?? false) ? 'var(--media-radius-top-right)'    : '0';
 	$br = $isTrue($radiusBottomRight ?? false) ? 'var(--media-radius-bottom-right)' : '0';
 	$bl = $isTrue($radiusBottomLeft  ?? false) ? 'var(--media-radius-bottom-left)'  : '0';
-	$radiusStyle = "border-radius:{$tl} {$tr} {$br} {$bl};overflow:hidden;";
+	$radiusStyle = "border-radius:{$tl} {$tr} {$br} {$bl};overflow:hidden;clip-path:inset(0 round {$tl} {$tr} {$br} {$bl});isolation:isolate;";
 }
 
 // Internal Video
@@ -66,8 +68,9 @@ if ($source === 'internal'):
 		e(!empty($ratio), ' data-ratio="'.$ratio.'"');
 		e(!empty($radiusStyle), ' style="'.$radiusStyle.'"');
 		echo '>';
-		echo '<div>';
+		echo '<div'.(empty($radiusStyle) ? '' : ' style="border-radius:inherit"').'>';
 		echo '<video';
+		e(!empty($radiusStyle), ' style="border-radius:inherit"');
 		e(!empty($title), ' title="'.$title.'"');
 		e(!empty($ariaLabel), ' aria-label="'.$ariaLabel.'"');
 		e(!empty($describedbyId), ' aria-describedby="'.$describedbyId.'"');
@@ -111,7 +114,7 @@ elseif ($source === 'external' && !empty($url)):
 		echo '<figure data-ratio="'.$externalRatio.'"';
 		e(!empty($radiusStyle), ' style="'.$radiusStyle.'"');
 		echo '>';
-		echo '<div>';
+		echo '<div'.(empty($radiusStyle) ? '' : ' style="border-radius:inherit"').'>';
 		echo '<div data-consent-video="'.esc($embedUrl).'">';
 		echo '<button type="button">';
 		echo '<svg viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/><polygon points="10,8 17,12 10,16" fill="currentColor"/></svg>';

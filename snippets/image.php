@@ -45,19 +45,21 @@ if ($file):
 	$zoom = empty($noZoom) && $file->imageZoom()->toBool();
 
 	// Radius
+	// clip-path and isolation: browsers sometimes lose the overflow clip of a video or image layer while
+	// scrolling (e.g. under a fixed header) – the square inside then shows. The inner div takes the radius too.
 	$radiusStyle = '';
 	$radiusValue = $radius ?? '';
 	if ($radiusValue === 'round') {
 		$ratio = '1/1';
 		$crop  = true;
-		$radiusStyle = 'border-radius:9999px;overflow:hidden;';
+		$radiusStyle = 'border-radius:9999px;overflow:hidden;clip-path:inset(0 round 9999px);isolation:isolate;';
 	} elseif ($radiusValue === 'custom') {
 		$isTrue = fn($v) => $v === true || $v === 'true' || $v === 1;
 		$tl = $isTrue($radiusTopLeft     ?? false) ? 'var(--media-radius-top-left)'     : '0';
 		$tr = $isTrue($radiusTopRight    ?? false) ? 'var(--media-radius-top-right)'    : '0';
 		$br = $isTrue($radiusBottomRight ?? false) ? 'var(--media-radius-bottom-right)' : '0';
 		$bl = $isTrue($radiusBottomLeft  ?? false) ? 'var(--media-radius-bottom-left)'  : '0';
-		$radiusStyle = "border-radius:{$tl} {$tr} {$br} {$bl};overflow:hidden;";
+		$radiusStyle = "border-radius:{$tl} {$tr} {$br} {$bl};overflow:hidden;clip-path:inset(0 round {$tl} {$tr} {$br} {$bl});isolation:isolate;";
 	}
 
 	// Output
@@ -68,7 +70,7 @@ if ($file):
 	e($zoom, ' data-zoom');
 	e(!empty($radiusStyle), ' style="'.$radiusStyle.'"');
 	echo '>';
-	echo '<div>';
+	echo '<div'.(empty($radiusStyle) ? '' : ' style="border-radius:inherit"').'>';
 	if ($zoom):
 		$captionText = $file->imageCaption()->isNotEmpty() ? esc($file->imageCaption()->value()) : '';
 		$lightboxId = 'img-' . uniqid();
