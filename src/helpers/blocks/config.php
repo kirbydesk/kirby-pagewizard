@@ -1016,6 +1016,11 @@ class pwConfig
 						$fontFace .= "\tfont-style: " . $style . ";\n";
 						$fontFace .= "\tfont-weight: " . ($file['weight'] ?? '400') . ";\n";
 						$fontFace .= "\tsrc: url('" . self::fontUrl($font, $file['src']) . "') format('woff2');\n";
+						// fonts from Google come in parts per character set (Latin, Latin
+						// Extended): the browser loads a part only when the page needs it
+						if (!empty($file['unicodeRange']) && preg_match('/^[U+0-9A-F?, -]+$/i', $file['unicodeRange'])) {
+							$fontFace .= "\tunicode-range: " . $file['unicodeRange'] . ";\n";
+						}
 						$fontFace .= "}";
 						$imports[] = $fontFace;
 					}
