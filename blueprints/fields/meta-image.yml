@@ -1,0 +1,13 @@
+---
+label: pw.field.meta-image
+type: files
+layout: cards
+size: small
+multiple: false
+query: page.images
+image:
+  cover: true
+  ratio: 1200/630
+empty: pw.field.meta-image.empty
+help: pw.field.meta-image.help
+width: 1/2

@@ -174,6 +174,8 @@ return [
 	'pagewizard/fields/media-source' => __DIR__ . '/../../blueprints/fields/media-source.yml',
 	'pagewizard/fields/media-type' => __DIR__ . '/../../blueprints/fields/media-type.yml',
 	'pagewizard/fields/meta-author' => __DIR__ . '/../../blueprints/fields/meta-author.yml',
+	'pagewizard/fields/meta-image' => __DIR__ . '/../../blueprints/fields/meta-image.yml',
+	'pagewizard/fields/seo-index' => __DIR__ . '/../../blueprints/fields/seo-index.yml',
 	'pagewizard/fields/meta-description' => __DIR__ . '/../../blueprints/fields/meta-description.yml',
 	'pagewizard/fields/meta-keywords' => __DIR__ . '/../../blueprints/fields/meta-keywords.yml',
 	'pagewizard/fields/meta-navigationtitle' => __DIR__ . '/../../blueprints/fields/meta-navigationtitle.yml',

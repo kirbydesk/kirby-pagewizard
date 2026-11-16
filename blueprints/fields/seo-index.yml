@@ -1,0 +1,9 @@
+---
+# (a switch: off – also on pages from before – means shown)
+label: pw.field.seo-index
+type: toggle
+text:
+  - pw.option.seo-index.show
+  - pw.option.seo-index.hide
+help: pw.field.seo-index.help
+width: 1/2

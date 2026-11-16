@@ -31,6 +31,12 @@ return function (App $kirby) {
 			'method'  => 'GET',
 			'action'  => fn (string $hash, string $file) => pwFavicon::response($hash, $file),
 		],
+		// The website's image for sharing (Project Wizard), cropped to 1200 × 630
+		[
+			'pattern' => $media . '/pagewizard/share/(:alphanum)/share.jpg',
+			'method'  => 'GET',
+			'action'  => fn (string $hash) => pwMeta::imageResponse($hash),
+		],
 		// …and /favicon.ico for browsers and crawlers that don't read the head
 		[
 			'pattern' => 'favicon.ico',

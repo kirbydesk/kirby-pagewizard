@@ -11,6 +11,7 @@ require_once __DIR__ . '/src/helpers/blocks/snippet.php';
 require_once __DIR__ . '/src/helpers/blocks/blueprint.php';
 require_once __DIR__ . '/src/helpers/secrets.php';
 require_once __DIR__ . '/src/helpers/favicon.php';
+require_once __DIR__ . '/src/helpers/meta.php';
 require_once __DIR__ . '/src/helpers/fields/pwblocks.php';
 
 Kirby::plugin('kirbydesk/kirby-pagewizard', [
@@ -28,4 +29,11 @@ Kirby::plugin('kirbydesk/kirby-pagewizard', [
 	'snippets'			=> require_once 'src/extensions/snippets.php',
 	'templates'			=> require_once 'src/extensions/templates.php',
   'translations' 	=> require_once 'src/extensions/translations.php',
+	/* -------------- Page methods --------------*/
+	// the automatic title and description (placeholders of the page's fields
+	// under "Properties")
+	'pageMethods'		=> [
+		'pwMetaTitle'       => function () { return pwMeta::autoTitle($this); },
+		'pwMetaDescription' => function () { return pwMeta::autoDescription($this); },
+	],
 ]);

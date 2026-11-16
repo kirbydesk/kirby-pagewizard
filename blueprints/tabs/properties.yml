@@ -1,38 +1,28 @@
 ---
 label: pw.tab.properties
 icon: settings
-columns:
-  - width: 3/4
-    sections:
-      meta:
-        type: fields
-        fields:
-          headlineMeta:
-            extends: pagewizard/headlines/meta
-          metaPagetitle:
-            extends: pagewizard/fields/meta-pagetitle
-          metaTeaser:
-            extends: pagewizard/fields/meta-teaser
-          metaNavigationtitle:
-            extends: pagewizard/fields/meta-navigationtitle
-          line:
-            type: line
-          metaDescription:
-            extends: pagewizard/fields/meta-description
-          metaKeywords:
-            extends: pagewizard/fields/meta-keywords
-          metaAuthor:
-            extends: pagewizard/fields/meta-author
-  - width: 1/4
-    sections:
-      seo:
-        type: fields
-        fields:
-          headlineSeo:
-            extends: pagewizard/headlines/seo
-          seoRobots:
-            extends: pagewizard/fields/seo-robots
-          seoCanonical:
-            extends: pagewizard/fields/seo-canonical
-
-
+sections:
+  # how the page appears in Google and when shared (empty: automatic, by
+  # the rules of Project Wizard → Project › Search engines)
+  seo:
+    type: fields
+    fields:
+      headlineSeo:
+        extends: pagewizard/headlines/seo
+      metaPagetitle:
+        extends: pagewizard/fields/meta-pagetitle
+      metaDescription:
+        extends: pagewizard/fields/meta-description
+      metaImage:
+        extends: pagewizard/fields/meta-image
+      seoHidden:
+        extends: pagewizard/fields/seo-index
+  meta:
+    type: fields
+    fields:
+      headlineMeta:
+        extends: pagewizard/headlines/meta
+      metaNavigationtitle:
+        extends: pagewizard/fields/meta-navigationtitle
+      metaTeaser:
+        extends: pagewizard/fields/meta-teaser

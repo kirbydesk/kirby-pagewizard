@@ -2,5 +2,5 @@
 label: pw.field.meta-pagetitle
 type: text
 counter: true
-placeholder: '{{page.title}} | {{site.title}}'
+placeholder: '{{ page.pwMetaTitle }}'
 help: pw.field.meta-pagetitle.help

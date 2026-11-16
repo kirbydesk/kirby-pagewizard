@@ -3,4 +3,6 @@ label: pw.field.meta-description
 type: textarea
 buttons: false
 size: small
+counter: true
+placeholder: '{{ page.pwMetaDescription }}'
 help: pw.field.meta-description.help

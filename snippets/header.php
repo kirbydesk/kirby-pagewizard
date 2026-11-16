@@ -26,7 +26,8 @@
 			}
 
 		
-		?><title><?=$page->title()->value()?></title>
+		?><?= pwMeta::head($page) ?>
+
 		<style>body{opacity:0}body.ready{opacity:1}</style>
 	</head>
 <body class="<?php e($kirby->user(), 'debug-screens'); ?>">
