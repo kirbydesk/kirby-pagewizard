@@ -921,6 +921,32 @@
 					}
 				}
 			},
+			"button-mobile-width": {
+				"value": "as-set",
+				"options": [
+					"as-set",
+					"full-width"
+				],
+				"type": "toggle-pair",
+				"generates": {
+					"button-mobile-applied": {
+						"as-set": "var(--button-width-applied)",
+						"full-width": "100%"
+					},
+					"button-mobile-inner": {
+						"as-set": "var(--button-inner-width)",
+						"full-width": "100%"
+					},
+					"button-mobile-display": {
+						"as-set": "var(--button-display)",
+						"full-width": "inline-flex"
+					},
+					"button-mobile-justify": {
+						"as-set": "var(--button-justify)",
+						"full-width": "center"
+					}
+				}
+			},
 			"button-border-width": {
 				"value": "1px",
 				"unit": "px",

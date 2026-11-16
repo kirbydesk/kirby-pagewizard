@@ -369,6 +369,8 @@
 	'pw.option.addressblock' => 'Adressblock',
 	'pw.option.auto' => 'Auto',
 	'pw.option.manual' => 'Manuell',
+	'pw.option.as-set' => 'Wie eingestellt',
+	'pw.option.full-width' => 'Volle Breite',
 	'pw.option.background' => 'Hintergrund',
 	'pw.option.backgroundcolor' => 'Hintergrundfarbe',
 	'pw.option.backgroundimage' => 'Hintergrundbild',

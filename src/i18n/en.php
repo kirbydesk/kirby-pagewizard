@@ -369,6 +369,8 @@
 	'pw.option.addressblock' => 'Address block',
 	'pw.option.auto' => 'Auto',
 	'pw.option.manual' => 'Manual',
+	'pw.option.as-set' => 'As Set',
+	'pw.option.full-width' => 'Full Width',
 	'pw.option.background' => 'Background',
 	'pw.option.backgroundcolor' => 'Background color',
 	'pw.option.backgroundimage' => 'Background Image',

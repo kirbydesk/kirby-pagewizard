@@ -234,6 +234,19 @@ section[data-block] [data-entry] > [data-field="text"] > * + * {
 	min-width: 0;
 	max-width: 100%;
 }
+/* mobile (below 1024px) at full width, if set (Project Wizard → Elements ›
+   Buttons › Mobile): every button over the whole width, one below the other */
+@media (max-width: 1023.98px) {
+	[data-field="button"] {
+		width: var(--button-mobile-applied, var(--button-width-applied));
+	}
+	[data-field="button"] > a, [data-field="button"] > span, [data-field="button"] > button {
+		display: var(--button-mobile-display, var(--button-display));
+		width: var(--button-mobile-inner, var(--button-inner-width));
+		justify-content: var(--button-mobile-justify, var(--button-justify));
+	}
+}
+
 /* manual width: the text on one line, cut off with "…" when too long */
 [data-field="button"] .link-text {
 	min-width: 0;

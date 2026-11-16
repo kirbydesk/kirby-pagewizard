@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buttons auf dem Handy</title>
+<style>
+  :root { --dim: #6b6f76; --line: #e8e8e8; --labelbg: #fafafa; --mono: ui-monospace, Menlo, monospace; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #2a2a2e; color: #16171a; padding: 24px 16px 60px; }
+  h1 { font-size: 18px; color: #f2f2f4; font-weight: 600; }
+  .lead { color: #a8a8ae; margin: 4px 0 14px; max-width: 1200px; }
+  .panel { max-width: 1200px; display: grid; grid-template-columns: minmax(0, 1fr) 440px; background: #efefef; border-radius: 10px; overflow: hidden; }
+  @media (max-width: 900px) { .panel { grid-template-columns: 1fr; } }
+  .main { padding: 16px 36px 40px; min-width: 0; }
+  .top { display: flex; gap: 8px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid #ddd; flex-wrap: wrap; }
+  .top span { background: #fff; border-radius: 6px; padding: 4px 11px; font-size: 13px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  .top span.on { background: #000; color: #fff; font-weight: 600; }
+  .head h2 { font-size: 26px; font-weight: 500; padding-bottom: 10px; border-bottom: 1px solid #ddd; }
+  .intro { color: var(--dim); margin: 14px 0 22px; }
+  .sec { margin-bottom: 28px; }
+  .sec h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+  .card { background: #fff; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+  .row { display: grid; grid-template-columns: 200px 1fr; min-height: 38px; }
+  .row + .row { border-top: 1px solid var(--line); }
+  .row.new { outline: 2px dashed #ff9f0a; outline-offset: -2px; }
+  .lab { background: var(--labelbg); border-right: 1px solid var(--line); font: 12.5px var(--mono); color: var(--dim); padding: 0 12px; display: flex; align-items: center; }
+  .val { display: flex; align-items: center; gap: 8px; padding: 0 10px; flex-wrap: wrap; }
+  .tg { display: inline-flex; gap: 2px; }
+  .tg span { font-size: 14px; padding: 1px 8px; border-radius: 4px; cursor: pointer; }
+  .tg span.on { background: #000; color: #fff; }
+  .num { font: 14px var(--mono); } .unit { font: 13px var(--mono); color: var(--dim); }
+  .px { background: #dbeafe; color: #3b82f6; font: 12.5px var(--mono); padding: 0 7px; align-self: stretch; display: flex; align-items: center; margin-left: -10px; }
+  .help { font-size: 12.5px; line-height: 1.5; color: var(--dim); padding: 6px 0 0; }
+  .help b { color: #16171a; font-weight: 500; }
+  .faded { opacity: .45; }
+  /* preview */
+  .side { background: #e9e7df; padding: 12px 20px 30px; min-width: 0; }
+  .bar { display: flex; gap: 6px; margin-bottom: 20px; }
+  .pill { background: #fff; border-radius: 5px; padding: 2px; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,.08); display: inline-flex; gap: 2px; }
+  .pill span { padding: 2px 9px; border-radius: 3px; cursor: pointer; }
+  .pill span.on { background: #16171a; color: #fff; }
+  .stage { display: flex; justify-content: center; }
+  .screen { background: #fff; border-radius: 8px; padding: 22px 18px; transition: width .2s; }
+  .screen.mobile { width: 300px; border: 8px solid #222; border-radius: 26px; }
+  .screen.desktop { width: 100%; }
+  .screen h4 { font-size: 20px; margin-bottom: 6px; } .screen p { font-size: 13px; color: #444; margin-bottom: 14px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { background: #000; color: #fff; font-weight: 700; font-size: 14px; border-radius: 999px; padding: 11px 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
+  .notes { max-width: 1200px; color: #ff9f0a; font-size: 12.5px; margin-top: 12px; }
+  .notes p + p { margin-top: 6px; }
+</style>
+</head>
+<body>
+<h1>Buttons – volle Breite auf dem Handy</h1>
+<p class="lead">Project Wizard › Elemente › Buttons, Karte „Form“. Neu ist die orange umrandete Zeile. Rechts die Vorschau, oben zwischen Handy und Desktop umschalten. Alles bedienbar; Erläuterungen in Orange gehören nicht zum Plugin.</p>
+<div class="panel">
+  <div class="main">
+    <div class="top"><span>Projekt ⌄</span><span class="on">Elemente ⌄</span><span>Blöcke ⌄</span><span>Einstellungen ⌄</span></div>
+    <div class="head"><h2>🔗 Buttons</h2></div>
+    <p class="intro">Buttons verlinken auf Seiten, Dateien oder externe Adressen, etwa im Text- oder Hero-Block.</p>
+    <div class="sec faded"><h3>Text · Innenabstände · Außenabstände</h3><p class="help">(unverändert)</p></div>
+    <div class="sec"><h3>Form</h3><div class="card" id="form"></div><p class="help" id="formhelp"></p></div>
+    <div class="sec faded"><h3>Stil · Icon</h3><p class="help">(unverändert)</p></div>
+  </div>
+  <div class="side">
+    <div class="bar"><span class="pill" id="dev"></span></div>
+    <div class="stage"><div class="screen" id="screen"></div></div>
+  </div>
+</div>
+<div class="notes">
+  <p><b>Neue Zeile „Mobil“:</b> „Wie eingestellt“ ist der Start – nichts ändert sich. „Volle Breite“: unter 1024 Pixel (Handy und Tablet hochkant) nimmt jeder Button die ganze Breite des Inhalts ein, mehrere stehen untereinander. Ab 1024 Pixel gilt die Breite wie eingestellt (Auto oder Manuell).</p>
+  <p>Gilt für alle Buttons der Website – auch den Absende-Knopf des Kontaktformulars. Die Ausrichtung der Buttons (links, Mitte, rechts) spielt bei voller Breite keine Rolle.</p>
+</div>
+<script>
+  const S = { mode: 'auto', mobile: 'full', dev: 'mobile' };
+  const tg = (k, opts) => '<span class="tg">' + opts.map(([v, t]) => '<span data-k="' + k + '" data-v="' + v + '" class="' + (S[k] === v ? 'on' : '') + '">' + t + '</span>').join('') + '</span>';
+  function render() {
+    document.getElementById('form').innerHTML =
+      '<div class="row"><div class="lab">Ecken</div><div class="val">' + '<span class="tg"><span>Eckig</span><span class="on">Rund</span><span>Benutzerdefiniert</span></span></div></div>' +
+      '<div class="row"><div class="lab">Breite</div><div class="val">' + tg('mode', [['auto', 'Auto'], ['manual', 'Manuell']]) + '</div></div>' +
+      (S.mode === 'manual' ? '<div class="row"><div class="lab">Manuelle Breite</div><div class="val"><span class="px">192px</span><span class="num">12.0</span><span class="unit">rem</span></div></div>' : '') +
+      '<div class="row new"><div class="lab">Mobil</div><div class="val">' + tg('mobile', [['same', 'Wie eingestellt'], ['full', 'Volle Breite']]) + '</div></div>';
+    document.getElementById('formhelp').innerHTML = 'Bei manueller Breite sind alle Buttons gleich breit. Zu lange Texte werden gekürzt.';
+    document.getElementById('dev').innerHTML = [['mobile', '📱 Handy'], ['desktop', '🖥 Desktop']].map(([v, t]) => '<span data-k="dev" data-v="' + v + '" class="' + (S.dev === v ? 'on' : '') + '">' + t + '</span>').join('');
+    const full = S.dev === 'mobile' && S.mobile === 'full';
+    const width = full ? '100%' : S.mode === 'manual' ? '192px' : 'auto';
+    const sc = document.getElementById('screen'); sc.className = 'screen ' + S.dev;
+    sc.innerHTML = '<h4>Bereit für den nächsten Schritt?</h4><p>Wir beraten Sie gern – unverbindlich.</p><div class="btns">' +
+      ['★ Kontakt aufnehmen', '★ Mehr erfahren'].map((t) => '<span class="btn" style="width:' + width + ';flex:' + (full ? '0 0 100%' : '0 0 auto') + '">' + t + '</span>').join('') + '</div>';
+  }
+  document.addEventListener('click', (e) => { const d = e.target.dataset; if (d.k) { S[d.k] = d.v; render(); } });
+  render();
+</script>
+</body>
+</html>
