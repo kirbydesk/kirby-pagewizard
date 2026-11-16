@@ -193,7 +193,8 @@ section[data-block] [data-entry] > [data-field="text"] > * + * {
 	&[data-align="center"] { justify-content: center; }
 	&[data-align="right"]  { justify-content: flex-end; }
 }
-[data-field="button"] > a, [data-field="button"] > span {
+/* (a button too: the contact form's send button) */
+[data-field="button"] > a, [data-field="button"] > span, [data-field="button"] > button {
 	font-family: var(--button-font-family);
 	font-size: var(--button-font-size);
 	font-weight: var(--button-font-weight);
@@ -220,6 +221,10 @@ section[data-block] [data-entry] > [data-field="text"] > * + * {
 	border-radius: var(--button-radius);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 	transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+[data-field="button"] > button {
+	cursor: pointer;
+	appearance: none;
 }
 
 /* the button's wrapper carries the manual width (rem, or % of the row) and

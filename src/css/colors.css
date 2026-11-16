@@ -99,7 +99,7 @@ section[data-block]{
 	}
 
 	/* -------------- Button --------------*/
-	[data-field="button"] a {
+	[data-field="button"] :is(a, button) {
 		color: var(--element-button-text);
 		background-color: var(--element-button-background);
 		border-color: var(--element-button-border);
@@ -234,7 +234,7 @@ section[data-block][data-style="variant"] {
 section[data-block][data-style="variant"],
 section[data-block][data-style="custom"][data-button-style="variant"] {
 
-	[data-field="button"] a {
+	[data-field="button"] :is(a, button) {
 		color: var(--element-button-text-variant);
 		background-color: var(--element-button-background-variant);
 		border-color: var(--element-button-border-variant);
@@ -369,7 +369,7 @@ section[data-block][data-style="variant2"] {
 section[data-block][data-style="variant2"],
 section[data-block][data-style="custom"][data-button-style="variant2"] {
 
-	[data-field="button"] a {
+	[data-field="button"] :is(a, button) {
 		color: var(--element-button-text-variant2);
 		background-color: var(--element-button-background-variant2);
 		border-color: var(--element-button-border-variant2);
@@ -501,7 +501,7 @@ section[data-block][data-style="variant3"] {
 section[data-block][data-style="variant3"],
 section[data-block][data-style="custom"][data-button-style="variant3"] {
 
-	[data-field="button"] a {
+	[data-field="button"] :is(a, button) {
 		color: var(--element-button-text-variant3);
 		background-color: var(--element-button-background-variant3);
 		border-color: var(--element-button-border-variant3);
