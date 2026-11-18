@@ -972,6 +972,13 @@
 					}
 				}
 			},
+			"button-spacing-top": {
+				"value": "0rem",
+				"unit": "rem",
+				"step": 0.1,
+				"min": 0,
+				"max": 6
+			},
 			"button-spacing": {
 				"value": "1rem",
 				"unit": "rem",

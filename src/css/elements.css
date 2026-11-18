@@ -51,6 +51,11 @@ section[data-block] :is(
 section[data-block] figure:has(> [data-field="quote"]) { --pw-space-after: var(--quote-spacing); }
 section[data-block] :is([data-field="image"], [data-field="slideshow"], [data-field="video"]) { --pw-space-after: var(--media-spacing); }
 section[data-block] :is([data-field="buttons"], [data-field="button"]) { --pw-space-after: var(--button-spacing); }
+/* buttons: a space above of their own where something comes before them
+   (the larger of it and the space below the element above counts) */
+section[data-block] :is([data-field="buttons"], [data-field="button"]):not(:first-child):not([data-block="item"] *) {
+	margin-top: var(--button-spacing-top, 0);
+}
 
 /* -------------- Tagline --------------*/
 [data-field="tagline"] {
@@ -234,9 +239,10 @@ section[data-block] [data-entry] > [data-field="text"] > * + * {
 	min-width: 0;
 	max-width: 100%;
 }
-/* mobile (below 1024px) at full width, if set (Project Wizard → Elements ›
-   Buttons › Mobile): every button over the whole width, one below the other */
-@media (max-width: 1023.98px) {
+/* mobile (below 768px, where the burger menu shows) at full width, if set
+   (Project Wizard → Elements › Buttons › Mobile): every button over the
+   whole width, one below the other */
+@media (max-width: 767.98px) {
 	[data-field="button"] {
 		width: var(--button-mobile-applied, var(--button-width-applied));
 	}
