@@ -52,8 +52,9 @@ section[data-block] figure:has(> [data-field="quote"]) { --pw-space-after: var(-
 section[data-block] :is([data-field="image"], [data-field="slideshow"], [data-field="video"]) { --pw-space-after: var(--media-spacing); }
 section[data-block] :is([data-field="buttons"], [data-field="button"]) { --pw-space-after: var(--button-spacing); }
 /* buttons: a space above of their own where something comes before them
-   (the larger of it and the space below the element above counts) */
-section[data-block] :is([data-field="buttons"], [data-field="button"]):not(:first-child):not([data-block="item"] *) {
+   (the larger of it and the space below the element above counts) – the
+   group of buttons, or a button on its own; not each button in a group */
+section[data-block] :is([data-field="buttons"], [data-field="button"]:not([data-field="buttons"] > *)):not(:first-child):not([data-block="item"] *) {
 	margin-top: var(--button-spacing-top, 0);
 }
 
