@@ -1149,8 +1149,11 @@ class pwConfig
 						if (!is_array($themes)) continue;
 						foreach ($themes as $theme => $themeValue) {
 							$override = $blockOverrides[$theme][$varName] ?? null;
+							$value = $override !== null && $override !== '' ? $override : $themeValue;
+							// (an empty colour: no var – the block's CSS has its fallback, e.g. the text's colour)
+							if (!is_string($value) || $value === '') continue;
 							$suffix = $theme === 'default' ? '' : '-' . $theme;
-							$blockValueLines[] = "\t--" . $blockType . '-' . $varName . $suffix . ': ' . ($override ?? $themeValue) . ';';
+							$blockValueLines[] = "\t--" . $blockType . '-' . $varName . $suffix . ': ' . $value . ';';
 						}
 					}
 				}
