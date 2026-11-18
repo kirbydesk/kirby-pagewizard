@@ -1,6 +1,6 @@
 {
 	"name": "kirbydesk/kirby-pagewizard",
-	"version": "1.5.5",
+	"version": "1.5.6",
 	"description": "Pagewizard for Kirby CMS",
 	"type": "kirby-plugin",
 	"keywords": [

@@ -37,8 +37,8 @@ export default {
     group: { type: String, default: 'columns' },
     // the help of each size: shown for the chosen one
     sizeHelps: { type: Object, default: () => ({}) },
-    // the heading and its rows gone while a field has this value
-    // (e.g. { itemstyle: 'connected' })
+    // the heading and its rows gone while a field has this value, or one
+    // of these (e.g. { itemstyle: 'connected' }, { statsview: ['pie'] })
     unless: { type: Object, default: null },
   },
   data() {
@@ -56,7 +56,10 @@ export default {
     },
     off() {
       if (!this.unless) return false;
-      return Object.keys(this.unless).some((key) => this.formValues[key.toLowerCase()] === this.unless[key]);
+      return Object.keys(this.unless).some((key) => {
+        const value = this.formValues[key.toLowerCase()];
+        return Array.isArray(this.unless[key]) ? this.unless[key].includes(value) : value === this.unless[key];
+      });
     },
   },
   watch: {
