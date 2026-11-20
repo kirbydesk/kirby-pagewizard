@@ -222,11 +222,25 @@ section[data-block] [data-entry] > [data-field="text"] > * + * {
 	color: var(--element-button-text);
 	background-color: var(--element-button-background);
 	border: var(--button-border-width) solid var(--element-button-border);
-	box-shadow: var(--button-shadow);
+	/* the glow of its variant (Project Wizard › Elements › Buttons, colors.css) in
+	   front of the chosen shadow – both always valid shadow lists */
+	--pw-btn-glow: var(--pw-btn-glow-rest, 0 0 #0000);
+	box-shadow: var(--pw-btn-glow), var(--button-shadow, 0 0 #0000);
 	/* square, round (pill) or the custom corner radii (button-shape) */
 	border-radius: var(--button-radius);
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-	transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+	transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.35s ease;
+}
+/* the glow brighter on hover and focus (on hover only: there it begins) */
+[data-field="button"] > :is(a, span, button):focus-visible {
+	--pw-btn-glow: var(--pw-btn-glow-on, var(--pw-btn-glow-rest, 0 0 #0000));
+}
+@media (hover: hover) {
+	[data-field="button"] > :is(a, span, button):hover {
+		--pw-btn-glow: var(--pw-btn-glow-on, var(--pw-btn-glow-rest, 0 0 #0000));
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	[data-field="button"] > :is(a, span, button) { transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
 }
 [data-field="button"] > button {
 	cursor: pointer;

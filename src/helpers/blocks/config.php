@@ -680,6 +680,24 @@ class pwConfig
 		}
 	}
 
+
+	/**
+	 * A button's glow (Project Wizard › Elements › Buttons): a fine line at the
+	 * rim and a soft light around it – at rest (always: a little; on hover
+	 * only: none) and on hover/focus. Three layers in both, so the change
+	 * fades. Half the cards' size (kirbyblock-cardlets); the Panel preview
+	 * has the same formula (kirby-projectwizard src/helpers/glow.js).
+	 */
+	private static function buttonGlow(string $mode, string $color, float $k): array
+	{
+		$mix  = fn (float $pct) => 'color-mix(in srgb, ' . $color . ' ' . min(100, round($pct * $k)) . '%, transparent)';
+		$px   = fn (float $v) => round($v * $k, 1) . 'px';
+		$on   = '0 0 0 1px ' . $color . ', 0 0 ' . $px(4) . ' 0 ' . $mix(65) . ', 0 0 ' . $px(18) . ' 0 ' . $mix(40);
+		$rest = $mode === 'always'
+			? '0 0 0 1px color-mix(in srgb, ' . $color . ' 60%, transparent), 0 0 ' . $px(3) . ' 0 ' . $mix(45) . ', 0 0 ' . $px(12) . ' 0 ' . $mix(28)
+			: '0 0 0 1px transparent, 0 0 0 0 transparent, 0 0 0 0 transparent';
+		return ['rest' => $rest, 'on' => $on];
+	}
 	/**
 	 * Called by projectbuilder-hook for plugin-specific CSS var injection and stub creation.
 	 * Reads navigation.json, navigation-colors.json, colors.json, merges with project overrides,
@@ -886,6 +904,8 @@ class pwConfig
 			// Style vars (single values)
 			if (isset($group['vars'])) {
 				foreach ($group['vars'] as $varName => $def) {
+					// (the buttons' glow: turned into shadows per variant below)
+					if (is_array($def) && ($def['type'] ?? null) === 'glow') continue;
 					// Responsive font-size (default/lg/xl)
 					if (is_array($def) && isset($def['default']) && isset($def['lg']) && !isset($def['variant'])) {
 						foreach (['default' => &$elementLines, 'lg' => &$elementLinesLg, 'xl' => &$elementLinesXl] as $bp => &$lines) {
@@ -942,6 +962,22 @@ class pwConfig
 						$suffix = $theme === 'default' ? '' : '-' . $theme;
 						$elementLines[] = "\t--" . $varName . $suffix . ': ' . ($override ?? $themeValue) . ';';
 					}
+				}
+			}
+			// The buttons' glow per variant: the shadows at rest and on hover (none when off)
+			if ($groupKey === 'button') {
+				foreach (['default' => '', 'variant' => '-variant', 'variant2' => '-variant2', 'variant3' => '-variant3'] as $suffix) {
+					$choice = function (string $name, array $allowed) use ($group, $elementOverrides, $suffix) {
+						$value = $elementOverrides['global'][$name . $suffix] ?? $group['vars'][$name . $suffix]['value'] ?? $allowed[0];
+						return in_array($value, $allowed, true) ? $value : $allowed[0];
+					};
+					$mode = $choice('button-glow', ['off', 'always', 'hover']);
+					if ($mode === 'off') continue;
+					$preset = $choice('button-glow-color', ['cyan', 'pink', 'violet', 'amber', 'custom']);
+					$color  = ['cyan' => '#22d3ee', 'pink' => '#ec4899', 'violet' => '#a78bfa', 'amber' => '#f59e0b'][$preset] ?? 'var(--element-button-glow' . $suffix . ', #22d3ee)';
+					$shadows = self::buttonGlow($mode, $color, $choice('button-glow-strength', ['subtle', 'strong']) === 'strong' ? 1.6 : 1);
+					$elementLines[] = "\t--element-button-glow-rest" . $suffix . ': ' . $shadows['rest'] . ';';
+					$elementLines[] = "\t--element-button-glow-on" . $suffix . ': ' . $shadows['on'] . ';';
 				}
 			}
 		}

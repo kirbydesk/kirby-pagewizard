@@ -100,6 +100,9 @@ section[data-block]{
 
 	/* -------------- Button --------------*/
 	[data-field="button"] :is(a, button) {
+		/* its glow (none when the variant has none) */
+		--pw-btn-glow-rest: var(--element-button-glow-rest);
+		--pw-btn-glow-on: var(--element-button-glow-on);
 		color: var(--element-button-text);
 		background-color: var(--element-button-background);
 		border-color: var(--element-button-border);
@@ -235,6 +238,9 @@ section[data-block][data-style="variant"],
 section[data-block][data-style="custom"][data-button-style="variant"] {
 
 	[data-field="button"] :is(a, button) {
+		/* its glow (none when the variant has none) */
+		--pw-btn-glow-rest: var(--element-button-glow-rest-variant);
+		--pw-btn-glow-on: var(--element-button-glow-on-variant);
 		color: var(--element-button-text-variant);
 		background-color: var(--element-button-background-variant);
 		border-color: var(--element-button-border-variant);
@@ -370,6 +376,9 @@ section[data-block][data-style="variant2"],
 section[data-block][data-style="custom"][data-button-style="variant2"] {
 
 	[data-field="button"] :is(a, button) {
+		/* its glow (none when the variant has none) */
+		--pw-btn-glow-rest: var(--element-button-glow-rest-variant2);
+		--pw-btn-glow-on: var(--element-button-glow-on-variant2);
 		color: var(--element-button-text-variant2);
 		background-color: var(--element-button-background-variant2);
 		border-color: var(--element-button-border-variant2);
@@ -502,6 +511,9 @@ section[data-block][data-style="variant3"],
 section[data-block][data-style="custom"][data-button-style="variant3"] {
 
 	[data-field="button"] :is(a, button) {
+		/* its glow (none when the variant has none) */
+		--pw-btn-glow-rest: var(--element-button-glow-rest-variant3);
+		--pw-btn-glow-on: var(--element-button-glow-on-variant3);
 		color: var(--element-button-text-variant3);
 		background-color: var(--element-button-background-variant3);
 		border-color: var(--element-button-border-variant3);

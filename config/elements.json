@@ -718,6 +718,12 @@
 				"variant": "#FFFFFF",
 				"variant2": "#262626",
 				"variant3": "#262626"
+			},
+			"element-button-glow": {
+				"default": "#22D3EE",
+				"variant": "#22D3EE",
+				"variant2": "#22D3EE",
+				"variant3": "#22D3EE"
 			}
 		},
 		"vars": {
@@ -955,7 +961,7 @@
 				"max": 4
 			},
 			"button-shadow": {
-				"value": "none",
+				"value": "sm",
 				"options": [
 					"none",
 					"sm",
@@ -965,12 +971,124 @@
 				"type": "toggle-pair",
 				"generates": {
 					"button-shadow": {
-						"none": "none",
+						"none": "0 0 #0000",
 						"sm": "0 1px 2px rgba(0, 0, 0, 0.12)",
 						"md": "0 4px 10px rgba(0, 0, 0, 0.15)",
 						"lg": "0 10px 24px rgba(0, 0, 0, 0.18)"
 					}
 				}
+			},
+			"button-glow": {
+				"value": "off",
+				"options": [
+					"off",
+					"always",
+					"hover"
+				],
+				"type": "glow"
+			},
+			"button-glow-variant": {
+				"value": "off",
+				"options": [
+					"off",
+					"always",
+					"hover"
+				],
+				"type": "glow"
+			},
+			"button-glow-variant2": {
+				"value": "off",
+				"options": [
+					"off",
+					"always",
+					"hover"
+				],
+				"type": "glow"
+			},
+			"button-glow-variant3": {
+				"value": "off",
+				"options": [
+					"off",
+					"always",
+					"hover"
+				],
+				"type": "glow"
+			},
+			"button-glow-color": {
+				"value": "cyan",
+				"options": [
+					"cyan",
+					"pink",
+					"violet",
+					"amber",
+					"custom"
+				],
+				"type": "glow"
+			},
+			"button-glow-color-variant": {
+				"value": "cyan",
+				"options": [
+					"cyan",
+					"pink",
+					"violet",
+					"amber",
+					"custom"
+				],
+				"type": "glow"
+			},
+			"button-glow-color-variant2": {
+				"value": "cyan",
+				"options": [
+					"cyan",
+					"pink",
+					"violet",
+					"amber",
+					"custom"
+				],
+				"type": "glow"
+			},
+			"button-glow-color-variant3": {
+				"value": "cyan",
+				"options": [
+					"cyan",
+					"pink",
+					"violet",
+					"amber",
+					"custom"
+				],
+				"type": "glow"
+			},
+			"button-glow-strength": {
+				"value": "subtle",
+				"options": [
+					"subtle",
+					"strong"
+				],
+				"type": "glow"
+			},
+			"button-glow-strength-variant": {
+				"value": "subtle",
+				"options": [
+					"subtle",
+					"strong"
+				],
+				"type": "glow"
+			},
+			"button-glow-strength-variant2": {
+				"value": "subtle",
+				"options": [
+					"subtle",
+					"strong"
+				],
+				"type": "glow"
+			},
+			"button-glow-strength-variant3": {
+				"value": "subtle",
+				"options": [
+					"subtle",
+					"strong"
+				],
+				"type": "glow"
 			},
 			"button-spacing-top": {
 				"value": "0rem",
