@@ -151,6 +151,11 @@
 
 	'pw.toolbar.align' => 'Ausrichtung',
 	'pw.toolbar.flourish' => 'Zierelement',
+	'pw.toolbar.leadline' => 'Zierlinie',
+	'pw.option.leadline-default' => 'Wie eingestellt',
+	'pw.option.leadline-off' => 'Aus',
+	'pw.option.leadline-straight' => 'Gerade',
+	'pw.option.leadline-bent' => 'Abgeknickt',
 	'pw.toolbar.level' => 'Ebene',
 	'pw.toolbar.mode' => 'Modus',
 	'pw.toolbar.multiline' => 'Mehrzeilig',

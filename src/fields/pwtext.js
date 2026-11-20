@@ -11,6 +11,7 @@ export default {
 		textbackground: String,
 		multiline: String,
 		flourish: String,
+		leadline: String,
 		alignOptions: {
 			default: null
 		},
@@ -32,6 +33,10 @@ export default {
 		flourishOptions: {
 			type: Array,
 			default: null
+		},
+		leadlineOptions: {
+			type: Array,
+			default: null
 		}
 	},
 	data() {
@@ -44,6 +49,7 @@ export default {
 				textbackground: parsed.textbackground || this.textbackground || null,
 				multiline: parsed.multiline || this.multiline || null,
 				flourish: parsed.flourish || this.flourish || null,
+				leadline: parsed.leadline || this.leadline || null,
 			}
 		}
 	},
@@ -51,7 +57,7 @@ export default {
 		// the dropdowns shown (each only with its preset and options), in the
 		// order of the drawer
 		toolbarItems() {
-			return ['flourish', 'multiline', 'textbackground', 'align', 'size', 'level']
+			return ['leadline', 'flourish', 'multiline', 'textbackground', 'align', 'size', 'level']
 				.filter(key => this[key] && this[key + 'Options'])
 				.map(key => ({ key, value: this.current[key], options: this[key + 'Options'] }));
 		}
@@ -74,11 +80,13 @@ export default {
 			}
 		},
 		emitValue(text) {
-			const { align, level, size, textbackground, multiline, flourish } = this.current;
+			const { align, level, size, textbackground, multiline, flourish, leadline } = this.current;
 			const data = { text, align, level, size };
 			if (textbackground) data.textbackground = textbackground;
 			if (multiline) data.multiline = multiline;
 			if (flourish) data.flourish = flourish;
+			// (the tagline's line: only the block's own form, "as set" stays out)
+			if (leadline && leadline !== 'default') data.leadline = leadline;
 			this.$emit('input', JSON.stringify(data));
 		},
 		// a dropdown chose a value

@@ -35,6 +35,9 @@ section[data-block]{
 
 	/* -------------- Tagline --------------*/
 	[data-field="tagline"] {
+		/* its line (elements.css): the variant's colour, the wave drawn in it */
+		--pw-leadline-color: var(--element-tagline-leadline);
+		--pw-leadline-wave: var(--element-tagline-leadline-wave);
 		color: var(--element-tagline-text);
 	}
 
@@ -169,6 +172,9 @@ section[data-block][data-style="variant"] {
 
 	/* -------------- Tagline --------------*/
 	[data-field="tagline"] {
+		/* its line (elements.css): the variant's colour, the wave drawn in it */
+		--pw-leadline-color: var(--element-tagline-leadline-variant);
+		--pw-leadline-wave: var(--element-tagline-leadline-wave-variant);
 		color: var(--element-tagline-text-variant);
 	}
 
@@ -307,6 +313,9 @@ section[data-block][data-style="variant2"] {
 
 	/* -------------- Tagline --------------*/
 	[data-field="tagline"] {
+		/* its line (elements.css): the variant's colour, the wave drawn in it */
+		--pw-leadline-color: var(--element-tagline-leadline-variant2);
+		--pw-leadline-wave: var(--element-tagline-leadline-wave-variant2);
 		color: var(--element-tagline-text-variant2);
 	}
 
@@ -442,6 +451,9 @@ section[data-block][data-style="variant3"] {
 
 	/* -------------- Tagline --------------*/
 	[data-field="tagline"] {
+		/* its line (elements.css): the variant's colour, the wave drawn in it */
+		--pw-leadline-color: var(--element-tagline-leadline-variant3);
+		--pw-leadline-wave: var(--element-tagline-leadline-wave-variant3);
 		color: var(--element-tagline-text-variant3);
 	}
 

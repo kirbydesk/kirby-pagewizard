@@ -83,6 +83,9 @@ return [
 			'multiline' => function (?string $multiline = null) {
 				return $multiline;
 			},
+			'leadline' => function (?string $leadline = null) {
+				return $leadline;
+			},
 			'flourish' => function (?string $flourish = null) {
 				return $flourish;
 			},
@@ -100,6 +103,9 @@ return [
 			},
 			'multilineOptions' => function ($multilineOptions = null) {
 				return $multilineOptions;
+			},
+			'leadlineOptions' => function ($leadlineOptions = null) {
+				return $leadlineOptions;
 			},
 			'flourishOptions' => function ($flourishOptions = null) {
 				return $flourishOptions;

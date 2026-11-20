@@ -207,6 +207,9 @@ class pwBlueprint
 					'extends'      => 'pagewizard/fields/tagline',
 					'align'        => $fields['align-tagline'],
 					'alignOptions' => $fieldOptions['tagline']['align'] ?? null,
+					// its line above it: as set for all taglines, or the block's own form
+					'leadline'        => $fields['leadline-tagline'] ?? 'default',
+					'leadlineOptions' => $fieldOptions['tagline']['leadline'] ?? ['default', 'off', 'straight', 'bent'],
 				];
 			} elseif ($key === 'heading' && !empty($settings['heading'])) {
 				$out['heading'] = [

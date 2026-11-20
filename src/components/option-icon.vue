@@ -1,6 +1,7 @@
 <template>
   <!-- an option of a content field as in the drawer: its icon or its text -->
-  <span v-if="isIcon" class="k-button-icon"><svg aria-hidden="true" class="k-icon" viewBox="0 0 24 24" fill="currentColor" v-html="html"></svg></span>
+  <!-- (an icon: its name as the tooltip) -->
+  <span v-if="isIcon" class="k-button-icon" :title="text"><svg aria-hidden="true" class="k-icon" viewBox="0 0 24 24" fill="currentColor" v-html="html"></svg></span>
   <span v-else class="k-button-text pw-size-label">{{ text }}</span>
 </template>
 

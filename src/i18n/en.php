@@ -151,6 +151,11 @@
 
 	'pw.toolbar.align' => 'Align',
 	'pw.toolbar.flourish' => 'Flourish',
+	'pw.toolbar.leadline' => 'Lead line',
+	'pw.option.leadline-default' => 'As set',
+	'pw.option.leadline-off' => 'Off',
+	'pw.option.leadline-straight' => 'Straight',
+	'pw.option.leadline-bent' => 'Bent',
 	'pw.toolbar.level' => 'Level',
 	'pw.toolbar.mode' => 'Mode',
 	'pw.toolbar.multiline' => 'Multiline',

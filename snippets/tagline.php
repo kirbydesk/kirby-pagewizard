@@ -5,5 +5,6 @@
 	$tagline = ($taglineRaw === null || $taglineRaw === '') ? [] : (json_decode($taglineRaw, true) ?? []);
 
 	if (!empty($tagline['text'])):
-		echo '<div data-field="tagline" data-align="'.$tagline['align'].'">'.$tagline['text'].'</div>'."\n";
+		// (its line above it: Project Wizard › Elements › Tagline, the form per block)
+		echo '<div data-field="tagline" data-align="'.($tagline['align'] ?? 'left').'"'.pwConfig::taglineLeadline($tagline).'>'.$tagline['text'].'</div>'."\n";
 	endif;

@@ -71,6 +71,112 @@ section[data-block] :is([data-field="buttons"], [data-field="button"]:not([data-
 	padding: 0;
 }
 
+/* the tagline's line (Project Wizard › Elements › Tagline): a line from the
+   screen edge or the grid's edge to a circle above the tagline, or bent down to
+   it – the tagline's own pseudo elements, nothing in the layout moves. --pw-ll-lead
+   (from the tagline's start to the edge) comes from 05_leadline.js; until then
+   nothing shows. The space above the tagline grows by the line */
+[data-field="tagline"][data-leadline] {
+	--pw-ll-color: var(--pw-leadline-color, currentColor);
+	--pw-ll-stroke: var(--tagline-leadline-stroke, 2px);
+	--pw-ll-dot: var(--tagline-leadline-dot, 12px);
+	--pw-ll-offset: var(--tagline-leadline-offset, 3.25rem);
+	--pw-ll-x: var(--tagline-leadline-dot-offset, 8px);
+	--pw-ll-bend: var(--tagline-leadline-bend, 3.5rem);
+	--pw-ll-length: var(--pw-ll-lead, 0px);
+	position: relative;
+	margin-top: calc(var(--pw-ll-offset) + var(--pw-ll-dot) / 2);
+}
+[data-field="tagline"][data-leadline="bent"] {
+	margin-top: calc(var(--pw-ll-offset) + var(--pw-ll-bend));
+}
+[data-field="tagline"][data-leadline]::before,
+[data-field="tagline"][data-leadline]::after {
+	content: "";
+	position: absolute;
+	pointer-events: none;
+	box-sizing: border-box;
+}
+/* (not measured yet: nothing) */
+[data-field="tagline"][data-leadline]:not([data-leadline-ready])::before,
+[data-field="tagline"][data-leadline]:not([data-leadline-ready])::after {
+	visibility: hidden;
+}
+/* the circle: its centre --pw-ll-x right of the text start, --pw-ll-offset above it */
+[data-field="tagline"][data-leadline]::after {
+	width: var(--pw-ll-dot);
+	height: var(--pw-ll-dot);
+	left: calc(var(--pw-ll-x) - var(--pw-ll-dot) / 2);
+	top: calc(-1 * var(--pw-ll-offset) - var(--pw-ll-dot) / 2);
+	border: var(--pw-ll-stroke) solid var(--pw-ll-color);
+	border-radius: 50%;
+}
+/* straight: from the edge to the circle */
+[data-field="tagline"][data-leadline="straight"]::before {
+	--pw-ll-h: var(--pw-ll-stroke);
+	left: calc(-1 * var(--pw-ll-length));
+	width: calc(var(--pw-ll-length) + var(--pw-ll-x) - var(--pw-ll-dot) / 2);
+	top: calc(-1 * var(--pw-ll-offset) - var(--pw-ll-h) / 2);
+	height: var(--pw-ll-h);
+	background: var(--pw-ll-color);
+}
+/* bent: in higher up, a round corner, down to the circle */
+[data-field="tagline"][data-leadline="bent"]::before {
+	left: calc(-1 * var(--pw-ll-length));
+	width: calc(var(--pw-ll-length) + var(--pw-ll-x) + var(--pw-ll-stroke) / 2);
+	top: calc(-1 * var(--pw-ll-offset) - var(--pw-ll-bend));
+	height: calc(var(--pw-ll-bend) - var(--pw-ll-dot) / 2);
+	border: var(--pw-ll-stroke) solid var(--pw-ll-color);
+	border-left: 0;
+	border-bottom: 0;
+	border-top-right-radius: calc(var(--pw-ll-stroke) * 9);
+}
+/* the styles: on the straight line drawn (round dots, even dashes, the wave in
+   the line's colour – colors.css), on the bent one the border's own */
+[data-field="tagline"][data-leadline="straight"][data-leadline-style="dashed"]::before {
+	background: repeating-linear-gradient(90deg, var(--pw-ll-color) 0 calc(var(--pw-ll-stroke) * 5), transparent calc(var(--pw-ll-stroke) * 5) calc(var(--pw-ll-stroke) * 8.5));
+}
+[data-field="tagline"][data-leadline="straight"][data-leadline-style="dotted"]::before {
+	--pw-ll-h: calc(var(--pw-ll-stroke) * 2);
+	background: radial-gradient(circle, var(--pw-ll-color) 0 calc(var(--pw-ll-stroke) * 0.9), transparent calc(var(--pw-ll-stroke) + 0.5px)) 0 50% / calc(var(--pw-ll-stroke) * 4) 100% repeat-x;
+}
+[data-field="tagline"][data-leadline="straight"][data-leadline-style="wavy"]::before {
+	--pw-ll-h: calc(var(--pw-ll-stroke) * 4);
+	background: var(--pw-leadline-wave) 0 50% / calc(var(--pw-ll-stroke) * 8) calc(var(--pw-ll-stroke) * 4) repeat-x;
+}
+[data-field="tagline"][data-leadline="bent"][data-leadline-style="dashed"]::before { border-style: dashed; }
+[data-field="tagline"][data-leadline="bent"][data-leadline-style="dotted"]::before { border-style: dotted; }
+/* the glow */
+[data-field="tagline"][data-leadline][data-leadline-glow]::before,
+[data-field="tagline"][data-leadline][data-leadline-glow]::after {
+	filter: drop-shadow(0 0 4px var(--pw-ll-color)) drop-shadow(0 0 10px color-mix(in srgb, var(--pw-ll-color) 50%, transparent));
+}
+/* running in once it comes into view (room for the glow around it), then the circle */
+[data-field="tagline"][data-leadline-motion="in"][data-leadline-play="wait"]::before { clip-path: inset(-30px 100% -30px -30px); }
+[data-field="tagline"][data-leadline-motion="in"][data-leadline-play="wait"]::after { opacity: 0; transform: scale(0); }
+[data-field="tagline"][data-leadline-motion="in"][data-leadline-play="run"]::before {
+	clip-path: inset(-30px 100% -30px -30px);
+	animation: pw-ll-run 1.1s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+[data-field="tagline"][data-leadline-motion="in"][data-leadline-play="run"]::after {
+	opacity: 0;
+	transform: scale(0);
+	animation: pw-ll-pop 0.35s ease-out 1s forwards;
+}
+@keyframes pw-ll-run { to { clip-path: inset(-30px -30px -30px -30px); } }
+@keyframes pw-ll-pop { 60% { opacity: 1; transform: scale(1.35); } to { opacity: 1; transform: scale(1); } }
+/* flowing: the pattern moves towards the circle */
+[data-field="tagline"][data-leadline-motion="flow"][data-leadline-style="dashed"]::before { animation: pw-ll-flow-dash 1.2s linear infinite; }
+[data-field="tagline"][data-leadline-motion="flow"][data-leadline-style="dotted"]::before { animation: pw-ll-flow-dot 0.8s linear infinite; }
+[data-field="tagline"][data-leadline-motion="flow"][data-leadline-style="wavy"]::before { animation: pw-ll-flow-wave 1s linear infinite; }
+@keyframes pw-ll-flow-dash { to { background-position-x: calc(var(--pw-ll-stroke) * 8.5); } }
+@keyframes pw-ll-flow-dot { to { background-position-x: calc(var(--pw-ll-stroke) * 4); } }
+@keyframes pw-ll-flow-wave { to { background-position-x: calc(var(--pw-ll-stroke) * 8); } }
+@media (prefers-reduced-motion: reduce) {
+	[data-field="tagline"][data-leadline]::before,
+	[data-field="tagline"][data-leadline]::after { animation: none !important; clip-path: none !important; opacity: 1 !important; transform: none !important; }
+}
+
 /* -------------- Editor --------------*/
 [data-field="textarea"],
 [data-field="writer"],

@@ -12,6 +12,13 @@ const PATHS = {
 		disabled: '<path d="M5 19H19V5H5V19ZM3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4ZM10 8V11H14V8L18 12L14 16V13H10V16L6 12L10 8Z"/>',
 		enabled: '<path d="M5 19H19V5H5V19ZM3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4ZM8 10L12 6L16 10H13V14H16L12 18L8 14H11V10L8 10Z"/>',
 	},
+	// the tagline's line: as set for all, none, straight, bent
+	leadline: {
+		default: '<path d="M2 12h2M7 12h2M12 12h2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="19" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>',
+		off: '<circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 20L20 4" stroke="currentColor" stroke-width="2" fill="none"/>',
+		straight: '<path d="M2 12h14" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="19" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>',
+		bent: '<path d="M2 5h9a4 4 0 0 1 4 4v6" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="15" cy="18.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/>',
+	},
 	flourish: {
 		disabled: '<path d="M5.55397 22H3.3999L10.9999 3H12.9999L20.5999 22H18.4458L16.0458 16H7.95397L5.55397 22ZM8.75397 14H15.2458L11.9999 5.88517L8.75397 14Z"/>',
 		enabled: '<path d="M15.2459 14H8.75407L7.15407 18H5L11 3H13L19 18H16.8459L15.2459 14ZM14.4459 12L12 5.88516L9.55407 12H14.4459ZM3 20H21V22H3V20Z"/>',
@@ -23,7 +30,7 @@ const PATHS = {
 export function hasIcon(type, value) {
 	if (type === 'size' || type === 'mode') return false;
 	if (type === 'align') return !!value;
-	return ['level', 'textbackground', 'multiline', 'flourish'].includes(type);
+	return ['level', 'textbackground', 'multiline', 'flourish', 'leadline'].includes(type);
 }
 
 // the icon's svg content
@@ -41,6 +48,8 @@ export function optionText(type, value, t, options) {
 	if (type === 'mode') return t('pw.field.text-' + value, value);
 	if (type === 'align' && !value) return '···';
 	if (type === 'size' && Array.isArray(options) && options.includes('normal')) return t('pw.option.text-' + value, value);
+	// the tagline's line: its own names (default: as set for all taglines)
+	if (type === 'leadline') return t('pw.option.leadline-' + value, value);
 	// a list's style: bullets, numbers or none
 	if (type === 'style') return t('pw.option.list-' + value, value);
 	return t('pw.option.' + value, value);

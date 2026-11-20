@@ -16,6 +16,12 @@
 	section[data-block-id="<?=$blockid?>"] [data-entry] > [data-field="text"]{
 		color: <?=$textcolor?>;
 	}
+<?php if (!empty($textcolor)): ?>
+	section[data-block-id="<?=$blockid?>"] [data-field="tagline"] {
+		--pw-leadline-color: <?=$textcolor?>;
+		--pw-leadline-wave: <?=pwConfig::leadlineWave((string) $textcolor)?>;
+	}
+<?php endif ?>
 	section[data-block-id="<?=$blockid?>"] {
 		--pw-list-marker: <?=$textcolor?>;
 		--pw-list-number: <?=$textcolor?>;

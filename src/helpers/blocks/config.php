@@ -682,6 +682,52 @@ class pwConfig
 
 
 	/**
+	 * The tagline's wavy line: a tile of the wave in the line's colour (an
+	 * image – a mask would cut off the glow). Drawn beyond its tile, so the
+	 * tiles join without gaps. "#rrggbbaa" as rgba() (inside the image the
+	 * later replacement can't see it).
+	 */
+	public static function leadlineWave(string $color): string
+	{
+		if (preg_match('/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i', trim($color), $m)) {
+			$color = 'rgba(' . hexdec($m[1]) . ',' . hexdec($m[2]) . ',' . hexdec($m[3]) . ',' . round(hexdec($m[4]) / 255, 3) . ')';
+		}
+		$svg = "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='8' viewBox='0 0 16 8'><path d='M-8 4 Q-4 0 0 4 T8 4 T16 4 T24 4' fill='none' stroke='" . str_replace("'", '', $color) . "' stroke-width='2'/></svg>";
+		return 'url("data:image/svg+xml,' . rawurlencode($svg) . '")';
+	}
+
+	/**
+	 * The tagline's line (Project Wizard › Elements › Tagline): its attributes
+	 * for the tagline's element – the block's own form (default: the global
+	 * one), the global style, length, motion and glow. Only left-aligned
+	 * taglines; wavy only straight, flowing only a straight patterned line.
+	 */
+	public static function taglineLeadline(array $tagline): string
+	{
+		static $global = null;
+		if ($global === null) {
+			$defaults  = self::readJson(dirname(__DIR__, 3) . '/config/elements.json')['tagline']['vars'] ?? [];
+			$overrides = self::projectOverride('elements')['global'] ?? [];
+			$global = [];
+			foreach (['tagline-leadline', 'tagline-leadline-style', 'tagline-leadline-reach', 'tagline-leadline-motion', 'tagline-leadline-glow'] as $name) {
+				$allowed = $defaults[$name]['options'] ?? [];
+				$value   = $overrides[$name] ?? $defaults[$name]['value'] ?? null;
+				$global[$name] = in_array($value, $allowed, true) ? $value : ($defaults[$name]['value'] ?? null);
+			}
+		}
+		if (!in_array($tagline['align'] ?? 'left', ['left', '', null], true)) return '';
+		$own  = $tagline['leadline'] ?? 'default';
+		$form = in_array($own, ['off', 'straight', 'bent'], true) ? $own : $global['tagline-leadline'];
+		if (!in_array($form, ['straight', 'bent'], true)) return '';
+		$style  = $global['tagline-leadline-style'] ?? 'solid';
+		if ($style === 'wavy' && $form !== 'straight') $style = 'solid';
+		$motion = $global['tagline-leadline-motion'] ?? 'none';
+		if ($motion === 'flow' && ($form !== 'straight' || $style === 'solid')) $motion = 'none';
+		return ' data-leadline="' . $form . '" data-leadline-style="' . $style . '" data-leadline-reach="' . ($global['tagline-leadline-reach'] ?? 'screen') . '"'
+			. ' data-leadline-motion="' . $motion . '"' . (($global['tagline-leadline-glow'] ?? 'on') === 'on' ? ' data-leadline-glow' : '');
+	}
+
+	/**
 	 * A button's glow (Project Wizard › Elements › Buttons): a fine line at the
 	 * rim and a soft light around it – at rest (always: a little; on hover
 	 * only: none) and on hover/focus. Three layers in both, so the change
@@ -849,6 +895,8 @@ class pwConfig
 			// Color vars (multi-theme)
 			if (isset($group['colors'])) {
 				foreach ($group['colors'] as $varName => $value) {
+					// (the tagline's line: below, following the tagline's colour)
+					if ($varName === 'element-tagline-leadline') continue;
 					foreach ($value as $theme => $themeValue) {
 						$override = ($globalOverrides['global'][$theme][$varName] ?? null);
 						$suffix = $theme === 'default' ? '' : '-' . $theme;
@@ -905,7 +953,7 @@ class pwConfig
 			if (isset($group['vars'])) {
 				foreach ($group['vars'] as $varName => $def) {
 					// (the buttons' glow: turned into shadows per variant below)
-					if (is_array($def) && ($def['type'] ?? null) === 'glow') continue;
+					if (is_array($def) && in_array($def['type'] ?? null, ['glow', 'leadline'], true)) continue;
 					// Responsive font-size (default/lg/xl)
 					if (is_array($def) && isset($def['default']) && isset($def['lg']) && !isset($def['variant'])) {
 						foreach (['default' => &$elementLines, 'lg' => &$elementLinesLg, 'xl' => &$elementLinesXl] as $bp => &$lines) {
@@ -957,11 +1005,23 @@ class pwConfig
 			// Color vars (multi-theme: default, variant, variant2)
 			if (isset($group['colors'])) {
 				foreach ($group['colors'] as $varName => $value) {
+					// (the tagline's line: below, following the tagline's colour)
+					if ($varName === 'element-tagline-leadline') continue;
 					foreach ($value as $theme => $themeValue) {
 						$override = ($elementOverrides['global'][$theme][$varName] ?? null);
 						$suffix = $theme === 'default' ? '' : '-' . $theme;
 						$elementLines[] = "\t--" . $varName . $suffix . ': ' . ($override ?? $themeValue) . ';';
 					}
+				}
+			}
+			// The tagline's line per variant: its colour (unset: the tagline's) and
+			// the wave drawn in it (an image needs the colour itself)
+			if ($groupKey === 'tagline') {
+				foreach (['default' => '', 'variant' => '-variant', 'variant2' => '-variant2', 'variant3' => '-variant3'] as $theme => $suffix) {
+					$own  = $elementOverrides['global'][$theme]['element-tagline-leadline'] ?? null;
+					$text = $elementOverrides['global'][$theme]['element-tagline-text'] ?? $group['colors']['element-tagline-text'][$theme] ?? '#000000';
+					$elementLines[] = "\t--element-tagline-leadline" . $suffix . ': ' . ($own ?: 'var(--element-tagline-text' . $suffix . ')') . ';';
+					$elementLines[] = "\t--element-tagline-leadline-wave" . $suffix . ': ' . self::leadlineWave($own ?: $text) . ';';
 				}
 			}
 			// The buttons' glow per variant: the shadows at rest and on hover (none when off)
